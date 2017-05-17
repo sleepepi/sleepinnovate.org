@@ -1,0 +1,15 @@
+- @title = "Dashboard"
+
+%h1
+  .pull-right= link_to "Logout", landing_path, class: "btn btn-danger"
+  = @title
+
+%p
+  Welcome! You have
+  %strong 1 new survey
+  to fill out.
+
+%p
+  = link_to "Go to Survey", survey_path
+
+

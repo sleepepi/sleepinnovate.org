@@ -1,6 +1,39 @@
-%h1= ENV['website_name']
+.page-box{ style: "background-color: #eceff1;" }
+  .container
+    %h1= ENV["website_name"]
 
-%p
-  Welcome to the
-  = ENV['website_name']
-  website.
+    %p
+      Welcome to the
+      = ENV["website_name"]
+      website.
+
+    %p
+      Login with your 4-digit code from your visit.
+
+    = form_with(url: dashboard_path, class: "form-inline") do
+      .form-group
+        = label_tag "code", "Code"
+        = text_field_tag "code", "", maxlength: 4, class: "form-control"
+      .form-group
+        = label_tag "visit", "Visit Date"
+        = date_field_tag "visit", "", class: "form-control"
+      .form-group
+        =# submit_tag "Login", class: "btn btn-primary"
+        = link_to "Login", dashboard_path, class: "btn btn-primary"
+
+    %p
+      Forget your login code? Give our study coordinators a call!
+      = link_to "1-(800)-555-0584", "tel:1-(800)-555-0584"
+
+%hr
+
+.page-box.last-slide{ style: "background-color: #cfd8dc;" }
+  .container
+    %h2
+      Learn more about
+      = ENV["website_name"]
+
+    %p
+      The
+      = ENV["website_name"]
+      project is

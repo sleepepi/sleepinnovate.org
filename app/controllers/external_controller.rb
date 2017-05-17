@@ -2,9 +2,10 @@
 
 # Displays public pages.
 class ExternalController < ApplicationController
-  # # GET /landing
-  # def landing
-  # end
+  # GET /landing
+  def landing
+    render layout: 'full_page'
+  end
 
   # GET /sitemap.xml.gz
   def sitemap_xml
