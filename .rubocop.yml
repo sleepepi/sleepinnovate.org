@@ -1,0 +1,43 @@
+AllCops:
+  DisplayCopNames: true
+  Exclude:
+    - 'db/**/*'
+    - 'db/schema.rb'
+    # - 'config/**/*'
+    # - 'script/**/*'
+Rails:
+  Enabled: true
+# Style/Documentation:
+#   Enabled: false
+Metrics/ClassLength:
+  Enabled: false
+Metrics/LineLength:
+  Max: 120
+# While methods ideally should be around 5 lines max, comment this out while
+# other issues are present.
+# Metrics/MethodLength:
+#   Max: 5
+Style/ClassAndModuleChildren:
+  Enabled: false
+# Frozen String Literal Pragma will not be needed in Ruby 3+ as it will be the
+# default, Added `frozen_string_literal: true` to use this new default
+Style/FrozenStringLiteralComment:
+  EnforcedStyle: always
+# Strings assigned to constants will no longer be considered mutable in Ruby 3+
+# This can be removed after Ruby 3 is released.
+Style/MutableConstant:
+  Enabled: false
+Rails/DynamicFindBy:
+  Whitelist:
+    - find_by_param
+Rails/SkipsModelValidations:
+  Enabled: false
+
+# Check quotes usage according to lint rule below.
+Style/StringLiterals:
+  Enabled: true
+  EnforcedStyle: double_quotes
+
+# Allow perl backrefs.
+Style/PerlBackrefs:
+  Enabled: false
