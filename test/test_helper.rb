@@ -14,7 +14,7 @@ class ActiveSupport::TestCase
   # Add more helper methods to be used by all tests here...
 end
 
-# Set up ActionDispatch tests
+# Set up ActionDispatch tests.
 class ActionDispatch::IntegrationTest
   def login(user)
     sign_in_as(user, "1234567890")

@@ -1,0 +1,14 @@
+%p{ style: p_style }
+  Hello
+  = succeed "!" do
+    = @resource.email
+
+%p{ style: p_style }
+  Your account has been locked due to an excessive number of unsuccessful sign
+  in attempts.
+
+%p{ style: p_style }
+  Click the link below to unlock your account:
+
+%p{ style: p_style }
+  = link_to "Unlock my account", "#{ENV['website_url']}/unlock?unlock_token=#{@token}", style: link_style

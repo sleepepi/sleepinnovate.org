@@ -1,0 +1,24 @@
+.page-box.last-slide.background-p50-grey
+  .sign-up-form
+    .sign-up-form-title
+      Change your password
+
+    = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put, class: "form-vertical", autocomplete: "off" }) do |f|
+      = f.hidden_field :reset_password_token
+
+      .form-group
+        = render 'layouts/label_or_errors', f: f, object: resource, key: :password, key_name: 'New Password'
+        = f.password_field :password, class: 'form-control'
+        - if @minimum_password_length
+          %small.form-text.text-muted
+            = @minimum_password_length
+            characters minimum
+      .form-group
+        = render 'layouts/label_or_errors', f: f, object: resource, key: :password_confirmation, key_name: 'Confirm new password'
+        = f.password_field :password_confirmation, class: 'form-control'
+
+      .form-group.submit-btn-container
+        = f.submit "Change my password", class: "btn btn-accent btn-block"
+
+  .sign-up-form.text-center
+    = render "devise/shared/links"

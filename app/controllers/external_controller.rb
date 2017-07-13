@@ -4,7 +4,7 @@
 class ExternalController < ApplicationController
   # GET /landing
   def landing
-    render layout: 'full_page'
+    render layout: "full_page"
   end
 
   # GET /sitemap.xml.gz

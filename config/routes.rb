@@ -14,4 +14,15 @@ Rails.application.routes.draw do
     get :survey
     get :thank_you, path: "thank-you"
   end
+
+  devise_for :users,
+             controllers: {
+               confirmations: "confirmations",
+               passwords: "passwords",
+               registrations: "registrations",
+               sessions: "sessions",
+               unlocks: "unlocks"
+             },
+             path_names: { sign_up: "join", sign_in: "login" },
+             path: ""
 end

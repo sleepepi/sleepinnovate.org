@@ -1,0 +1,18 @@
+.sign-up-form
+  .sign-up-form-title
+    Create your account
+  = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "form-vertical", autocomplete: "off" }) do |f|
+    .form-group
+      = render "layouts/label_or_errors", f: f, object: resource, key: :full_name
+      = f.text_field :full_name, class: "form-control form-control-danger"
+
+    .form-group
+      = render "layouts/label_or_errors", f: f, object: resource, key: :email
+      = f.email_field :email, class: "form-control form-control-danger"
+      %small.form-text.text-muted You will need to confirm your email after registration.
+
+    .form-group.submit-btn-container
+      = f.submit "Create Account", class: "btn btn-accent btn-block"
+
+.sign-up-form.text-center
+  = link_to "I already have an account.", new_user_session_path

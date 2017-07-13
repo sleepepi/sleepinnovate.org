@@ -1,0 +1,39 @@
+$standard-shadow-color: rgba(0, 0, 0, .3);
+$standard-shadow-hover-color: rgba(0, 0, 0, .2);
+$brand-white: #fff;
+$brand-black: #333;
+
+.btn {
+  cursor: pointer;
+  transition: all .25s ease-out;
+}
+
+.btn-shadow {
+  box-shadow: 0 0 15px $standard-shadow-color;
+
+  &:hover,
+  &:focus,
+  &:active,
+  &.active,
+  &.disabled,
+  &[disabled] {
+    box-shadow: 0 0 8px $standard-shadow-hover-color;
+  }
+}
+
+.btn-accent {
+  background-color: $p400-teal;
+  border: 1px solid $p600-teal;
+  color: $brand-white;
+
+  &:hover,
+  &:focus,
+  &:active,
+  &.active,
+  &.disabled,
+  &[disabled] {
+    background-color: $p100-teal;
+    border: 1px solid $p200-teal;
+    color: $brand-black;
+  }
+}

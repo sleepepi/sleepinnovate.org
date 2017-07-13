@@ -20,7 +20,7 @@
     = javascript_tag "var root_url='#{request.script_name + '/'}';"
   %body#top.full-page{ class: yield(:body_class) }
     #top-menu= render 'layouts/menu'
-    = render 'layouts/flash_messages'
+    = render "layouts/flash_bar"
     = yield :header
 
     .container.body-content

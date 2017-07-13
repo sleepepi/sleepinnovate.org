@@ -2,7 +2,7 @@
 
 # Displays internal pages.
 class InternalController < ApplicationController
-  # before_action :authenticate_user!
+  before_action :authenticate_user!
 
   # # GET /dashboard
   # def dashboard

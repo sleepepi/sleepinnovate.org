@@ -1,0 +1,42 @@
+- @title = "Sign in"
+
+.page-box.last-slide.background-p50-grey
+  .sign-up-form
+    .sign-up-form-title
+      Sign in
+
+    = form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "form-vertical", autocomplete: "off" }) do |f|
+      .form-group{ class: flash[:alert].present? ? "has-danger" : "" }
+        = f.label :email, class: "form-control-label"
+        = f.text_field :email, class: "form-control form-control-danger"
+
+      .form-group{ class: flash[:alert].present? ? "has-danger" : "" }
+        = f.label :password, class: "form-control-label"
+        %small= link_to "(Forgot password?)", new_password_path(resource_name), tabindex: "-1"
+        = f.password_field :password, class: "form-control form-control-danger"
+        - if flash[:alert].present?
+          %small.form-text.text-danger= flash[:alert].html_safe
+
+      .form-group.submit-btn-container
+        = f.submit "Sign in", class: "btn btn-primary btn-block"
+
+      - flash[:alert] = nil
+
+  .sign-up-form.text-center
+    New to SleepINNOVATE?
+    = link_to "Create an account.", new_user_registration_path
+
+  - if devise_mapping.confirmable?
+    %hr
+    .text-center
+      = link_to "Didn't receive confirmation instructions?", new_confirmation_path(resource_name)
+
+
+  .container{ style: "margin-top: 40px;" }
+    .row
+      .col
+        .sleep-background.mx-auto{ style: "width: 25px; height: 25px;" }
+      .col
+        .innovate-background.mx-auto{ style: "width: 25px; height: 25px;" }
+      .col
+        .boston-background.mx-auto{ style: "width: 25px; height: 25px;" }

@@ -1,3 +1,25 @@
-%nav.navbar.fixed-top.navbar-light.bg-faded
+%nav.navbar.fixed-top.navbar-toggleable-md.navbar-light.bg-faded
   .container
-    = link_to ENV['website_name'], landing_path, class: "navbar-brand"
+    %button.navbar-toggler.navbar-toggler-right{ type: "button", data: { toggle: "collapse", target: "#navbarSupportedContent" }, aria: { controls: "navbarSupportedContent", expanded: "false", label: "Toggle navigation" } }
+      %span.navbar-toggler-icon
+    = link_to landing_path, class: "navbar-brand" do
+      %span.sleep-color> Sleep
+      %span.innovate-color INNOVATE
+      %span.boston-color Boston
+    #navbarSupportedContent.collapse.navbar-collapse
+      %ul.navbar-nav.mr-auto
+        %li.nav-item.active
+          %a.nav-link{ href: "#" }
+            Home
+            %span.sr-only (current)
+        %li.nav-item
+          %a.nav-link{ href: "#" } Link
+        %li.nav-item
+          %a.nav-link.disabled{ href: "#" }Disabled
+
+      %form.form-inline.my-2.my-lg-0
+        / %input.form-control.mr-sm-2{ type: "text", placeholder: "Search" }
+        - if current_user
+          = link_to "Logout", destroy_user_session_path, method: :delete, class: "btn btn-outline-danger my-2 my-sm-0"
+        - else
+          = link_to "Sign in", new_user_session_path, class: "btn btn-outline-success my-2 my-sm-0"
