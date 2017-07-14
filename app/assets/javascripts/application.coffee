@@ -14,4 +14,9 @@
 #= require rails-ujs
 #= require turbolinks
 #= require bootstrap
+
+# External
+#= require external/signature_pad-2.2.0.src.js
+
+# Application
 #= require_tree .

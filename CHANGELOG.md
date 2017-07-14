@@ -8,4 +8,5 @@
   - New users are sent a welcome email
   - New users are sent an email verification email to confirm their email
     address
+  - Users can sign and accept consent form
   - Initial Ruby on Rails 5.1.2 framework

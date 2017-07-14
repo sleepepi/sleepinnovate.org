@@ -1,13 +1,27 @@
 - @title = "Dashboard"
 
-%h1= @title
+- if false
+  %h1= @title
 
-%p
-  Welcome! You have
-  %strong 1 new survey
-  to fill out.
+- if current_user.consented?
+  %p
+    Welcome! You have
+    %strong 1 new survey
+    to fill out.
 
-%p
-  = link_to "Go to Survey", survey_path
+  %p
+    = link_to "Go to Survey", survey_path
 
+  %p
+    Your beautiful signature.
+
+  = image_tag signature_path
+
+- else
+  .jumbotron
+    %h2 Step 1: Consent
+    %p
+      To get started,
+      = link_to "read the consent", consent_path
+      for SleepINNOVATE.
 

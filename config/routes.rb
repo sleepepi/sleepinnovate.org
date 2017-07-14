@@ -10,7 +10,10 @@ Rails.application.routes.draw do
   end
 
   scope module: :internal do
+    get :consent
+    post :consent, action: :submit_consent
     get :dashboard
+    get :signature
     get :survey
     get :thank_you, path: "thank-you"
   end

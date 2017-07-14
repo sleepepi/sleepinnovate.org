@@ -8,6 +8,12 @@ class InternalControllerTest < ActionDispatch::IntegrationTest
     @regular_user = users(:one)
   end
 
+  test "should get consent" do
+    login(@regular_user)
+    get consent_url
+    assert_response :success
+  end
+
   test "should get dashboard" do
     login(@regular_user)
     get dashboard_url

@@ -1,0 +1,54 @@
+- @title = "Consent"
+
+
+.page-box.last-slide.background-p50-grey
+  .consent
+    %h1.consent-title
+      = @title
+    %p
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+      quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+      consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+      cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+      proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+    %p
+      %strong Heading
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+      quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+      consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+      cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+      proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+    %p
+      Call the study coordinator
+      = succeed "." do
+        = link_to "1-(800)-555-0584", "tel:1-(800)-555-0584"
+
+    = form_tag consent_path, method: :post, id: "consent-form" do
+      = hidden_field_tag :data_uri
+      =# text_area_tag :data_uri
+
+    #signature-pad.m-signature-pad
+      %div{ class: "m-signature-pad--body" }
+        %canvas
+      %div{ class: "m-signature-pad--footer" }
+        .row
+          .col
+          .col
+            .text-center
+              %small.form-text{ style: "color: #bdbdbd;"} Sign Above
+          .col
+            .text-right
+              %small= link_to "Clear Signature", "#", data: { action: "clear" }
+
+        %div{ style: "display: none2;" }
+          = link_to "Save as PNG", "#", data: { action: "save-png" }, class: "btn btn-sm btn-secondary"
+          = link_to "Save as SVG", "#", data: { action: "save-svg" }, class: "btn btn-sm btn-secondary"
+
+    %hr
+
+    = link_to "I Consent", "#", data: { object: "consent-with-signature" }, class: "btn btn-lg btn-primary"
+    = link_to "I do not consent.", dashboard_path, class: "btn btn-link"

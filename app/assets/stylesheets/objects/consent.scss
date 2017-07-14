@@ -1,0 +1,12 @@
+.consent {
+  background-color: $brand-white;
+  margin: 0 auto;
+  max-width: 840px;
+  padding: 20px;
+
+  .consent-title {
+    background-color: $p100-grey;
+    margin: -20px -20px 20px;
+    padding: 20px;
+  }
+}

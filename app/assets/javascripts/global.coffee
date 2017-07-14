@@ -1,6 +1,12 @@
+@extensionsReady = ->
+  signatureReady()
+
+@globalReady = ->
+  extensionsReady()
+
 # These functions get called on initial page visit and on turbolink page changes
 @turbolinksReady = ->
-  false
+  globalReady()
 
 # These functions only get called on the initial page visit (no turbolinks).
 # Browsers that don't support turbolinks will initialize all functions in
