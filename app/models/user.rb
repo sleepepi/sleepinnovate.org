@@ -28,12 +28,15 @@ class User < ApplicationRecord
     !consented_at.nil?
   end
 
+  def events
+    [["Baseline", ["survey_1", "survey_2"]], ["2 Month", []]]
+  end
+
   def save_signature!(data_uri)
     file = Tempfile.new("consent_signature.png")
     begin
       encoded_image = data_uri.split(",")[1]
       decoded_image = Base64.decode64(encoded_image)
-      # File.open(file.path, "wb") ???
       File.open(file, "wb") { |f| f.write(decoded_image) }
       file.define_singleton_method(:original_filename) do
         "consent_signature.png"

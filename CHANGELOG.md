@@ -9,4 +9,5 @@
   - New users are sent an email verification email to confirm their email
     address
   - Users can sign and accept consent form
+  - The full consent can now be viewed online
   - Initial Ruby on Rails 5.1.2 framework

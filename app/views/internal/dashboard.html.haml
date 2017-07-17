@@ -4,18 +4,27 @@
   %h1= @title
 
 - if current_user.consented?
-  %p
-    Welcome! You have
-    %strong 1 new survey
-    to fill out.
 
-  %p
-    = link_to "Go to Survey", survey_path
+  - if current_user.events.present?
+    - current_user.events.each do |event, surveys|
+      %h2= event
+      %ul
+        - surveys.each do |survey|
+          %li
+            = link_to survey, survey_path
+            50% complete
+
+  - else
+    You have completed all of your surveys!
+
 
   %p
     Your beautiful signature.
 
-  = image_tag signature_path
+  = image_tag signature_path, style: "max-width: 100%; height: auto;"
+
+  %p
+    = link_to "View Consent", consent_path
 
 - else
   .jumbotron
