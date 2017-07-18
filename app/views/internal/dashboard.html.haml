@@ -4,16 +4,24 @@
   %h1= @title
 
 - if current_user.consented?
+  %code= current_user.subject.subject_code
 
-  - if current_user.events.present?
-    - current_user.events.each do |event, surveys|
-      %h2= event
-      %ul
-        - surveys.each do |survey|
-          %li
-            = link_to survey, survey_path
-            50% complete
-
+  - if current_user.subject_events.present?
+    - current_user.subject_events.each do |subject_event|
+      = link_to "#{ENV['slice_url']}/projects/#{ENV['project_id']}/subjects/#{current_user.subject.id}", "#{ENV['slice_url']}/projects/#{ENV['project_id']}/subjects/#{current_user.subject.id}", target: "_blank"
+      %h2
+        = subject_event.name
+        %small.text-muted= "#{subject_event.percent}% complete"
+      - if subject_event.event_designs.present?
+        - subject_event.event_designs.each do |design|
+          %div
+            %strong= design.name
+            - if design.sheets.present?
+              %ul
+                - design.sheets.each do |sheet|
+                  %li
+                    = link_to sheet.name, sheet.path
+                    = "#{sheet.percent}% complete"
   - else
     You have completed all of your surveys!
 

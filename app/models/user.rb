@@ -17,6 +17,10 @@ class User < ApplicationRecord
   # Uploaders
   mount_uploader :consent_signature, SignatureUploader
 
+  # Delegations
+  delegate :subject_events, to: :subject
+  delegate :subject_code, to: :subject
+
   # Methods
 
   def consent!(data_uri)
@@ -28,8 +32,8 @@ class User < ApplicationRecord
     !consented_at.nil?
   end
 
-  def events
-    [["Baseline", ["survey_1", "survey_2"]], ["2 Month", []]]
+  def subject
+    @subject ||= Subject.new(slice_subject_id, self)
   end
 
   def save_signature!(data_uri)
