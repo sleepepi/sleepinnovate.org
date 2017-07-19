@@ -8,7 +8,9 @@
       = link_to "#{ENV['slice_url']}/projects/#{ENV['project_id']}/subjects/#{current_user.subject.id}", "#{ENV['slice_url']}/projects/#{ENV['project_id']}/subjects/#{current_user.subject.id}", target: "_blank"
       %h2
         = subject_event.name
-        %small.text-muted= "#{subject_event.percent}% complete"
+        %small{ style: "color: #bdbdbd;" }
+          %span{ title: "#{subject_event.unblinded_responses_count} of #{subject_event.unblinded_questions_count} question#{"s" unless subject_event.unblinded_questions_count == 1}", data: { toggle: "tooltip", placement: "top", } }= "#{subject_event.percent}%"
+          %span complete
       - if subject_event.event_designs.present?
         - subject_event.event_designs.each do |design|
           %div
@@ -20,7 +22,9 @@
                     =# link_to sheet.name, sheet.path
                     =# link_to "Survey Overview", show_survey_path(subject_event_id: subject_event.id, design_id: design.id, sheet_id: sheet.id)
                     = link_to "Continue Survey", "#{ENV['slice_url']}/survey/#{sheet.design_slug}/#{sheet.authentication_token}"
-                    = "#{sheet.percent}% complete"
+                    %small{ style: "color: #bdbdbd;" }
+                      %span{ title: "#{sheet.response_count} of #{sheet.total_response_count} question#{"s" unless sheet.total_response_count == 1}", data: { toggle: "tooltip", placement: "top", } }= "#{sheet.percent}%"
+                      %span complete
             - else
               %ul
                 %li= link_to "Start Survey", start_survey_path(subject_event_id: subject_event.id, design_id: design.id), method: :post

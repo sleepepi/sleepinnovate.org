@@ -1,5 +1,6 @@
 @extensionsReady = ->
   signatureReady()
+  tooltipsReady()
 
 @globalReady = ->
   extensionsReady()
