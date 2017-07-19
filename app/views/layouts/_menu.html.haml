@@ -1,5 +1,5 @@
 %nav.navbar.fixed-top.navbar-toggleable-md.navbar-light.bg-faded
-  .container
+  .container.container-xs-fix
     %button.navbar-toggler.navbar-toggler-right{ type: "button", data: { toggle: "collapse", target: "#navbarSupportedContent" }, aria: { controls: "navbarSupportedContent", expanded: "false", label: "Toggle navigation" } }
       %span.navbar-toggler-icon
     = link_to landing_path, class: "navbar-brand" do
@@ -26,11 +26,14 @@
 
           %li.nav-item.dropdown
             = link_to current_user.subject_code || "Home", "#", data: { toggle: "dropdown" }, aria: { haspopup: "true", expanded: "false" }, class: "nav-link dropdown-toggle"
-            .dropdown-menu
-              = link_to "Action", "#", class: "dropdown-item"
-              = link_to "Another action", "#", class: "dropdown-item"
-              .dropdown-divider
-              = link_to "Logout", destroy_user_session_path, method: :delete, class: "dropdown-item"
+            .dropdown-menu.dropdown-menu-right
+              - if false
+                = link_to "Action", "#", class: "dropdown-item"
+                = link_to "Another action", "#", class: "dropdown-item"
+                .dropdown-divider
+              = link_to destroy_user_session_path, method: :delete, class: "dropdown-item" do
+                %i.fa.fa-sign-out
+                Sign out
 
           - if false
             %li.nav-item.dropdown
