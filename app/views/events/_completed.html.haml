@@ -1,0 +1,10 @@
+- if subject_event
+  .card{ style: "width: 20rem;" }
+    .text-center{ style: "font-size: 6rem;" }
+      %i.fa.fa-check.text-success
+    .card-block
+      %h4.card-title= subject_event.name
+      .progress
+        .progress-bar.progress-bar-striped.bg-success{ role: "progressbar", style: "width: 100%;", aria: { valuenow: "100", valuemin: "0", valuemax: "100" } } 100%
+      %p.card-text
+        %div{ style: "color: #bababa;" } Complete!

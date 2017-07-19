@@ -31,6 +31,13 @@ class Subject < SliceRecord
     json["id"]
   end
 
+  def next_survey
+    @next_survey ||= begin
+      event = subject_events.find { |se| se.percent != 100 }
+      event.event_designs.find { |ed| !ed.complete? } if event
+    end
+  end
+
   private
 
   def set_defaults

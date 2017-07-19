@@ -1,48 +1,62 @@
 - @title = "Dashboard"
 
-%h1= @title
+.page-box.last-slide.background-p50-grey
+  .container
+    %h1= @title
 
-- if current_user.consented?
-  - if current_user.subject_events.present?
-    - current_user.subject_events.each do |subject_event|
-      = link_to "#{ENV['slice_url']}/projects/#{ENV['project_id']}/subjects/#{current_user.subject.id}", "#{ENV['slice_url']}/projects/#{ENV['project_id']}/subjects/#{current_user.subject.id}", target: "_blank"
-      %h2
-        = subject_event.name
-        %small{ style: "color: #bdbdbd;" }
-          %span{ title: "#{subject_event.unblinded_responses_count} of #{subject_event.unblinded_questions_count} question#{"s" unless subject_event.unblinded_questions_count == 1}", data: { toggle: "tooltip", placement: "top", } }= "#{subject_event.percent}%"
-          %span complete
-      - if subject_event.event_designs.present?
-        - subject_event.event_designs.each do |design|
-          %div
-            %strong= design.name
-            - if design.sheets.present?
-              %ul
-                - design.sheets.each do |sheet|
-                  %li
-                    =# link_to sheet.name, sheet.path
-                    =# link_to "Survey Overview", show_survey_path(subject_event_id: subject_event.id, design_id: design.id, sheet_id: sheet.id)
-                    = link_to "Continue Survey", "#{ENV['slice_url']}/survey/#{sheet.design_slug}/#{sheet.authentication_token}"
-                    %small{ style: "color: #bdbdbd;" }
-                      %span{ title: "#{sheet.response_count} of #{sheet.total_response_count} question#{"s" unless sheet.total_response_count == 1}", data: { toggle: "tooltip", placement: "top", } }= "#{sheet.percent}%"
-                      %span complete
-            - else
-              %ul
-                %li= link_to "Start Survey", start_survey_path(subject_event_id: subject_event.id, design_id: design.id), method: :post
-  - else
-    You have completed all of your surveys!
+    - if current_user.consented?
+      - if current_user.subject_events.present?
+        .card-deck
+          - if current_user.next_survey
+            = render "events/ongoing", event_design: current_user.next_survey
+          - else
+            = render "events/completed", subject_event: current_user.subject_events.first
+          = render "events/coming_soon", title: "3 Month Phonecall"
+          = render "internal/get_in_touch"
+        %hr
 
-  %p
-    Your beautiful signature.
+        - current_user.subject_events.each do |subject_event|
+          %p= link_to "#{ENV['slice_url']}/projects/#{ENV['project_id']}/subjects/#{current_user.subject.id}", "#{ENV['slice_url']}/projects/#{ENV['project_id']}/subjects/#{current_user.subject.id}", target: "_blank"
+          %h2
+            = subject_event.name
+            %small{ style: "color: #bdbdbd;" }
+              %span{ title: "#{subject_event.unblinded_responses_count} of #{subject_event.unblinded_questions_count} question#{"s" unless subject_event.unblinded_questions_count == 1}", data: { toggle: "tooltip", placement: "top", } }= "#{subject_event.percent}%"
+              %span complete
+          - if subject_event.event_designs.present?
+            - subject_event.event_designs.each do |design|
+              %div
+                %strong= design.name
+                - if design.sheets.present?
+                  %ul
+                    - design.sheets.each do |sheet|
+                      %li
+                        =# link_to sheet.name, sheet.path
+                        =# link_to "Survey Overview", show_survey_path(subject_event_id: subject_event.id, design_id: design.id, sheet_id: sheet.id)
+                        = link_to "Continue Survey", "#{ENV['slice_url']}/survey/#{sheet.design_slug}/#{sheet.authentication_token}"
+                        %small{ style: "color: #bdbdbd;" }
+                          %span{ title: "#{sheet.response_count} of #{sheet.total_response_count} question#{"s" unless sheet.total_response_count == 1}", data: { toggle: "tooltip", placement: "top", } }= "#{sheet.percent}%"
+                          %span complete
+                - else
+                  %ul
+                    %li= link_to "Start Survey", start_survey_path(subject_event_id: subject_event.id, design_id: design.id), method: :post
+      - else
+        You have not been assigned any surveys!
 
-  = image_tag signature_path, style: "max-width: 100%; height: auto;"
+      %hr
 
-  %p
-    = link_to "View Consent", consent_path
+      %p
+        Your beautiful signature.
 
-- else
-  .jumbotron
-    %h2 Step 1: Consent
-    %p
-      To get started,
-      = link_to "read the consent", consent_path
-      for SleepINNOVATE.
+      = image_tag signature_path, style: "max-width: 100%; height: auto;"
+
+      %p
+        = link_to "View Consent", consent_path
+
+    - else
+
+      .jumbotron.jumbotron-white
+        %h2 Step 1: Consent
+        %p
+          To get started,
+          = link_to "read the consent", consent_path
+          for SleepINNOVATE.

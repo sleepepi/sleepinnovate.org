@@ -21,6 +21,7 @@ class User < ApplicationRecord
   delegate :subject_events, to: :subject
   delegate :subject_code, to: :subject
   delegate :launch_survey!, to: :subject
+  delegate :next_survey, to: :subject
 
   # Methods
 

@@ -10,10 +10,8 @@
     -# Don't cache any pages
     %meta{ name: "turbolinks-cache-control", content: "no-cache" }
     %title= [@title, ENV["website_name"]].compact.join(" - ").html_safe
-
     = favicon_link_tag
     = csrf_meta_tags
-
     = javascript_include_tag "https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"
     = stylesheet_link_tag "application", media: "all", data: { turbolinks_track: "reload" }
     = javascript_include_tag "application", data: { turbolinks_track: "reload" }
@@ -22,7 +20,5 @@
     #top-menu= render "layouts/menu"
     = render "layouts/flash_bar"
     = yield :header
-
     = yield
-
     = yield :footer

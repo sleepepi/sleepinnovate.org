@@ -36,9 +36,10 @@ class InternalController < ApplicationController
     # redirect_to "#{ENV['slice_url']}/survey/#{design_slug}/#{sheet.token}"
   end
 
-  # # GET /dashboard
-  # def dashboard
-  # end
+  # GET /dashboard
+  def dashboard
+    render layout: "layouts/full_page"
+  end
 
   # # GET /survey
   # def survey

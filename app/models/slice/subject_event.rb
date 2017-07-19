@@ -21,7 +21,7 @@ class SubjectEvent
   def load_event_designs(json_event_designs)
     if json_event_designs
       json_event_designs.collect do |json|
-        EventDesign.new(json)
+        EventDesign.new(json, self)
       end
     else
       []
