@@ -4,18 +4,25 @@
   - subject_event = event_design.subject_event
   .card-block
     %h4.card-title= subject_event.name
-    .progress
-      .progress-bar.progress-bar-striped.bg-success{ role: "progressbar", style: "width: #{subject_event.percent}%;", aria: { valuenow: "#{subject_event.percent}", valuemin: "0", valuemax: "100" } }= "#{subject_event.percent}%"
-    %p.card-text
-      %div{ style: "color: #bababa;" } Pick up where you left off.
-    .text-center
-      - if event_design.sheets.present?
+    - if subject_event.percent.zero?
+      .progress
+        .progress-bar.progress-bar-striped{ role: "progressbar", style: "width: 100%;background-color: #ededed;", aria: { valuenow: "#{subject_event.percent}", valuemin: "0", valuemax: "100" } }= "#{subject_event.percent}%"
+    - else
+      .progress
+        .progress-bar.progress-bar-striped.bg-success{ role: "progressbar", style: "width: #{subject_event.percent}%;", aria: { valuenow: "#{subject_event.percent}", valuemin: "0", valuemax: "100" } }= "#{subject_event.percent}%"
+    - if event_design.sheets.present?
+      %p.card-text
+        %div{ style: "color: #bababa;" } Pick up where you left off.
+      .text-center
         - sheet = event_design.sheets.first
         = link_to "#{ENV['slice_url']}/survey/#{sheet.design_slug}/#{sheet.authentication_token}", class: "btn btn-success" do
           Continue Survey
           %i.fa.fa-arrow-right
-      - else
-        = link_to start_survey_path(subject_event_id: subject_event.id, design_id: design.id), method: :post, class: "btn btn-success" do
+    - else
+      %p.card-text
+        %div{ style: "color: #bababa;" } Get started.
+      .text-center
+        = link_to start_survey_path(subject_event_id: subject_event.id, design_id: event_design.design_id), method: :post, class: "btn btn-success" do
           Start Survey
           %i.fa.fa-arrow-right
   .card-footer
