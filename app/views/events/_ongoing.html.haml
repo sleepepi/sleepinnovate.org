@@ -4,9 +4,9 @@
   - subject_event = event_design.subject_event
   .card-block
     %h4.card-title= subject_event.name
-    - if subject_event.percent.zero?
+    - if subject_event.percent.to_i.zero?
       .progress
-        .progress-bar.progress-bar-striped{ role: "progressbar", style: "width: 100%;background-color: #ededed;", aria: { valuenow: "#{subject_event.percent}", valuemin: "0", valuemax: "100" } }= "#{subject_event.percent}%"
+        .progress-bar.progress-bar-striped{ role: "progressbar", style: "width: 100%;background-color: #ededed;", aria: { valuenow: "0", valuemin: "0", valuemax: "100" } } 0%
     - else
       .progress
         .progress-bar.progress-bar-striped.bg-success{ role: "progressbar", style: "width: #{subject_event.percent}%;", aria: { valuenow: "#{subject_event.percent}", valuemin: "0", valuemax: "100" } }= "#{subject_event.percent}%"
@@ -22,7 +22,7 @@
       %p.card-text
         %div{ style: "color: #bababa;" } Get started.
       .text-center
-        = link_to start_survey_path(subject_event_id: subject_event.id, design_id: event_design.design_id), method: :post, class: "btn btn-success" do
+        = link_to start_survey_path(subject_event_id: subject_event.id, design_id: event_design.id), method: :post, class: "btn btn-success" do
           Start Survey
           %i.fa.fa-arrow-right
   .card-footer

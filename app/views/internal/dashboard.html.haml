@@ -23,12 +23,12 @@
               %span{ title: "#{subject_event.unblinded_responses_count} of #{subject_event.unblinded_questions_count} question#{"s" unless subject_event.unblinded_questions_count == 1}", data: { toggle: "tooltip", placement: "top", } }= "#{subject_event.percent}%"
               %span complete
           - if subject_event.event_designs.present?
-            - subject_event.event_designs.each do |design|
+            - subject_event.event_designs.each do |event_design|
               %div
-                %strong= design.name
-                - if design.sheets.present?
+                %strong= event_design.name
+                - if event_design.sheets.present?
                   %ul
-                    - design.sheets.each do |sheet|
+                    - event_design.sheets.each do |sheet|
                       %li
                         =# link_to sheet.name, sheet.path
                         =# link_to "Survey Overview", show_survey_path(subject_event_id: subject_event.id, design_id: design.id, sheet_id: sheet.id)
@@ -38,7 +38,7 @@
                           %span complete
                 - else
                   %ul
-                    %li= link_to "Start Survey", start_survey_path(subject_event_id: subject_event.id, design_id: design.id), method: :post
+                    %li= link_to "Start Survey", start_survey_path(subject_event_id: subject_event.id, design_id: event_design.id), method: :post
       - else
         You have not been assigned any surveys!
 
