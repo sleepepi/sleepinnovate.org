@@ -16,6 +16,8 @@ Rails.application.routes.draw do
     get :signature
     get :survey
     get :thank_you, path: "thank-you"
+    post :start_survey, path: "start-survey"
+    get :show_survey, path: "show-survey"
   end
 
   devise_for :users,

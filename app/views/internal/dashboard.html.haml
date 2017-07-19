@@ -1,11 +1,8 @@
 - @title = "Dashboard"
 
-- if false
-  %h1= @title
+%h1= @title
 
 - if current_user.consented?
-  %code= current_user.subject.subject_code
-
   - if current_user.subject_events.present?
     - current_user.subject_events.each do |subject_event|
       = link_to "#{ENV['slice_url']}/projects/#{ENV['project_id']}/subjects/#{current_user.subject.id}", "#{ENV['slice_url']}/projects/#{ENV['project_id']}/subjects/#{current_user.subject.id}", target: "_blank"
@@ -20,11 +17,15 @@
               %ul
                 - design.sheets.each do |sheet|
                   %li
-                    = link_to sheet.name, sheet.path
+                    =# link_to sheet.name, sheet.path
+                    =# link_to "Survey Overview", show_survey_path(subject_event_id: subject_event.id, design_id: design.id, sheet_id: sheet.id)
+                    = link_to "Continue Survey", "#{ENV['slice_url']}/survey/#{sheet.design_slug}/#{sheet.authentication_token}"
                     = "#{sheet.percent}% complete"
+            - else
+              %ul
+                %li= link_to "Start Survey", start_survey_path(subject_event_id: subject_event.id, design_id: design.id), method: :post
   - else
     You have completed all of your surveys!
-
 
   %p
     Your beautiful signature.

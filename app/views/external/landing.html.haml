@@ -1,8 +1,9 @@
 .page-box.background-p50-grey
 
   - if current_user
-    Go to
-    = link_to "Dashboard", dashboard_path
+    .container
+      Go to
+      = link_to "Dashboard", dashboard_path
   - else
     = render "devise/registrations/form", resource: User.new, resource_name: "user"
 

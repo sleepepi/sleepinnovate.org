@@ -20,6 +20,7 @@ class User < ApplicationRecord
   # Delegations
   delegate :subject_events, to: :subject
   delegate :subject_code, to: :subject
+  delegate :launch_survey!, to: :subject
 
   # Methods
 
@@ -33,7 +34,7 @@ class User < ApplicationRecord
   end
 
   def subject
-    @subject ||= Subject.new(slice_subject_id, self)
+    @subject ||= Subject.new(self)
   end
 
   def save_signature!(data_uri)
