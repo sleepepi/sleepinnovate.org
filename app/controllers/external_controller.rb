@@ -32,8 +32,9 @@ class ExternalController < ApplicationController
     end
   end
 
-  # # GET /version
-  # # GET /version.json
-  # def version
-  # end
+  # GET /version
+  # GET /version.json
+  def version
+    render layout: "full_page"
+  end
 end
