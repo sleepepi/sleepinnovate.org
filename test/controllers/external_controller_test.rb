@@ -4,6 +4,26 @@ require "test_helper"
 
 # Tests to assure external pages are accessible.
 class ExternalControllerTest < ActionDispatch::IntegrationTest
+  setup do
+    @regular_user = users(:one)
+  end
+
+  test "should get about" do
+    get about_url
+    assert_response :success
+  end
+
+  test "should get contact" do
+    get contact_url
+    assert_response :success
+  end
+
+  test "should get consent for regular user" do
+    login(@regular_user)
+    get consent_url
+    assert_response :success
+  end
+
   test "should get landing" do
     get landing_url
     assert_response :success

@@ -1,0 +1,48 @@
+.landing-page-question {
+  color: $p400-grey;
+  text-align: center;
+}
+
+.landing-read-consent-box {
+  margin-bottom: 20px;
+
+  a {
+    color: $p400-grey;
+    text-decoration: underline;
+
+    &:hover,
+    &:focus,
+    &:active,
+    &.active,
+    &.disabled,
+    &[disabled] {
+      color: $p500-teal;
+    }
+  }
+}
+
+.landing-button-bar {
+  display: flex;
+
+  .landing-button {
+    flex: 1 1;
+    padding: 20px;
+  }
+}
+
+@include media-breakpoint-down(lg) {
+  .landing-learn-more-box {
+    bottom: 0;
+    left: 0;
+    padding-bottom: 10px;
+    position: absolute;
+    right: 0;
+    text-align: center;
+  }
+}
+
+@include media-breakpoint-up(xl) {
+  .landing-learn-more-box {
+    text-align: center;
+  }
+}

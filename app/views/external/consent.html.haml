@@ -1,6 +1,5 @@
 - @title = "Consent"
 
-
 .page-box.last-slide.background-p50-grey
   .consent
     %h1.consent-title
@@ -21,7 +20,8 @@
     = render "consent/13_privacy"
     = render "consent/14_authorization"
 
-    %hr
+    - if current_user && !current_user.consented?
+      %hr
 
-    = link_to "I Consent", "#", data: { object: "consent-with-signature" }, class: "btn btn-lg btn-primary"
-    = link_to "I do not consent.", dashboard_path, class: "btn btn-link"
+      = link_to "I Consent", "#", data: { object: "consent-with-signature" }, class: "btn btn-lg btn-primary"
+      = link_to "I do not consent.", dashboard_path, class: "btn btn-link"

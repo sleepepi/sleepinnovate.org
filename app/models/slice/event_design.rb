@@ -30,4 +30,8 @@ class EventDesign
   def percent
     @sheets.first ? @sheets.first.percent : 0
   end
+
+  def sheets_where(sheet_id)
+    @sheets.select { |s| s.id.to_i == sheet_id.to_i }
+  end
 end

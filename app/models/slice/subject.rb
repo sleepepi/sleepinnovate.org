@@ -27,7 +27,7 @@ class Subject < SliceRecord
 
   def launch_survey!(subject_event_id, design_id, remote_ip)
     params = { subject_event_id: subject_event_id, design_id: design_id, remote_ip: remote_ip }
-    (json, status) = Helpers::JsonRequest.post("#{project_url}/subjects/#{@id}/sheets.json", params)
+    (json, _status) = Helpers::JsonRequest.post("#{project_url}/subjects/#{@id}/sheets.json", params)
     json["id"]
   end
 
@@ -36,6 +36,11 @@ class Subject < SliceRecord
       event = subject_events.find { |se| se.percent != 100 }
       event.event_designs.find { |ed| !ed.complete? } if event
     end
+  end
+
+  def survey_path(sheet_id)
+    sheet = subject_events.collect { |se| se.sheets_where(sheet_id) }.flatten.first
+    "#{ENV['slice_url']}/survey/#{sheet.design_slug}/#{sheet.authentication_token}" if sheet
   end
 
   private

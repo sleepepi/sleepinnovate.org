@@ -4,11 +4,6 @@
 class InternalController < ApplicationController
   before_action :authenticate_user!
 
-  # GET /consent
-  def consent
-    render layout: "layouts/full_page"
-  end
-
   # POST /consent
   def submit_consent
     current_user.consent!(params[:data_uri])
@@ -33,12 +28,17 @@ class InternalController < ApplicationController
 
   # GET /show-survey
   def show_survey
-    # redirect_to "#{ENV['slice_url']}/survey/#{design_slug}/#{sheet.token}"
+    slice_survey = current_user.survey_path(params[:sheet_id])
+    if slice_survey
+      redirect_to slice_survey
+    else
+      redirect_to dashboard_path, notice: "Survey could not be loaded."
+    end
   end
 
   # GET /dashboard
   def dashboard
-    render layout: "layouts/full_page"
+    render layout: "full_page"
   end
 
   # # GET /survey

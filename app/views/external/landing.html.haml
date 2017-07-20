@@ -1,28 +1,26 @@
-.page-box.background-p50-grey
-
-  - if current_user
-    .container
-      Go to
-      = link_to "Dashboard", dashboard_path
-  - else
-    = render "devise/registrations/form", resource: User.new, resource_name: "user"
-
-  .container{ style: "margin-top: 40px;" }
-    .row
-      .col
-        .sleep-background.mx-auto{ style: "width: 25px; height: 25px;" }
-      .col
-        .innovate-background.mx-auto{ style: "width: 25px; height: 25px;" }
-      .col
-        .boston-background.mx-auto{ style: "width: 25px; height: 25px;" }
-
-.page-box.last-slide{ style: "background-color: #cfd8dc;" }
+.page-box.last-slide.background-p50-grey.center-vertically-xs-sm
   .container
-    %h2
-      Learn more about
-      = ENV["website_name"]
+    .landing-page-question
+      %p.lead
+        Have you ever wondered why sleep disorders affect some patients more than
+        others?
 
-    %p
-      The
-      = ENV["website_name"]
-      project is
+    .jumbotron.jumbotron-white.text-center
+      %h1.landing-title
+        %i.fa.fa-puzzle-piece.boston-color
+        %span.sleep-color Sleep
+        %span.innovate-color> INNOVATE
+
+      .landing-read-consent-box
+        = link_to "read the consent form", consent_path
+
+      .landing-button-bar
+        .landing-button= link_to "enroll", new_user_registration_path, class: "btn btn-lg btn-outline-success btn-shadow"
+
+        .landing-button= link_to "opt out", new_user_registration_path, class: "btn btn-lg btn-outline-secondary btn-shadow"
+
+
+  .landing-learn-more-box
+    = link_to about_path, class: "btn btn-lg btn-link" do
+      learn more
+      %i.fa.fa-caret-right

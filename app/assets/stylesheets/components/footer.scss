@@ -1,0 +1,30 @@
+.footer-container {
+  background-color: $p100-grey;
+  bottom: 0;
+  height: $footer-height;
+  position: absolute;
+  width: 100%;
+
+  .footer {
+    height: $footer-height;
+    padding: 40px 0;
+  }
+
+  a {
+    color: $p400-grey;
+    transition: color .4s ease-out;
+
+    &:hover,
+    &:focus,
+    &:active,
+    &.active,
+    &.disabled,
+    &[disabled] {
+      color: $p500-teal;
+    }
+  }
+
+  img {
+    @include ignore-selection;
+  }
+}

@@ -15,20 +15,3 @@
     box-shadow: 0 0 8px $standard-shadow-hover-color;
   }
 }
-
-.btn-accent {
-  background-color: $p400-teal;
-  border: 1px solid $p600-teal;
-  color: $brand-white;
-
-  &:hover,
-  &:focus,
-  &:active,
-  &.active,
-  &.disabled,
-  &[disabled] {
-    background-color: $p100-teal;
-    border: 1px solid $p200-teal;
-    color: $brand-black;
-  }
-}

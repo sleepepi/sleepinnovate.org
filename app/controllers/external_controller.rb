@@ -2,6 +2,21 @@
 
 # Displays public pages.
 class ExternalController < ApplicationController
+  # GET /about
+  def about
+    render layout: "full_page"
+  end
+
+  # GET /consent
+  def consent
+    render layout: "full_page"
+  end
+
+  # GET /contact
+  def contact
+    render layout: "full_page"
+  end
+
   # GET /landing
   def landing
     render layout: "full_page"

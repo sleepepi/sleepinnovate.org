@@ -1,3 +1,8 @@
+html {
+  min-height: 100%;
+  position: relative;
+}
+
 body {
   &.full-page {
     margin-bottom: $footer-height;
@@ -13,4 +18,16 @@ body {
 .body-content {
   padding-bottom: 20px;
   padding-top: 20px;
+}
+
+$p200-teal-rgba: rgba(128, 203, 196, .99);
+
+::selection {
+  background-color: $p200-teal-rgba;
+  color: $p800-grey;
+  text-shadow: none;
+}
+
+:focus {
+  outline-color: $p200-teal !important;
 }

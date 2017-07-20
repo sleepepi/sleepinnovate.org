@@ -22,6 +22,7 @@ class User < ApplicationRecord
   delegate :subject_code, to: :subject
   delegate :launch_survey!, to: :subject
   delegate :next_survey, to: :subject
+  delegate :survey_path, to: :subject
 
   # Methods
 

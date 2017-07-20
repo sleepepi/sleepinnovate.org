@@ -1,0 +1,21 @@
+.footer-container
+  .container
+    .footer
+      .center.nowrap.hidden-sm-up
+        &copy;
+        = Date.today.year
+        = link_to "Boston Sleep", about_path
+        .pull-right
+          = link_to "Questions?", contact_path
+      .row.hidden-xs-down
+        .col-6.nowrap
+          &copy;
+          = Date.today.year
+          Boston Sleep
+          &nbsp;
+          = link_to "About", about_path
+        .col-6.nowrap.text-right.hidden-xs-down
+          .pull-right{ style: "margin-top: -14px;" }
+            = link_to "Questions?", contact_path
+            &nbsp;
+            = link_to image_tag("logos/bwh-logo.png", size: "48x56"), "http://www.brighamandwomens.org/"

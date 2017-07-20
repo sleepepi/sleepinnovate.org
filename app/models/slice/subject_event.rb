@@ -27,4 +27,8 @@ class SubjectEvent
       []
     end
   end
+
+  def sheets_where(sheet_id)
+    @event_designs.collect { |ed| ed.sheets_where(sheet_id) }.flatten
+  end
 end

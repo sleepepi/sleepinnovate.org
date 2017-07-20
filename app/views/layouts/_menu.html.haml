@@ -5,44 +5,27 @@
     = link_to landing_path, class: "navbar-brand" do
       %span.sleep-color> Sleep
       %span.innovate-color INNOVATE
-      %span.boston-color Boston
+      / %span.boston-color Boston
     #navbarSupportedContent.collapse.navbar-collapse
       %ul.navbar-nav.mr-auto
-        %li.nav-item{ class: current_page?(dashboard_path) ? "active" : nil }
-          = link_to "Dashboard", dashboard_path, class: "nav-link"
-          - if current_page?(dashboard_path)
-            %span.sr-only (current)
-        %li.nav-item{ class: current_page?(consent_path) ? "active" : nil }
-          = link_to "Consent", consent_path, class: "nav-link"
-          - if current_page?(consent_path)
-            %span.sr-only (current)
-        %li.nav-item
-          = link_to "Disabled", "#", class: "nav-link disabled", data: { object: "suppress-click" }
+        - if current_user
+          = render "menu/item", title: "Dashboard", path: dashboard_path
+          = render "menu/item", title: "Consent", path: consent_path
+          = render "menu/item_disabled", title: "Disabled" if false
+        - else
+          =# render "menu/item", title: "Landing2", path: landing2_path
       - if current_user
         %ul.navbar-nav
-          - if false
-            %li.nav-item
-              = link_to current_user.subject_code, "#", data: { object: "suppress-click" }, class: "nav-link disabled"
-
-          %li.nav-item.dropdown
-            = link_to current_user.subject_code || "Home", "#", data: { toggle: "dropdown" }, aria: { haspopup: "true", expanded: "false" }, class: "nav-link dropdown-toggle"
-            .dropdown-menu.dropdown-menu-right
-              - if false
-                = link_to "Action", "#", class: "dropdown-item"
-                = link_to "Another action", "#", class: "dropdown-item"
-                .dropdown-divider
-              = link_to destroy_user_session_path, method: :delete, class: "dropdown-item" do
-                %i.fa.fa-sign-out
-                Sign out
-
-          - if false
-            %li.nav-item.dropdown
-              = link_to "Dropdown", "#", data: { toggle: "dropdown" }, aria: { haspopup: "true", expanded: "false" }, class: "nav-link dropdown-toggle"
-              .dropdown-menu
-                = link_to "Action", "#", class: "dropdown-item"
-                = link_to "Another action", "#", class: "dropdown-item"
-                = link_to "Something else here", "#", class: "dropdown-item"
+          = render "menu/dropdown_account"
       - else
-        %form.form-inline.my-2.my-lg-0
-          / %input.form-control.mr-sm-2{ type: "text", placeholder: "Search" }
-          = link_to "Sign in", new_user_session_path, class: "btn btn-outline-success my-2 my-sm-0"
+        %ul.navbar-nav
+          %li.nav-item{ class: current_page?(new_user_session_path) ? "active" : nil }
+            = link_to new_user_session_path, class: "nav-link" do
+              %i.fa.fa-lock
+              Sign in
+            - if current_page?(new_user_session_path)
+              %span.sr-only (current)
+        - if false
+          %form.form-inline.my-2.my-lg-0
+            / %input.form-control.mr-sm-2{ type: "text", placeholder: "Search" }
+            = link_to "Sign in", new_user_session_path, class: "btn btn-outline-success my-2 my-sm-0"

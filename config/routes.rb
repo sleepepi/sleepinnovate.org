@@ -4,13 +4,16 @@ Rails.application.routes.draw do
   root "external#landing"
 
   scope module: :external do
+    get :about
+    get :consent
+    get :contact
     get :landing
+    get :landing2
     get :sitemap_xml, path: "sitemap.xml.gz"
     get :version
   end
 
   scope module: :internal do
-    get :consent
     post :consent, action: :submit_consent
     get :dashboard
     get :signature

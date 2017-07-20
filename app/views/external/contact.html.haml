@@ -1,0 +1,29 @@
+- @title = "Contact Us"
+
+.page-box.last-slide.background-p50-grey.center-vertically-xs-sm
+  .container
+    %h1{ style: "color: #bdbdbd;font-weight: 300;" }= @title
+    %p.lead
+      Please email
+      = mail_to "support@sleepinnovate.org"
+      with any questions.
+
+    %p.lead
+      Susan Redline, MD, MPH is the person in charge of this research study.
+      You can call her at
+      = succeed "." do
+        = link_to "617-732-5859", "tel:617-732-5859"
+
+    %p.lead
+      If you have questions about the scheduling of appointments or study visits,
+      call Carolina Dos Santos at
+      = succeed "." do
+        = link_to "617-278-0746", "tel:617-278-0746"
+
+    %p.lead
+      If you want to speak with someone
+      %strong{ style: "color: #9e9e9e;" } not
+      directly involved in this research study, please contact the Partners Human
+      Research Committee office. You can call them at
+      = succeed "." do
+        = link_to "857-282-1900", "tel:857-282-1900"
