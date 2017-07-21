@@ -15,9 +15,8 @@
         = link_to "read the consent form", consent_path
 
       .landing-button-bar
+        .landing-button= link_to "consent", consent_path, class: "btn btn-lg btn-outline-secondary btn-shadow"
         .landing-button= link_to "enroll", new_user_registration_path, class: "btn btn-lg btn-outline-success btn-shadow"
-
-        .landing-button= link_to "opt out", new_user_registration_path, class: "btn btn-lg btn-outline-secondary btn-shadow"
 
 
   .landing-learn-more-box

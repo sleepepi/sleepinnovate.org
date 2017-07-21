@@ -4,9 +4,50 @@
   max-width: 840px;
   padding: 20px;
 
-  .consent-title {
+  a {
+    word-wrap: break-word;
+  }
+
+  p,
+  ul {
+    line-height: 1.625rem;
+  }
+
+  h2 {
+    border-bottom: 1px solid $p300-grey;
+    font-weight: 600;
+    margin-bottom: 12px;
+    margin-top: 40px;
+    padding-bottom: 6.5px;
+  }
+
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-weight: 600;
+    margin-bottom: 12px;
+    margin-top: 20px;
+    padding-bottom: 6.5px;
+  }
+
+  h1 {
     background-color: $p100-grey;
     margin: -20px -20px 20px;
     padding: 20px;
+  }
+
+  h2 {
+    font-size: 20px;
+  }
+
+  h3 {
+    font-size: 18px;
+  }
+
+  h4,
+  h5,
+  h6 {
+    font-size: 16px;
   }
 }
