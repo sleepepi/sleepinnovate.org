@@ -4,10 +4,18 @@
 class InternalController < ApplicationController
   before_action :authenticate_user!
 
+  layout "full_page"
+
   # POST /consent
   def submit_consent
     current_user.consent!(params[:data_uri])
     redirect_to dashboard_path
+  end
+
+  # DELETE /consent
+  def revoke_consent
+    current_user.revoke_consent!
+    redirect_to dashboard_path, notice: "You have successfully withdrawn from the SleepINNOVATE study."
   end
 
   # GET /signature
@@ -36,10 +44,21 @@ class InternalController < ApplicationController
     end
   end
 
-  # GET /dashboard
-  def dashboard
-    render layout: "full_page"
-  end
+  # # GET /awards
+  # def awards
+  # end
+
+  # # GET /biobank
+  # def biobank
+  # end
+
+  # # GET /dashboard
+  # def dashboard
+  # end
+
+  # # GET /consents
+  # def consents
+  # end
 
   # # GET /survey
   # def survey
@@ -47,5 +66,9 @@ class InternalController < ApplicationController
 
   # # GET /thank-you
   # def thank_you
+  # end
+
+  # # GET /test-my-brain
+  # def test_my_brain
   # end
 end

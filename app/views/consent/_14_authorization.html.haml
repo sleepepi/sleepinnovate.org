@@ -25,8 +25,6 @@
 
 - if current_user
   - if current_user.consented?
-
-
     %table{ style: "width: 100%;" }
       %col{ width: "200px" }
       %col
@@ -45,6 +43,8 @@
         %td
           %div{ style: "border-top: 1px solid #333;" }
             %strong Time
+  - elsif current_user.consent_revoked?
+    .alert.alert-warning You have withdrawn from the SleepINNOVATE study.
   - else
     = form_tag consent_path, method: :post, id: "consent-form" do
       = hidden_field_tag :data_uri

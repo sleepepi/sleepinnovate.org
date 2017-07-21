@@ -2,7 +2,12 @@
 
 .page-box.last-slide.background-p50-grey
   .consent
-    %h1= @title
+    %h1
+      .pull-right
+        = link_to consent_path(format: "pdf"), class: "btn btn-sm btn-secondary", data: { turbolinks: false } do
+          %i.fa.fa-print
+          PDF
+      = @title
 
     = render "consent/01_about"
     = render "consent/02_why_research"
@@ -19,7 +24,7 @@
     = render "consent/13_privacy"
     = render "consent/14_authorization"
 
-    - if current_user && !current_user.consented?
+    - if current_user && current_user.unconsented?
       %hr
 
       = link_to "I Consent", "#", data: { object: "consent-with-signature" }, class: "btn btn-lg btn-primary"

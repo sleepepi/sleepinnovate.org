@@ -1,0 +1,20 @@
+- @title = "Awards"
+
+.page-box.last-slide.background-p50-grey.center-vertically-xs-sm
+  .container
+    %h1{ style: "color: #bdbdbd;font-weight: 300;" }= @title
+
+    - if current_user.consented?
+      %p Earn lottery tickets by completing surveys!
+      %p
+        You have earned
+        %strong= current_user.awards_count
+        lottery
+        = succeed "." do
+          = current_user.awards_count == 1 ? "ticket" : "tickets"
+
+      %p
+        The lottery for a $100 gift card is drawn quarterly.
+    - elsif current_user.consent_revoked?
+      %p
+        You are no longer eligible for the lottery drawing.

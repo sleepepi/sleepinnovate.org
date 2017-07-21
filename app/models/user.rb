@@ -28,11 +28,32 @@ class User < ApplicationRecord
 
   def consent!(data_uri)
     save_signature!(data_uri)
-    update consented_at: Time.zone.now
+    update(consented_at: Time.zone.now, consent_revoked_at: nil)
+  end
+
+  def revoke_consent!
+    update(consent_revoked_at: Time.zone.now)
+  end
+
+  # Only to be used by admins in case user accidentally revoked consent.
+  def unrevoke_consent!
+    update(consent_revoked_at: nil)
   end
 
   def consented?
-    !consented_at.nil?
+    !consented_at.nil? && consent_revoked_at.nil?
+  end
+
+  def consent_revoked?
+    !consent_revoked_at.nil?
+  end
+
+  def unconsented?
+    consented_at.nil? && consent_revoked_at.nil?
+  end
+
+  def awards_count
+    0
   end
 
   def subject

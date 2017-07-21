@@ -10,7 +10,11 @@
       %ul.navbar-nav.mr-auto
         - if current_user
           = render "menu/item", title: "Dashboard", path: dashboard_path
+          = render "menu/item", title: "Dashboard2", path: dashboard2_path
           = render "menu/item", title: "Consent", path: consent_path
+          = render "menu/item", title: "Consents", path: consents_path
+          = render "menu/item", title: "Biobank", path: biobank_path
+          = render "menu/item", title: "Test My Brain", path: test_my_brain_path
           = render "menu/item_disabled", title: "Disabled" if false
         - else
           =# render "menu/item", title: "Landing2", path: landing2_path

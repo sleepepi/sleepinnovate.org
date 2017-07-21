@@ -1,0 +1,44 @@
+.page-box.last-slide.background-p50-grey.center-vertically-xs-sm
+  .container
+    .row
+      .col-lg-4.col-buffer= render "cards/consents"
+      .col-lg-4.col-buffer= render "cards/biobank"
+      .col-lg-4.col-buffer= render "cards/get_in_touch"
+    - if false
+      .card-deck
+        .card
+          .text-center{ style: "font-size: 6rem;" }
+            %i.fa.fa-lightbulb-o.text-warning
+          .card-block
+            %h4.card-title Test My Brain
+            %p.card-text
+              %div{ style: "color: #bdbdbd;" } ...
+            .text-center
+              %p.card-text
+                = link_to contact_path, class: "btn btn-secondary" do
+                  %i.fa.fa-envelope
+                  Get in touch
+        .card
+          .text-center{ style: "font-size: 6rem;" }
+            %i.fa.fa-lightbulb-o.text-warning
+          .card-block
+            %h4.card-title Test My Brain
+            %p.card-text
+              %div{ style: "color: #bdbdbd;" } ...
+            .text-center
+              %p.card-text
+                = link_to contact_path, class: "btn btn-secondary" do
+                  %i.fa.fa-envelope
+                  Get in touch
+        .card
+          .text-center{ style: "font-size: 6rem;" }
+            %i.fa.fa-lightbulb-o.text-warning
+          .card-block
+            %h4.card-title Test My Brain
+            %p.card-text
+              %div{ style: "color: #bdbdbd;" } ...
+            .text-center
+              %p.card-text
+                = link_to contact_path, class: "btn btn-secondary" do
+                  %i.fa.fa-envelope
+                  Get in touch

@@ -1,0 +1,14 @@
+.card{ style: "height: 100%;" }
+  .card-block
+    .text-center{ style: "font-size: 6rem;" }
+      %i.fa.fa-trophy.text-warning
+    %h4.card-title My Awards
+    %p.card-text
+      %div{ style: "color: #bdbdbd;" }
+        View how many lottery tickets you
+        have earned by completing surveys.
+    .text-center
+      %p.card-text
+        = link_to contact_path, class: "btn btn-secondary" do
+          %i.fa.fa-envelope
+          Get in touch

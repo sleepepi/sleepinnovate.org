@@ -1,6 +1,7 @@
 %li.nav-item.dropdown
   = link_to current_user.subject_code || "Home", "#", data: { toggle: "dropdown" }, aria: { haspopup: "true", expanded: "false" }, class: "nav-link dropdown-toggle"
   .dropdown-menu.dropdown-menu-right
+    = link_to "My Awards", awards_path, class: "dropdown-item"
     - if false
       = link_to "Action", "#", class: "dropdown-item"
       = link_to "Another action", "#", class: "dropdown-item"

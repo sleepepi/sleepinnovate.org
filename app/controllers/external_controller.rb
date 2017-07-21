@@ -12,6 +12,11 @@ class ExternalController < ApplicationController
     render layout: "full_page"
   end
 
+  # GET /consent.pdf
+  def print_consent
+    render plain: current_user ? "#{current_user.full_name}'s PDF" : "PDF"
+  end
+
   # GET /contact
   def contact
     render layout: "full_page"

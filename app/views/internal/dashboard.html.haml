@@ -4,13 +4,21 @@
   .container
     - if current_user.consented?
       - if current_user.subject_events.present?
-        .card-deck
+        .row
           - if current_user.next_survey
-            = render "events/ongoing", event_design: current_user.next_survey
+            .col-lg-4.col-buffer= render "cards/ongoing", event_design: current_user.next_survey
           - else
-            = render "events/completed", subject_event: current_user.subject_events.first
-          = render "events/coming_soon", title: "3 Month Phonecall"
-          = render "internal/get_in_touch"
+            .col-lg-4.col-buffer= render "cards/completed", subject_event: current_user.subject_events.first
+          .col-lg-4.col-buffer= render "cards/coming_soon", title: "3 Month Phonecall"
+          .col-lg-4.col-buffer= render "cards/awards"
+
+        .row
+          .col-lg-4.col-buffer= render "cards/consents"
+          .col-lg-4.col-buffer= render "cards/biobank"
+          .col-lg-4.col-buffer= render "cards/get_in_touch"
+
+        .row
+          .col-lg-4.col-buffer= render "cards/testmybrain"
 
         - if false
           %hr
@@ -52,6 +60,14 @@
         %p
           = link_to "View Consent", consent_path
 
+    - elsif current_user.consent_revoked?
+      .jumbotron.jumbotron-white
+        %h2 Withdrawn from Study
+        %p You have withdrawn from the SleepINNOVATE study.
+        %p
+          Please
+          = link_to "notify the person", contact_path
+          in charge of this research study in writing.
     - else
 
       .jumbotron.jumbotron-white

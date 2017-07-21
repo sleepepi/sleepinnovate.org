@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
   scope module: :external do
     get :about
+    get :print_consent, path: "consent.pdf"
     get :consent
     get :contact
     get :landing
@@ -15,9 +16,15 @@ Rails.application.routes.draw do
 
   scope module: :internal do
     post :consent, action: :submit_consent
+    delete :consent, action: :revoke_consent
+    get :awards
+    get :consents
     get :dashboard
+    get :dashboard2
     get :signature
     get :survey
+    get :test_my_brain, path: "test-my-brain"
+    get :biobank
     get :thank_you, path: "thank-you"
     post :start_survey, path: "start-survey"
     get :show_survey, path: "show-survey"
