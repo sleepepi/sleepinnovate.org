@@ -10,6 +10,7 @@ class User < ApplicationRecord
   # Concerns
   include Deletable
   include Forkable
+  include Latexable
 
   # Validations
   validates :full_name, presence: true
@@ -83,5 +84,23 @@ class User < ApplicationRecord
 
   def send_welcome_email(pw)
     RegistrationMailer.welcome_email(self, pw).deliver_now if EMAILS_ENABLED
+  end
+
+  def self.latex_partial(partial)
+    File.read(File.join("app", "views", "latex", "_#{partial}.tex.erb"))
+  end
+
+  def self.generate_printed_pdf!(current_user)
+    jobname = current_user ? "consent_#{current_user.id}" : "consent"
+    output_folder = File.join("tmp", "files", "tex")
+    FileUtils.mkdir_p output_folder
+    file_tex = File.join("tmp", "files", "tex", "#{jobname}.tex")
+    @user = current_user # Needed by Binding
+    File.open(file_tex, "w") do |file|
+      file.syswrite(ERB.new(latex_partial("header")).result(binding))
+      file.syswrite(ERB.new(latex_partial("consent")).result(binding))
+      file.syswrite(ERB.new(latex_partial("footer")).result(binding))
+    end
+    generate_pdf(jobname, output_folder, file_tex)
   end
 end

@@ -14,7 +14,12 @@ class ExternalController < ApplicationController
 
   # GET /consent.pdf
   def print_consent
-    render plain: current_user ? "#{current_user.full_name}'s PDF" : "PDF"
+    pdf_file = Rails.root.join(User.generate_printed_pdf!(current_user))
+    if File.exist?(pdf_file)
+      send_file(pdf_file, filename: "SleepINNOVATEConsentForm.pdf", type: "application/pdf", disposition: "inline")
+    else
+      redirect_to consent_path, alert: "Unable to generate PDF at this time."
+    end
   end
 
   # GET /contact

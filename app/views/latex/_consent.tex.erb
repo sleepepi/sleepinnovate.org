@@ -1,0 +1,28 @@
+\begin{center}
+  {\Large SleepINNOVATE Consent} \\[0.5cm]
+  {\large Brigham and Women's Hospital}
+\end{center}
+
+
+\section*{About this consent form}
+
+Please read this form carefully. It tells you important information about a
+research study. A member of our research team will also talk to you about taking
+part in this research study. People who agree to take part in research studies
+are called ``subjects.'' This term will be used throughout this consent form. \\
+
+Partners HealthCare System is made up of Partners hospitals, health care
+providers, and researchers. In the rest of this consent form, we refer to the
+Partners system simply as ``Partners.'' \\
+
+If you have any questions about the research or about this form, please ask us.
+Taking part in this research study is up to you. If you decide to take part in
+this research study, you must sign this form to show that you want to take part.
+We will give you a signed copy of this form to keep. \\
+
+
+<% if @user && @user.consent_signature.url %>
+  \begin{figure}[!htpb]
+    \includegraphics[max width=7.5in]{<%= @user.consent_signature.path %>}
+  \end{figure}
+<% end %>
