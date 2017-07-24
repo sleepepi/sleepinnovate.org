@@ -57,6 +57,25 @@ class User < ApplicationRecord
     0
   end
 
+  def slice_surveys_step?
+    # true
+    rand(2).zero?
+  end
+
+  def test_my_brain_step?
+    # true
+    rand(2).zero?
+  end
+
+  def biobank_step?
+    # true
+    rand(2).zero?
+  end
+
+  def finished_step?
+    true
+  end
+
   def subject
     @subject ||= Subject.new(self)
   end

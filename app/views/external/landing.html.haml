@@ -1,6 +1,6 @@
 .page-box.last-slide.background-p50-grey.center-vertically-xs-sm
   .container
-    .landing-page-question
+    .landing-page-question.hidden-md-down
       %p.lead
         Have you ever wondered why sleep disorders affect some patients more than
         others?
@@ -15,7 +15,8 @@
         = link_to "read the consent form", consent_path
 
       .landing-button-bar
-        .landing-button= link_to "consent", consent_path, class: "btn btn-lg btn-outline-secondary btn-shadow"
+        - if false
+          .landing-button= link_to "consent", consent_path, class: "btn btn-lg btn-outline-secondary"
         .landing-button= link_to "enroll", new_user_registration_path, class: "btn btn-lg btn-outline-success btn-shadow"
 
 

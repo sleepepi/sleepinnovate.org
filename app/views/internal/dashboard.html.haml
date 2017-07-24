@@ -2,65 +2,8 @@
 
 .page-box.last-slide.background-p50-grey.center-vertically-xs-sm
   .container
-    - if current_user.consented?
-      - if current_user.subject_events.present?
-        .row
-          - if current_user.next_survey
-            .col-lg-4.col-buffer= render "cards/ongoing", event_design: current_user.next_survey
-          - else
-            .col-lg-4.col-buffer= render "cards/completed", subject_event: current_user.subject_events.first
-          .col-lg-4.col-buffer= render "cards/coming_soon", title: "3 Month Phonecall"
-          .col-lg-4.col-buffer= render "cards/awards"
 
-        .row
-          .col-lg-4.col-buffer= render "cards/consents"
-          .col-lg-4.col-buffer= render "cards/biobank"
-          .col-lg-4.col-buffer= render "cards/get_in_touch"
-
-        .row
-          .col-lg-4.col-buffer= render "cards/testmybrain"
-
-        - if false
-          %hr
-          - current_user.subject_events.each do |subject_event|
-            %p= link_to "#{ENV['slice_url']}/projects/#{ENV['project_id']}/subjects/#{current_user.subject.id}", "#{ENV['slice_url']}/projects/#{ENV['project_id']}/subjects/#{current_user.subject.id}", target: "_blank", class: "breakword"
-            %h2
-              = subject_event.name
-              %small{ style: "color: #bdbdbd;" }
-                %span{ title: "#{subject_event.unblinded_responses_count} of #{subject_event.unblinded_questions_count} question#{"s" unless subject_event.unblinded_questions_count == 1}", data: { toggle: "tooltip", placement: "top", } }= "#{subject_event.percent}%"
-                %span complete
-            - if subject_event.event_designs.present?
-              - subject_event.event_designs.each do |event_design|
-                %div
-                  %strong= event_design.name
-                  - if event_design.sheets.present?
-                    %ul
-                      - event_design.sheets.each do |sheet|
-                        %li
-                          =# link_to sheet.name, sheet.path
-                          =# link_to "Survey Overview", show_survey_path(subject_event_id: subject_event.id, design_id: design.id, sheet_id: sheet.id)
-                          = link_to "Continue Survey", "#{ENV['slice_url']}/survey/#{sheet.design_slug}/#{sheet.authentication_token}"
-                          %small{ style: "color: #bdbdbd;" }
-                            %span{ title: "#{sheet.response_count} of #{sheet.total_response_count} question#{"s" unless sheet.total_response_count == 1}", data: { toggle: "tooltip", placement: "top", } }= "#{sheet.percent}%"
-                            %span complete
-                  - else
-                    %ul
-                      %li= link_to "Start Survey", start_survey_path(subject_event_id: subject_event.id, design_id: event_design.id), method: :post
-      - else
-        You have not been assigned any surveys!
-
-      - if false
-        %hr
-
-        %p
-          Your beautiful signature.
-
-        = image_tag signature_path, style: "max-width: 100%; height: auto;"
-
-        %p
-          = link_to "View Consent", consent_path
-
-    - elsif current_user.consent_revoked?
+    - if current_user.consent_revoked?
       .jumbotron.jumbotron-white
         %h2 Withdrawn from Study
         %p You have withdrawn from the SleepINNOVATE study.
@@ -68,8 +11,58 @@
           Please
           = link_to "notify the person", contact_path
           in charge of this research study in writing.
-    - else
+    - elsif current_user.slice_surveys_step?
+      - if current_user.subject_events.present?
+        .row
+          - if current_user.next_survey
+            .col-lg-4.col-buffer= render "cards/ongoing", event_design: current_user.next_survey
+          - else
+            .col-lg-4.col-buffer= render "cards/completed", subject_event: current_user.subject_events.first
+          .col-lg-4.col-buffer= render "cards/coming_soon", title: "3 Month Phonecall"
+          - if false
+            .col-lg-4.col-buffer= render "cards/awards"
 
+        - if false
+          .row
+            .col-lg-4.col-buffer= render "cards/consents"
+
+            .col-lg-4.col-buffer= render "cards/get_in_touch"
+
+
+
+        - if false
+          %hr
+
+          %p
+            Your beautiful signature.
+
+          = image_tag signature_path, style: "max-width: 100%; height: auto;"
+
+          %p
+            = link_to "View Consent", consent_path
+
+
+      - else
+        You have not been assigned any surveys!
+    - elsif current_user.test_my_brain_step?
+      .row
+        .col-lg-4.col-buffer= render "cards/completed", subject_event: current_user.subject_events.first
+        .col-lg-4.col-buffer= render "cards/testmybrain"
+    - elsif current_user.biobank_step?
+      .row
+        .col-lg-4.col-buffer= render "cards/completed", subject_event: current_user.subject_events.first
+        .col-lg-4.col-buffer= render "cards/testmybrain_completed"
+        .col-lg-4.col-buffer= render "cards/biobank"
+    - elsif current_user.finished_step?
+      .row
+        .col-lg-4.col-buffer= render "cards/all_three_finished"
+        .col-lg-4.col-buffer= render "cards/coming_soon", title: "3 Month Phonecall"
+      - if false
+        .row
+          .col-lg-4.col-buffer= render "cards/completed", subject_event: current_user.subject_events.first
+          .col-lg-4.col-buffer= render "cards/testmybrain_completed"
+          .col-lg-4.col-buffer= render "cards/biobank_completed"
+    - else
       .jumbotron.jumbotron-white
         %h2 Step 1: Consent
         %p

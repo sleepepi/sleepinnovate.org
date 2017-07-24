@@ -3,14 +3,14 @@
     .footer
       .center.nowrap.hidden-sm-up
         &copy;
-        = Date.today.year
+        = Time.zone.today.year
         = link_to "Boston Sleep", about_path
         .pull-right
           = link_to "Questions?", contact_path
       .row.hidden-xs-down
         .col-6.nowrap
           &copy;
-          = Date.today.year
+          = Time.zone.today.year
           Boston Sleep
           &nbsp;
           = link_to "About", about_path
