@@ -13,4 +13,4 @@
   - An about page describes the study
   - A contact page was added to allow users to contact research study staff
   - Consent forms can now be downloaded as PDFs
-  - Initial Ruby on Rails 5.1.2 framework
+  - Using Ruby on Rails 5.1.3.rc1 framework
