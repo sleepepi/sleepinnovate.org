@@ -1,10 +1,16 @@
 %li.nav-item.dropdown
   = link_to current_user.subject_code || "Home", "#", data: { toggle: "dropdown" }, aria: { haspopup: "true", expanded: "false" }, class: "nav-link dropdown-toggle"
   .dropdown-menu.dropdown-menu-right
-    = link_to "My Awards", awards_path, class: "dropdown-item"
-    = link_to "Settings", settings_path, class: "dropdown-item"
+    = link_to awards_path, class: "dropdown-item" do
+      %i.fa.fa-trophy
+      My Awards
+    = link_to settings_path, class: "dropdown-item" do
+      %i.fa.fa-cogs
+      Settings
     .dropdown-divider
-    = link_to "Dashboard 2", dashboard2_path, class: "dropdown-item"
+    = link_to dashboard2_path, class: "dropdown-item text-danger" do
+      %i.fa.fa-exclamation-triangle
+      Dashboard 2
     .dropdown-divider
     - if false
       = link_to "Action", "#", class: "dropdown-item"
