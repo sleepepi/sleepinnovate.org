@@ -1,16 +1,13 @@
 one:
   full_name: Yellow Fish
   email: yellow_fish@example.com
-  # confirmed_at: 2017-01-15 14:22:15
 
 two:
   full_name: Brown Dog
   email: brown_dog@example.com
-  # confirmed_at: 2017-01-17 10:34:56
 
 withdrawn:
   full_name: Revoked Consent
   email: withdrawn@example.com
-  # confirmed_at: 2017-04-21 13:43:24
   consented_at: 2017-04-21 16:22:24
   consent_revoked_at: 2017-07-21 13:43:24
