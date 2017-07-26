@@ -1,0 +1,12 @@
+- @title = "What's Next"
+
+.page-box.last-slide.background-p50-grey.center-vertically-xs-sm
+  .container
+    .row
+      .col-lg-4.col-buffer
+      .col-lg-4.col-buffer= render "cards/coming_soon", title: "3 Month Phonecall"
+
+    .text-center
+      Back to
+      = succeed "."do
+        = link_to "dashboard", dashboard_path

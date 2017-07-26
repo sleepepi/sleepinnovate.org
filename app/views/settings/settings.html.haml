@@ -1,0 +1,39 @@
+- @title = "Settings"
+
+.page-box.last-slide.background-p50-grey.center-vertically-xs-sm
+  .container
+    %h1= @title
+
+    - if !current_user.brain_surveys_step? && !current_user.brain_surveys_started?
+      %p
+        %strong Test My Brain
+      %p= link_to "Start Test My Brain surveys.", test_my_brain_start_path, method: :post
+
+    - if current_user.brain_surveys_started? && !current_user.brain_surveys_completed?
+      %p
+        %strong Test My Brain
+      %p= link_to "I've completed the TestMyBrain surveys.", test_my_brain_complete_path, method: :post
+
+
+    - if !current_user.biobank_registration_step? && !current_user.biobank_registration_started?
+      %p
+        %strong Biobank
+      %p= link_to "Start Biobank registration.", biobank_start_path, method: :post
+
+    - if current_user.biobank_registration_started? && !current_user.biobank_registration_completed?
+      %p
+        %strong Biobank
+      %p= link_to "I've completed the Biobank registration.", biobank_complete_path, method: :post
+
+
+    %p
+      %strong My Password
+    %p= link_to "Update my password.", settings_password_path
+
+    %p
+      %strong Consents
+    %p= link_to "View consents.", settings_consents_path
+
+    %p
+      %strong Study
+    %p= link_to "Leave study.", settings_leave_study_path

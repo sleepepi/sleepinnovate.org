@@ -71,4 +71,28 @@ class InternalController < ApplicationController
   # # GET /test-my-brain
   # def test_my_brain
   # end
+
+  # POST /test-my-brain/start
+  def test_my_brain_start
+    current_user.test_my_brain_started!
+    redirect_to "https://testmybrain.org"
+  end
+
+  # POST /test-my-brain/complete
+  def test_my_brain_complete
+    current_user.test_my_brain_completed!
+    redirect_to dashboard_path
+  end
+
+  # POST /biobank/start
+  def biobank_start
+    current_user.biobank_registration_started!
+    redirect_to "https://biobank.partners.org"
+  end
+
+  # POST /biobank/complete
+  def biobank_complete
+    current_user.biobank_registration_completed!
+    redirect_to dashboard_path
+  end
 end

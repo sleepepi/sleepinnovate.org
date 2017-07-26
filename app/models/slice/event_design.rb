@@ -13,18 +13,12 @@ class EventDesign
     @sheets = load_sheets(json["sheets"])
   end
 
-  def load_sheets(json_sheets)
-    if json_sheets
-      json_sheets.collect do |json|
-        Sheet.new(json)
-      end
-    else
-      []
-    end
-  end
-
   def complete?
     @sheets.count { |s| s.percent == 100 }.positive?
+  end
+
+  def incomplete?
+    !complete?
   end
 
   def percent
@@ -33,5 +27,17 @@ class EventDesign
 
   def sheets_where(sheet_id)
     @sheets.select { |s| s.id.to_i == sheet_id.to_i }
+  end
+
+  private
+
+  def load_sheets(json_sheets)
+    if json_sheets
+      json_sheets.collect do |json|
+        Sheet.new(json)
+      end
+    else
+      []
+    end
   end
 end

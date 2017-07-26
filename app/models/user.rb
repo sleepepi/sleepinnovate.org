@@ -24,6 +24,7 @@ class User < ApplicationRecord
   delegate :launch_survey!, to: :subject
   delegate :next_survey, to: :subject
   delegate :survey_path, to: :subject
+  delegate :baseline_surveys_completed?, to: :subject
 
   # Methods
 
@@ -39,6 +40,26 @@ class User < ApplicationRecord
   # Only to be used by admins in case user accidentally revoked consent.
   def unrevoke_consent!
     update(consent_revoked_at: nil)
+  end
+
+  def test_my_brain_started!
+    return unless brain_started.nil?
+    update(brain_started: Time.zone.now)
+  end
+
+  def test_my_brain_completed!
+    return unless brain_completed.nil?
+    update(brain_completed: Time.zone.now)
+  end
+
+  def biobank_registration_started!
+    return unless biobank_started.nil?
+    update(biobank_started: Time.zone.now)
+  end
+
+  def biobank_registration_completed!
+    return unless biobank_completed.nil?
+    update(biobank_completed: Time.zone.now)
   end
 
   def consented?
@@ -58,22 +79,39 @@ class User < ApplicationRecord
   end
 
   def slice_surveys_step?
-    # true
-    rand(2).zero?
+    consented?
   end
 
-  def test_my_brain_step?
-    # true
-    rand(2).zero?
+  def brain_surveys_step?
+    baseline_surveys_completed?
   end
 
-  def biobank_step?
-    # true
-    rand(2).zero?
+  def brain_surveys_started?
+    !brain_started.nil?
   end
 
-  def finished_step?
-    true
+  def brain_surveys_completed?
+    !brain_completed.nil?
+  end
+
+  def biobank_registration_step?
+    brain_surveys_completed?
+  end
+
+  def biobank_registration_started?
+    !biobank_started.nil?
+  end
+
+  def biobank_registration_completed?
+    !biobank_completed.nil?
+  end
+
+  def biobank_opted_out?
+    false
+  end
+
+  def whats_next?
+    baseline_surveys_completed? && brain_surveys_completed? && (biobank_registration_completed? || biobank_opted_out?)
   end
 
   def subject

@@ -10,6 +10,18 @@ class Subject < SliceRecord
     find_or_create_subject
   end
 
+  def baseline_surveys_completed?
+    if baseline_event
+      baseline_event.event_designs.count(&:incomplete?).zero?
+    else
+      false
+    end
+  end
+
+  def baseline_event
+    subject_events.find { |se| se.name == "Baseline" }
+  end
+
   def loaded?
     @id.present?
   end

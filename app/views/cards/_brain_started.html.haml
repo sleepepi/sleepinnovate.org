@@ -1,0 +1,12 @@
+.card{ style: "height: 100%;" }
+  .card-block
+    .text-center{ style: "font-size: 6rem;" }
+      %i.fa.fa-lightbulb-o.text-warning
+    %h4.card-title Test My Brain
+    %p.card-text
+      %div{ style: "color: #bdbdbd;" } Continue testing your brain!
+    .text-center
+      %p.card-text
+        = link_to test_my_brain_path, class: "btn btn-warning btn-shadow" do
+          %i.fa.fa-lightbulb-o
+          Next brain survey.

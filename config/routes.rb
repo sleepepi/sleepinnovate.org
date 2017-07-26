@@ -18,16 +18,31 @@ Rails.application.routes.draw do
     post :consent, action: :submit_consent
     delete :consent, action: :revoke_consent
     get :awards
-    get :consents
     get :dashboard
     get :dashboard2
     get :signature
     get :survey
     get :test_my_brain, path: "test-my-brain"
     get :biobank
+    get :whats_next, path: "whats-next"
     get :thank_you, path: "thank-you"
     post :start_survey, path: "start-survey"
     get :show_survey, path: "show-survey"
+    post :test_my_brain_start, path: "test-my-brain/start"
+    post :test_my_brain_complete, path: "test-my-brain/complete"
+    post :biobank_start, path: "biobank/start"
+    post :biobank_complete, path: "biobank/complete"
+  end
+
+  scope module: :settings do
+    get :settings
+  end
+
+  namespace :settings do
+    # root to: "settings#index"
+    get :consents
+    get :leave_study, path: "leave-study"
+    get :password
   end
 
   devise_for :users,

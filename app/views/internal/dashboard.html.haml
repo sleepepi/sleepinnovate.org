@@ -11,57 +11,56 @@
           Please
           = link_to "notify the person", contact_path
           in charge of this research study in writing.
-    - elsif current_user.slice_surveys_step?
-      - if current_user.subject_events.present?
-        .row
-          - if current_user.next_survey
-            .col-lg-4.col-buffer= render "cards/ongoing", event_design: current_user.next_survey
-          - else
-            .col-lg-4.col-buffer= render "cards/completed", subject_event: current_user.subject_events.first
-          .col-lg-4.col-buffer= render "cards/coming_soon", title: "3 Month Phonecall"
-          - if false
-            .col-lg-4.col-buffer= render "cards/awards"
-
-        - if false
-          .row
-            .col-lg-4.col-buffer= render "cards/consents"
-
-            .col-lg-4.col-buffer= render "cards/get_in_touch"
-
-
-
-        - if false
-          %hr
-
-          %p
-            Your beautiful signature.
-
-          = image_tag signature_path, style: "max-width: 100%; height: auto;"
-
-          %p
-            = link_to "View Consent", consent_path
-
-
-      - else
-        You have not been assigned any surveys!
-    - elsif current_user.test_my_brain_step?
+    - elsif current_user.consented?
       .row
-        .col-lg-4.col-buffer= render "cards/completed", subject_event: current_user.subject_events.first
-        .col-lg-4.col-buffer= render "cards/testmybrain"
-    - elsif current_user.biobank_step?
-      .row
-        .col-lg-4.col-buffer= render "cards/completed", subject_event: current_user.subject_events.first
-        .col-lg-4.col-buffer= render "cards/testmybrain_completed"
-        .col-lg-4.col-buffer= render "cards/biobank"
-    - elsif current_user.finished_step?
-      .row
-        .col-lg-4.col-buffer= render "cards/all_three_finished"
-        .col-lg-4.col-buffer= render "cards/coming_soon", title: "3 Month Phonecall"
+        - if current_user.subject_events.blank?
+          .col-lg-4.col-buffer= render "cards/no_surveys"
+        - elsif current_user.next_survey
+          .col-lg-4.col-buffer= render "cards/ongoing", event_design: current_user.next_survey
+        - else
+          .col-lg-4.col-buffer= render "cards/completed", subject_event: current_user.subject_events.first
+
+        - if current_user.brain_surveys_completed?
+          .col-lg-4.col-buffer= render "cards/brain_completed"
+        - elsif current_user.brain_surveys_started?
+          .col-lg-4.col-buffer= render "cards/brain_started"
+        - elsif current_user.brain_surveys_step?
+          .col-lg-4.col-buffer= render "cards/brain"
+
+        - if current_user.biobank_registration_completed?
+          .col-lg-4.col-buffer= render "cards/biobank_completed"
+        - elsif current_user.biobank_registration_started?
+          .col-lg-4.col-buffer= render "cards/biobank_started"
+        - elsif current_user.biobank_registration_step?
+          .col-lg-4.col-buffer= render "cards/biobank"
+
+      - if current_user.whats_next?
+        .text-center
+          Congrats, you are all done!
+          = link_to "What's next?", whats_next_path
+
+      - if false
+        %hr
+
+        %p
+          Your beautiful signature.
+
+        = image_tag signature_path, style: "max-width: 100%; height: auto;"
+
+        %p
+          = link_to "View Consent", consent_path
+
       - if false
         .row
           .col-lg-4.col-buffer= render "cards/completed", subject_event: current_user.subject_events.first
-          .col-lg-4.col-buffer= render "cards/testmybrain_completed"
+          .col-lg-4.col-buffer= render "cards/test_my_brain_completed"
           .col-lg-4.col-buffer= render "cards/biobank_completed"
+          - if false
+            .col-lg-4.col-buffer= render "cards/awards"
+            .col-lg-4.col-buffer= render "cards/get_in_touch"
+            .col-lg-4.col-buffer= render "cards/consents"
+            .col-lg-4.col-buffer= render "cards/coming_soon", title: "3 Month Phonecall"
+
     - else
       .jumbotron.jumbotron-white
         %h2 Step 1: Consent
