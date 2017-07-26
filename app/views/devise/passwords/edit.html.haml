@@ -17,8 +17,9 @@
         = render 'layouts/label_or_errors', f: f, object: resource, key: :password_confirmation, key_name: 'Confirm new password'
         = f.password_field :password_confirmation, class: 'form-control'
 
+      - if resource.errors[:reset_password_token].present?
+        = f.label :reset_password_token, "Reset token has expired.", class: "form-control-label"
+        = link_to "Request a new reset token.", new_password_path(resource_name)
+
       .form-group.submit-btn-container
         = f.submit "Change my password", class: "btn btn-primary btn-block"
-
-  .sign-up-form.text-center
-    = render "devise/shared/links"

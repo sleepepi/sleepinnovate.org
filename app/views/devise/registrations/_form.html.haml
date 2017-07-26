@@ -9,7 +9,6 @@
     .form-group
       = render "layouts/label_or_errors", f: f, object: resource, key: :email
       = f.email_field :email, class: "form-control form-control-danger"
-      %small.form-text.text-muted You will need to confirm your email after registration.
 
     .form-group.submit-btn-container
       = f.submit "Create Account", class: "btn btn-primary btn-block"

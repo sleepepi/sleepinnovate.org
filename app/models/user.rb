@@ -3,9 +3,9 @@
 # Defines a user in the web application.
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
-  # :omniauthable
-  devise :confirmable, :database_authenticatable, :lockable, :registerable,
-         :recoverable, :rememberable, :timeoutable, :trackable, :validatable
+  # :confirmable, :omniauthable
+  devise :database_authenticatable, :lockable, :registerable, :recoverable,
+         :rememberable, :timeoutable, :trackable, :validatable
 
   # Concerns
   include Deletable
@@ -135,12 +135,12 @@ class User < ApplicationRecord
     end
   end
 
-  def send_welcome_email_in_background(pw)
-    fork_process(:send_welcome_email, pw)
+  def send_welcome_email_in_background(token)
+    fork_process(:send_welcome_email, token)
   end
 
-  def send_welcome_email(pw)
-    RegistrationMailer.welcome_email(self, pw).deliver_now if EMAILS_ENABLED
+  def send_welcome_email(token)
+    RegistrationMailer.welcome_email(self, token).deliver_now if EMAILS_ENABLED
   end
 
   def self.latex_partial(partial)

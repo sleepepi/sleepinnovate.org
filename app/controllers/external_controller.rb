@@ -32,6 +32,12 @@ class ExternalController < ApplicationController
     render layout: "full_page"
   end
 
+  # GET /settings/password/reset
+  def settings_password_reset
+    sign_out @user if current_user
+    redirect_to edit_user_password_path(reset_password_token: params[:reset_password_token])
+  end
+
   # GET /sitemap.xml.gz
   def sitemap_xml
     sitemap_xml = File.join(CarrierWave::Uploader::Base.root, "sitemaps", "sitemap.xml.gz")

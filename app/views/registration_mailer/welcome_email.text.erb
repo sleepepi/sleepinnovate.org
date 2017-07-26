@@ -1,4 +1,16 @@
-Congratulations and thank you for creating a <%= ENV["website_name"] %> Account. To get you
-started, we set a temporary password for your account:
+Welcome to the SleepINNOVATE portal! We truly value your support and thank you
+for your interest. Your participation will help us better understand how sleep
+influences health and well-being and hopefully improve sleep healthcare.
 
-<%= @pw %>
+Account passwords must be set within 24 hours. Please login and create a new
+password through the link below:
+
+<%= "#{ENV['website_url']}/settings/password/reset?reset_password_token=#{@token}" %>
+
+
+If you have any questions about SleepINNOVATE or need technical support,
+please contact support@sleepinnovate.org or Carolina Dos Santos at 617-278-0746.
+
+Thanks again,
+
+The SleepINNOVATE Team

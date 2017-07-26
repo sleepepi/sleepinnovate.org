@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     get :contact
     get :landing
     get :landing2
+    get :settings_password_reset, path: "settings/password/reset"
     get :sitemap_xml, path: "sitemap.xml.gz"
     get :version
   end

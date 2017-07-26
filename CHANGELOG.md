@@ -3,11 +3,9 @@
 ### Enhancements
 - **General Changes**
   - Setup initial flow through website
-  - New users can now create accounts, confirm their new accounts, and reset
-    their passwords
-  - New users are sent a welcome email
-  - New users are sent an email verification email to confirm their email
-    address
+  - New users can now create accounts, and reset their passwords
+  - New users are sent a welcome email that contains a link to create their
+    password
   - Users can sign and accept consent form
   - The full consent can now be viewed online
   - An about page describes the study

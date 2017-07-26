@@ -19,11 +19,15 @@ class RegistrationsController < Devise::RegistrationsController
 
   def generate_password
     params[:user] ||= {}
-    params[:user][:password] = Devise.friendly_token.first(8)
+    params[:user][:password] = Devise.friendly_token
   end
 
   def generate_welcome_email
     return unless current_user
-    current_user.send_welcome_email_in_background(params[:user][:password])
+    raw, enc = Devise.token_generator.generate(User, :reset_password_token)
+    current_user.reset_password_token   = enc
+    current_user.reset_password_sent_at = Time.now.utc + 42.hours
+    current_user.save(validate: false)
+    current_user.send_welcome_email_in_background(raw)
   end
 end

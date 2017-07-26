@@ -9,6 +9,6 @@ class RegistrationMailerTest < ActionMailer::TestCase
     assert_equal "#{ENV['website_name']} - Account Activation", mail.subject
     assert_equal ["yellow_fish@example.com"], mail.to
     assert_equal ["travis-ci@example.com"], mail.from
-    assert_match "Congratulations and thank you for creating a #{ENV['website_name']} Account.", mail.body.encoded
+    assert_match "Welcome to the SleepINNOVATE portal!", mail.body.encoded
   end
 end
