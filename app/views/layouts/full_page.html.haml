@@ -9,10 +9,15 @@
     %meta{ name: "keywords", content: "sleep innovate, sleep research" }
     %meta{ name: "apple-mobile-web-app-capable", content: "yes" }
     %meta{ name: "apple-mobile-web-app-status-bar-style", content: "black-translucent" }
+    %meta{ name: "apple-mobile-web-app-title", content: ENV["website_name"] }
     -# Don't cache any pages
     %meta{ name: "turbolinks-cache-control", content: "no-cache" }
     %title= [@title, ENV["website_name"]].compact.join(" - ").html_safe
     = favicon_link_tag
+    = favicon_link_tag "touch-icon-iphone.png", rel: "apple-touch-icon", type: "image/png"
+    = favicon_link_tag "touch-icon-ipad.png", rel: "apple-touch-icon", type: "image/png", size: "76x76"
+    = favicon_link_tag "touch-icon-iphone-retina.png", rel: "apple-touch-icon", type: "image/png", size: "120x120"
+    = favicon_link_tag "touch-icon-ipad-retina.png", rel: "apple-touch-icon", type: "image/png", size: "152x152"
     = csrf_meta_tags
     = javascript_include_tag "https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"
     = stylesheet_link_tag "application", media: "all", data: { turbolinks_track: "reload" }
