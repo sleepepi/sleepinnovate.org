@@ -10,6 +10,10 @@ class RegistrationsController < Devise::RegistrationsController
 
   private
 
+  def after_sign_up_path_for(resource)
+    consent_path
+  end
+
   def check_captcha
     return unless RECAPTCHA_ENABLED && !verify_recaptcha
     self.resource = resource_class.new sign_up_params

@@ -5,17 +5,13 @@
     = link_to landing_path, class: "navbar-brand" do
       %span.sleep-color> Sleep
       %span.innovate-color INNOVATE
-      / %span.boston-color Boston
     #navbarSupportedContent.collapse.navbar-collapse
       %ul.navbar-nav.mr-auto
         - if current_user
-          = render "menu/item", title: "Dashboard", path: dashboard_path
           = render "menu/item", title: "Consent", path: consent_path
-          = render "menu/item", title: "Test My Brain", path: test_my_brain_path
-          = render "menu/item", title: "Biobank", path: biobank_path
-          = render "menu/item_disabled", title: "Disabled" if false
-        - else
-          =# render "menu/item", title: "Landing2", path: landing2_path
+          =# render "menu/item", title: "Test My Brain", path: test_my_brain_path
+          =# render "menu/item", title: "Biobank", path: biobank_path
+          =# render "menu/item_disabled", title: "Disabled"
       - if current_user
         %ul.navbar-nav
           = render "menu/dropdown_account"

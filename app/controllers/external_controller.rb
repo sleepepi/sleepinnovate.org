@@ -29,6 +29,10 @@ class ExternalController < ApplicationController
 
   # GET /landing
   def landing
+    if current_user
+      redirect_to dashboard_path
+      return
+    end
     render layout: "full_page"
   end
 

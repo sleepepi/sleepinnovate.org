@@ -8,21 +8,16 @@ class ApplicationController < ActionController::Base
   before_action :store_location
 
   def store_location
-    if !request.post? && !request.xhr? && params[:format] != "atom"
-      if internal_action?(params[:controller], params[:action])
-        store_internal_location_in_session
-      end
-      if external_action?(params[:controller], params[:action])
-        store_external_location_in_session
-      end
-    end
+    return if request.post? || request.xhr? || params[:format] == "atom"
+    store_internal_location_in_session if internal_action?(params[:controller], params[:action])
+    store_external_location_in_session if external_action?(params[:controller], params[:action])
   end
 
-  def after_sign_in_path_for(resource)
+  def after_sign_in_path_for(_resource)
     session[:previous_internal_url] || session[:previous_external_url] || dashboard_path
   end
 
-  def after_sign_out_path_for(resource_or_scope)
+  def after_sign_out_path_for(_resource_or_scope)
     session[:previous_external_url] || root_path
   end
 

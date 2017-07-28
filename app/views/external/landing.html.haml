@@ -11,8 +11,9 @@
         %span.sleep-color Sleep
         %span.innovate-color> INNOVATE
 
-      .landing-read-consent-box
-        = link_to "read the consent form", consent_path
+      - if false
+        .landing-read-consent-box
+          = link_to "read the consent form", consent_path
 
       .landing-button-bar
         - if false
