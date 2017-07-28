@@ -12,3 +12,5 @@
   - A contact page was added to allow users to contact research study staff
   - Consent forms can now be downloaded as PDFs
   - Using Ruby on Rails 5.1.3.rc2 framework
+- **Admin Changes**
+  - Admins can now manage user accounts

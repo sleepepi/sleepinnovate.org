@@ -1,0 +1,21 @@
+- @title = "Users"
+
+.page-box.last-slide.background-p50-grey.center-vertically-xs-sm
+  .container
+    %h1= @title
+
+    %hr
+
+    %table.table.table-striped.table-hover
+      /.table-sm
+      %col
+      %col{ width: "1px" }
+      %thead.thead-inverse
+        %tr
+          %th Name
+          %th.text-center Consented
+      %tbody
+        - @users.each do |user|
+          %tr
+            %td= link_to user.name ? user.name : "Unconsented", admin_user_path(user)
+            %td.text-center= simple_check user.consented?

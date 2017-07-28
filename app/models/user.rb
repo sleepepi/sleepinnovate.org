@@ -28,6 +28,14 @@ class User < ApplicationRecord
 
   # Methods
 
+  def name
+    if admin?
+      full_name
+    elsif consented?
+      subject_code
+    end
+  end
+
   def consent!(data_uri)
     save_signature!(data_uri)
     update(consented_at: Time.zone.now, consent_revoked_at: nil)

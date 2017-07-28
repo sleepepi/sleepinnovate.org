@@ -3,6 +3,18 @@
 Rails.application.routes.draw do
   root "external#landing"
 
+  scope module: :admin do
+    get "admin" => "admin#admin"
+  end
+
+  namespace :admin do
+    resources :users do
+      member do
+        post :unrevoke
+      end
+    end
+  end
+
   scope module: :external do
     get :about
     get :print_consent, path: "consent.pdf"

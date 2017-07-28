@@ -59,6 +59,7 @@ class Subject < SliceRecord
 
   def set_defaults
     @id = @user.slice_subject_id
+    @subject_code = "New Subject"
   end
 
   def linked?
@@ -66,6 +67,7 @@ class Subject < SliceRecord
   end
 
   def find_or_create_subject
+    return unless @user.consented?
     if linked?
       load_remote_subject
     else

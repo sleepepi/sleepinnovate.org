@@ -1,0 +1,109 @@
+- @title = @user.name
+
+.page-box.last-slide.background-p50-grey.center-vertically-xs-sm
+  .container
+    %h1= @title
+    = succeed " " do
+      = link_to admin_users_path, class: "btn btn-link btn-sm" do
+        %i.fa.fa-caret-left
+        Users
+    = succeed " " do
+      = link_to edit_admin_user_path(@user), class: "btn btn-secondary btn-sm" do
+        %i.fa.fa-pencil
+        Edit
+
+    %hr
+
+    .row{ style: "margin-bottom: 20px;", data: { object: "hover-show", target: "#full-name", target_default: "#full-name-obscurred" } }
+      .col-md-2
+        .col-form-label
+          %strong Name
+      .col-md-10
+        %p.form-control-static
+          %span#full-name-obscurred= @user.full_name.to_s.gsub(/\B./, "*")
+          %span#full-name{ style: "display: none;" }= @user.full_name
+    .row{ style: "margin-bottom: 20px;", data: { object: "hover-show", target: "#email", target_default: "#email-obscurred" } }
+      .col-md-2
+        .col-form-label
+          %strong Email
+      .col-md-10
+        %p.form-control-static
+          %span#email-obscurred= @user.email.to_s.gsub(/\B./, "*")
+          %span#email{ style: "display: none;" }= @user.email
+
+    .row{ style: "margin-bottom: 20px;" }
+      .col-md-2
+        .col-form-label
+          %strong Subject Code
+      .col-md-10
+        %p.form-control-static
+          %code= @user.subject_code
+    .row{ style: "margin-bottom: 20px;" }
+      .col-md-2
+        .col-form-label
+          %strong Consented
+      .col-md-10
+        %p.form-control-static= simple_check @user.consented?
+    - if @user.consented?
+      .row{ style: "margin-bottom: 20px;" }
+        .col-md-2
+          .col-form-label
+            %strong Consented On
+        .col-md-10
+          %p.form-control-static= @user.consented_at.strftime("%-m/%-d/%Y at %-l:%M %p")
+    - if @user.consent_revoked?
+      .row{ style: "margin-bottom: 20px;" }
+        .col-md-2
+          .col-form-label
+            %strong Consent Revoked
+        .col-md-10
+          %p.form-control-static
+            = simple_check @user.consent_revoked?
+            = link_to unrevoke_admin_user_path(@user), method: :post, class: "btn btn-outline-danger btn-sm", data: { confirm: "Unrevoke consent?" } do
+              %i.fa.fa-undo
+              Unrevoke Consent
+      .row{ style: "margin-bottom: 20px;" }
+        .col-md-2
+          .col-form-label
+            %strong Consent Revoked On
+        .col-md-10
+          %p.form-control-static= @user.consent_revoked_at.strftime("%-m/%-d/%Y at %-l:%M %p")
+
+    - if false
+      %table.table.table-striped.table-hover
+        /.table-sm
+        %col{ width: "20%" }
+        %col
+        %tbody
+          %tr{ data: { object: "hover-show", target: "#full-name", target_default: "#full-name-obscurred" } }
+            %th.text-right Name
+            %td
+              %span#full-name-obscurred= @user.full_name.to_s.gsub(/\B./, "*")
+              %span#full-name{ style: "display: none;" }= @user.full_name
+          %tr{ data: { object: "hover-show", target: "#email", target_default: "#email-obscurred" } }
+            %th.text-right Email
+            %td
+              %span#email-obscurred= @user.email.to_s.gsub(/\B./, "*")
+              %span#email{ style: "display: none;" }= @user.email
+          %tr
+            %th.text-right Subject Code
+            %td
+              %code= @user.subject_code
+          %tr
+            %th.text-right Consented
+            %td= simple_check @user.consented?
+          - if @user.consented?
+            %tr
+              %th.text-right Consented On
+              %td= @user.consented_at.strftime("%-m/%-d/%Y at %-l:%M %p")
+          - if @user.consent_revoked?
+            %tr.table-warning
+              %th.text-right Consent Revoked
+              %td
+                = simple_check @user.consent_revoked?
+                = link_to unrevoke_admin_user_path(@user), method: :post, class: "btn btn-outline-danger btn-sm", data: { confirm: "Unrevoke consent?" } do
+                  %i.fa.fa-undo
+                  Unrevoke Consent
+            %tr.table-warning
+              %th.text-right Consent Revoked On
+              %td= @user.consent_revoked_at.strftime("%-m/%-d/%Y at %-l:%M %p")
