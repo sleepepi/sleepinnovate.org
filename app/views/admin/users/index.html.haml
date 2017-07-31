@@ -29,6 +29,10 @@
                 = link_to admin_user_path(user) do
                   %i.fa.fa-bed{ title: "Sleep" }
                   = user.subject_code
+              - elsif user.unconsented?
+                = link_to admin_user_path(user), class: "small text-muted" do
+                  %i.fa.fa-user-secret
+                  Subject has not yet consented
               - else
                 = link_to admin_user_path(user), class: "small text-muted" do
                   %i.fa.fa-user-secret

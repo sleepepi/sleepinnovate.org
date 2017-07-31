@@ -23,7 +23,13 @@
               %i.fa.fa-undo
               Undo study withdrawal
               %span>
-
+    - elsif @user.unconsented?
+      %h1
+        %i.fa.fa-user-secret
+        Subject
+      %p
+        %small.text-muted
+          Subject has not yet consented to study.
     - elsif @user.subject_code.present?
       %h1
         %i.fa.fa-bed{ title: "Sleep" }
@@ -102,6 +108,8 @@
         %p.form-control-static
           - if @user.subject_code.present?
             %kbd= @user.subject_code
+          - elsif @user.unconsented?
+            %span Assigned after consent
           - else
             %span Unassigned
 
@@ -118,7 +126,7 @@
           - elsif @user.withdrawn?
             Withdrawn
           - else
-            Unknown
+            Registered
     - if @user.consented_at.present?
       .row{ style: "margin-bottom: 20px;" }
         .col-md-2
