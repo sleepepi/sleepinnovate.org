@@ -1,8 +1,46 @@
-- @title = @user.name.nil? ? "Unconsented" : @user.name
+- if @user.admin?
+  - @title = @user.name
+- elsif @user.subject_code.present?
+  - @title = @user.subject_code
+- else
+  - @title = "Subject"
 
 .page-box.last-slide.background-p50-grey.center-vertically-xs-sm
   .container
-    %h1= @title
+    - if @user.admin?
+      %h1
+        %i.fa.fa-user-md
+        = @user.name
+    - elsif @user.withdrawn?
+      %h1
+        %i.fa.fa-street-view
+        Subject
+      %p
+        %small.text-muted
+          Subject withdrew from study.
+          = succeed "." do
+            = link_to unrevoke_admin_user_path(@user), method: :post, data: { confirm: "Undo study withdrawal?" } do
+              %i.fa.fa-undo
+              Undo study withdrawal
+              %span>
+
+    - elsif @user.subject_code.present?
+      %h1
+        %i.fa.fa-bed{ title: "Sleep" }
+        = @user.subject_code
+    - else
+      %h1
+        %i.fa.fa-user-secret
+        Subject
+      %p
+        %small.text-muted
+          Subject code unassigned.
+          = succeed "." do
+            = link_to assign_subject_admin_user_path(@user), method: :post do
+              %i.fa.fa-user-plus
+              Assign subject code
+              %span>
+
     = succeed " " do
       = link_to admin_users_path, class: "btn btn-link btn-sm" do
         %i.fa.fa-caret-left
@@ -11,25 +49,50 @@
       = link_to edit_admin_user_path(@user), class: "btn btn-secondary btn-sm" do
         %i.fa.fa-pencil
         Edit
+    - if @user.subject_code.present?
+      = succeed " " do
+        = link_to "#{ENV['slice_url']}/projects/#{ENV['project_id']}/subjects/#{@user.slice_subject_id}", class: "btn btn-secondary btn-sm" do
+          %i.fa.fa-link
+          View in Slice
 
     %hr
 
-    .row{ style: "margin-bottom: 20px;", data: { object: "hover-show", target: "#full-name", target_default: "#full-name-obscurred" } }
-      .col-md-2
-        .col-form-label
-          %strong Name
-      .col-md-10
-        %p.form-control-static
-          %span#full-name-obscurred= @user.full_name.to_s.gsub(/\B./, "*")
-          %span#full-name{ style: "display: none;" }= @user.full_name
-    .row{ style: "margin-bottom: 20px;", data: { object: "hover-show", target: "#email", target_default: "#email-obscurred" } }
-      .col-md-2
-        .col-form-label
-          %strong Email
-      .col-md-10
-        %p.form-control-static
-          %span#email-obscurred= @user.email.to_s.gsub(/\B./, "*")
-          %span#email{ style: "display: none;" }= @user.email
+    - if @user.admin?
+      .row{ style: "margin-bottom: 20px;" }
+        .col-md-2
+          .col-form-label
+            %strong Role
+        .col-md-10
+          %p.form-control-static Admin
+      .row{ style: "margin-bottom: 20px;" }
+        .col-md-2
+          .col-form-label
+            %strong Name
+        .col-md-10
+          %p.form-control-static= @user.name
+      .row{ style: "margin-bottom: 20px;" }
+        .col-md-2
+          .col-form-label
+            %strong Email
+        .col-md-10
+          %p.form-control-static= @user.email
+    - else
+      .row{ style: "margin-bottom: 20px;", data: { object: "hover-show", target: "#full-name", target_default: "#full-name-obscurred" } }
+        .col-md-2
+          .col-form-label
+            %strong Name
+        .col-md-10
+          %p.form-control-static
+            %span#full-name-obscurred= @user.full_name.to_s.gsub(/\B./, "*")
+            %span#full-name{ style: "display: none;" }= @user.full_name
+      .row{ style: "margin-bottom: 20px;", data: { object: "hover-show", target: "#email", target_default: "#email-obscurred" } }
+        .col-md-2
+          .col-form-label
+            %strong Email
+        .col-md-10
+          %p.form-control-static
+            %span#email-obscurred= @user.email.to_s.gsub(/\B./, "*")
+            %span#email{ style: "display: none;" }= @user.email
 
     .row{ style: "margin-bottom: 20px;" }
       .col-md-2
@@ -37,80 +100,110 @@
           %strong Subject Code
       .col-md-10
         %p.form-control-static
-          %code= @user.subject_code
+          - if @user.subject_code.present?
+            %kbd= @user.subject_code
+          - else
+            %span Unassigned
+
+    %h2{ style: "margin-top: 40px;" } SleepINNOVATE
+    %hr
     .row{ style: "margin-bottom: 20px;" }
       .col-md-2
         .col-form-label
-          %strong Consented
+          %strong Status
       .col-md-10
-        %p.form-control-static= simple_check @user.consented?
+        %p.form-control-static
+          - if @user.consented?
+            Consented
+          - elsif @user.withdrawn?
+            Withdrawn
+          - else
+            Unknown
+    - if @user.consented_at.present?
+      .row{ style: "margin-bottom: 20px;" }
+        .col-md-2
+          .col-form-label
+            %strong Consented
+        .col-md-10
+          - if @user.withdrawn?
+            %p.form-control-static.text-muted= @user.consented_at.strftime("%-m/%-d/%Y at %-l:%M %p")
+          - else
+            %p.form-control-static
+              %strong.text-success= @user.consented_at.strftime("%-m/%-d/%Y at %-l:%M %p")
+    - if @user.withdrawn?
+      .row{ style: "margin-bottom: 20px;" }
+        .col-md-2
+          .col-form-label
+            %strong Withdrew
+        .col-md-10
+          %p.form-control-static
+            %strong.text-warning= @user.consent_revoked_at.strftime("%-m/%-d/%Y at %-l:%M %p")
     - if @user.consented?
       .row{ style: "margin-bottom: 20px;" }
         .col-md-2
           .col-form-label
-            %strong Consented On
-        .col-md-10
-          %p.form-control-static= @user.consented_at.strftime("%-m/%-d/%Y at %-l:%M %p")
-    - if @user.consent_revoked?
-      .row{ style: "margin-bottom: 20px;" }
-        .col-md-2
-          .col-form-label
-            %strong Consent Revoked
+            %strong Baseline
         .col-md-10
           %p.form-control-static
-            = simple_check @user.consent_revoked?
-            = link_to unrevoke_admin_user_path(@user), method: :post, class: "btn btn-outline-danger btn-sm", data: { confirm: "Unrevoke consent?" } do
-              %i.fa.fa-undo
-              Unrevoke Consent
-      .row{ style: "margin-bottom: 20px;" }
-        .col-md-2
-          .col-form-label
-            %strong Consent Revoked On
-        .col-md-10
-          %p.form-control-static= @user.consent_revoked_at.strftime("%-m/%-d/%Y at %-l:%M %p")
+            = pluralize(@user.baseline_surveys_completed_count, "survey")
+            completed
+
+    %h2{ style: "margin-top: 40px;" } Test My Brain
+    %hr
     .row{ style: "margin-bottom: 20px;" }
       .col-md-2
         .col-form-label
-          %strong Biobank Status
+          %strong Status
+      .col-md-10
+        %p.form-control-static
+          - if @user.brain_surveys_completed?
+            Completed
+          - elsif @user.brain_surveys_started?
+            Started
+          - else
+            Unknown
+    - if @user.brain_surveys_started?
+      .row{ style: "margin-bottom: 20px;" }
+        .col-md-2
+          .col-form-label
+            %strong Started
+        .col-md-10
+          %p.form-control-static
+            = @user.brain_started_at.strftime("%-m/%-d/%Y at %-l:%M %p")
+
+    - if @user.brain_surveys_completed?
+      .row{ style: "margin-bottom: 20px;" }
+        .col-md-2
+          .col-form-label
+            %strong Completed
+        .col-md-10
+          %p.form-control-static
+            = @user.brain_completed_at.strftime("%-m/%-d/%Y at %-l:%M %p")
+
+
+    %h2{ style: "margin-top: 40px;" } Biobank
+    %hr
+    .row{ style: "margin-bottom: 20px;" }
+      .col-md-2
+        .col-form-label
+          %strong Status
       .col-md-10
         %p.form-control-static= @user.biobank_status_string
 
+    - if @user.biobank_registration_started?
+      .row{ style: "margin-bottom: 20px;" }
+        .col-md-2
+          .col-form-label
+            %strong Started
+        .col-md-10
+          %p.form-control-static
+            = @user.biobank_started_at.strftime("%-m/%-d/%Y at %-l:%M %p")
 
-    - if false
-      %table.table.table-striped.table-hover
-        /.table-sm
-        %col{ width: "20%" }
-        %col
-        %tbody
-          %tr{ data: { object: "hover-show", target: "#full-name", target_default: "#full-name-obscurred" } }
-            %th.text-right Name
-            %td
-              %span#full-name-obscurred= @user.full_name.to_s.gsub(/\B./, "*")
-              %span#full-name{ style: "display: none;" }= @user.full_name
-          %tr{ data: { object: "hover-show", target: "#email", target_default: "#email-obscurred" } }
-            %th.text-right Email
-            %td
-              %span#email-obscurred= @user.email.to_s.gsub(/\B./, "*")
-              %span#email{ style: "display: none;" }= @user.email
-          %tr
-            %th.text-right Subject Code
-            %td
-              %code= @user.subject_code
-          %tr
-            %th.text-right Consented
-            %td= simple_check @user.consented?
-          - if @user.consented?
-            %tr
-              %th.text-right Consented On
-              %td= @user.consented_at.strftime("%-m/%-d/%Y at %-l:%M %p")
-          - if @user.consent_revoked?
-            %tr.table-warning
-              %th.text-right Consent Revoked
-              %td
-                = simple_check @user.consent_revoked?
-                = link_to unrevoke_admin_user_path(@user), method: :post, class: "btn btn-outline-danger btn-sm", data: { confirm: "Unrevoke consent?" } do
-                  %i.fa.fa-undo
-                  Unrevoke Consent
-            %tr.table-warning
-              %th.text-right Consent Revoked On
-              %td= @user.consent_revoked_at.strftime("%-m/%-d/%Y at %-l:%M %p")
+    - if @user.biobank_registration_completed?
+      .row{ style: "margin-bottom: 20px;" }
+        .col-md-2
+          .col-form-label
+            %strong Completed
+        .col-md-10
+          %p.form-control-static
+            = @user.biobank_completed_at.strftime("%-m/%-d/%Y at %-l:%M %p")

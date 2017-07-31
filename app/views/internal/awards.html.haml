@@ -5,7 +5,16 @@
     %h1{ style: "color: #bdbdbd;font-weight: 300;" }= @title
 
     - if current_user.consented?
-      %p Earn lottery tickets by completing surveys!
+      %p
+        Earn a lottery ticket for completing your baseline surveys.
+        - unless current_user.baseline_surveys_completed_count.zero?
+          %small.text-muted
+            = surround "[", "]" do
+              = current_user.baseline_surveys_completed_count
+              of
+              = current_user.total_baseline_surveys_count
+              completed
+
       %p
         You have earned
         %strong= current_user.awards_count

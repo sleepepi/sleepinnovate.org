@@ -32,6 +32,8 @@ class User < ApplicationRecord
   delegate :next_survey, to: :subject
   delegate :survey_path, to: :subject
   delegate :baseline_surveys_completed?, to: :subject
+  delegate :total_baseline_surveys_count, to: :subject
+  delegate :baseline_surveys_completed_count, to: :subject
 
   # Methods
 
@@ -57,24 +59,30 @@ class User < ApplicationRecord
     update(consent_revoked_at: nil)
   end
 
+  # Only used by admins when Slice failed to initially set a subject code.
+  def assign_subject!
+    return if subject_code.present?
+    update(slice_subject_id: nil)
+  end
+
   def test_my_brain_started!
-    return unless brain_started.nil?
-    update(brain_started: Time.zone.now)
+    return unless brain_started_at.nil?
+    update(brain_started_at: Time.zone.now)
   end
 
   def test_my_brain_completed!
-    return unless brain_completed.nil?
-    update(brain_completed: Time.zone.now)
+    return unless brain_completed_at.nil?
+    update(brain_completed_at: Time.zone.now)
   end
 
   def biobank_registration_started!
-    return unless biobank_started.nil?
-    update(biobank_started: Time.zone.now)
+    return unless biobank_started_at.nil?
+    update(biobank_started_at: Time.zone.now)
   end
 
   def biobank_registration_completed!
-    return unless biobank_completed.nil?
-    update(biobank_completed: Time.zone.now)
+    return unless biobank_completed_at.nil?
+    update(biobank_completed_at: Time.zone.now)
   end
 
   def consented?
@@ -85,12 +93,20 @@ class User < ApplicationRecord
     !consent_revoked_at.nil?
   end
 
+  def withdrawn?
+    consent_revoked?
+  end
+
   def unconsented?
     consented_at.nil? && consent_revoked_at.nil?
   end
 
   def awards_count
-    0
+    if baseline_surveys_completed?
+      1
+    else
+      0
+    end
   end
 
   def slice_surveys_step?
@@ -102,11 +118,11 @@ class User < ApplicationRecord
   end
 
   def brain_surveys_started?
-    !brain_started.nil?
+    !brain_started_at.nil?
   end
 
   def brain_surveys_completed?
-    !brain_completed.nil?
+    !brain_completed_at.nil?
   end
 
   def biobank_registration_step?
@@ -114,11 +130,11 @@ class User < ApplicationRecord
   end
 
   def biobank_registration_started?
-    !biobank_started.nil?
+    !biobank_started_at.nil?
   end
 
   def biobank_registration_completed?
-    !biobank_completed.nil?
+    !biobank_completed_at.nil?
   end
 
   def biobank_opted_out?

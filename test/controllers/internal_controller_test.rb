@@ -55,7 +55,7 @@ class InternalControllerTest < ActionDispatch::IntegrationTest
     login(@regular_user)
     post test_my_brain_start_url
     @regular_user.reload
-    assert_not_nil @regular_user.brain_started
+    assert_not_nil @regular_user.brain_started_at
     assert_redirected_to "https://testmybrain.org"
   end
 
@@ -63,7 +63,7 @@ class InternalControllerTest < ActionDispatch::IntegrationTest
     login(@regular_user)
     post test_my_brain_complete_url
     @regular_user.reload
-    assert_not_nil @regular_user.brain_completed
+    assert_not_nil @regular_user.brain_completed_at
     assert_redirected_to dashboard_url
   end
 
@@ -71,7 +71,7 @@ class InternalControllerTest < ActionDispatch::IntegrationTest
     login(@regular_user)
     post biobank_start_url
     @regular_user.reload
-    assert_not_nil @regular_user.biobank_started
+    assert_not_nil @regular_user.biobank_started_at
     assert_redirected_to "https://biobank.partners.org"
   end
 
@@ -79,7 +79,7 @@ class InternalControllerTest < ActionDispatch::IntegrationTest
     login(@regular_user)
     post biobank_complete_url
     @regular_user.reload
-    assert_not_nil @regular_user.biobank_completed
+    assert_not_nil @regular_user.biobank_completed_at
     assert_redirected_to dashboard_url
   end
 end

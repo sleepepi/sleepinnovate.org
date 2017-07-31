@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :users do
       member do
+        post :assign_subject, path: "assign-subject"
         post :unrevoke
       end
     end

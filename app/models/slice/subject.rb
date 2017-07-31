@@ -10,6 +10,22 @@ class Subject < SliceRecord
     find_or_create_subject
   end
 
+  def total_baseline_surveys_count
+    if baseline_event
+      baseline_event.event_designs.size
+    else
+      0
+    end
+  end
+
+  def baseline_surveys_completed_count
+    if baseline_event
+      baseline_event.event_designs.count(&:complete?)
+    else
+      0
+    end
+  end
+
   def baseline_surveys_completed?
     if baseline_event
       baseline_event.event_designs.count(&:incomplete?).zero?
@@ -33,6 +49,7 @@ class Subject < SliceRecord
   end
 
   def load_subject_events
+    return [] unless linked?
     (json, status) = Helpers::JsonRequest.get("#{project_url}/subjects/#{@id}/events.json")
     load_events_from_json(json, status)
   end
@@ -59,7 +76,6 @@ class Subject < SliceRecord
 
   def set_defaults
     @id = @user.slice_subject_id
-    @subject_code = "New Subject"
   end
 
   def linked?
@@ -126,10 +142,38 @@ class Subject < SliceRecord
   end
 
   def generate_subject_code
-    "S#{format('%05d', subject_count)}-#{SecureRandom.hex(2)}"
+    "INN#{format('%05d', next_subject_code_number)}"
   end
 
-  def subject_count
-    User.where.not(slice_subject_id: nil).count + 1
+  def next_subject_code_number
+    highest_subject_code_number + 1
+  end
+
+  def highest_subject_code_number
+    all_subject_codes.collect { |c| c.gsub("INN", "").to_i }.max || 0
+  end
+
+  def all_subject_codes
+    @all_codes ||= begin
+      all_codes = []
+      page = 1
+      loop do
+        new_subject_codes = subject_codes_on_page(page)
+        all_codes += new_subject_codes.reject { |c| (/^INN\d{5}$/ =~ c).nil? }
+        page += 1
+        break unless new_subject_codes.size == 20
+      end
+      all_codes
+    end
+  end
+
+  def subject_codes_on_page(page)
+    params = { page: page }
+    (json, _status) = Helpers::JsonRequest.get("#{project_url}/subjects.json", params)
+    return [] unless json
+    subject_codes = json.collect do |subject_json|
+      subject_json["subject_code"]
+    end
+    subject_codes
   end
 end

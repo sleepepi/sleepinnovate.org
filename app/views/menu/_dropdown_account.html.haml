@@ -1,19 +1,37 @@
-%li.nav-item.dropdown
-  = link_to current_user.subject_code, "#", data: { toggle: "dropdown" }, aria: { haspopup: "true", expanded: "false" }, class: "nav-link dropdown-toggle"
-  .dropdown-menu.dropdown-menu-right
-    - if current_user.consented? && false
-      = link_to awards_path, class: "dropdown-item" do
-        %i.fa.fa-trophy
-        My Awards
-    = link_to settings_path, class: "dropdown-item" do
-      %i.fa.fa-cogs
-      Settings
-    .dropdown-divider
-    - if current_user.admin?
-      = link_to admin_path, class: "dropdown-item text-success" do
-        %i.fa.fa-user-md
-        Admin
-      .dropdown-divider
-    = link_to destroy_user_session_path, method: :delete, class: "dropdown-item" do
+- if !current_user.admin? && current_user.withdrawn?
+  %li.nav-item
+    = link_to destroy_user_session_path, method: :delete, class: "nav-link" do
       %i.fa.fa-sign-out
       Sign out
+- else
+  %li.nav-item.dropdown
+    = link_to "#", data: { toggle: "dropdown" }, aria: { haspopup: "true", expanded: "false" }, class: "nav-link dropdown-toggle" do
+      - if current_user.admin?
+        = current_user.name
+      - elsif current_user.withdrawn?
+        Subject Withdrawn
+      - elsif current_user.subject_code.present?
+        = current_user.subject_code
+      - else
+        New Subject
+    .dropdown-menu.dropdown-menu-right
+      - if current_user.consented? && false
+        = link_to awards_path, class: "dropdown-item" do
+          %i.fa.fa-trophy
+          My Awards
+      = link_to settings_path, class: "dropdown-item" do
+        %i.fa.fa-cogs
+        Settings
+      .dropdown-divider
+      - if current_user.admin?
+        = link_to admin_users_path, class: "dropdown-item text-success" do
+          %i.fa.fa-user-md
+          Admin
+        - if false
+          = link_to admin_path, class: "dropdown-item text-success" do
+            %i.fa.fa-user-md
+            Admin
+        .dropdown-divider
+      = link_to destroy_user_session_path, method: :delete, class: "dropdown-item" do
+        %i.fa.fa-sign-out
+        Sign out

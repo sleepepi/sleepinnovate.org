@@ -2,11 +2,13 @@
 
 # Allows admins to edit user accounts.
 class Admin::UsersController < Admin::AdminController
-  before_action :find_user_or_redirect, only: [:unrevoke, :show, :edit, :update, :destroy]
+  before_action :find_user_or_redirect, only: [
+    :assign_subject, :unrevoke, :show, :edit, :update, :destroy
+  ]
 
   # GET /admin/users
   def index
-    @users = User.current.page(params[:page]).per(40)
+    @users = User.current.order(id: :desc).page(params[:page]).per(40)
   end
 
   # # GET /admin/users/1
@@ -26,7 +28,13 @@ class Admin::UsersController < Admin::AdminController
     end
   end
 
-  # # POST /admin/users/1/unrevoke
+  # POST /admin/users/1/assign-subject
+  def assign_subject
+    @user.assign_subject!
+    redirect_to admin_user_path(@user)
+  end
+
+  # POST /admin/users/1/unrevoke
   def unrevoke
     @user.unrevoke_consent!
     redirect_to admin_user_path(@user)
