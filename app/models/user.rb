@@ -12,6 +12,13 @@ class User < ApplicationRecord
   include Forkable
   include Latexable
 
+  # Constants
+  BIOBANK_STATUS = [
+    ["Unconsented", "unconsented"],
+    ["Consented", "consented"],
+    ["Opted Out", "opted_out"]
+  ]
+
   # Validations
   validates :full_name, presence: true
 
@@ -116,6 +123,10 @@ class User < ApplicationRecord
 
   def biobank_opted_out?
     false
+  end
+
+  def biobank_status_string
+    BIOBANK_STATUS.find { |_name, value| value == biobank_status }.first
   end
 
   def whats_next?

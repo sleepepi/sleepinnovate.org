@@ -47,7 +47,7 @@ class Admin::UsersController < Admin::AdminController
 
   def user_params
     params.require(:user).permit(
-      :full_name, :email
+      :full_name, :email, :biobank_status
     )
   end
 end

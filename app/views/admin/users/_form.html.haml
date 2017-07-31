@@ -10,6 +10,11 @@
       = form.email_field :email, class: "form-control"
 
   .form-group.row
+    = form.label :biobank_status, nil, class: "col-md-2 col-form-label"
+    .col-md-10
+      = form.select :biobank_status, User::BIOBANK_STATUS, {}, class: "form-control"
+
+  .form-group.row
     .col-md-10.offset-md-2
       = form.submit nil, class: "btn btn-primary"
       = link_to "cancel", admin_user_path(user), class: "btn btn-link"

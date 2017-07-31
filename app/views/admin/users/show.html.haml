@@ -1,4 +1,4 @@
-- @title = @user.name
+- @title = @user.name.nil? ? "Unconsented" : @user.name
 
 .page-box.last-slide.background-p50-grey.center-vertically-xs-sm
   .container
@@ -68,6 +68,13 @@
             %strong Consent Revoked On
         .col-md-10
           %p.form-control-static= @user.consent_revoked_at.strftime("%-m/%-d/%Y at %-l:%M %p")
+    .row{ style: "margin-bottom: 20px;" }
+      .col-md-2
+        .col-form-label
+          %strong Biobank Status
+      .col-md-10
+        %p.form-control-static= @user.biobank_status_string
+
 
     - if false
       %table.table.table-striped.table-hover
