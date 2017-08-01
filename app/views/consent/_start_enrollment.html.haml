@@ -1,2 +1,4 @@
 .text-center
-  = link_to "Start Enrollment Process", new_user_registration_path, class: "btn btn-lg btn-success btn-shadow"
+  = link_to new_user_registration_path, class: "btn btn-lg btn-success btn-shadow" do
+    Start enrollment
+    %i.fa.fa-caret-right
