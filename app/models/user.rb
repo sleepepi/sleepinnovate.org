@@ -50,6 +50,7 @@ class User < ApplicationRecord
   def consent!(data_uri)
     save_signature!(data_uri)
     update(consented_at: Time.zone.now, consent_revoked_at: nil)
+    send_consent_pdf_email_in_background
   end
 
   def revoke_consent!
@@ -178,6 +179,14 @@ class User < ApplicationRecord
 
   def send_welcome_email(token)
     RegistrationMailer.welcome_email(self, token).deliver_now if EMAILS_ENABLED
+  end
+
+  def send_consent_pdf_email_in_background
+    fork_process(:send_consent_pdf_email)
+  end
+
+  def send_consent_pdf_email
+    ConsentMailer.consent_pdf_email(self).deliver_now if EMAILS_ENABLED
   end
 
   def self.latex_partial(partial)

@@ -9,6 +9,7 @@
     password
   - Users can sign and accept consent form
   - The full consent can now be viewed online
+  - Users are emailed a PDF copy of the consent after consenting to the study
   - An about page describes the study
   - A contact page was added to allow users to contact research study staff
   - Consent forms can now be downloaded as PDFs
