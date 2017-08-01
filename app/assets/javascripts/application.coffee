@@ -16,6 +16,7 @@
 #= require bootstrap
 
 # External
+#= require external/jquery.mask-1.14.11.src.js
 #= require external/signature_pad-2.2.0.src.js
 
 # Application

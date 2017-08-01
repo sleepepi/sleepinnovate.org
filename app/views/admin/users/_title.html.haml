@@ -1,0 +1,20 @@
+- if user.admin?
+  %h1
+    %i.fa.fa-user-md
+    = user.name
+- elsif user.withdrawn?
+  %h1
+    %i.fa.fa-street-view
+    Subject
+- elsif user.unconsented?
+  %h1
+    %i.fa.fa-user-secret
+    Subject
+- elsif user.subject_code.present?
+  %h1
+    %i.fa.fa-bed{ title: "Sleep" }
+    = user.subject_code
+- else
+  %h1
+    %i.fa.fa-user-secret
+    Subject

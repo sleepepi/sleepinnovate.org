@@ -28,7 +28,6 @@ class InternalController < ApplicationController
     subject_event_id = params[:subject_event_id]
     design_id = params[:design_id]
     sheet_id = current_user.launch_survey!(subject_event_id, design_id, request.remote_ip)
-
     redirect_to show_survey_path(
       subject_event_id: subject_event_id, design_id: design_id, sheet_id: sheet_id
     )
@@ -54,18 +53,6 @@ class InternalController < ApplicationController
 
   # # GET /dashboard
   # def dashboard
-  # end
-
-  # # GET /consents
-  # def consents
-  # end
-
-  # # GET /survey
-  # def survey
-  # end
-
-  # # GET /thank-you
-  # def thank_you
   # end
 
   # # GET /test-my-brain

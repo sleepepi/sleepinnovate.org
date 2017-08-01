@@ -21,6 +21,12 @@ class InternalControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test "should get consent signature for regular user" do
+    login(@regular_user)
+    get consent_signature_url
+    assert_response :success
+  end
+
   test "should get dashboard for regular user" do
     login(@regular_user)
     get dashboard_url
@@ -30,18 +36,6 @@ class InternalControllerTest < ActionDispatch::IntegrationTest
   test "should get dashboard for withdrawn user" do
     login(@withdrawn_user)
     get dashboard_url
-    assert_response :success
-  end
-
-  test "should get survey" do
-    login(@regular_user)
-    get survey_url
-    assert_response :success
-  end
-
-  test "should get thank you" do
-    login(@regular_user)
-    get thank_you_url
     assert_response :success
   end
 

@@ -1,0 +1,23 @@
+- if user.withdrawn?
+  %p
+    %small.text-muted
+      Subject withdrew from study.
+      = succeed "." do
+        = link_to unrevoke_admin_user_path(user), method: :post, data: { confirm: "Undo study withdrawal?" } do
+          %i.fa.fa-undo
+          Undo study withdrawal
+          %span>
+- elsif user.unconsented?
+  %p
+    %small.text-muted
+      Subject has not yet consented to study.
+- elsif user.subject_code.blank?
+  %p
+    %small.text-muted
+      Subject code unassigned.
+      = succeed "." do
+        = link_to assign_subject_admin_user_path(user), method: :post do
+          %i.fa.fa-user-plus
+          Assign subject code
+          %span>
+

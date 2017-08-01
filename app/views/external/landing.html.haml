@@ -17,11 +17,11 @@
 
       .landing-button-bar
         - if false
-          .landing-button= link_to "consent", consent_path, class: "btn btn-lg btn-outline-secondary"
-        .landing-button= link_to "enroll", new_user_registration_path, class: "btn btn-lg btn-outline-success btn-shadow"
+          .landing-button= link_to "read consent", consent_path, class: "btn btn-lg btn-outline-secondary"
+        .landing-button= link_to "read consent", consent_path, class: "btn btn-lg btn-outline-success btn-shadow"
 
-
-  .landing-learn-more-box
-    = link_to about_path, class: "btn btn-lg btn-link" do
-      learn more
-      %i.fa.fa-caret-right
+  - if false
+    .landing-learn-more-box
+      = link_to about_path, class: "btn btn-lg btn-link" do
+        learn more
+        %i.fa.fa-caret-right

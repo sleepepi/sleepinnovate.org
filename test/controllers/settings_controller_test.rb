@@ -9,18 +9,6 @@ class SettingsControllerTest < ActionDispatch::IntegrationTest
     @withdrawn_user = users(:withdrawn)
   end
 
-  test "should get consents" do
-    login(@regular_user)
-    get settings_consents_url
-    assert_response :success
-  end
-
-  test "should get leave study" do
-    login(@regular_user)
-    get settings_leave_study_url
-    assert_response :success
-  end
-
   test "should get password" do
     login(@regular_user)
     get settings_password_url
@@ -30,6 +18,45 @@ class SettingsControllerTest < ActionDispatch::IntegrationTest
   test "should get settings" do
     login(@regular_user)
     get settings_url
+    assert_response :success
+  end
+
+  test "should change password" do
+    login(@regular_user)
+    patch settings_change_password_url, params: {
+      user: {
+        current_password: "password",
+        password: "newpassword",
+        password_confirmation: "newpassword"
+      }
+    }
+    assert_equal "Your password has been changed.", flash[:notice]
+    assert_redirected_to settings_path
+  end
+
+  test "should not change password as user with invalid current password" do
+    login(@regular_user)
+    patch settings_change_password_url, params: {
+      user: {
+        current_password: "invalid",
+        password: "newpassword",
+        password_confirmation: "newpassword"
+      }
+    }
+    assert_template "password"
+    assert_response :success
+  end
+
+  test "should not change password with new password mismatch" do
+    login(@regular_user)
+    patch settings_change_password_url, params: {
+      user: {
+        current_password: "password",
+        password: "newpassword",
+        password_confirmation: "mismatched"
+      }
+    }
+    assert_template "password"
     assert_response :success
   end
 end

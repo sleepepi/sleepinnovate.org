@@ -7,14 +7,14 @@
       = f.hidden_field :reset_password_token
 
       .form-group
-        = render 'layouts/label_or_errors', f: f, object: resource, key: :password, key_name: 'New Password'
+        = render 'layouts/label_or_errors', form: f, object: resource, key: :password, key_name: 'New Password'
         = f.password_field :password, class: 'form-control'
         - if @minimum_password_length
           %small.form-text.text-muted
             = @minimum_password_length
             characters minimum
       .form-group
-        = render 'layouts/label_or_errors', f: f, object: resource, key: :password_confirmation, key_name: 'Confirm new password'
+        = render 'layouts/label_or_errors', form: f, object: resource, key: :password_confirmation, key_name: 'Confirm new password'
         = f.password_field :password_confirmation, class: 'form-control'
 
       - if resource.errors[:reset_password_token].present?

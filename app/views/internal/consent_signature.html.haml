@@ -1,0 +1,32 @@
+- @title = "Signature"
+
+.page-box.last-slide.background-p50-grey.center-vertically-xs-sm
+  .container
+    = form_tag consent_path, method: :post, id: "consent-form", class: "mb-4" do
+      = hidden_field_tag :data_uri
+
+      #signature-pad.signature-form
+        %h1
+          .pull-right
+            = link_to "#", data: { action: "clear" }, class: "btn btn-sm btn-link" do
+              %i.fa.fa-eraser
+              %span Clear
+              %span.hidden-xs-down Signature
+          = @title
+        .m-signature-pad
+          %div{ class: "m-signature-pad--body" }
+            %div{ style: "margin-top: 15px;margin-left: 15px;" }
+              %small.form-text{ style: "color: #bdbdbd;font-style: italic;" } Sign here
+            %canvas
+
+
+    %div{ style: "" }
+      .row
+        .col
+          .text-left
+            = link_to consent_path, method: :delete, class: "btn btn-link" do
+              %i.fa.fa-caret-left
+              Leave study
+        .col
+          .text-right
+            = link_to "I Consent", "#", data: { object: "consent-with-signature" }, class: "btn btn-lg btn-success btn-shadow"

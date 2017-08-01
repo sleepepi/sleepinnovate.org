@@ -11,7 +11,8 @@ class RegistrationsControllerTest < ActionDispatch::IntegrationTest
   def user_params
     {
       full_name: "Full Name",
-      email: "full_name@example.com"
+      email: "full_name@example.com",
+      date_of_birth: "01/01/1970"
     }
   end
 

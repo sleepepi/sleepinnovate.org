@@ -20,7 +20,9 @@ class User < ApplicationRecord
   ]
 
   # Validations
+  # validates :full_name, :date_of_birth, presence: true
   validates :full_name, presence: true
+  validate :date_of_birth_is_reasonable
 
   # Uploaders
   mount_uploader :consent_signature, SignatureUploader
@@ -194,5 +196,10 @@ class User < ApplicationRecord
       file.syswrite(ERB.new(latex_partial("footer")).result(binding))
     end
     generate_pdf(jobname, output_folder, file_tex)
+  end
+
+  def date_of_birth_is_reasonable
+    return if date_of_birth.present? && date_of_birth.in?(Date.parse("1900-01-01")..Time.zone.today)
+    errors.add(:date_of_birth, "is not a valid date")
   end
 end

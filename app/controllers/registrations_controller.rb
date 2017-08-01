@@ -21,9 +21,29 @@ class RegistrationsController < Devise::RegistrationsController
     respond_with_navigational(resource) { render :new }
   end
 
+  def verify_recaptcha
+    url = URI.parse("https://www.google.com/recaptcha/api/siteverify")
+    http = Net::HTTP.new(url.host, url.port)
+    if url.scheme == "https"
+      http.use_ssl = true
+      http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+    end
+    post_params = [
+      "secret=#{ENV['recaptcha_secret_key']}",
+      "response=#{params['g-recaptcha-response']}",
+      "remoteip=#{request.remote_ip}"
+    ]
+    response = http.start do |h|
+      h.post(url.path, post_params.join("&"))
+    end
+    json = JSON.parse(response.body)
+    json["success"]
+  end
+
   def generate_password
     params[:user] ||= {}
     params[:user][:password] = Devise.friendly_token
+    params[:user][:date_of_birth] = parse_date(params[:user][:date_of_birth], params[:user][:date_of_birth])
   end
 
   def generate_welcome_email
@@ -33,5 +53,15 @@ class RegistrationsController < Devise::RegistrationsController
     current_user.reset_password_sent_at = Time.now.utc + 42.hours
     current_user.save(validate: false)
     current_user.send_welcome_email_in_background(raw)
+  end
+
+  def parse_date(date_string, default_date = "")
+    if date_string.to_s.split("/").last.size == 2
+      Date.strptime(date_string, "%m/%d/%y")
+    else
+      Date.strptime(date_string, "%m/%d/%Y")
+    end
+  rescue
+    default_date
   end
 end

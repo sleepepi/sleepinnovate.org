@@ -23,9 +23,12 @@
     = render "consent/12_questions"
     = render "consent/13_privacy"
     = render "consent/14_authorization"
-
-    - if current_user && current_user.unconsented?
-      %hr
-
-      = link_to "I Consent", "#", data: { object: "consent-with-signature" }, class: "btn btn-lg btn-primary"
-      = link_to "I do not consent.", dashboard_path, class: "btn btn-link"
+    - if current_user
+      - if current_user.consented?
+        = render "consent/consented"
+      - elsif current_user.withdrawn?
+        = render "consent/withdrawn"
+      - else
+        = render "consent/continue_to_signature"
+    - else
+      = render "consent/start_enrollment"

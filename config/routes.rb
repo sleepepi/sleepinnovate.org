@@ -31,15 +31,13 @@ Rails.application.routes.draw do
   scope module: :internal do
     post :consent, action: :submit_consent
     delete :consent, action: :revoke_consent
+    get :consent_signature, path: "consent/signature"
     get :awards
     get :dashboard
-    get :dashboard2
     get :signature
-    get :survey
     get :test_my_brain, path: "test-my-brain"
     get :biobank
     get :whats_next, path: "whats-next"
-    get :thank_you, path: "thank-you"
     post :start_survey, path: "start-survey"
     get :show_survey, path: "show-survey"
     post :test_my_brain_start, path: "test-my-brain/start"
@@ -57,6 +55,7 @@ Rails.application.routes.draw do
     get :consents
     get :leave_study, path: "leave-study"
     get :password
+    patch :change_password, path: "password"
   end
 
   devise_for :users,

@@ -3,12 +3,24 @@
     Create your account
   = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "form-vertical", autocomplete: "off" }) do |f|
     .form-group
-      = render "layouts/label_or_errors", f: f, object: resource, key: :full_name
+      = render "layouts/label_or_errors", form: f, object: resource, key: :full_name
       = f.text_field :full_name, class: "form-control form-control-danger"
 
     .form-group
-      = render "layouts/label_or_errors", f: f, object: resource, key: :email
+      = render "layouts/label_or_errors", form: f, object: resource, key: :email
       = f.email_field :email, class: "form-control form-control-danger"
+
+    .form-group
+      = render "layouts/label_or_errors", form: f, object: resource, key: :date_of_birth, key_name: "Date of birth"
+      = f.text_field :date_of_birth, class: "form-control form-control-danger", data: { mask: "00/00/0000" }, value: resource.date_of_birth ? resource.date_of_birth.strftime("%m/%d/%Y") : ""
+      %small.form-text.text-muted mm/dd/yyyy
+
+    - if RECAPTCHA_ENABLED
+      .form-group
+        %label.form-control-label Human Verification
+        %div{ style: "height: 78px;margin-left: 27.5px" }
+          .g-recaptcha{ data: { sitekey: ENV["recaptcha_site_key"] } }
+          <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
     .form-group.submit-btn-container
       = f.submit "Create Account", class: "btn btn-primary btn-block"
