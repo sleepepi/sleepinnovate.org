@@ -7,9 +7,9 @@ class EventDesign
   def initialize(json, subject_event)
     @subject_event = subject_event
     @json = json
-    @design_id = json["design"]["id"]
-    @design_name = json["design"]["name"]
-    @event_id = json["event"]["id"]
+    @design_id = json.dig("design", "id")
+    @design_name = json.dig("design", "name")
+    @event_id = json.dig("event", "id")
     @sheets = load_sheets(json["sheets"])
   end
 
