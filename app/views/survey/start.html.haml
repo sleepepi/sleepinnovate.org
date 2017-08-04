@@ -4,8 +4,6 @@
   .container
     %h1= @json["design"]["name"]
 
-    = @json.inspect
-
     = link_to survey_page_path(params[:event], params[:design], 1) do
       Get Started
       %i.fa.fa-caret-right
