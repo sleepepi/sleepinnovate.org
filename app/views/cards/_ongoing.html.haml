@@ -22,9 +22,15 @@
           = succeed "." do
             = number_of_surveys
       .text-center
-        = link_to survey_page_path(event_design.event_id, event_design.design_id, page: 1), class: "btn btn-success btn-shadow" do
-          Continue Survey
-          %i.fa.fa-caret-right
+        - if event_design.valid?
+          = link_to survey_page_path(event_design.event_id, event_design.design_id, page: 1), class: "btn btn-success btn-shadow" do
+            Continue Survey
+            %i.fa.fa-caret-right
+        - else
+          .btn.btn-success.btn-shadow.disabled
+            %i.fa.fa-exclamation-triangle
+            Survey Unavailable
+
     - else
       %p.card-text
         %div{ style: "color: #bdbdbd;" }
@@ -37,9 +43,15 @@
             = succeed "." do
               = number_of_surveys
       .text-center
-        = link_to survey_start_path(event_design.event_id, event_design.design_id), class: "btn btn-success btn-shadow" do
-          Start Survey
-          %i.fa.fa-caret-right
-  .card-footer
-    %small.text-muted
-      = event_design.design_name
+        - if event_design.valid?
+          = link_to survey_start_path(event_design.event_id, event_design.design_id), class: "btn btn-success btn-shadow" do
+            Start Survey
+            %i.fa.fa-caret-right
+        - else
+          .btn.btn-success.btn-shadow.disabled
+            %i.fa.fa-exclamation-triangle
+            Survey Unavailable
+  - if event_design.valid?
+    .card-footer
+      %small.text-muted
+        = event_design.design_name

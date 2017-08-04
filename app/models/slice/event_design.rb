@@ -13,6 +13,10 @@ class EventDesign
     @sheets = load_sheets(json["sheets"])
   end
 
+  def valid?
+    @event_id.present? && @design_id.present? && @design_name.present?
+  end
+
   def complete?
     @sheets.count { |s| s.percent == 100 }.positive?
   end

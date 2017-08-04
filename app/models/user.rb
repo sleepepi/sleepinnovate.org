@@ -84,6 +84,19 @@ class User < ApplicationRecord
     update(brain_completed_at: Time.zone.now)
   end
 
+  def brain_baseline_surveys_completed
+    2
+  end
+
+  def brain_baseline_surveys_count
+    8
+  end
+
+  def brain_baseline_percent
+    return 100 if brain_baseline_surveys_count.zero?
+    brain_baseline_surveys_completed * 100 / brain_baseline_surveys_count
+  end
+
   def biobank_registration_started!
     return unless biobank_started_at.nil?
     update(biobank_started_at: Time.zone.now)

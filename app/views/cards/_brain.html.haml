@@ -3,6 +3,12 @@
     .text-center{ style: "font-size: 6rem;" }
       %i.fa.fa-lightbulb-o.text-warning
     %h4.card-title Test My Brain
+    - if current_user.brain_baseline_percent.to_i.zero?
+      .progress
+        .progress-bar.progress-bar-striped{ role: "progressbar", style: "width: 100%;background-color: #ededed;", aria: { valuenow: "0", valuemin: "0", valuemax: "100" } }
+    - else
+      .progress
+        .progress-bar.progress-bar-striped.bg-warning{ role: "progressbar", style: "width: #{current_user.brain_baseline_percent}%;", aria: { valuenow: "#{current_user.brain_baseline_percent}", valuemin: "0", valuemax: "100" } }
     %p.card-text
       %div{ style: "color: #bdbdbd;" } Time for some fun, go test your brain!
     .text-center

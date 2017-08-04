@@ -31,7 +31,8 @@
       %ul
         - subject_event.event_designs.each do |event_design|
           %li
-            = link_to event_design.design_name, survey_start_path(event_design.event_id, event_design.design_id)
+            - if event_design.valid?
+              = link_to event_design.design_name, survey_start_path(event_design.event_id, event_design.design_id)
             %div
               %strong event_id
               = event_design.event_id
