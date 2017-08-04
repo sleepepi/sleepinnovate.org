@@ -64,4 +64,14 @@ class ApplicationController < ActionController::Base
       keys: [:full_name, :email, :date_of_birth, :password]
     )
   end
+
+  def parse_date(date_string, default_date = "")
+    if date_string.to_s.split("/").last.size == 2
+      Date.strptime(date_string, "%m/%d/%y")
+    else
+      Date.strptime(date_string, "%m/%d/%Y")
+    end
+  rescue
+    default_date
+  end
 end

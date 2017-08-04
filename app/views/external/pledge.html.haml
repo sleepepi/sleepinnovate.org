@@ -1,0 +1,23 @@
+- @title = "Pledge"
+
+.page-box.last-slide.background-p50-grey.center-vertically-xs-sm
+  .container
+    %h1.mb-5.text-center= @title
+
+    .row.mb-5
+      .col.text-center
+        %strong We promise to:
+        %ul.list-unstyled
+          %li Keep your data safe
+          %li Make things easy
+          %li Keep you up to date
+      .col.text-center
+        %strong You promise to:
+        %ul.list-unstyled
+          %li Participate as much as you can
+          %li Tell us about your life
+
+    .text-center
+      = link_to new_user_registration_path, class: "btn btn-lg btn-success btn-shadow" do
+        Start enrollment
+        %i.fa.fa-caret-right

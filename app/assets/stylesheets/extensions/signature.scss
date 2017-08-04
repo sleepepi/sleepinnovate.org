@@ -7,14 +7,24 @@
     padding: 20px;
   }
 
+  .signature-form-description {
+    padding: 20px 20px 0;
+  }
+
   .m-signature-pad {
     padding: 20px;
+  }
+
+  .signature-form-footer {
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 20px;
   }
 }
 
 .m-signature-pad--body {
   position: relative;
-  min-height: 338px;
+  min-height: 354px;
   border: 1px solid $p100-grey;
   margin: 0 auto;
 

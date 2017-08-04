@@ -7,13 +7,12 @@
   - number_of_surveys = subject_event.event_designs.size
   .card-block
     %h4.card-title= subject_event.name
-    - if false
-      - if subject_event.percent.to_i.zero?
-        .progress
-          .progress-bar.progress-bar-striped{ role: "progressbar", style: "width: 100%;background-color: #ededed;", aria: { valuenow: "0", valuemin: "0", valuemax: "100" } } 0%
-      - else
-        .progress
-          .progress-bar.progress-bar-striped.bg-success{ role: "progressbar", style: "width: #{subject_event.percent}%;", aria: { valuenow: "#{subject_event.percent}", valuemin: "0", valuemax: "100" } }= "#{subject_event.percent}%"
+    - if subject_event.percent.to_i.zero?
+      .progress
+        .progress-bar.progress-bar-striped{ role: "progressbar", style: "width: 100%;background-color: #ededed;", aria: { valuenow: "0", valuemin: "0", valuemax: "100" } }
+    - else
+      .progress
+        .progress-bar.progress-bar-striped.bg-success{ role: "progressbar", style: "width: #{subject_event.percent}%;", aria: { valuenow: "#{subject_event.percent}", valuemin: "0", valuemax: "100" } }
     - if event_design.sheets.present?
       %p.card-text
         %div{ style: "color: #bdbdbd;" }
@@ -23,8 +22,7 @@
           = succeed "." do
             = number_of_surveys
       .text-center
-        - sheet = event_design.sheets.first
-        = link_to "#{ENV['slice_url']}/survey/#{sheet.design_slug}/#{sheet.authentication_token}", class: "btn btn-success btn-shadow" do
+        = link_to survey_page_path(event_design.event_id, event_design.design_id, page: 1), class: "btn btn-success btn-shadow" do
           Continue Survey
           %i.fa.fa-caret-right
     - else
@@ -39,9 +37,9 @@
             = succeed "." do
               = number_of_surveys
       .text-center
-        = link_to start_survey_path(subject_event_id: subject_event.id, design_id: event_design.id), method: :post, class: "btn btn-success btn-shadow" do
+        = link_to survey_start_path(event_design.event_id, event_design.design_id), class: "btn btn-success btn-shadow" do
           Start Survey
           %i.fa.fa-caret-right
   .card-footer
     %small.text-muted
-      = event_design.name
+      = event_design.design_name

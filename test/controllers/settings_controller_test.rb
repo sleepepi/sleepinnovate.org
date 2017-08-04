@@ -25,9 +25,9 @@ class SettingsControllerTest < ActionDispatch::IntegrationTest
     login(@regular_user)
     patch settings_change_password_url, params: {
       user: {
-        current_password: "password",
-        password: "newpassword",
-        password_confirmation: "newpassword"
+        current_password: "PASSword1",
+        password: "NEWpassword2",
+        password_confirmation: "NEWpassword2"
       }
     }
     assert_equal "Your password has been changed.", flash[:notice]
@@ -39,8 +39,8 @@ class SettingsControllerTest < ActionDispatch::IntegrationTest
     patch settings_change_password_url, params: {
       user: {
         current_password: "invalid",
-        password: "newpassword",
-        password_confirmation: "newpassword"
+        password: "NEWpassword2",
+        password_confirmation: "NEWpassword2"
       }
     }
     assert_template "password"
@@ -51,9 +51,22 @@ class SettingsControllerTest < ActionDispatch::IntegrationTest
     login(@regular_user)
     patch settings_change_password_url, params: {
       user: {
-        current_password: "password",
-        password: "newpassword",
+        current_password: "PASSword1",
+        password: "NEWpassword2",
         password_confirmation: "mismatched"
+      }
+    }
+    assert_template "password"
+    assert_response :success
+  end
+
+  test "should not change password without meeting password requirements" do
+    login(@regular_user)
+    patch settings_change_password_url, params: {
+      user: {
+        current_password: "PASSword1",
+        password: "newpassword",
+        password_confirmation: "newpassword"
       }
     }
     assert_template "password"

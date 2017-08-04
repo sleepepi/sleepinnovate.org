@@ -29,6 +29,11 @@ class ExternalControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test "should get pledge" do
+    get pledge_url
+    assert_response :success
+  end
+
   test "should get sitemap xml file" do
     get sitemap_xml_url
     assert_response :success

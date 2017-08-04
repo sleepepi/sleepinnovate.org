@@ -1,0 +1,11 @@
+- @title = [@json["design"]["name"], @json["event"]["name"]].join(" - ")
+
+.page-box.last-slide.background-p50-grey.center-vertically-xs-sm
+  .container
+    %h1= @json["design"]["name"]
+
+    = @json.inspect
+
+    = link_to survey_page_path(params[:event], params[:design], 1) do
+      Get Started
+      %i.fa.fa-caret-right

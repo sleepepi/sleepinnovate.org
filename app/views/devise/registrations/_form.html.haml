@@ -1,19 +1,14 @@
 .sign-up-form
   .sign-up-form-title
     Create your account
-  = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "form-vertical", autocomplete: "off" }) do |f|
+  = form_with(model: resource, url: registration_path(resource_name), local: true, class: "form-vertical", autocomplete: "off") do |form|
     .form-group
-      = render "layouts/label_or_errors", form: f, object: resource, key: :full_name
-      = f.text_field :full_name, class: "form-control form-control-danger"
+      = render "layouts/label_or_errors", form: form, object: resource, key: :full_name
+      = form.text_field :full_name, class: "form-control form-control-danger"
 
     .form-group
-      = render "layouts/label_or_errors", form: f, object: resource, key: :email
-      = f.email_field :email, class: "form-control form-control-danger"
-
-    .form-group
-      = render "layouts/label_or_errors", form: f, object: resource, key: :date_of_birth, key_name: "Date of birth"
-      = f.text_field :date_of_birth, class: "form-control form-control-danger", data: { mask: "00/00/0000" }, value: resource.date_of_birth ? resource.date_of_birth.strftime("%m/%d/%Y") : ""
-      %small.form-text.text-muted mm/dd/yyyy
+      = render "layouts/label_or_errors", form: form, object: resource, key: :email
+      = form.email_field :email, class: "form-control form-control-danger"
 
     - if RECAPTCHA_ENABLED
       .form-group
@@ -23,7 +18,7 @@
           <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
     .form-group.submit-btn-container
-      = f.submit "Create Account", class: "btn btn-primary btn-block"
+      = form.submit "Create Account", class: "btn btn-primary btn-block"
 
 .sign-up-form.text-center
   = link_to "I already have an account.", new_user_session_path

@@ -72,6 +72,27 @@ class Subject < SliceRecord
     "#{ENV['slice_url']}/survey/#{sheet.design_slug}/#{sheet.authentication_token}" if sheet
   end
 
+  def start_event_survey(event, design)
+    (json, _status) = Helpers::JsonRequest.get("#{project_url}/subjects/#{@id}/surveys/#{event}/#{design}.json")
+    # return unless status.is_a?(Net::HTTPSuccess)
+    json
+  end
+
+  def page_event_survey(event, design, page)
+    (json, _status) = Helpers::JsonRequest.get("#{project_url}/subjects/#{@id}/surveys/#{event}/#{design}/#{page}.json")
+    # return unless status.is_a?(Net::HTTPSuccess)
+    json
+  end
+
+  def submit_response_event_survey(event, design, page, response)
+    params = { _method: "patch", response: response }
+    Helpers::JsonRequest.post("#{project_url}/subjects/#{@id}/surveys/#{event}/#{design}/#{page}.json", params)
+  end
+
+  def complete_event_survey(event, design)
+    start_event_survey(event, design)
+  end
+
   private
 
   def set_defaults

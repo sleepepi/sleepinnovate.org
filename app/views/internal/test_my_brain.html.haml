@@ -4,4 +4,4 @@
   .container
     %h1{ style: "color: #bdbdbd;font-weight: 300;" }= @title
 
-    = link_to "Test My Brain website", "https://testmybrain.org"
+    = link_to "Test My Brain website", "#{ENV['test_my_brain_url']}?id=#{current_user.subject_code}"

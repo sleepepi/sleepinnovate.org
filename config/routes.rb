@@ -18,6 +18,7 @@ Rails.application.routes.draw do
 
   scope module: :external do
     get :about
+    get :pledge
     get :print_consent, path: "consent.pdf"
     get :consent
     get :contact
@@ -32,18 +33,20 @@ Rails.application.routes.draw do
     post :consent, action: :submit_consent
     delete :consent, action: :revoke_consent
     get :consent_signature, path: "consent/signature"
+    get :medical_record, path: "medical-record/connect"
+    patch :medical_record_connect, path: "medical-record/connect"
     get :awards
     get :dashboard
     get :signature
     get :test_my_brain, path: "test-my-brain"
     get :biobank
     get :whats_next, path: "whats-next"
-    post :start_survey, path: "start-survey"
-    get :show_survey, path: "show-survey"
     post :test_my_brain_start, path: "test-my-brain/start"
     post :test_my_brain_complete, path: "test-my-brain/complete"
     post :biobank_start, path: "biobank/start"
     post :biobank_complete, path: "biobank/complete"
+    get :surveys
+    get :returning_from, path: "returning-from/:external/:subject_code"
   end
 
   scope module: :settings do
@@ -56,6 +59,13 @@ Rails.application.routes.draw do
     get :leave_study, path: "leave-study"
     get :password
     patch :change_password, path: "password"
+  end
+
+  namespace :survey do
+    get :start, path: ":event/:design/start"
+    get :complete, path: ":event/:design/complete"
+    get :page, path: ":event/:design/:page"
+    patch :submit_page, path: ":event/:design/:page"
   end
 
   devise_for :users,

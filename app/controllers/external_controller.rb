@@ -2,15 +2,15 @@
 
 # Displays public pages.
 class ExternalController < ApplicationController
-  # GET /about
-  def about
-    render layout: "full_page"
-  end
+  layout "full_page"
 
-  # GET /consent
-  def consent
-    render layout: "full_page"
-  end
+  # # GET /about
+  # def about
+  # end
+
+  # # GET /consent
+  # def consent
+  # end
 
   # GET /consent.pdf
   def print_consent
@@ -22,19 +22,18 @@ class ExternalController < ApplicationController
     end
   end
 
-  # GET /contact
-  def contact
-    render layout: "full_page"
-  end
+  # # GET /contact
+  # def contact
+  # end
 
   # GET /landing
   def landing
-    if current_user
-      redirect_to dashboard_path
-      return
-    end
-    render layout: "full_page"
+    redirect_to dashboard_path if current_user
   end
+
+  # # GET /pledge
+  # def pledge
+  # end
 
   # GET /settings/password/reset
   def settings_password_reset
@@ -52,9 +51,8 @@ class ExternalController < ApplicationController
     end
   end
 
-  # GET /version
-  # GET /version.json
-  def version
-    render layout: "full_page"
-  end
+  # # GET /version
+  # # GET /version.json
+  # def version
+  # end
 end

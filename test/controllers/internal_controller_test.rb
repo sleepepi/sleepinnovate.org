@@ -39,6 +39,12 @@ class InternalControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test "should get medical record connect for regular user" do
+    login(@regular_user)
+    get medical_record_url
+    assert_response :success
+  end
+
   test "should get test my brain for regular user" do
     login(@regular_user)
     get test_my_brain_url
@@ -50,7 +56,7 @@ class InternalControllerTest < ActionDispatch::IntegrationTest
     post test_my_brain_start_url
     @regular_user.reload
     assert_not_nil @regular_user.brain_started_at
-    assert_redirected_to "https://testmybrain.org"
+    assert_redirected_to "#{ENV['test_my_brain_url']}?id=#{@regular_user.subject_code}"
   end
 
   test "should complete test my brain for regular user" do

@@ -9,7 +9,7 @@ class InternalController < ApplicationController
   # POST /consent
   def submit_consent
     current_user.consent!(params[:data_uri])
-    redirect_to dashboard_path
+    redirect_to medical_record_path
   end
 
   # DELETE /consent
@@ -23,24 +23,10 @@ class InternalController < ApplicationController
     send_file File.join(CarrierWave::Uploader::Base.root, current_user.consent_signature.url)
   end
 
-  # POST /start-survey
-  def start_survey
-    subject_event_id = params[:subject_event_id]
-    design_id = params[:design_id]
-    sheet_id = current_user.launch_survey!(subject_event_id, design_id, request.remote_ip)
-    redirect_to show_survey_path(
-      subject_event_id: subject_event_id, design_id: design_id, sheet_id: sheet_id
-    )
-  end
-
-  # GET /show-survey
-  def show_survey
-    slice_survey = current_user.survey_path(params[:sheet_id])
-    if slice_survey
-      redirect_to slice_survey
-    else
-      redirect_to dashboard_path, notice: "Survey could not be loaded."
-    end
+  # GET /returning-from/:location/:subject_code
+  def returning_from
+    flash[:notice] = "Welcome back from TestMyBrain!" if params[:location] == "test-my-brain"
+    redirect_to dashboard_path
   end
 
   # # GET /awards
@@ -55,6 +41,24 @@ class InternalController < ApplicationController
   # def dashboard
   # end
 
+  # # GET /medical-record/connect
+  # def medical_record
+  # end
+
+  # PATCH /medical-record/connect
+  def medical_record_connect
+    if current_user.assign_date_of_birth!(parse_date(params[:date_of_birth]))
+      redirect_to dashboard_path
+    else
+      @date_error = params[:date_of_birth]
+      render :medical_record
+    end
+  end
+
+  # # GET /surveys
+  # def surveys
+  # end
+
   # # GET /test-my-brain
   # def test_my_brain
   # end
@@ -62,7 +66,7 @@ class InternalController < ApplicationController
   # POST /test-my-brain/start
   def test_my_brain_start
     current_user.test_my_brain_started!
-    redirect_to "https://testmybrain.org"
+    redirect_to "#{ENV['test_my_brain_url']}?id=#{current_user.subject_code}"
   end
 
   # POST /test-my-brain/complete

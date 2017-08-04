@@ -17,7 +17,7 @@ end
 # Set up ActionDispatch tests.
 class ActionDispatch::IntegrationTest
   def login(user)
-    sign_in_as(user, "password")
+    sign_in_as(user, "PASSword1")
   end
 
   def sign_in_as(user, password)

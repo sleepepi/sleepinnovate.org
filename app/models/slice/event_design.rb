@@ -2,14 +2,14 @@
 
 # Tracks a series of events on a design.
 class EventDesign
-  attr_accessor :subject_event, :json, :id, :name, :sheets, :design_id
+  attr_accessor :subject_event, :json, :sheets, :design_id, :design_name, :event_id
 
   def initialize(json, subject_event)
     @subject_event = subject_event
     @json = json
-    @id = json["id"]
-    @name = json["name"]
-    @design_id = json["design_id"]
+    @design_id = json["design"]["id"]
+    @design_name = json["design"]["name"]
+    @event_id = json["event"]["id"]
     @sheets = load_sheets(json["sheets"])
   end
 

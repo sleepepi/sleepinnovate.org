@@ -5,20 +5,20 @@
     .sign-up-form-title
       Sign in
 
-    = form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "form-vertical", autocomplete: "off" }) do |f|
+    = form_with(model: resource, url: session_path(resource_name), local: true, class: "form-vertical", autocomplete: "off") do |form|
       .form-group{ class: flash[:alert].present? ? "has-danger" : "" }
-        = f.label :email, class: "form-control-label"
-        = f.text_field :email, class: "form-control form-control-danger"
+        = form.label :email, class: "form-control-label"
+        = form.text_field :email, class: "form-control form-control-danger"
 
       .form-group{ class: flash[:alert].present? ? "has-danger" : "" }
-        = f.label :password, class: "form-control-label"
+        = form.label :password, class: "form-control-label"
         %small= link_to "(Forgot password?)", new_password_path(resource_name), tabindex: "-1"
-        = f.password_field :password, class: "form-control form-control-danger"
+        = form.password_field :password, class: "form-control form-control-danger"
         - if flash[:alert].present?
           %small.form-text.text-danger= flash[:alert].html_safe
 
       .form-group.submit-btn-container
-        = f.submit "Sign in", class: "btn btn-primary btn-block"
+        = form.submit "Sign in", class: "btn btn-primary btn-block"
 
       - flash[:alert] = nil
 

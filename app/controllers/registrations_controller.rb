@@ -54,14 +54,4 @@ class RegistrationsController < Devise::RegistrationsController
     current_user.save(validate: false)
     current_user.send_welcome_email_in_background(raw)
   end
-
-  def parse_date(date_string, default_date = "")
-    if date_string.to_s.split("/").last.size == 2
-      Date.strptime(date_string, "%m/%d/%y")
-    else
-      Date.strptime(date_string, "%m/%d/%Y")
-    end
-  rescue
-    default_date
-  end
 end

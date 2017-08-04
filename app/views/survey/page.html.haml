@@ -1,0 +1,116 @@
+- @title = [@json["design"]["name"], @json["event"]["name"]].join(" - ")
+
+- response = @json["sheet_variable"]["response"] if @json["sheet_variable"]
+- start = (@json["design"]["current_page"] - 1) * 100 / @json["design"]["pages_count"]
+- percent = (@json["design"]["current_page"]) * 100 / @json["design"]["pages_count"]
+
+.page-box.last-slide.background-p50-grey.center-vertically-xs-sm
+  = render "survey/progress_bar", start: start, percent: percent
+  .container
+    = form_with(url: survey_submit_page_path(params[:event], params[:design], @page), method: :patch, local: true, autocomplete: "off", enforce_utf8: false) do |form|
+      .survey-question-container
+        - if @json["section"].present?
+          .survey-question
+            - if @json["section"]["name"].present?
+              .survey-question-text= @json["section"]["name"]
+            - if @json["section"]["description"].present?
+              .survey-question-desc= @json["section"]["description"]
+        - elsif @json["variable"].present?
+          .survey-question
+            - if @json["group"].present?
+              - if @json["group"]["name"].present?
+                .survey-question-lead= @json["group"]["name"]
+              - if @json["group"]["description"].present?
+                .survey-question-desc= simple_format @json["group"]["description"]
+            .survey-question-text= @json["variable"]["display_name"]
+            - case @json["variable"]["variable_type"]
+            - when "radio"
+              .survey-choices
+                - @json["variable"]["domain_options"].each do |domain_option_json|
+                  %label.survey-choice.box-shadow
+                    = form.radio_button "response", domain_option_json["value"], checked: domain_option_json["value"] == response
+                    = domain_option_json["name"]
+            - when "checkbox"
+              - response ||= []
+              .survey-choices
+                - @json["variable"]["domain_options"].each do |domain_option_json|
+                  %label.survey-choice.box-shadow
+                    = check_box_tag "response[]", domain_option_json["value"], domain_option_json["value"].in?(response)
+                    =# form.check_box "response[]", domain_option_json["value"] #, checked: false
+                    = domain_option_json["name"]
+            - when "string"
+              .form-group
+                = form.text_field "response", class: "form-control form-control-danger", value: response
+            - when "integer"
+              .form-group
+                = form.text_field "response", class: "form-control form-control-danger", value: response
+                %small.form-text.text-muted= @json["variable"]["units"]
+            - when "time_of_day", "imperial_height"
+              %p.lead.text-muted= @json["variable"]["variable_type"]
+            - else
+              %p.lead.text-muted= @json["variable"]["variable_type"]
+
+        = form.submit "Next", class: "btn btn-primary btn-block"
+
+    .survey-question-skip
+      = link_to survey_page_path(params[:event], params[:design], @page + 1), data: { confirm: "Skip this question?" } do
+        Skip question
+        %i.fa.fa-caret-right
+
+
+- if false
+  .page-box.last-slide.background-p50-grey.center-vertically-xs-sm
+    .container
+      %h1= @json["design"]["name"]
+      %h1= @status
+      %p.lead
+        Page
+        %strong= @json["design"]["current_page"]
+        of
+        %strong= @json["design"]["pages_count"]
+
+      - response = @json["sheet_variable"]["response"] if @json["sheet_variable"]
+
+      - if false
+        = @json.inspect
+        %h2= response
+
+      = form_with(url: survey_submit_page_path(params[:event], params[:design], @page), method: :patch, local: true, autocomplete: "off", enforce_utf8: false) do |form|
+        - if @json["section"]
+          %h2= @json["section"]["name"]
+          = simple_format @json["section"]["description"] if @json["section"]["description"].present?
+        - elsif @json["variable"]
+          %h2= @json["variable"]["display_name"]
+          %p.lead.text-muted= @json["variable"]["variable_type"]
+          - case @json["variable"]["variable_type"]
+          - when "radio"
+            - @json["variable"]["domain_options"].each do |domain_option_json|
+              %div
+                = domain_option_json.inspect
+                %br
+                = form.radio_button "response", domain_option_json["value"], checked: domain_option_json["value"] == response # selected.to_s == value.to_s
+                = domain_option_json["name"]
+          - when "checkbox"
+            %ul
+              - @json["variable"]["domain_options"].each do |domain_option_json|
+                %li
+                  %i.fa.fa-square-o
+                  = domain_option_json["name"]
+          - when "string"
+            .form-group
+              = form.label key, error_message, class: "form-control-label"
+              = form.text_field :full_name, class: "form-control form-control-danger"
+          - when "integer"
+            .form-group
+              = form.label @json["variable"]["name"], @json["variable"]["display_name"], class: "form-control-label"
+              = form.text_field @json["variable"]["name"], class: "form-control form-control-danger"
+              %small.form-text.text-muted= @json["variable"]["units"]
+          - when "integer", "checkbox", "time_of_day", "imperial_height", "string"
+
+        .form-group.submit-btn-container
+          = form.submit "Continue", class: "btn btn-primary btn-block"
+
+
+        = link_to survey_page_path(params[:event], params[:design], @page + 1) do
+          Skip question
+          %i.fa.fa-caret-right

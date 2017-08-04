@@ -11,14 +11,8 @@
         %span.sleep-color Sleep
         %span.innovate-color> INNOVATE
 
-      - if false
-        .landing-read-consent-box
-          = link_to "read the consent form", consent_path
-
       .landing-button-bar
-        - if false
-          .landing-button= link_to "read consent", consent_path, class: "btn btn-lg btn-outline-secondary"
-        .landing-button= link_to "read consent", consent_path, class: "btn btn-lg btn-outline-success btn-shadow"
+        .landing-button= link_to "join the study", pledge_path, class: "btn btn-lg btn-outline-success btn-shadow"
 
   - if false
     .landing-learn-more-box

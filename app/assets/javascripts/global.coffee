@@ -4,6 +4,7 @@
 
 @componentsReady = ->
   masksReady()
+  animateProgressBar()
 
 @globalReady = ->
   extensionsReady()
@@ -25,3 +26,7 @@ $(document).ready(initialLoadReady)
 $(document)
   .on('turbolinks:load', turbolinksReady)
   .on('click', '[data-object~="suppress-click"]', -> false)
+  .on('click', '[data-object~="toggle-visibility"]', ->
+    $($(this).data('target')).toggle()
+    false
+  )

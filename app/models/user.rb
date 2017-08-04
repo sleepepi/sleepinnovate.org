@@ -22,7 +22,10 @@ class User < ApplicationRecord
   # Validations
   # validates :full_name, :date_of_birth, presence: true
   validates :full_name, presence: true
-  validate :date_of_birth_is_reasonable
+  validates :password, format: {
+    with: /\A(?=.*[a-z])(?=.*[A-Z])(?=.*\d)./,
+    message: "must include at least one lowercase letter, one uppercase letter, and one digit"
+  }, allow_blank: true
 
   # Uploaders
   mount_uploader :consent_signature, SignatureUploader
@@ -36,6 +39,10 @@ class User < ApplicationRecord
   delegate :baseline_surveys_completed?, to: :subject
   delegate :total_baseline_surveys_count, to: :subject
   delegate :baseline_surveys_completed_count, to: :subject
+  delegate :start_event_survey, to: :subject
+  delegate :page_event_survey, to: :subject
+  delegate :submit_response_event_survey, to: :subject
+  delegate :complete_event_survey, to: :subject
 
   # Methods
 
@@ -207,8 +214,8 @@ class User < ApplicationRecord
     generate_pdf(jobname, output_folder, file_tex)
   end
 
-  def date_of_birth_is_reasonable
-    return if date_of_birth.present? && date_of_birth.in?(Date.parse("1900-01-01")..Time.zone.today)
-    errors.add(:date_of_birth, "is not a valid date")
+  def assign_date_of_birth!(date)
+    return false unless date.in?(Date.parse("1900-01-01")..Time.zone.today)
+    update(date_of_birth: date)
   end
 end
