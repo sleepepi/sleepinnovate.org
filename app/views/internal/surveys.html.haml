@@ -38,9 +38,6 @@
             %div
               %strong design_id
               = event_design.design_id
-            %div
-              %strong design_name
-              = event_design.design_name
             - if event_design.sheets.present?
               %ul
                 - event_design.sheets.each do |sheet|
@@ -92,6 +89,3 @@
                       %div
                         %strong updated_at
                         = sheet.updated_at
-                      %div
-                        %strong design_slug
-                        = sheet.design_slug

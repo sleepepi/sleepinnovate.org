@@ -3,16 +3,11 @@
 # Tracks a sheet on a subject_event event for a subject.
 class Sheet
   attr_accessor :json, :id, :name, :project_id, :design_id, :subject_id,
-                :subject_event_id, :authentication_token, :response_count,
-                :total_response_count, :percent, :missing, :created_at,
-                :updated_at, :design_slug
+                :subject_event_id, :response_count, :total_response_count,
+                :percent, :missing, :created_at, :updated_at
 
   def initialize(json)
     load_sheet_from_json(json)
-  end
-
-  def path
-    "#{ENV['slice_url']}/survey/#{@design_slug}/#{@authentication_token}"
   end
 
   private
@@ -33,14 +28,12 @@ class Sheet
       :design_id,
       :subject_id,
       :subject_event_id,
-      :authentication_token,
       :response_count,
       :total_response_count,
       :percent,
       :missing,
       :created_at,
-      :updated_at,
-      :design_slug
+      :updated_at
     ]
   end
 end

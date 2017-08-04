@@ -67,11 +67,6 @@ class Subject < SliceRecord
     end
   end
 
-  def survey_path(sheet_id)
-    sheet = subject_events.collect { |se| se.sheets_where(sheet_id) }.flatten.first
-    "#{ENV['slice_url']}/survey/#{sheet.design_slug}/#{sheet.authentication_token}" if sheet
-  end
-
   def start_event_survey(event, design)
     (json, _status) = Helpers::JsonRequest.get("#{project_url}/subjects/#{@id}/surveys/#{event}/#{design}.json")
     # return unless status.is_a?(Net::HTTPSuccess)

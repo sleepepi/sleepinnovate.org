@@ -35,7 +35,6 @@ class User < ApplicationRecord
   delegate :subject_code, to: :subject
   delegate :launch_survey!, to: :subject
   delegate :next_survey, to: :subject
-  delegate :survey_path, to: :subject
   delegate :baseline_surveys_completed?, to: :subject
   delegate :total_baseline_surveys_count, to: :subject
   delegate :baseline_surveys_completed_count, to: :subject
