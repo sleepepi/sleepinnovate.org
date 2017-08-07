@@ -1,8 +1,8 @@
-- @title = [@json["design"]["name"], @json["event"]["name"]].join(" - ")
+- @title = [@json.dig("design", "name"), @json.dig("event", "name")].compact.join(" - ")
 
-- response = @json["sheet_variable"]["response"] if @json["sheet_variable"]
-- start = (@json["design"]["current_page"] - 1) * 100 / @json["design"]["pages_count"]
-- percent = (@json["design"]["current_page"]) * 100 / @json["design"]["pages_count"]
+- response = @json.dig("sheet_variable", "response")
+- start = (@json.dig("design", "current_page") - 1) * 100 / @json.dig("design", "pages_count")
+- percent = (@json.dig("design", "current_page")) * 100 / @json.dig("design", "pages_count")
 
 .page-box.last-slide.background-p50-grey.center-vertically-xs-sm
   = render "survey/progress_bar", start: start, percent: percent
@@ -11,44 +11,22 @@
       .survey-question-container
         - if @json["section"].present?
           .survey-question
-            - if @json["section"]["name"].present?
-              .survey-question-text= @json["section"]["name"]
-            - if @json["section"]["description"].present?
-              .survey-question-desc= @json["section"]["description"]
+            - if @json.dig("section", "name").present?
+              .survey-question-text= @json.dig("section", "name")
+            - if @json.dig("section", "description").present?
+              .survey-question-desc= @json.dig("section", "description")
         - elsif @json["variable"].present?
           .survey-question
-            - if @json["group"].present?
-              - if @json["group"]["name"].present?
-                .survey-question-lead= @json["group"]["name"]
-              - if @json["group"]["description"].present?
-                .survey-question-desc= simple_format @json["group"]["description"]
-            .survey-question-text= @json["variable"]["display_name"]
-            - case @json["variable"]["variable_type"]
-            - when "radio"
-              .survey-choices
-                - @json["variable"]["domain_options"].each do |domain_option_json|
-                  %label.survey-choice.box-shadow
-                    = form.radio_button "response", domain_option_json["value"], checked: domain_option_json["value"] == response
-                    = domain_option_json["name"]
-            - when "checkbox"
-              - response ||= []
-              .survey-choices
-                - @json["variable"]["domain_options"].each do |domain_option_json|
-                  %label.survey-choice.box-shadow
-                    = check_box_tag "response[]", domain_option_json["value"], domain_option_json["value"].in?(response)
-                    =# form.check_box "response[]", domain_option_json["value"] #, checked: false
-                    = domain_option_json["name"]
-            - when "string"
-              .form-group
-                = form.text_field "response", class: "form-control form-control-danger", value: response
-            - when "integer"
-              .form-group
-                = form.text_field "response", class: "form-control form-control-danger", value: response
-                %small.form-text.text-muted= @json["variable"]["units"]
-            - when "time_of_day", "imperial_height"
-              %p.lead.text-muted= @json["variable"]["variable_type"]
+            - if @json.dig("group", "name").present?
+              .survey-question-lead= @json.dig("group", "name")
+            - if @json.dig("group", "description").present?
+              .survey-question-desc= simple_format @json.dig("group", "description")
+            .survey-question-text= @json.dig("variable", "display_name")
+            - case @json.dig("variable", "variable_type")
+            - when "checkbox", "date", "dropdown", "imperial_height", "imperial_weight", "integer", "numeric", "radio", "string", "text", "time_duration", "time_of_day"
+              = render "survey/variables/#{@json.dig("variable", "variable_type")}", form: form, response: response
             - else
-              %p.lead.text-muted= @json["variable"]["variable_type"]
+              %p.lead.text-muted= @json.dig("variable", "variable_type")
 
         = form.submit "Next", class: "btn btn-primary btn-block"
 

@@ -1,0 +1,20 @@
+.form-inline
+  - case @json.dig("variable", "time_duration_format")
+  - when "hh:mm:ss"
+    = render "survey/decoration/hours"
+    \:
+    = render "survey/decoration/minutes"
+    \:
+    = render "survey/decoration/seconds"
+  - when "hh:mm"
+    = render "survey/decoration/hours"
+    \:
+    = render "survey/decoration/minutes"
+  - else # "mm:ss"
+    = render "survey/decoration/minutes"
+    \:
+    = render "survey/decoration/seconds"
+
+  = link_to "Clear (not implemented)", "#", class: "btn btn-sm btn-link text-danger"
+
+= render "survey/decoration/field_note"

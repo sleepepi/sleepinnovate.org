@@ -1,0 +1,28 @@
+.form-inline
+  - case @json.dig("variable", "time_of_day_format")
+  - when "24hour"
+    = render "survey/decoration/hours"
+    \:
+    = render "survey/decoration/minutes"
+    \:
+    = render "survey/decoration/seconds"
+  - when "12hour"
+    = render "survey/decoration/hours"
+    \:
+    = render "survey/decoration/minutes"
+    \:
+    = render "survey/decoration/seconds"
+
+    = render "survey/decoration/period"
+  - else # "12hour-pm"
+    = render "survey/decoration/hours"
+    \:
+    = render "survey/decoration/minutes"
+    \:
+    = render "survey/decoration/seconds"
+    = render "survey/decoration/period"
+
+  = link_to "Current Time (not implemented)", "#", class: "btn btn-sm btn-link" if @json.dig("variable", "show_current_button")
+  = link_to "Clear (not implemented)", "#", class: "btn btn-sm btn-link text-danger"
+
+= render "survey/decoration/field_note"

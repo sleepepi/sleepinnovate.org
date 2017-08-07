@@ -1,0 +1,7 @@
+- response ||= []
+.survey-choices
+  - (@json.dig("variable", "domain_options") || []).each do |domain_option_json|
+    %label.survey-choice.box-shadow
+      = check_box_tag "response[]", domain_option_json["value"], domain_option_json["value"].in?(response)
+      = domain_option_json["name"]
+= render "survey/decoration/field_note"

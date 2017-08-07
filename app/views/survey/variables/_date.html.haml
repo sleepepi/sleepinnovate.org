@@ -1,0 +1,31 @@
+.form-inline
+  - case @json.dig("variable", "format")
+  - when "dd-mmm-yyyy"
+    = render "survey/decoration/day"
+    \-
+    = render "survey/decoration/month_select"
+    \-
+    = render "survey/decoration/year"
+  - when "yyyy-mm-dd", "%Y-%m-%d" # Second will be deprecated
+    = render "survey/decoration/year"
+    \-
+    = render "survey/decoration/month"
+    \-
+    = render "survey/decoration/day"
+  - when "dd/mm/yyyy", "%d/%m/%Y" # Second will be deprecated
+    = render "survey/decoration/day"
+    \/
+    = render "survey/decoration/month"
+    \/
+    = render "survey/decoration/year"
+  - else # "mm/dd/yyyy" "%m/%d/%Y" # Second will be deprecated
+    = render "survey/decoration/month"
+    \/
+    = render "survey/decoration/day"
+    \/
+    = render "survey/decoration/year"
+
+  = link_to "Today (not implemented)", "#", class: "btn btn-sm btn-link" if @json.dig("variable", "show_current_button")
+  = link_to "Clear (not implemented)", "#", class: "btn btn-sm btn-link text-danger"
+
+= render "survey/decoration/field_note"

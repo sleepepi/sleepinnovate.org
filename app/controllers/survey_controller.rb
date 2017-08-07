@@ -20,7 +20,24 @@ class SurveyController < ApplicationController
 
   # PATCH /survey/:event/:design/:page
   def submit_page
-    (@json, @status) = current_user.submit_response_event_survey(params[:event], params[:design], @page, params[:response])
+    if params[:response].is_a?(ActionController::Parameters)
+      value = {
+        day: params[:response][:day],
+        month: params[:response][:month],
+        year: params[:response][:year],
+        hours: params[:response][:hours],
+        minutes: params[:response][:minutes],
+        seconds: params[:response][:seconds],
+        period: params[:response][:period],
+        pounds: params[:response][:pounds],
+        ounces: params[:response][:ounces],
+        feet: params[:response][:feet],
+        inches: params[:response][:inches]
+      }
+    else
+      value = params[:response]
+    end
+    (@json, @status) = current_user.submit_response_event_survey(params[:event], params[:design], @page, value)
     if @status.is_a?(Net::HTTPOK)
       redirect_to survey_page_path(params[:event], params[:design], @page + 1)
     else

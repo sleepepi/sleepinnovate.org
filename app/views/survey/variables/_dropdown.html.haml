@@ -1,0 +1,3 @@
+.form-group
+  = form.select :response, (@json.dig("variable", "domain_options") || []).collect { |doj| [doj["name"], doj["value"]] }, { include_blank: true, selected: response }, class: "form-control form-control-danger"
+  = render "survey/decoration/field_note"
