@@ -1,0 +1,2 @@
+- if @json.dig("errors", "base").present?
+  .form-control-feedback= @json.dig("errors", "base").join(", ")

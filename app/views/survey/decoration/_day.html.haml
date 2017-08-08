@@ -1,1 +1,1 @@
-%span.day-box= text_field_tag "response[day]", "", maxlength: 2, placeholder: "dd", class: "form-control", style: "display: inline-block;"
+%span.day-box= text_field_tag "response[day]", value ? value["day"] : nil, maxlength: 2, placeholder: "dd", class: "form-control", style: "display: inline-block;"
