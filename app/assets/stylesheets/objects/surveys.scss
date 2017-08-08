@@ -62,42 +62,14 @@
   margin-bottom: 10px;
   padding: 10px;
 
-  .fa {
-    color: $brand-white;
-  }
-
-  .fa-dynamic::before {
-    content: "\f111";
-  }
-
-  .fa-check-circle,
-  .fa-check-square {
-    color: transparent;
-  }
-
   &:hover,
   &:focus,
-  &:active {
-    background-color: $p300-light-blue;
+  &:active,
+  &.active {
+    background-color: $p300-teal;
     box-shadow: none;
     color: $brand-white;
     text-decoration: none;
-
-    .fa-dynamic::before {
-      content: "\f058";
-    }
-
-    .fa-circle,
-    .fa-square {
-      font-size: 13px;
-      margin-top: 2px;
-    }
-
-    .fa-dynamic,
-    .fa-check-circle,
-    .fa-check-square {
-      color: $p600-teal;
-    }
   }
 }
 

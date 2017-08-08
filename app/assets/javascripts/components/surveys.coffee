@@ -105,3 +105,7 @@ $(document)
     setCurrentDate($(this))
     false
   )
+  .on('click', '.survey-choices', ->
+    $(".survey-choices input").closest("label").removeClass("active")
+    $(".survey-choices input:checked").closest("label").addClass("active")
+  )
