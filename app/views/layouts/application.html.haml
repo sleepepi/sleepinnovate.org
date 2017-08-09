@@ -7,9 +7,6 @@
     %meta{ name: "description", content: "SleepINNOVATE project website." }
     %meta{ name: "author", content: "Remo Mueller" }
     %meta{ name: "keywords", content: "sleep innovate, sleep research" }
-    %meta{ name: "apple-mobile-web-app-capable", content: "yes" }
-    %meta{ name: "apple-mobile-web-app-status-bar-style", content: "black-translucent" }
-    %meta{ name: "apple-mobile-web-app-title", content: ENV["website_name"] }
     -# Don't cache any pages
     %meta{ name: "turbolinks-cache-control", content: "no-cache" }
     %title= [@title, ENV["website_name"]].compact.join(" - ").html_safe
