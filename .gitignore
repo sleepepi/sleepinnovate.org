@@ -44,5 +44,8 @@
 /carrierwave/**/*
 /test/support/*
 
+# Test My Brain nightly export.
+/brains
+
 # SimpleCov
 /coverage/*
