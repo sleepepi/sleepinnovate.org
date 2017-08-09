@@ -90,11 +90,11 @@ class User < ApplicationRecord
   end
 
   def brain_baseline_surveys_completed
-    2
+    brain_surveys_count
   end
 
   def brain_baseline_surveys_count
-    8
+    TEST_MY_BRAIN_SURVEYS.size
   end
 
   def brain_baseline_percent

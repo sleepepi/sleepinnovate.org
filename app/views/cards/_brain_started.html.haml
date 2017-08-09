@@ -2,7 +2,7 @@
   .card-block
     .text-center{ style: "font-size: 6rem;" }
       %i.fa.fa-lightbulb-o.text-warning
-    %h4.card-title Brain Quizzes
+    %h4.card-title Brain Surveys
     - if current_user.brain_baseline_percent.to_i.zero?
       .progress
         .progress-bar.progress-bar-striped{ role: "progressbar", style: "width: 100%;background-color: #ededed;", aria: { valuenow: "0", valuemin: "0", valuemax: "100" } }
@@ -13,6 +13,9 @@
       %div{ style: "color: #bdbdbd;" } Continue testing your brain!
     .text-center
       %p.card-text
-        = link_to test_my_brain_path, class: "btn btn-warning btn-shadow" do
-          %i.fa.fa-lightbulb-o
-          Next brain survey.
+        = link_to "#{ENV['test_my_brain_url']}?id=#{current_user.subject_code}", class: "btn btn-warning btn-shadow" do
+          Next brain survey
+          %i.fa.fa-caret-right
+  .card-footer
+    %small.text-muted
+      = User::TEST_MY_BRAIN_SURVEYS.first.first

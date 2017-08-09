@@ -144,9 +144,9 @@
             %strong Test My Brain Surveys Completed
         .col-md-10
           %p.form-control-static
-            = @user.brain_surveys_count
+            = @user.brain_baseline_surveys_completed
             of
-            = User::TEST_MY_BRAIN_SURVEYS.size
+            = @user.brain_baseline_surveys_count
 
 
     - if @user.brain_surveys_completed?
