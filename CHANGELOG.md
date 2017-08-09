@@ -15,5 +15,8 @@
   - Consent forms can now be downloaded as PDFs
   - Users can reset their password on the settings page
   - Using Ruby on Rails 5.1.3 framework
+- **Test My Brain Changes**
+  - Added task to import data from Test My Brain export to track user brain
+    surveys completion
 - **Admin Changes**
   - Admins can now manage user accounts

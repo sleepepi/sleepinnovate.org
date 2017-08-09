@@ -19,6 +19,11 @@ class User < ApplicationRecord
     ["Opted Out", "opted_out"]
   ]
 
+  TEST_MY_BRAIN_SURVEYS = [
+    ["Matching Shapes and Numbers", 1],
+    ["Placeholder", 2]
+  ]
+
   # Validations
   # validates :full_name, :date_of_birth, presence: true
   validates :full_name, presence: true

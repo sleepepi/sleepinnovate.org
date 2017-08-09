@@ -128,6 +128,16 @@
         .col-md-10
           %p.form-control-static
             = @user.brain_started_at.strftime("%-m/%-d/%Y at %-l:%M %p")
+      .row{ style: "margin-bottom: 20px;" }
+        .col-md-2
+          .col-form-label
+            %strong Test My Brain Surveys Completed
+        .col-md-10
+          %p.form-control-static
+            = @user.brain_surveys_count
+            of
+            = User::TEST_MY_BRAIN_SURVEYS.size
+
 
     - if @user.brain_surveys_completed?
       .row{ style: "margin-bottom: 20px;" }
