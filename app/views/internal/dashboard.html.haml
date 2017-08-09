@@ -2,8 +2,15 @@
 
 .page-box.last-slide.background-p50-grey.center-vertically-xs-sm
   .container
-
-    - if current_user.consent_revoked?
+    - if current_user.refused?
+      .jumbotron.jumbotron-white
+        %h2 Refused to join Study
+        %p You refused to join the SleepINNOVATE study.
+        %p
+          Please
+          = link_to "notify the person", contact_path
+          in charge of this research study in writing.
+    - elsif current_user.withdrawn?
       .jumbotron.jumbotron-white
         %h2 Withdrawn from Study
         %p You have withdrawn from the SleepINNOVATE study.
