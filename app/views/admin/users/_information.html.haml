@@ -1,4 +1,13 @@
-- if user.withdrawn?
+- if user.refused?
+  %p
+    %small.text-muted
+      Subject refused to join study.
+      = succeed "." do
+        = link_to unrevoke_admin_user_path(user), method: :post, data: { confirm: "Undo study refusal?" } do
+          %i.fa.fa-undo
+          Undo study refusal
+          %span>
+- elsif user.withdrawn?
   %p
     %small.text-muted
       Subject withdrew from study.

@@ -33,20 +33,20 @@
         .col-md-10
           %p.form-control-static= @user.email
     - else
-      .row{ style: "margin-bottom: 20px;", data: { object: "hover-show", target: "#full-name", target_default: "#full-name-obscurred" } }
+      .row{ style: "margin-bottom: 20px;" }
         .col-md-2
           .col-form-label
             %strong Name
         .col-md-10
-          %p.form-control-static
+          %p.form-control-static{ data: { object: "hover-show", target: "#full-name", target_default: "#full-name-obscurred" } }
             %span#full-name-obscurred= @user.full_name.to_s.gsub(/\B./, "*")
             %span#full-name{ style: "display: none;" }= @user.full_name
-      .row{ style: "margin-bottom: 20px;", data: { object: "hover-show", target: "#email", target_default: "#email-obscurred" } }
+      .row{ style: "margin-bottom: 20px;" }
         .col-md-2
           .col-form-label
             %strong Email
         .col-md-10
-          %p.form-control-static
+          %p.form-control-static{ data: { object: "hover-show", target: "#email", target_default: "#email-obscurred" } }
             %span#email-obscurred= @user.email.to_s.gsub(/\B./, "*")
             %span#email{ style: "display: none;" }= @user.email
 
@@ -71,10 +71,12 @@
           %strong Status
       .col-md-10
         %p.form-control-static
-          - if @user.consented?
-            Consented
+          - if @user.refused?
+            Refused
           - elsif @user.withdrawn?
             Withdrawn
+          - elsif @user.consented?
+            Consented
           - else
             Registered
     - if @user.consented_at.present?
@@ -88,6 +90,14 @@
           - else
             %p.form-control-static
               %strong.text-success= @user.consented_at.strftime("%-m/%-d/%Y at %-l:%M %p")
+    - if @user.refused?
+      .row{ style: "margin-bottom: 20px;" }
+        .col-md-2
+          .col-form-label
+            %strong Refused
+        .col-md-10
+          %p.form-control-static
+            %strong.text-warning= @user.consent_revoked_at.strftime("%-m/%-d/%Y at %-l:%M %p")
     - if @user.withdrawn?
       .row{ style: "margin-bottom: 20px;" }
         .col-md-2

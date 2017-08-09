@@ -2,7 +2,7 @@
   %h1
     %i.fa.fa-user-md
     = user.name
-- elsif user.withdrawn?
+- elsif user.consent_revoked?
   %h1
     %i.fa.fa-street-view
     Subject

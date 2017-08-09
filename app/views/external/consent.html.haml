@@ -24,10 +24,12 @@
     = render "consent/13_privacy"
     = render "consent/14_authorization"
     - if current_user
-      - if current_user.consented?
-        = render "consent/consented"
+      - if current_user.refused?
+        = render "consent/refused"
       - elsif current_user.withdrawn?
         = render "consent/withdrawn"
+      - elsif current_user.consented?
+        = render "consent/consented"
       - else
         = render "consent/continue_to_signature"
     - else

@@ -21,6 +21,10 @@
                 = link_to admin_user_path(user), class: "text-success" do
                   %i.fa.fa-user-md
                   = user.name
+              - elsif user.refused?
+                = link_to admin_user_path(user), class: "small text-muted" do
+                  %i.fa.fa-street-view
+                  Subject refused to join study
               - elsif user.withdrawn?
                 = link_to admin_user_path(user), class: "small text-muted" do
                   %i.fa.fa-street-view

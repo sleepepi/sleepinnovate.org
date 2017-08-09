@@ -8,7 +8,7 @@
     #navbarSupportedContent.collapse.navbar-collapse
       %ul.navbar-nav.mr-auto
         - if current_user
-          = render "menu/item", title: "Consent", path: consent_path unless current_user.withdrawn?
+          = render "menu/item", title: "Consent", path: consent_path unless current_user.consent_revoked?
           =# render "menu/item", title: "Test My Brain", path: test_my_brain_path
           =# render "menu/item", title: "Biobank", path: biobank_path
           =# render "menu/item_disabled", title: "Disabled"

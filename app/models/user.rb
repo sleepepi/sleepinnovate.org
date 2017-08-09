@@ -116,12 +116,17 @@ class User < ApplicationRecord
     !consented_at.nil? && consent_revoked_at.nil?
   end
 
-  def consent_revoked?
-    !consent_revoked_at.nil?
+  def refused?
+    consented_at.nil? && !consent_revoked_at.nil?
   end
 
   def withdrawn?
-    consent_revoked?
+    !consented_at.nil? && !consent_revoked_at.nil?
+  end
+
+  # Equivalent to (refused? || withdrawn?)
+  def consent_revoked?
+    !consent_revoked_at.nil?
   end
 
   def unconsented?

@@ -1,4 +1,4 @@
-- if !current_user.admin? && current_user.withdrawn?
+- if !current_user.admin? && current_user.consent_revoked?
   %li.nav-item
     = link_to destroy_user_session_path, method: :delete, class: "nav-link" do
       %i.fa.fa-sign-out
@@ -8,6 +8,8 @@
     = link_to "#", data: { toggle: "dropdown" }, aria: { haspopup: "true", expanded: "false" }, class: "nav-link dropdown-toggle" do
       - if current_user.admin?
         = current_user.name
+      - elsif current_user.refused?
+        Subject Refused
       - elsif current_user.withdrawn?
         Subject Withdrawn
       - elsif current_user.subject_code.present?
