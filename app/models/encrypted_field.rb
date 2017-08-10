@@ -18,6 +18,7 @@ class EncryptedField < ApplicationRecord
   end
 
   def data
+    return nil unless valid?
     decrypt(encrypted_data, encryption_key, encrypted_data_iv)
   end
 

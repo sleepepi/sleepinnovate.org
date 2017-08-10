@@ -11,6 +11,10 @@ class User < ApplicationRecord
   include Deletable
   include Forkable
   include Latexable
+  include Encrypted
+
+  # Encrypted Fields
+  encrypted :date_of_birth
 
   # Constants
   BIOBANK_STATUS = [
@@ -25,7 +29,6 @@ class User < ApplicationRecord
   ]
 
   # Validations
-  # validates :full_name, :date_of_birth, presence: true
   validates :full_name, presence: true
   validates :password, format: {
     with: /\A(?=.*[a-z])(?=.*[A-Z])(?=.*\d)./,

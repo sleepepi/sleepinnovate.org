@@ -45,6 +45,27 @@ class InternalControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test "should update date of birth for regular user" do
+    login(@regular_user)
+    patch medical_record_connect_url(
+      date_of_birth: "12/31/1984"
+    )
+    @regular_user.reload
+    assert_equal "1984-12-31", @regular_user.date_of_birth
+    assert_redirected_to dashboard_url
+  end
+
+  test "should not update invalid date of birth for regular user" do
+    login(@regular_user)
+    patch medical_record_connect_url(
+      date_of_birth: "2/31/1990"
+    )
+    @regular_user.reload
+    assert_nil @regular_user.date_of_birth
+    assert_template "medical_record"
+    assert_response :success
+  end
+
   test "should get test my brain for regular user" do
     login(@regular_user)
     get test_my_brain_url
