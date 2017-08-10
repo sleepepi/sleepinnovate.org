@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+# <% field_one = EncryptedField.new(data: "My secret message.") %>
+# one:
+#   encrypted_data: <%= field_one.encrypted_data %>
+#   encrypted_data_iv: <%= field_one.encrypted_data_iv %>
+#   data_encryption_key: two
+
+# <% field_two = EncryptedField.new(data: "My second secret message.") %>
+# two:
+#   encrypted_data: <%= field_two.encrypted_data %>
+#   encrypted_data_iv: <%= field_two.encrypted_data_iv %>
+#   data_encryption_key: two
+
+# <% field_empty = EncryptedField.new(data: "") %>
+# empty:
+#   encrypted_data: <%= field_empty.encrypted_data %>
+#   encrypted_data_iv: <%= field_empty.encrypted_data_iv %>
+#   data_encryption_key_id: <%= field_empty.data_encryption_key_id %>
+
+# <% field_empty_nil = EncryptedField.new(data: nil) %>
+# empty_nil:
+#   encrypted_data: <%= field_empty_nil.encrypted_data %>
+#   encrypted_data_iv: <%= field_empty_nil.encrypted_data_iv %>
+#   data_encryption_key_id: <%= field_empty_nil.data_encryption_key_id %>

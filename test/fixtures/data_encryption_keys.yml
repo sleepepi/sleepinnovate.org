@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+<% dek_old = DataEncryptionKey.new(key: DataEncryptionKey.random_key_hex) %>
+one:
+  encrypted_key: <%= dek_old.encrypted_key %>
+  encrypted_key_iv: <%= dek_old.encrypted_key_iv %>
+  primary: false
+
+<% dek_primary = DataEncryptionKey.new(key: DataEncryptionKey.random_key_hex) %>
+two:
+  encrypted_key: <%= dek_primary.encrypted_key %>
+  encrypted_key_iv: <%= dek_primary.encrypted_key_iv %>
+  primary: true

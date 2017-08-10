@@ -15,6 +15,8 @@ devise_pepper:        "<%= SecureRandom.hex(64) %>"
 website_secret:       "<%= SecureRandom.hex(64) %>"
 cookie_store_key:     "_innovate_session"
 
+key_encryption_key:   "<%= SecureRandom.hex(32) %>"
+
 recaptcha_enabled:    "<%= print "Enable reCAPTCHA? (y|n)"; response = gets.chomp.downcase[0]; response == 'y' ? 'true' : 'false' %>"
 recaptcha_site_key:   "<%= print "Enter reCAPTCHA Site Key: "; gets.chomp %>"
 recaptcha_secret_key: "<%= print "Enter reCAPTCHA Secret Key: "; gets.chomp %>"
