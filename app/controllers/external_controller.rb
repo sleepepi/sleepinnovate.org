@@ -32,9 +32,10 @@ class ExternalController < ApplicationController
     redirect_to dashboard_path if current_user
   end
 
-  # # GET /pledge
-  # def pledge
-  # end
+  # GET /pledge
+  def pledge
+    render layout: "full_page_no_header_no_footer"
+  end
 
   # GET /settings/password/reset
   def settings_password_reset

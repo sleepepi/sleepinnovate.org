@@ -1,23 +1,54 @@
 - @title = "Pledge"
 
 .page-box.last-slide.background-p50-grey.center-vertically-xs-sm
-  .container
-    %h1.mb-5.text-center= @title
+  .pledge
+    %h1
+      Everyone needs sleep.
+      %br.d-inline.d-sm-none
+      Sleep research needs you.
 
-    .row.mb-5
-      .col.text-center
-        %strong We promise to:
-        %ul.list-unstyled
-          %li Keep your data safe
-          %li Make things easy
-          %li Keep you up to date
-      .col.text-center
-        %strong You promise to:
-        %ul.list-unstyled
-          %li Participate as much as you can
-          %li Tell us about your life
+    .pledge-icon.boston-color
+      %i.fa.fa-bed
 
-    .text-center
-      = link_to new_user_registration_path, class: "btn btn-lg btn-success btn-shadow" do
-        Start enrollment
-        %i.fa.fa-caret-right
+    %p
+      %strong We want to understand how sleep influences health and well-being.
+      Our study,
+      = succeed "," do
+        %strong= render "layouts/logo"
+      is led by Dr. Susan Redline in the Division of Sleep and Circadian
+      Disorders at Brigham & Women's Hospital and funded by the National
+      Institutes of Health.
+
+
+    .pledge-icon.sleep-color
+      %i.fa.fa-wifi
+
+    %p
+      %strong
+        It's easy to complete our brief surveys and fun brain quizzes online.
+      We are recruiting
+      %u adult patients
+      at Partners Healthcare sleep centers with
+      %u internet access
+      and can
+      = succeed "." do
+        %u read English
+      We'll give you feedback on your responses and enter you in a drawing for a
+      $100 gift certificate every time you return for a follow-up.
+
+
+    .pledge-icon.innovate-color
+      %i.fa.fa-users
+
+
+    %p
+      %strong Participation is completely voluntary and confidential.
+      Participation will not affect your medical care and you can withdraw at
+      any time. We will store all information securely at Brigham & Women's
+      Hospital and never reveal your identity.
+
+
+  .text-center
+    = link_to new_user_registration_path, class: "btn btn-lg btn-success btn-shadow" do
+      Register and enroll now
+      %i.fa.fa-caret-right
