@@ -40,6 +40,7 @@ Rails.application.routes.draw do
     get :signature
     get :test_my_brain, path: "test-my-brain"
     get :biobank
+    get :parking, path: "parking-voucher"
     get :whats_next, path: "whats-next"
     post :test_my_brain_start, path: "test-my-brain/start"
     post :test_my_brain_complete, path: "test-my-brain/complete"

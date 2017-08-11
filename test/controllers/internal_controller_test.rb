@@ -45,6 +45,12 @@ class InternalControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test "should get parking voucher for regular user" do
+    login(@regular_user)
+    get parking_url
+    assert_response :success
+  end
+
   test "should update date of birth for regular user" do
     login(@regular_user)
     patch medical_record_connect_url(

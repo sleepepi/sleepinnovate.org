@@ -14,6 +14,8 @@
   - A contact page was added to allow users to contact research study staff
   - Consent forms can now be downloaded as PDFs
   - Users can reset their password on the settings page
+  - Users who have consented and completed their profile can receive a parking
+    voucher
   - Using Ruby on Rails 5.1.3 framework
   - Using Bootstrap 4.0.0.beta
 - **Encryption Changes**

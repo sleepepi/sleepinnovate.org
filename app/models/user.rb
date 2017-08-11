@@ -180,12 +180,31 @@ class User < ApplicationRecord
     BIOBANK_STATUS.find { |_name, value| value == biobank_status }.first
   end
 
+  def first_login?
+    sign_in_count == 1
+  end
+
+  def parking_voucher?
+    # first_login? && profile_complete? # TODO: Enable parking voucher.
+    true
+  end
+
+  def profile_complete?
+    consented? && dob.present?
+  end
+
   def whats_next?
     baseline_surveys_completed? && brain_surveys_completed? && (biobank_registration_completed? || biobank_opted_out?)
   end
 
   def subject
     @subject ||= Subject.new(self)
+  end
+
+  def dob
+    Date.parse(date_of_birth)
+  rescue
+    nil
   end
 
   def save_signature!(data_uri)

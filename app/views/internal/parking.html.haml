@@ -1,0 +1,28 @@
+- @title = "Parking Voucher"
+
+.page-box.last-slide.background-p50-grey.center-vertically-xs-sm
+  .container
+    .jumbotron.jumbotron-white
+      .text-center.mb-3
+        %h2
+          %i.fa.fa-car
+          = @title
+        %p.lead.text-muted
+          Redeem parking voucher from research staff.
+
+      .card.m-auto{ style: "max-width: 400px;" }
+        .card-body
+          %table.table.table-striped.table-bordered.mb-0
+            %col{ width: "1px" }
+            %col
+            %tr
+              %th.text-right Subject
+              %td= current_user.subject_code
+            - if current_user.dob.present?
+              %tr
+                %th.text-right Birthday
+                %td= current_user.dob.strftime("%B %-d")
+            - if current_user.consented_at.present?
+              %tr
+                %th.text-right Consented
+                %td= current_user.consented_at.strftime("%-m/%-d/%Y at %-l:%M %p")

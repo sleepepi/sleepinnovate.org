@@ -55,6 +55,10 @@ class InternalController < ApplicationController
     end
   end
 
+  # # GET /parking-voucher
+  # def parking
+  # end
+
   # # GET /surveys
   # def surveys
   # end
