@@ -1,29 +1,23 @@
-%nav.navbar.fixed-top.navbar-toggleable-md.navbar-light.bg-faded
-  .container.container-xs-fix
-    %button.navbar-toggler.navbar-toggler-right{ type: "button", data: { toggle: "collapse", target: "#navbarSupportedContent" }, aria: { controls: "navbarSupportedContent", expanded: "false", label: "Toggle navigation" } }
-      %span.navbar-toggler-icon
+%nav.navbar.fixed-top.navbar-expand-lg.navbar-light.bg-light
+  .container
     = link_to current_user ? dashboard_path : landing_path, class: "navbar-brand" do
       %span.sleep-color> Sleep
       %span.innovate-color INNOVATE
-    #navbarSupportedContent.collapse.navbar-collapse
+
+    %button.navbar-toggler{ type: "button", data: { toggle: "collapse", target: "#navbarNav" }, aria: { controls: "navbarNav", expanded: "false", label: "Toggle navigation" } }
+      %span.navbar-toggler-icon
+
+    #navbarNav.collapse.navbar-collapse
       %ul.navbar-nav.mr-auto
         - if current_user
           = render "menu/item", title: "Consent", path: consent_path unless current_user.consent_revoked?
-          =# render "menu/item", title: "Test My Brain", path: test_my_brain_path
-          =# render "menu/item", title: "Biobank", path: biobank_path
-          =# render "menu/item_disabled", title: "Disabled"
-      - if current_user
-        %ul.navbar-nav
+      %ul.navbar-nav
+        - if current_user
           = render "menu/dropdown_account"
-      - else
-        %ul.navbar-nav
+        - else
           %li.nav-item{ class: current_page?(new_user_session_path) ? "active" : nil }
             = link_to new_user_session_path, class: "nav-link" do
               %i.fa.fa-lock
               Sign in
             - if current_page?(new_user_session_path)
               %span.sr-only (current)
-        - if false
-          %form.form-inline.my-2.my-lg-0
-            / %input.form-control.mr-sm-2{ type: "text", placeholder: "Search" }
-            = link_to "Sign in", new_user_session_path, class: "btn btn-outline-success my-2 my-sm-0"

@@ -19,27 +19,27 @@
           = link_to "notify the person", contact_path
           in charge of this research study in writing.
     - elsif current_user.consented?
-      .row
+      .card-deck
         - if current_user.subject_events.blank?
-          .col-lg-4.col-buffer= render "cards/no_surveys"
+          = render "cards/no_surveys"
         - elsif current_user.next_survey
-          .col-lg-4.col-buffer= render "cards/ongoing", event_design: current_user.next_survey
+          = render "cards/ongoing", event_design: current_user.next_survey
         - else
-          .col-lg-4.col-buffer= render "cards/completed", subject_event: current_user.subject_events.first
+          = render "cards/completed", subject_event: current_user.subject_events.first
 
         - if current_user.brain_surveys_completed?
-          .col-lg-4.col-buffer= render "cards/brain_completed"
+          = render "cards/brain_completed"
         - elsif current_user.brain_surveys_started?
-          .col-lg-4.col-buffer= render "cards/brain_started"
+          = render "cards/brain_started"
         - elsif current_user.brain_surveys_step?
-          .col-lg-4.col-buffer= render "cards/brain"
+          = render "cards/brain"
 
         - if current_user.biobank_registration_completed?
-          .col-lg-4.col-buffer= render "cards/biobank_completed"
+          = render "cards/biobank_completed"
         - elsif current_user.biobank_registration_started?
-          .col-lg-4.col-buffer= render "cards/biobank_started"
+          = render "cards/biobank_started"
         - elsif current_user.biobank_registration_step?
-          .col-lg-4.col-buffer= render "cards/biobank"
+          = render "cards/biobank"
 
       - if current_user.whats_next?
         .text-center

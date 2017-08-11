@@ -1,0 +1,12 @@
+.dropdown-item {
+  &.dropdown-item-success {
+    color: $brand-success;
+
+    &.active,
+    &:active {
+      background-color: $brand-success;
+      color: $brand-white;
+      text-decoration: none;
+    }
+  }
+}

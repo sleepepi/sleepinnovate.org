@@ -1,7 +1,0 @@
-// Fixes navbar with container from centering contents on xs sized screens.
-@include media-breakpoint-only(xs) {
-  .container-xs-fix {
-    margin-left: 0;
-    margin-right: 0;
-  }
-}

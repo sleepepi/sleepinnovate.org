@@ -1,0 +1,10 @@
+- if current_user.admin?
+  = current_user.name
+- elsif current_user.refused?
+  Subject Refused
+- elsif current_user.withdrawn?
+  Subject Withdrawn
+- elsif current_user.subject_code.present?
+  = current_user.subject_code
+- else
+  New Subject

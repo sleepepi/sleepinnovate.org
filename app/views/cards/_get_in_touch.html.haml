@@ -1,12 +1,12 @@
-.card{ style: "height: 100%;" }
+.card
   .text-center{ style: "font-size: 6rem;" }
     %i.fa.fa-comments.text-primary
-  .card-block
+  .card-body
     %h4.card-title Contact Us
     %p.card-text
       %div{ style: "color: #bdbdbd;" } Questions, need help?
     .text-center
       %p.card-text
-        = link_to contact_path, class: "btn btn-secondary" do
+        = link_to contact_path, class: "btn btn-outline-secondary" do
           %i.fa.fa-envelope
           Get in touch

@@ -15,6 +15,7 @@
   - Consent forms can now be downloaded as PDFs
   - Users can reset their password on the settings page
   - Using Ruby on Rails 5.1.3 framework
+  - Using Bootstrap 4.0.0.beta
 - **Encryption Changes**
   - Sensitive data attributes are stored using AES-256-CBC encryption
   - A KEK/DEK rotation infrastructure is in place to allow quick and slow key
