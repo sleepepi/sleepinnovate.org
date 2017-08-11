@@ -40,3 +40,22 @@
     width: 100%;
   }
 }
+
+.sign-with-finger {
+  display: block;
+}
+
+.sign-with-mouse {
+  display: none;
+}
+
+// https://www.w3.org/TR/mediaqueries-4/#mf-interaction
+@media (hover) {
+  .sign-with-finger {
+    display: none;
+  }
+
+  .sign-with-mouse {
+    display: block;
+  }
+}

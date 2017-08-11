@@ -22,13 +22,30 @@
             %div{ style: "margin-top: 15px;margin-left: 15px;" }
               %small.form-text{ style: "color: #bdbdbd;font-style: italic;" } Sign here
             %canvas
+          .text-center.sign-with-mouse
+            %small.text-muted
+              Sign by holding the left mouse button down in the signature box.
+              Press
+              %strong Clear Signature
+              to try again.
+          .text-center.sign-with-finger
+            %small.text-muted
+              Sign using your finger in the signature box.
+              Press
+              %strong Clear Signature
+              to try again.
 
         .signature-form-footer
           .row
             .col
-              .text-left
-                = link_to consent_path, method: :delete, class: "btn btn-lg btn-outline-secondary", data: { confirm: "Click \"OK\" to exit enrollment process." } do
-                  I Do Not Consent
+              .d-none.d-md-block
+                = render "consent/i_do_no_consent_button", size: "btn-lg"
+              .d-block.d-md-none
+                = render "consent/i_do_no_consent_button", size: ""
             .col
               .text-right
-                = link_to "I Consent", "#", data: { object: "consent-with-signature" }, class: "btn btn-lg btn-success btn-shadow"
+                .d-none.d-md-block
+                  = render "consent/i_consent_button", size: "btn-lg"
+                .d-block.d-md-none
+                  = render "consent/i_consent_button", size: ""
+
