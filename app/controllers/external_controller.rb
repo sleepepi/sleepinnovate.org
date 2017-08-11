@@ -8,9 +8,10 @@ class ExternalController < ApplicationController
   # def about
   # end
 
-  # # GET /consent
-  # def consent
-  # end
+  # GET /consent
+  def consent
+    render layout: "full_page_no_header_no_footer" if current_user
+  end
 
   # GET /consent.pdf
   def print_consent

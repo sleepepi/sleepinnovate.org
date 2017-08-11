@@ -3,7 +3,7 @@
 .page-box.last-slide.background-p50-grey
   .consent
     %h1
-      .pull-right
+      .float-right
         = link_to consent_path(format: "pdf"), class: "btn btn-sm btn-outline-dark", data: { turbolinks: false } do
           %i.fa.fa-print
           PDF
@@ -22,7 +22,7 @@
     = render "consent/11_injured"
     = render "consent/12_questions"
     = render "consent/13_privacy"
-    = render "consent/14_authorization"
+    = render "consent/14_authorization" unless current_user && current_user.unconsented?
     - if current_user
       - if current_user.refused?
         = render "consent/refused"
@@ -30,7 +30,7 @@
         = render "consent/withdrawn"
       - elsif current_user.consented?
         = render "consent/consented"
-      - else
-        = render "consent/continue_to_signature"
-    - else
-      = render "consent/start_enrollment"
+  - if current_user
+    = render "consent/continue_to_signature" if current_user.unconsented?
+  - else
+    = render "consent/start_enrollment"

@@ -6,6 +6,11 @@ class InternalController < ApplicationController
 
   layout "full_page"
 
+  # GET /consent/signature
+  def consent_signature
+    render layout: "full_page_no_header_no_footer"
+  end
+
   # POST /consent
   def submit_consent
     current_user.consent!(params[:data_uri])
@@ -15,7 +20,13 @@ class InternalController < ApplicationController
   # DELETE /consent
   def revoke_consent
     current_user.revoke_consent!
-    redirect_to dashboard_path, notice: "You have successfully withdrawn from the SleepINNOVATE study."
+    notice = \
+      if current_user.refused?
+        "You refused to join the SleepINNOVATE study."
+      else
+        "You left the SleepINNOVATE study."
+      end
+    redirect_to dashboard_path, notice: notice
   end
 
   # GET /signature
