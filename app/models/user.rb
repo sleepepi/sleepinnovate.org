@@ -14,6 +14,7 @@ class User < ApplicationRecord
   include Encrypted
 
   # Encrypted Fields
+  encrypted :address
   encrypted :date_of_birth
 
   # Constants
@@ -63,6 +64,7 @@ class User < ApplicationRecord
 
   def consent!(data_uri)
     save_signature!(data_uri)
+    update(date_of_birth: "", address: "") if date_of_birth.blank? || address.blank?
     update(consented_at: Time.zone.now, consent_revoked_at: nil)
     send_consent_pdf_email_in_background
   end
@@ -256,6 +258,12 @@ class User < ApplicationRecord
       file.syswrite(ERB.new(latex_partial("footer")).result(binding))
     end
     generate_pdf(jobname, output_folder, file_tex)
+  end
+
+  def update_profile!(date, addr)
+    return false if date.blank? || addr.blank?
+    return false unless date.in?(Date.parse("1900-01-01")..Time.zone.today)
+    update(date_of_birth: date, address: addr)
   end
 
   def assign_date_of_birth!(date)

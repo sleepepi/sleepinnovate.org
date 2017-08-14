@@ -39,9 +39,9 @@ class InternalControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "should get medical record connect for regular user" do
+  test "should get complete your profile for regular user" do
     login(@regular_user)
-    get medical_record_url
+    get profile_complete_url
     assert_response :success
   end
 
@@ -51,24 +51,39 @@ class InternalControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "should update date of birth for regular user" do
+  test "should complete profile for regular user" do
     login(@regular_user)
-    patch medical_record_connect_url(
-      date_of_birth: "12/31/1984"
+    patch profile_complete_submit_url(
+      date_of_birth: { month: "12", day: "31", year: "1984" },
+      address: "123 Road Way"
     )
     @regular_user.reload
     assert_equal "1984-12-31", @regular_user.date_of_birth
+    assert_equal "123 Road Way", @regular_user.address
     assert_redirected_to dashboard_url
   end
 
-  test "should not update invalid date of birth for regular user" do
+  test "should not complete profile with invalid date of birth for regular user" do
     login(@regular_user)
-    patch medical_record_connect_url(
-      date_of_birth: "2/31/1990"
+    patch profile_complete_submit_url(
+      date_of_birth: { month: "2", day: "31", year: "1984" },
+      address: "123 Road Way"
     )
     @regular_user.reload
     assert_nil @regular_user.date_of_birth
-    assert_template "medical_record"
+    assert_template "profile_complete"
+    assert_response :success
+  end
+
+  test "should not complete profile with blank address for regular user" do
+    login(@regular_user)
+    patch profile_complete_submit_url(
+      date_of_birth: { month: "12", day: "31", year: "1984" },
+      address: ""
+    )
+    @regular_user.reload
+    assert_nil @regular_user.address
+    assert_template "profile_complete"
     assert_response :success
   end
 

@@ -19,43 +19,65 @@
           .col-form-label
             %strong Role
         .col-md-10
-          %p.form-control-static Admin
+          %p.form-control-plaintext Admin
       .row{ style: "margin-bottom: 20px;" }
         .col-md-2
           .col-form-label
             %strong Name
         .col-md-10
-          %p.form-control-static= @user.name
+          %p.form-control-plaintext= @user.name
       .row{ style: "margin-bottom: 20px;" }
         .col-md-2
           .col-form-label
             %strong Email
         .col-md-10
-          %p.form-control-static= @user.email
+          %p.form-control-plaintext= @user.email
     - else
       .row{ style: "margin-bottom: 20px;" }
         .col-md-2
           .col-form-label
             %strong Name
         .col-md-10
-          %p.form-control-static{ data: { object: "hover-show", target: "#full-name", target_default: "#full-name-obscurred" } }
-            %span#full-name-obscurred= @user.full_name.to_s.gsub(/\B./, "*")
-            %span#full-name{ style: "display: none;" }= @user.full_name
+          %p.form-control-plaintext
+            %span{ data: { object: "hover-show", target: "#full-name", target_default: "#full-name-obscurred" } }
+              %span#full-name-obscurred= @user.full_name.to_s.gsub(/\B./, "*")
+              %span#full-name{ style: "display: none;" }= @user.full_name
       .row{ style: "margin-bottom: 20px;" }
         .col-md-2
           .col-form-label
             %strong Email
         .col-md-10
-          %p.form-control-static{ data: { object: "hover-show", target: "#email", target_default: "#email-obscurred" } }
-            %span#email-obscurred= @user.email.to_s.gsub(/\B./, "*")
-            %span#email{ style: "display: none;" }= @user.email
+          %p.form-control-plaintext
+            %span{ data: { object: "hover-show", target: "#email", target_default: "#email-obscurred" } }
+              %span#email-obscurred= @user.email.to_s.gsub(/\B./, "*")
+              %span#email{ style: "display: none;" }= @user.email
+      - if @user.dob.present?
+        .row{ style: "margin-bottom: 20px;" }
+          .col-md-2
+            .col-form-label
+              %strong Date of Birth
+          .col-md-10
+            %p.form-control-plaintext
+              %span{ data: { object: "hover-show", target: "#dob", target_default: "#dob-obscurred" } }
+                %span#dob-obscurred= @user.dob.strftime("**/**/**%y")
+                %span#dob{ style: "display: none;" }= @user.dob.strftime("%m/%d/%Y")
+      - if @user.address.present?
+        .row{ style: "margin-bottom: 20px;" }
+          .col-md-2
+            .col-form-label
+              %strong Address
+          .col-md-10
+            %p.form-control-plaintext
+              %span{ data: { object: "hover-show", target: "#address", target_default: "#address-obscurred" } }
+                %span#address-obscurred= @user.address.to_s.gsub(/\B./, "*")
+                %span#address{ style: "display: none;" }= @user.address.gsub("\n", "<br>")
 
     .row{ style: "margin-bottom: 20px;" }
       .col-md-2
         .col-form-label
           %strong Subject Code
       .col-md-10
-        %p.form-control-static
+        %p.form-control-plaintext
           - if @user.subject_code.present?
             %kbd= @user.subject_code
           - elsif @user.unconsented?
@@ -70,7 +92,7 @@
         .col-form-label
           %strong Status
       .col-md-10
-        %p.form-control-static
+        %p.form-control-plaintext
           - if @user.refused?
             Refused
           - elsif @user.withdrawn?
@@ -86,9 +108,9 @@
             %strong Consented
         .col-md-10
           - if @user.withdrawn?
-            %p.form-control-static.text-muted= @user.consented_at.strftime("%-m/%-d/%Y at %-l:%M %p")
+            %p.form-control-plaintext.text-muted= @user.consented_at.strftime("%-m/%-d/%Y at %-l:%M %p")
           - else
-            %p.form-control-static
+            %p.form-control-plaintext
               %strong.text-success= @user.consented_at.strftime("%-m/%-d/%Y at %-l:%M %p")
     - if @user.refused?
       .row{ style: "margin-bottom: 20px;" }
@@ -96,7 +118,7 @@
           .col-form-label
             %strong Refused
         .col-md-10
-          %p.form-control-static
+          %p.form-control-plaintext
             %strong.text-warning= @user.consent_revoked_at.strftime("%-m/%-d/%Y at %-l:%M %p")
     - if @user.withdrawn?
       .row{ style: "margin-bottom: 20px;" }
@@ -104,7 +126,7 @@
           .col-form-label
             %strong Withdrew
         .col-md-10
-          %p.form-control-static
+          %p.form-control-plaintext
             %strong.text-warning= @user.consent_revoked_at.strftime("%-m/%-d/%Y at %-l:%M %p")
     - if @user.consented?
       .row{ style: "margin-bottom: 20px;" }
@@ -112,7 +134,7 @@
           .col-form-label
             %strong Baseline
         .col-md-10
-          %p.form-control-static
+          %p.form-control-plaintext
             = pluralize(@user.baseline_surveys_completed_count, "survey")
             completed
 
@@ -123,7 +145,7 @@
         .col-form-label
           %strong Status
       .col-md-10
-        %p.form-control-static
+        %p.form-control-plaintext
           - if @user.brain_surveys_completed?
             Completed
           - elsif @user.brain_surveys_started?
@@ -136,14 +158,14 @@
           .col-form-label
             %strong Started
         .col-md-10
-          %p.form-control-static
+          %p.form-control-plaintext
             = @user.brain_started_at.strftime("%-m/%-d/%Y at %-l:%M %p")
       .row{ style: "margin-bottom: 20px;" }
         .col-md-2
           .col-form-label
             %strong Test My Brain Surveys Completed
         .col-md-10
-          %p.form-control-static
+          %p.form-control-plaintext
             = @user.brain_baseline_surveys_completed
             of
             = @user.brain_baseline_surveys_count
@@ -155,7 +177,7 @@
           .col-form-label
             %strong Completed
         .col-md-10
-          %p.form-control-static
+          %p.form-control-plaintext
             = @user.brain_completed_at.strftime("%-m/%-d/%Y at %-l:%M %p")
 
 
@@ -166,7 +188,7 @@
         .col-form-label
           %strong Status
       .col-md-10
-        %p.form-control-static= @user.biobank_status_string
+        %p.form-control-plaintext= @user.biobank_status_string
 
     - if @user.biobank_registration_started?
       .row{ style: "margin-bottom: 20px;" }
@@ -174,7 +196,7 @@
           .col-form-label
             %strong Started
         .col-md-10
-          %p.form-control-static
+          %p.form-control-plaintext
             = @user.biobank_started_at.strftime("%-m/%-d/%Y at %-l:%M %p")
 
     - if @user.biobank_registration_completed?
@@ -183,5 +205,5 @@
           .col-form-label
             %strong Completed
         .col-md-10
-          %p.form-control-static
+          %p.form-control-plaintext
             = @user.biobank_completed_at.strftime("%-m/%-d/%Y at %-l:%M %p")

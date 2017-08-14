@@ -43,7 +43,6 @@ class RegistrationsController < Devise::RegistrationsController
   def generate_password
     params[:user] ||= {}
     params[:user][:password] = Devise.friendly_token
-    params[:user][:date_of_birth] = parse_date(params[:user][:date_of_birth], params[:user][:date_of_birth])
   end
 
   def generate_welcome_email

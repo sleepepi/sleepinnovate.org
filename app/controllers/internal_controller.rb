@@ -14,7 +14,11 @@ class InternalController < ApplicationController
   # POST /consent
   def submit_consent
     current_user.consent!(params[:data_uri])
-    redirect_to medical_record_path
+    if current_user.consented?
+      redirect_to profile_complete_path
+    else
+      render :consent_signature
+    end
   end
 
   # DELETE /consent
@@ -52,17 +56,25 @@ class InternalController < ApplicationController
   # def dashboard
   # end
 
-  # # GET /medical-record/connect
-  # def medical_record
-  # end
+  # GET /profile/complete
+  def profile_complete
+    render layout: "full_page_no_header_no_footer"
+  end
 
-  # PATCH /medical-record/connect
-  def medical_record_connect
-    if current_user.assign_date_of_birth!(parse_date(params[:date_of_birth]))
+  # PATCH /profile/complete
+  def profile_complete_submit
+    date_string = "#{params[:date_of_birth][:year]}-#{params[:date_of_birth][:month]}-#{params[:date_of_birth][:day]}"
+    dob = begin
+      Date.parse(date_string)
+    rescue
+      nil
+    end
+    if current_user.update_profile!(dob, params[:address])
       redirect_to dashboard_path
     else
-      @date_error = params[:date_of_birth]
-      render :medical_record
+      @address_error = params[:address].blank?
+      @date_error = dob.nil?
+      render :profile_complete, layout: "full_page_no_header_no_footer"
     end
   end
 

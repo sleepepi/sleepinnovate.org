@@ -1,0 +1,44 @@
+.panel {
+  background-color: $brand-white;
+  margin: 0 auto 1.5rem;
+  max-width: 840px;
+  padding: 20px;
+
+  a {
+    word-wrap: break-word;
+  }
+
+  p,
+  ul {
+    line-height: 1.625rem;
+  }
+
+  h1 {
+    background-color: $p100-grey;
+    font-size: 1.5rem;
+    margin: -20px -20px 20px;
+    padding: 20px;
+    text-align: center;
+  }
+
+  .panel-icon {
+    font-size: 2.5rem;
+    text-align: center;
+  }
+}
+
+@include media-breakpoint-up(md) {
+  .panel {
+    h1 {
+      font-size: 2rem;
+    }
+  }
+}
+
+@include media-breakpoint-up(lg) {
+  .panel {
+    h1 {
+      font-size: 2rem;
+    }
+  }
+}

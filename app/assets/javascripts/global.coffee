@@ -30,3 +30,7 @@ $(document)
     $($(this).data('target')).toggle()
     false
   )
+  .on('click', '[data-object~="submit"]', ->
+    $($(this).data('target')).submit()
+    false
+  )

@@ -33,7 +33,7 @@ module SleepInnovate
 
     # Overwrite Rails errors to use Bootstrap CSS classes.
     config.action_view.field_error_proc = Proc.new do |html_tag, instance|
-      "<span class=\"has-danger\">#{html_tag}</span>".html_safe
+      html_tag
     end
 
     # Add Slice models to autoload_paths.
