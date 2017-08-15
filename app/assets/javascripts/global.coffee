@@ -3,7 +3,6 @@
   tooltipsReady()
 
 @componentsReady = ->
-  masksReady()
   animateProgressBar()
 
 @globalReady = ->
