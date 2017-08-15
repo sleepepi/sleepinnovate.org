@@ -34,7 +34,7 @@ class RegistrationsTest < ApplicationSystemTestCase
     click_on "Finish enrollment"
     assert_equal "1984-12-31", User.last.date_of_birth
     assert_equal "123 Road Street City, ST 12345", User.last.address
-    assert_selector "a", text: "Start Survey"
+    assert_selector "a", text: "Start survey"
     screenshot("register-consent-step")
   end
 

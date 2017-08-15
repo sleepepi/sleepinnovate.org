@@ -6,11 +6,11 @@
       .text-center.mb-3
         %h2
           %i.fa.fa-car
-          = @title
+          Parking Voucher*
         %p.lead.text-muted
-          Redeem parking voucher from research staff.
+          Show this page to research staff to redeem your voucher.
 
-      .card.m-auto{ style: "max-width: 400px;" }
+      .card.ml-auto.mr-auto.mb-3{ style: "max-width: 400px;" }
         .card-body
           %table.table.table-striped.table-bordered.mb-0
             %col{ width: "1px" }
@@ -26,3 +26,12 @@
               %tr
                 %th.text-right Consented
                 %td= current_user.consented_at.strftime("%-m/%-d/%Y at %-l:%M %p")
+
+      .text-muted.text-center
+        %small * This is NOT an actual voucher. Voucher only available for in-clinic registrations.
+
+  .text-center
+    = link_to dashboard_path, class: "btn btn-lg btn-link" do
+      %i.fa.fa-caret-left
+      Back to Dashboard
+

@@ -1,39 +1,38 @@
 - @title = "Settings"
 
 .page-box.last-slide.background-p50-grey.center-vertically-xs-sm
-  .container
+  .panel{ style: "width: 100%;" }
     %h1= @title
 
-    - if !current_user.brain_surveys_step? && !current_user.brain_surveys_started?
-      %p
-        %strong Test My Brain
-      %p= link_to "Start Test My Brain surveys.", test_my_brain_start_path, method: :post
-
-    - if current_user.brain_surveys_started? && !current_user.brain_surveys_completed?
-      %p
-        %strong Test My Brain
-      %p= link_to "I've completed the TestMyBrain surveys.", test_my_brain_complete_path, method: :post
+    .card-deck
+      .card
+        .card-body
+          %h4.card-title
+            My Profile
 
 
-    - if !current_user.biobank_registration_step? && !current_user.biobank_registration_started?
-      %p
-        %strong Biobank
-      %p= link_to "Start Biobank registration.", biobank_start_path, method: :post
+          %ul
+            - unless current_user.first_login?
+              %li= link_to "Update my password.", settings_password_path
+            %li= link_to "Update my date of birth.", complete_profile_path
+            %li= link_to "Update my address.", complete_profile_path
 
-    - if current_user.biobank_registration_started? && !current_user.biobank_registration_completed?
-      %p
-        %strong Biobank
-      %p= link_to "I've completed the Biobank registration.", biobank_complete_path, method: :post
+      .card
+        .card-body
+          %h4.card-title
+            = render "layouts/logo"
 
+          %ul
+            %li= link_to "View consent.", consent_path
+            %li= link_to "Leave study.", consent_path, method: :delete, class: "text-danger", data: { confirm: "Withdraw from SleepINNOVATE study?" }
 
-    %p
-      %strong My Password
-    %p= link_to "Update my password.", settings_password_path
+          - unless current_user.first_login?
+            - if !current_user.biobank_registration_step? && !current_user.biobank_registration_started?
+              %h4.card-title Biobank
+              %ul
+                %li= link_to "Start Biobank registration.", biobank_start_path, method: :post
 
-    %p
-      %strong Consent
-    %p= link_to "View consent.", consent_path
-
-    %p
-      %strong Study
-    %p= link_to "Leave study.", consent_path, method: :delete, class: "text-danger", data: { confirm: "Withdraw from SleepINNOVATE study?" }
+            - if current_user.biobank_registration_started? && !current_user.biobank_registration_completed?
+              %h4.card-title Biobank
+              %ul
+                %li= link_to "I've completed the Biobank registration.", biobank_complete_path, method: :post

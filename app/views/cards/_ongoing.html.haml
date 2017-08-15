@@ -1,12 +1,15 @@
+- subject_event = event_design.subject_event
+- index = subject_event.event_designs.index(event_design)
+- survey_number = (index ? index + 1 : 0)
+- number_of_surveys = subject_event.event_designs.size
 .card
-  .text-center{ style: "font-size: 6rem;" }
-    %i.fa.fa-tasks.text-success
-  - subject_event = event_design.subject_event
-  - index = subject_event.event_designs.index(event_design)
-  - survey_number = (index ? index + 1 : 0)
-  - number_of_surveys = subject_event.event_designs.size
   .card-body
-    %h4.card-title= subject_event.name
+    .text-center{ style: "font-size: 6rem;" }
+      %i.fa.fa-tasks.text-success
+
+    %h4.card-title
+      = subject_event.name
+      Surveys
     - if subject_event.percent.to_i.zero?
       .progress
         .progress-bar.progress-bar-striped{ role: "progressbar", style: "width: 100%;background-color: #ededed;", aria: { valuenow: "0", valuemin: "0", valuemax: "100" } }
@@ -45,13 +48,13 @@
       .text-center
         - if event_design.valid?
           = link_to survey_start_path(event_design.event_id, event_design.design_id), class: "btn btn-success btn-shadow" do
-            Start Survey
+            Start survey
             %i.fa.fa-caret-right
         - else
           .btn.btn-success.btn-shadow.disabled
             %i.fa.fa-exclamation-triangle
-            Survey Unavailable
+            Survey unavailable
   - if event_design.valid?
     .card-footer
-      %small.text-muted
+      .overflow-hidden.nowrap.text-muted.small
         = event_design.design_name

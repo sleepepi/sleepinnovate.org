@@ -33,8 +33,8 @@ Rails.application.routes.draw do
     post :consent, action: :submit_consent
     delete :consent, action: :revoke_consent
     get :consent_signature, path: "consent/signature"
-    get :profile_complete, path: "profile/complete"
-    patch :profile_complete_submit, path: "profile/complete"
+    get :complete_profile, path: "profile/complete"
+    patch :complete_profile_submit, path: "profile/complete"
     get :awards
     get :dashboard
     get :signature

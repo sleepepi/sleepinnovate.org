@@ -149,8 +149,8 @@ class User < ApplicationRecord
     consented?
   end
 
-  def brain_surveys_step?
-    baseline_surveys_completed?
+  def brain_surveys_viewable?
+    !first_login? && profile_complete?
   end
 
   def brain_surveys_started?
@@ -186,12 +186,11 @@ class User < ApplicationRecord
   end
 
   def parking_voucher?
-    # first_login? && profile_complete? # TODO: Enable parking voucher.
-    true
+    first_login? && profile_complete?
   end
 
   def profile_complete?
-    consented? && dob.present?
+    consented? && dob.present? && address.present?
   end
 
   def whats_next?

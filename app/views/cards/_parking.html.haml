@@ -1,0 +1,17 @@
+.card
+  .card-body
+    .text-center{ style: "font-size: 6rem;" }
+      %i.fa.fa-car.text-primary
+    %h4.card-title Parking Voucher
+    .progress
+      .progress-bar.progress-bar-striped.bg-primary{ role: "progressbar", style: "width: 100%;background-color: #bdbdbd;", aria: { valuenow: "100", valuemin: "0", valuemax: "100" } } Redeemable now*
+    %p.card-text
+      %div{ style: "color: #bdbdbd;" } Redeem your parking voucher.
+    .text-center
+      %p.card-text
+        = link_to parking_path, class: "btn btn-primary btn-shadow" do
+          Show voucher
+          %i.fa.fa-caret-right
+  .card-footer
+    .overflow-hidden.nowrap.text-muted.small
+      * For in-clinic registrations only.

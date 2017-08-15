@@ -11,6 +11,7 @@ class InternalTest < ApplicationSystemTestCase
   test "visiting the dashboard" do
     password = "PASSword2"
     @consented_user.update(password: password, password_confirmation: password)
+    complete_profile!(@consented_user)
     visit root_url
     click_on "Sign in"
     screenshot("visiting-dashboard")

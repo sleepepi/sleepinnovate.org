@@ -2,7 +2,7 @@
   .card-body
     .text-center{ style: "font-size: 6rem;" }
       %i.fa.fa-lightbulb-o.text-warning
-    %h4.card-title Brain Surveys
+    %h4.card-title Brain Quizzes
     - if current_user.brain_baseline_percent.to_i.zero?
       .progress
         .progress-bar.progress-bar-striped{ role: "progressbar", style: "width: 100%;background-color: #ededed;", aria: { valuenow: "0", valuemin: "0", valuemax: "100" } }
@@ -17,5 +17,5 @@
           Next brain survey
           %i.fa.fa-caret-right
   .card-footer
-    %small.text-muted
+    .overflow-hidden.nowrap.text-muted.small
       = User::TEST_MY_BRAIN_SURVEYS.first.first

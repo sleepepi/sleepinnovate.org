@@ -30,7 +30,9 @@
         = render "consent/withdrawn"
       - elsif current_user.consented?
         = render "consent/consented"
-  - if current_user
-    = render "consent/continue_to_signature" if current_user.unconsented?
+  - if current_user && current_user.unconsented?
+    = render "consent/continue_to_signature"
+  - elsif current_user
+    = render "consent/back_to_dashboard"
   - else
     = render "consent/start_enrollment"

@@ -41,19 +41,44 @@ class InternalControllerTest < ActionDispatch::IntegrationTest
 
   test "should get complete your profile for regular user" do
     login(@regular_user)
-    get profile_complete_url
+    get complete_profile_url
     assert_response :success
   end
 
-  test "should get parking voucher for regular user" do
-    login(@regular_user)
+  test "should get parking voucher for newly consented user with a completed profile" do
+    login(users(:consented))
+    users(:consented).update(
+      date_of_birth: "1984-12-31",
+      address: "123 Road Way, City, ST 12345",
+      sign_in_count: 1
+    )
     get parking_url
     assert_response :success
   end
 
+  test "should not get parking voucher for a user without a completed profile" do
+    login(users(:consented))
+    users(:consented).update(
+      sign_in_count: 1
+    )
+    get parking_url
+    assert_redirected_to dashboard_url
+  end
+
+  test "should not get parking voucher for a user who has logged in more than once" do
+    login(users(:consented))
+    users(:consented).update(
+      date_of_birth: "1984-12-31",
+      address: "123 Road Way, City, ST 12345",
+      sign_in_count: 2
+    )
+    get parking_url
+    assert_redirected_to dashboard_url
+  end
+
   test "should complete profile for regular user" do
     login(@regular_user)
-    patch profile_complete_submit_url(
+    patch complete_profile_submit_url(
       date_of_birth: { month: "12", day: "31", year: "1984" },
       address: "123 Road Way"
     )
@@ -65,25 +90,25 @@ class InternalControllerTest < ActionDispatch::IntegrationTest
 
   test "should not complete profile with invalid date of birth for regular user" do
     login(@regular_user)
-    patch profile_complete_submit_url(
+    patch complete_profile_submit_url(
       date_of_birth: { month: "2", day: "31", year: "1984" },
       address: "123 Road Way"
     )
     @regular_user.reload
     assert_equal "", @regular_user.date_of_birth
-    assert_template "profile_complete"
+    assert_template "complete_profile"
     assert_response :success
   end
 
   test "should not complete profile with blank address for regular user" do
     login(@regular_user)
-    patch profile_complete_submit_url(
+    patch complete_profile_submit_url(
       date_of_birth: { month: "12", day: "31", year: "1984" },
       address: ""
     )
     @regular_user.reload
     assert_equal "", @regular_user.address
-    assert_template "profile_complete"
+    assert_template "complete_profile"
     assert_response :success
   end
 

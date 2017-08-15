@@ -18,6 +18,15 @@
           Please
           = link_to "notify the person", contact_path
           in charge of this research study in writing.
+    - elsif !current_user.profile_complete?
+      .jumbotron.jumbotron-white
+        %h2 Complete your profile
+        %p
+          Please
+          = link_to "complete your profile", complete_profile_path
+          to start surveys on the
+          = render "layouts/logo"
+          study.
     - elsif current_user.consented?
       .card-deck
         - if current_user.subject_events.blank?
@@ -27,14 +36,20 @@
         - else
           = render "cards/completed", subject_event: current_user.subject_events.first
 
+        = render "cards/parking" if current_user.parking_voucher?
+
         - if current_user.brain_surveys_completed?
           = render "cards/brain_completed"
         - elsif current_user.brain_surveys_started?
           = render "cards/brain_started"
-        - elsif current_user.brain_surveys_step?
+        - elsif current_user.brain_surveys_viewable?
           = render "cards/brain"
+        - else
+          = render "cards/brain_starting_soon"
 
-        - if current_user.biobank_registration_completed?
+        - if current_user.parking_voucher?
+          -# Nothing
+        - elsif current_user.biobank_registration_completed?
           = render "cards/biobank_completed"
         - elsif current_user.biobank_registration_started?
           = render "cards/biobank_started"

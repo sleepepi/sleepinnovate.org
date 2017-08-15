@@ -3,6 +3,7 @@
 # Displays internal pages.
 class InternalController < ApplicationController
   before_action :authenticate_user!
+  before_action :check_parking_voucher, only: :parking
 
   layout "full_page"
 
@@ -15,7 +16,7 @@ class InternalController < ApplicationController
   def submit_consent
     current_user.consent!(params[:data_uri])
     if current_user.consented?
-      redirect_to profile_complete_path
+      redirect_to complete_profile_path
     else
       render :consent_signature
     end
@@ -57,12 +58,12 @@ class InternalController < ApplicationController
   # end
 
   # GET /profile/complete
-  def profile_complete
+  def complete_profile
     render layout: "full_page_no_header_no_footer"
   end
 
   # PATCH /profile/complete
-  def profile_complete_submit
+  def complete_profile_submit
     date_string = "#{params[:date_of_birth][:year]}-#{params[:date_of_birth][:month]}-#{params[:date_of_birth][:day]}"
     dob = begin
       Date.parse(date_string)
@@ -74,7 +75,7 @@ class InternalController < ApplicationController
     else
       @address_error = params[:address].blank?
       @date_error = dob.nil?
-      render :profile_complete, layout: "full_page_no_header_no_footer"
+      render :complete_profile, layout: "full_page_no_header_no_footer"
     end
   end
 
@@ -112,5 +113,11 @@ class InternalController < ApplicationController
   def biobank_complete
     current_user.biobank_registration_completed!
     redirect_to dashboard_path
+  end
+
+  private
+
+  def check_parking_voucher
+    redirect_to dashboard_path unless current_user.parking_voucher?
   end
 end

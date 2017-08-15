@@ -22,4 +22,8 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
   def click_form_submit
     find("input[type=submit]").click
   end
+
+  def complete_profile!(user)
+    user.update(date_of_birth: "1984-12-31", address: "123 Road Way, City, ST 12345")
+  end
 end
