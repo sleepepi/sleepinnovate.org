@@ -7,15 +7,7 @@
 
     .jumbotron.jumbotron-white.text-center
       %h1.landing-title
-        %i.fa.fa-puzzle-piece.boston-color
-        %span.sleep-color Sleep
-        %span.innovate-color> INNOVATE
+        = render "layouts/logo"
 
       .landing-button-bar
         .landing-button= link_to "get started", pledge_path, class: "btn btn-lg btn-outline-success btn-shadow"
-
-  - if false
-    .landing-learn-more-box
-      = link_to about_path, class: "btn btn-lg btn-link" do
-        learn more
-        %i.fa.fa-caret-right

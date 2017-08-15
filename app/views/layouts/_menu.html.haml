@@ -1,8 +1,7 @@
 %nav.navbar.fixed-top.navbar-expand-lg.navbar-light.background-p100-grey
   .container
     = link_to current_user ? dashboard_path : landing_path, class: "navbar-brand" do
-      %span.sleep-color> Sleep
-      %span.innovate-color INNOVATE
+      = render "layouts/logo"
 
     %button.navbar-toggler{ type: "button", data: { toggle: "collapse", target: "#navbarNav" }, aria: { controls: "navbarNav", expanded: "false", label: "Toggle navigation" } }
       %span.navbar-toggler-icon
