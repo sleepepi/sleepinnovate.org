@@ -1,22 +1,28 @@
 - @title = "About"
 
 .page-box.last-slide.background-p50-grey.center-vertically-xs-sm
-  .container
-    %h1{ style: "color: #bdbdbd;font-weight: 300;" }= @title
+  .panel
+    %h1
+      = @title
+      = render "layouts/logo"
 
     %p
-      The purpose of the Sleep INNOVATE study is to engage people with sleep
-      disorders to share health information needed for research that will improve
-      the health and well-being of adults with sleep disorders.
+      The purpose of the
+      = render "layouts/logo"
+      study is to engage people with sleep disorders to share health information
+      needed for research that will improve the health and well-being of adults
+      with sleep disorders.
 
     %p
-      We hope to enroll at least 2,000 people into the Sleep INNOVATE study. We are
-      asking you to take part in this research study because you have had a sleep
-      study, are scheduled to have a sleep study, or have a diagnosis of a sleep
-      disorder. You need to be 18 or older and have access to a computer or mobile
-      device (smart phone) and read English to participate in this study.
+      We hope to enroll at least 2,000 people into the
+      = render "layouts/logo"
+      study. We are asking you to take part in this research study because you
+      have had a sleep study, are scheduled to have a sleep study, or have a
+      diagnosis of a sleep disorder. You need to be 18 or older and have access
+      to a computer or mobile device (smart phone) and read English to
+      participate in this study.
 
-    %p
-      = link_to consent_path do
-        Read the full consent
-        %i.fa.fa-caret-right
+  .text-center
+    = link_to pledge_path, class: "btn btn-lg btn-success btn-shadow" do
+      Get started
+      %i.fa.fa-caret-right
