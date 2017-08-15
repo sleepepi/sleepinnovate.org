@@ -70,7 +70,7 @@ class InternalControllerTest < ActionDispatch::IntegrationTest
       address: "123 Road Way"
     )
     @regular_user.reload
-    assert_nil @regular_user.date_of_birth
+    assert_equal "", @regular_user.date_of_birth
     assert_template "profile_complete"
     assert_response :success
   end
@@ -82,7 +82,7 @@ class InternalControllerTest < ActionDispatch::IntegrationTest
       address: ""
     )
     @regular_user.reload
-    assert_nil @regular_user.address
+    assert_equal "", @regular_user.address
     assert_template "profile_complete"
     assert_response :success
   end

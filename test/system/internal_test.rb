@@ -4,9 +4,20 @@ require "application_system_test_case"
 
 # System tests for internal pages.
 class InternalTest < ApplicationSystemTestCase
+  setup do
+    @consented_user = users(:consented)
+  end
+
   test "visiting the dashboard" do
-    visit dashboard_path
-    assert_selector "h1", text: "Dashboard"
-    take_screenshot
+    password = "PASSword2"
+    @consented_user.update(password: password, password_confirmation: password)
+    visit root_url
+    click_on "Sign in"
+    screenshot("visiting-dashboard")
+    fill_in "user[email]", with: @consented_user.email
+    fill_in "user[password]", with: @consented_user.password
+    click_form_submit
+    screenshot("visiting-dashboard")
+    assert_selector "h4", text: "Baseline"
   end
 end

@@ -64,7 +64,6 @@ class User < ApplicationRecord
 
   def consent!(data_uri)
     save_signature!(data_uri)
-    update(date_of_birth: "", address: "") if date_of_birth.blank? || address.blank?
     update(consented_at: Time.zone.now, consent_revoked_at: nil)
     send_consent_pdf_email_in_background
   end

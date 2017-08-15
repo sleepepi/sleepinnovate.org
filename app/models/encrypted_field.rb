@@ -5,11 +5,17 @@ class EncryptedField < ApplicationRecord
   # Concerns
   include Encryptable
 
+  after_initialize :set_defaults
+
   # Validations
   validates :encrypted_data, :encrypted_data_iv, presence: true
 
   # Relationships
   belongs_to :data_encryption_key
+
+  def set_defaults
+    self.data = "" if data.nil?
+  end
 
   def data=(plain_data)
     (encrypted, iv) = encrypt(plain_data, encryption_key)
