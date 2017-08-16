@@ -18,6 +18,15 @@
           Please
           = link_to "notify the person", contact_path
           in charge of this research study in writing.
+    - elsif !current_user.consented?
+      .jumbotron.jumbotron-white
+        %h2 Consent to study
+        %p
+          Please
+          = link_to "read through the consent", complete_profile_path
+          to start surveys on the
+          = render "layouts/logo"
+          study.
     - elsif !current_user.profile_complete?
       .jumbotron.jumbotron-white
         %h2 Complete your profile
@@ -27,7 +36,7 @@
           to start surveys on the
           = render "layouts/logo"
           study.
-    - elsif current_user.consented?
+    - else
       .card-deck
         - if current_user.subject_events.blank?
           = render "cards/no_surveys"
@@ -60,33 +69,3 @@
         .text-center
           Congrats, you are all done!
           = link_to "What's next?", whats_next_path
-
-      - if false
-        %hr
-
-        %p
-          Your beautiful signature.
-
-        = image_tag signature_path, style: "max-width: 100%; height: auto;"
-
-        %p
-          = link_to "View Consent", consent_path
-
-      - if false
-        .row
-          .col-lg-4.col-buffer= render "cards/completed", subject_event: current_user.subject_events.first
-          .col-lg-4.col-buffer= render "cards/test_my_brain_completed"
-          .col-lg-4.col-buffer= render "cards/biobank_completed"
-          - if false
-            .col-lg-4.col-buffer= render "cards/awards"
-            .col-lg-4.col-buffer= render "cards/get_in_touch"
-            .col-lg-4.col-buffer= render "cards/consents"
-            .col-lg-4.col-buffer= render "cards/coming_soon", title: "3 Month Phonecall"
-
-    - else
-      .jumbotron.jumbotron-white
-        %h2 Step 1: Consent
-        %p
-          To get started,
-          = link_to "read the consent", consent_path
-          for SleepINNOVATE.
