@@ -8,33 +8,50 @@
 .page-box.last-slide.background-p50-grey.center-vertically-xs-sm
   = render "survey/progress_bar", start: start, percent: percent
   .container
-    = form_with(url: survey_submit_page_path(params[:event], params[:design], @page), method: :patch, local: true, autocomplete: "off", enforce_utf8: false) do |form|
+    = form_with(url: survey_submit_page_path(params[:event], params[:design], @page), method: :patch, local: true, autocomplete: "off", id: "survey-form") do |form|
       .survey-question-container
-        - if @json["section"].present?
+        - if @section
           .survey-question
-            - if @json.dig("section", "name").present?
-              .survey-question-text= @json.dig("section", "name")
-            - if @json.dig("section", "description").present?
-              .survey-question-desc= @json.dig("section", "description")
-        - elsif @json["variable"].present?
+            - if @section.name.present?
+              .survey-question-text= @section.name
+            - if @section.description.present?
+              %p= @section.description
+        - elsif @variable
           .survey-question
             - if @json.dig("group", "name").present?
               .survey-question-lead= @json.dig("group", "name")
             - if @json.dig("group", "description").present?
               .survey-question-desc= simple_format @json.dig("group", "description")
-            .survey-question-text= @json.dig("variable", "display_name")
-            - case @json.dig("variable", "variable_type")
+            .survey-question-text= @variable.display_name
+            - case @variable.variable_type
             - when "checkbox", "date", "dropdown", "imperial_height", "imperial_weight", "integer", "numeric", "radio", "string", "text", "time_duration", "time_of_day"
-              = render "survey/variables/#{@json.dig("variable", "variable_type")}", form: form, response: response, value: value
+              = render "survey/variables/#{@variable.variable_type}", form: form, response: response, value: value
             - else
-              %p.lead.text-muted= @json.dig("variable", "variable_type")
+              %p.lead.text-muted= @variable.variable_type
 
-        = form.submit "Next", class: "btn btn-primary btn-block"
+        - if @section
+          = link_to "#", data: { object: "submit", target: "#survey-form" }, class: "btn btn-success btn-shadow float-right" do
+            Continue
+            %i.fa.fa-caret-right
+          .clearfix
 
-    .survey-question-skip
-      = link_to survey_page_path(params[:event], params[:design], @page + 1), data: { confirm: "Skip this question?" } do
-        Skip question
-        %i.fa.fa-caret-right
+        - if @variable
+          .float-left
+            = link_to survey_page_path(params[:event], params[:design], @page + 1), data: { confirm: "Skip this question?" }, class: "btn btn-link" do
+              Skip question
+          .float-right
+            = link_to "#", data: { object: "submit", target: "#survey-form" }, class: "btn btn-success btn-shadow" do
+              Continue
+              %i.fa.fa-caret-right
+
+
+          .clearfix
+
+    - if @variable && false
+      .survey-question-skip
+        = link_to survey_page_path(params[:event], params[:design], @page + 1), data: { confirm: "Skip this question?" } do
+          Skip question
+          %i.fa.fa-caret-right
 
 
 - if false

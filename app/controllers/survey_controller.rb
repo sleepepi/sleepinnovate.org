@@ -10,11 +10,15 @@ class SurveyController < ApplicationController
   # GET /survey/:event/:design/start
   def start
     @json = current_user.start_event_survey(params[:event], params[:design])
+    @survey = Survey.new(json: @json)
   end
 
   # GET /survey/:event/:design/:page
   def page
     @json = current_user.page_event_survey(params[:event], params[:design], @page)
+    @survey = Survey.new(json: @json)
+    @section = Section.new(json: @json["section"]) if @json["section"].present?
+    @variable = Variable.new(json: @json["variable"]) if @json["variable"].present?
     redirect_to survey_complete_path(params[:event], params[:design]) if @json.blank?
   end
 

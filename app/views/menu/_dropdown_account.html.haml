@@ -8,10 +8,15 @@
     = link_to "#", data: { toggle: "dropdown" }, aria: { haspopup: "true", expanded: "false" }, class: "nav-link dropdown-toggle", id: "navbarDropdownMenuLink" do
       = render "menu/user_name"
     .dropdown-menu.dropdown-menu-right{ aria: { labelledby: "navbarDropdownMenuLink" } }
-      - if current_user.consented? && false
-        = link_to awards_path, class: "dropdown-item" do
-          %i.fa.fa-trophy
-          My Awards
+      - if @survey
+        = link_to dashboard_path, class: "dropdown-item" do
+          %i.fa.fa-home
+          Dashboard
+
+        = link_to consent_path, class: "dropdown-item" do
+          %i.fa.fa-file-text-o
+          Consent
+
       = link_to settings_path, class: "dropdown-item" do
         %i.fa.fa-cogs
         Settings
@@ -24,6 +29,21 @@
       = link_to destroy_user_session_path, method: :delete, class: "dropdown-item" do
         %i.fa.fa-sign-out
         Sign out
+
+  - if @survey
+    %li.nav-item.d-lg-none{ class: current_page?(dashboard_path) ? "active" : nil }
+      = link_to dashboard_path, class: "nav-link" do
+        %i.fa.fa-home
+        Dashboard
+      - if current_page?(dashboard_path)
+        %span.sr-only (current)
+
+    %li.nav-item.d-lg-none{ class: current_page?(consent_path) ? "active" : nil }
+      = link_to consent_path, class: "nav-link" do
+        %i.fa.fa-file-text-o
+        Consent
+      - if current_page?(consent_path)
+        %span.sr-only (current)
 
   %li.nav-item.d-lg-none{ class: current_page?(settings_path) ? "active" : nil }
     = link_to settings_path, class: "nav-link" do
