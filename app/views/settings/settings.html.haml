@@ -12,10 +12,18 @@
 
 
           %ul
-            - unless current_user.first_login?
+            - if current_user.consented?
+              %li= link_to "Update my date of birth.", profile_dob_path
+              %li= link_to "Update my address.", profile_address_path
+            - elsif current_user.refused?
+              %li.text-muted You have refused to join the study.
+            - elsif current_user.withdrawn?
+              %li.text-muted You withdrew from the study.
+            - elsif current_user.unconsented?
+              %li.text-muted You have not yet consented to be part of the study.
+
+            - if !current_user.consent_revoked? && !current_user.first_login?
               %li= link_to "Update my password.", settings_password_path
-            %li= link_to "Update my date of birth.", complete_profile_path
-            %li= link_to "Update my address.", complete_profile_path
 
       .card
         .card-body
@@ -24,9 +32,10 @@
 
           %ul
             %li= link_to "View consent.", consent_path
-            %li= link_to "Leave study.", consent_path, method: :delete, class: "text-danger", data: { confirm: "Withdraw from SleepINNOVATE study?" }
+            - if current_user.consented?
+              %li= link_to "Leave study.", consent_path, method: :delete, class: "text-danger", data: { confirm: "Withdraw from SleepINNOVATE study?" }
 
-          - unless current_user.first_login?
+          - if !current_user.first_login? && current_user.consented?
             - if !current_user.biobank_registration_step? && !current_user.biobank_registration_started?
               %h4.card-title Biobank
               %ul

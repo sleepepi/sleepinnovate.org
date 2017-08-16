@@ -29,8 +29,8 @@ class RegistrationsController < Devise::RegistrationsController
       http.verify_mode = OpenSSL::SSL::VERIFY_NONE
     end
     post_params = [
-      "secret=#{ENV['recaptcha_secret_key']}",
-      "response=#{params['g-recaptcha-response']}",
+      "secret=#{ENV["recaptcha_secret_key"]}",
+      "response=#{params["g-recaptcha-response"]}",
       "remoteip=#{request.remote_ip}"
     ]
     response = http.start do |h|

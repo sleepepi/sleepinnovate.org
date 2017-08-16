@@ -1,0 +1,15 @@
+- @title = "Change Address"
+
+.page-box.last-slide.background-p50-grey.center-vertically-xs-sm
+  .panel
+    %h1= @title
+
+    = form_with(url: profile_change_address_path, method: :patch, local: true, id: "address-form") do |form|
+      = render "profile/address_input", form: form
+
+  .text-center
+    = succeed " " do
+      = link_to "#", class: "btn btn-lg btn-success btn-shadow", data: { object: "submit", target: "#address-form"  } do
+        Save changes
+
+    = link_to "Cancel", settings_path, class: "btn btn-lg btn-link"

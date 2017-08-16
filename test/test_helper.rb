@@ -38,7 +38,7 @@ class ActionDispatch::IntegrationTest
   def slice_generic_response
     proc do |env|
       project_url = "#{URI(ENV["slice_url"]).path}/api/v1/projects/#{ENV["project_id"]}-#{ENV["project_auth_token"]}"
-      case "#{env['PATH_INFO']}?#{env['QUERY_STRING']}"
+      case "#{env["PATH_INFO"]}?#{env["QUERY_STRING"]}"
       when "#{project_url}/subjects.json?page=1"
         subjects_json
       when "#{project_url}/subjects.json?"
@@ -49,7 +49,7 @@ class ActionDispatch::IntegrationTest
         if /^\/session/ =~ env["PATH_INFO"] || /^\/__identify__/ =~ env["PATH_INFO"]
           Artifice.passthru!
         else
-          # puts "#{env['PATH_INFO']}?#{env['QUERY_STRING']}"
+          # puts "#{env["PATH_INFO"]}?#{env["QUERY_STRING"]}"
           fail Net::ReadTimeout
           # [
           #   200,

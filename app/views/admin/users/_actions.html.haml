@@ -8,6 +8,6 @@
     Edit
 - if user.subject_code.present?
   = succeed " " do
-    = link_to "#{ENV['slice_url']}/projects/#{ENV['project_id']}/subjects/#{user.slice_subject_id}", class: "btn btn-outline-dark btn-sm" do
+    = link_to "#{ENV["slice_url"]}/projects/#{ENV["project_id"]}/subjects/#{user.slice_subject_id}", class: "btn btn-outline-dark btn-sm" do
       %i.fa.fa-link
       View in Slice

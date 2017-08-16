@@ -18,12 +18,12 @@
           Please
           = link_to "notify the person", contact_path
           in charge of this research study in writing.
-    - elsif !current_user.consented?
+    - elsif current_user.unconsented?
       .jumbotron.jumbotron-white
         %h2 Consent to study
         %p
           Please
-          = link_to "read through the consent", complete_profile_path
+          = link_to "read through the consent", consent_path
           to start surveys on the
           = render "layouts/logo"
           study.
@@ -32,7 +32,7 @@
         %h2 Complete your profile
         %p
           Please
-          = link_to "complete your profile", complete_profile_path
+          = link_to "complete your profile", profile_complete_path
           to start surveys on the
           = render "layouts/logo"
           study.

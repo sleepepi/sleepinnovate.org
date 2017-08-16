@@ -48,6 +48,13 @@ class Admin::UsersControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to admin_user_url(@user)
   end
 
+  test "should not update user with blank name for admin" do
+    login(@admin)
+    patch admin_user_url(@user), params: { user: user_params.merge(full_name: "") }
+    assert_template "edit"
+    assert_response :success
+  end
+
   test "should unrevoke user for admin" do
     login(@admin)
     post unrevoke_admin_user_url(@withdrawn)

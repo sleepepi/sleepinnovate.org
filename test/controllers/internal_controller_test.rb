@@ -5,43 +5,63 @@ require "test_helper"
 # Tests to assure internal pages are accessible for logged in users.
 class InternalControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @regular_user = users(:one)
-    @withdrawn_user = users(:withdrawn)
+    @unconsented = users(:unconsented)
+    @consented = users(:consented)
+    @refused = users(:refused)
+    @withdrawn = users(:withdrawn)
   end
 
-  test "should get awards for regular user" do
-    login(@regular_user)
+  test "should get awards for consented user" do
+    login(@consented)
     get awards_url
     assert_response :success
   end
 
-  test "should get biobank for regular user" do
-    login(@regular_user)
+  test "should get biobank for consented user" do
+    login(@consented)
     get biobank_url
     assert_response :success
   end
 
-  test "should get consent signature for regular user" do
-    login(@regular_user)
+  test "should get consent signature page for unconsented user" do
+    login(@unconsented)
     get consent_signature_url
     assert_response :success
   end
 
-  test "should get dashboard for regular user" do
-    login(@regular_user)
+  test "should not get consent signature page for consented user" do
+    login(@consented)
+    get consent_signature_url
+    assert_redirected_to consent_url
+  end
+
+  test "should not get consent signature page for user who refused to join study" do
+    login(@refused)
+    get consent_signature_url
+    assert_redirected_to consent_url
+  end
+
+  test "should not get consent signature page for user who withdrew from study" do
+    login(@withdrawn)
+    get consent_signature_url
+    assert_redirected_to consent_url
+  end
+
+  test "should get dashboard for consented user" do
+    login(@consented)
+    get dashboard_url
+    assert_response :success
+  end
+
+  test "should get dashboard for refused user" do
+    login(@refused)
     get dashboard_url
     assert_response :success
   end
 
   test "should get dashboard for withdrawn user" do
-    login(@withdrawn_user)
+    login(@withdrawn)
     get dashboard_url
-    assert_response :success
-  end
-
-  test "should get complete your profile for regular user" do
-    login(@regular_user)
-    get complete_profile_url
     assert_response :success
   end
 
@@ -76,77 +96,41 @@ class InternalControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to dashboard_url
   end
 
-  test "should complete profile for regular user" do
-    login(@regular_user)
-    patch complete_profile_submit_url(
-      date_of_birth: { month: "12", day: "31", year: "1984" },
-      address: "123 Road Way"
-    )
-    @regular_user.reload
-    assert_equal "1984-12-31", @regular_user.date_of_birth
-    assert_equal "123 Road Way", @regular_user.address
-    assert_redirected_to dashboard_url
-  end
-
-  test "should not complete profile with invalid date of birth for regular user" do
-    login(@regular_user)
-    patch complete_profile_submit_url(
-      date_of_birth: { month: "2", day: "31", year: "1984" },
-      address: "123 Road Way"
-    )
-    @regular_user.reload
-    assert_equal "", @regular_user.date_of_birth
-    assert_template "complete_profile"
-    assert_response :success
-  end
-
-  test "should not complete profile with blank address for regular user" do
-    login(@regular_user)
-    patch complete_profile_submit_url(
-      date_of_birth: { month: "12", day: "31", year: "1984" },
-      address: ""
-    )
-    @regular_user.reload
-    assert_equal "", @regular_user.address
-    assert_template "complete_profile"
-    assert_response :success
-  end
-
-  test "should get test my brain for regular user" do
-    login(@regular_user)
+  test "should get test my brain for consented user" do
+    login(@consented)
     get test_my_brain_url
     assert_response :success
   end
 
-  test "should start test my brain for regular user" do
-    login(@regular_user)
+  test "should start test my brain for consented user" do
+    login(@consented)
     post test_my_brain_start_url
-    @regular_user.reload
-    assert_not_nil @regular_user.brain_started_at
-    assert_redirected_to "#{ENV['test_my_brain_url']}?id=#{@regular_user.subject_code}"
+    @consented.reload
+    assert_not_nil @consented.brain_started_at
+    assert_redirected_to "#{ENV["test_my_brain_url"]}?id=#{@consented.subject_code}"
   end
 
-  test "should complete test my brain for regular user" do
-    login(@regular_user)
+  test "should complete test my brain for consented user" do
+    login(@consented)
     post test_my_brain_complete_url
-    @regular_user.reload
-    assert_not_nil @regular_user.brain_completed_at
+    @consented.reload
+    assert_not_nil @consented.brain_completed_at
     assert_redirected_to dashboard_url
   end
 
-  test "should start biobank registration for regular user" do
-    login(@regular_user)
+  test "should start biobank registration for consented user" do
+    login(@consented)
     post biobank_start_url
-    @regular_user.reload
-    assert_not_nil @regular_user.biobank_started_at
+    @consented.reload
+    assert_not_nil @consented.biobank_started_at
     assert_redirected_to "https://biobank.partners.org"
   end
 
-  test "should complete biobank registration for regular user" do
-    login(@regular_user)
+  test "should complete biobank registration for consented user" do
+    login(@consented)
     post biobank_complete_url
-    @regular_user.reload
-    assert_not_nil @regular_user.biobank_completed_at
+    @consented.reload
+    assert_not_nil @consented.biobank_completed_at
     assert_redirected_to dashboard_url
   end
 end

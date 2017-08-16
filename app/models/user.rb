@@ -264,7 +264,13 @@ class User < ApplicationRecord
     update(date_of_birth: date, address: addr)
   end
 
-  def assign_date_of_birth!(date)
+  def update_address!(addr)
+    return false if addr.blank?
+    update(address: addr)
+  end
+
+  def update_date_of_birth!(date)
+    return false if date.blank?
     return false unless date.in?(Date.parse("1900-01-01")..Time.zone.today)
     update(date_of_birth: date)
   end

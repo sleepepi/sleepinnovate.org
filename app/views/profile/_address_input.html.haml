@@ -1,0 +1,10 @@
+.form-group
+  = form.label :address, class: "form-control-label" do
+    What is your
+    = succeed "?" do
+      %strong Address
+  = form.text_area :address, class: "form-control #{"is-invalid" if @address_error}", value: params[:address], rows: 3
+  - if @address_error
+    %small.form-text.text-danger Please enter an address.
+  - else
+    %small.form-text.text-muted Ex: 75 Francis St, Boston, MA 02115

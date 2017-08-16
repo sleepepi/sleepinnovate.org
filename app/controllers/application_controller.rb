@@ -74,4 +74,8 @@ class ApplicationController < ActionController::Base
   rescue
     default_date
   end
+
+  def check_consented
+    redirect_to dashboard_path unless current_user.consented?
+  end
 end

@@ -4,6 +4,7 @@
 class InternalController < ApplicationController
   before_action :authenticate_user!
   before_action :check_parking_voucher, only: :parking
+  before_action :check_unconsented, only: [:consent_signature, :submit_consent]
 
   layout "full_page"
 
@@ -16,7 +17,7 @@ class InternalController < ApplicationController
   def submit_consent
     current_user.consent!(params[:data_uri])
     if current_user.consented?
-      redirect_to complete_profile_path
+      redirect_to profile_complete_path
     else
       render :consent_signature
     end
@@ -57,28 +58,6 @@ class InternalController < ApplicationController
   # def dashboard
   # end
 
-  # GET /profile/complete
-  def complete_profile
-    render layout: "full_page_no_header_no_footer"
-  end
-
-  # PATCH /profile/complete
-  def complete_profile_submit
-    date_string = "#{params[:date_of_birth][:year]}-#{params[:date_of_birth][:month]}-#{params[:date_of_birth][:day]}"
-    dob = begin
-      Date.parse(date_string)
-    rescue
-      nil
-    end
-    if current_user.update_profile!(dob, params[:address])
-      redirect_to dashboard_path
-    else
-      @address_error = params[:address].blank?
-      @date_error = dob.nil?
-      render :complete_profile, layout: "full_page_no_header_no_footer"
-    end
-  end
-
   # # GET /parking-voucher
   # def parking
   # end
@@ -94,7 +73,7 @@ class InternalController < ApplicationController
   # POST /test-my-brain/start
   def test_my_brain_start
     current_user.test_my_brain_started!
-    redirect_to "#{ENV['test_my_brain_url']}?id=#{current_user.subject_code}"
+    redirect_to "#{ENV["test_my_brain_url"]}?id=#{current_user.subject_code}"
   end
 
   # POST /test-my-brain/complete
@@ -119,5 +98,9 @@ class InternalController < ApplicationController
 
   def check_parking_voucher
     redirect_to dashboard_path unless current_user.parking_voucher?
+  end
+
+  def check_unconsented
+    redirect_to consent_path unless current_user.unconsented?
   end
 end

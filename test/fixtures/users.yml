@@ -6,13 +6,22 @@ two:
   full_name: Brown Dog
   email: brown_dog@example.com
 
+unconsented:
+  full_name: Unconsented Subject
+  email: unconsented@example.com
+
 consented:
   full_name: Consented Subject
   email: consented@example.com
   consented_at: 2017-03-20 20:42:04
 
+refused:
+  full_name: Refused to Join
+  email: refused@example.com
+  consent_revoked_at: 2017-07-21 13:43:24
+
 withdrawn:
-  full_name: Revoked Consent
+  full_name: Withdrew Consent
   email: withdrawn@example.com
   consented_at: 2017-04-21 16:22:24
   consent_revoked_at: 2017-07-21 13:43:24

@@ -33,8 +33,6 @@ Rails.application.routes.draw do
     post :consent, action: :submit_consent
     delete :consent, action: :revoke_consent
     get :consent_signature, path: "consent/signature"
-    get :complete_profile, path: "profile/complete"
-    patch :complete_profile_submit, path: "profile/complete"
     get :awards
     get :dashboard
     get :signature
@@ -48,6 +46,15 @@ Rails.application.routes.draw do
     post :biobank_complete, path: "biobank/complete"
     get :surveys
     get :returning_from, path: "returning-from/:external/:subject_code"
+  end
+
+  namespace :profile do
+    get :address
+    patch :change_address, path: "address"
+    get :dob
+    patch :change_dob, path: "dob"
+    get :complete
+    patch :complete_submit, path: "profile"
   end
 
   scope module: :settings do

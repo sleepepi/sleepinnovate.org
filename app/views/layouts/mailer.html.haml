@@ -15,7 +15,7 @@
                   %tr
                     %td{ style: 'border-collapse:collapse;padding:20px 16px 12px', valign: 'bottom' }
                       %div{ style: 'text-align:center;color:white;word-break:break-word;line-height:28px;font-size:24px;' }
-                        = image_tag attachments.inline['myapnea-logo.png'].url, alt: ENV['website_name'], border: 0, width: 300, height: 80, style: 'outline:none;text-decoration:none;border:none;width:300px;min-height:36px;max-width:100%' if attachments.inline['myapnea-logo.png']
+                        = image_tag attachments.inline['myapnea-logo.png'].url, alt: ENV["website_name"], border: 0, width: 300, height: 80, style: 'outline:none;text-decoration:none;border:none;width:300px;min-height:36px;max-width:100%' if attachments.inline['myapnea-logo.png']
           %tr
             %td{ style: 'border-collapse:collapse', valign: 'top' }
               -# Table can be repeated for multiple sections
@@ -42,12 +42,12 @@
                               %br
                               You may
                               = succeed '.' do
-                                %a{ href: "#{ENV['website_url']}/account", style: link_style, target: '_blank' } change your email preferences here
+                                %a{ href: "#{ENV["website_url"]}/account", style: link_style, target: '_blank' } change your email preferences here
                         %p{ style: 'font-size:12px;line-height:20px;margin:0 0 16px;margin-top:16px' }
-                          %a{ href: ENV['website_url'], style: link_style, target: '_blank' }= ENV['website_name']
+                          %a{ href: ENV["website_url"], style: link_style, target: '_blank' }= ENV["website_name"]
                           \&nbsp;&bull;&nbsp;
-                          %a{ href: "#{ENV['website_url']}", style: link_style, target: '_blank' } Sleep and Circadian Disorders
+                          %a{ href: "#{ENV["website_url"]}", style: link_style, target: '_blank' } Sleep and Circadian Disorders
                           %br
-                            %a{ href: "#{ENV['website_url']}", style: 'color:#989ea6;font-weight:normal;text-decoration:none;word-break:break-word' }
+                            %a{ href: "#{ENV["website_url"]}", style: 'color:#989ea6;font-weight:normal;text-decoration:none;word-break:break-word' }
                               221 Longwood Avenue, BLI 225 &nbsp;&bull;&nbsp; Boston, MA
                               \&nbsp;&bull;&nbsp; 02115

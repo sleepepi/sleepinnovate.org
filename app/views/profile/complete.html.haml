@@ -1,0 +1,30 @@
+- @title = "Complete Your Profile"
+
+.page-box.last-slide.background-p50-grey.center-vertically-xs-sm
+  .panel
+    %h1= @title
+
+    %p
+      Thank you for agreeing to participate in the
+      %strong= render "layouts/logo"
+      research study! You're almost ready to help sleep research. To access our
+      surveys, brain quizzes and (if eligible) a parking voucher, please
+      %u confirm your identity
+      with a few easy questions:
+
+
+    = form_with(url: profile_complete_submit_path, method: :patch, local: true, id: "profile-form") do |form|
+      .panel-icon.boston-color
+        %i.fa.fa-birthday-cake
+
+      = render "profile/date_of_birth_input", form: form
+
+      .panel-icon.sleep-color
+        %i.fa.fa-home
+
+      = render "profile/address_input", form: form
+
+  .text-center
+    = link_to "#", class: "btn btn-lg btn-success btn-shadow", data: { object: "submit", target: "#profile-form"  } do
+      Finish enrollment
+      %i.fa.fa-caret-right
