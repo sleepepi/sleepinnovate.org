@@ -2,7 +2,6 @@
 
 - response = @json.dig("response") || @json.dig("sheet_variable", "response")
 - value = @json.dig("response") || @json.dig("sheet_variable", "value")
-
 - start = (@json.dig("design", "current_page") - 1) * 100 / @json.dig("design", "pages_count")
 - percent = (@json.dig("design", "current_page")) * 100 / @json.dig("design", "pages_count")
 
