@@ -1,32 +1,32 @@
-.form-group{ class: @json.dig("errors", "base").present? ? "has-danger" : nil }
+.form-group
   .form-inline
-    - case @json.dig("variable", "format")
+    - case @variable.date_format
     - when "dd-mmm-yyyy"
       = render "survey/decoration/day", value: value
       \-
       = render "survey/decoration/month_select", value: value
       \-
       = render "survey/decoration/year", value: value
-    - when "yyyy-mm-dd", "%Y-%m-%d" # Second will be deprecated
+    - when "yyyy-mm-dd"
       = render "survey/decoration/year", value: value
       \-
       = render "survey/decoration/month", value: value
       \-
       = render "survey/decoration/day", value: value
-    - when "dd/mm/yyyy", "%d/%m/%Y" # Second will be deprecated
+    - when "dd/mm/yyyy"
       = render "survey/decoration/day", value: value
       \/
       = render "survey/decoration/month", value: value
       \/
       = render "survey/decoration/year", value: value
-    - else # "mm/dd/yyyy" "%m/%d/%Y" # Second will be deprecated
+    - else # "mm/dd/yyyy"
       = render "survey/decoration/month", value: value
       \/
       = render "survey/decoration/day", value: value
       \/
       = render "survey/decoration/year", value: value
 
-    = link_to "Today", "#", data: { object: "set-date-input-to-current-date", target_name: "response" }, class: "btn btn-sm btn-link" if @json.dig("variable", "show_current_button")
+    = link_to "Today", "#", data: { object: "set-date-input-to-current-date", target_name: "response" }, class: "btn btn-sm btn-link" if @variable.show_current_button
     = link_to "Clear", "#", data: { object: "clear-date-input", target_name: "response" }, class: "btn btn-sm btn-link text-danger"
 
   = render "survey/decoration/errors"

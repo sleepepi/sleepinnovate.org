@@ -26,7 +26,7 @@
             = number_of_surveys
       .text-center
         - if event_design.valid?
-          = link_to survey_page_path(event_design.event_id, event_design.design_id, page: 1), class: "btn btn-success btn-shadow" do
+          = link_to survey_resume_path(event_design.event_id, event_design.design_id), class: "btn btn-success btn-shadow" do
             Continue survey
             %i.fa.fa-caret-right
         - else

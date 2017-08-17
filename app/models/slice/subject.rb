@@ -73,6 +73,12 @@ class Subject < SliceRecord
     json
   end
 
+  def resume_event_survey(event, design)
+    (json, _status) = Helpers::JsonRequest.get("#{project_url}/subjects/#{@id}/surveys/#{event}/#{design}/resume.json")
+    # return unless status.is_a?(Net::HTTPSuccess)
+    json
+  end
+
   def page_event_survey(event, design, page)
     (json, _status) = Helpers::JsonRequest.get("#{project_url}/subjects/#{@id}/surveys/#{event}/#{design}/#{page}.json")
     # return unless status.is_a?(Net::HTTPSuccess)

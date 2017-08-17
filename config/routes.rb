@@ -71,6 +71,7 @@ Rails.application.routes.draw do
 
   namespace :survey do
     get :start, path: ":event/:design/start"
+    get :resume, path: ":event/:design/resume"
     get :complete, path: ":event/:design/complete"
     get :page, path: ":event/:design/:page"
     patch :submit_page, path: ":event/:design/:page"

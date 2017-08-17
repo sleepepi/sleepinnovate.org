@@ -17,9 +17,25 @@ class SurveyController < ApplicationController
   def page
     @json = current_user.page_event_survey(params[:event], params[:design], @page)
     @survey = Survey.new(json: @json)
-    @section = Section.new(json: @json["section"]) if @json["section"].present?
-    @variable = Variable.new(json: @json["variable"]) if @json["variable"].present?
+    if @json.present?
+      @section = Section.new(json: @json.dig("section")) if @json.dig("section").present?
+      @variable = Variable.new(json: @json.dig("variable")) if @json.dig("variable").present?
+    end
     redirect_to survey_complete_path(params[:event], params[:design]) if @json.blank?
+  end
+
+  # GET /survey/:event/:design/:resume
+  def resume
+    @json = current_user.resume_event_survey(params[:event], params[:design])
+    @survey = Survey.new(json: @json)
+    if @json.blank?
+      redirect_to survey_complete_path(params[:event], params[:design])
+    else
+      @page = @json.dig("design", "current_page")
+      @section = Section.new(json: @json.dig("section")) if @json.dig("section").present?
+      @variable = Variable.new(json: @json.dig("variable")) if @json.dig("variable").present?
+      render :page
+    end
   end
 
   # PATCH /survey/:event/:design/:page
@@ -45,6 +61,8 @@ class SurveyController < ApplicationController
     if @status.is_a?(Net::HTTPOK)
       redirect_to survey_page_path(params[:event], params[:design], @page + 1)
     elsif @json
+      @section = Section.new(json: @json.dig("section")) if @json.dig("section").present?
+      @variable = Variable.new(json: @json.dig("variable")) if @json.dig("variable").present?
       render :page
     else
       redirect_to survey_page_path(params[:event], params[:design], @page)

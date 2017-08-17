@@ -1,4 +1,4 @@
-.form-group{ class: @json.dig("errors", "base").present? ? "has-danger" : nil }
+.form-group
   .form-inline
     - case @json.dig("variable", "time_of_day_format")
     - when "24hour"

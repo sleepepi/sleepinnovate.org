@@ -48,6 +48,7 @@ class User < ApplicationRecord
   delegate :total_baseline_surveys_count, to: :subject
   delegate :baseline_surveys_completed_count, to: :subject
   delegate :start_event_survey, to: :subject
+  delegate :resume_event_survey, to: :subject
   delegate :page_event_survey, to: :subject
   delegate :submit_response_event_survey, to: :subject
   delegate :complete_event_survey, to: :subject
