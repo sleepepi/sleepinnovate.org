@@ -5,6 +5,8 @@ class InternalController < ApplicationController
   before_action :authenticate_user!
   before_action :check_parking_voucher, only: :parking
   before_action :check_unconsented, only: [:consent_signature, :submit_consent]
+  before_action :check_consented, only: :surveys
+  before_action :check_not_first_login, only: :surveys
 
   layout "full_page"
 

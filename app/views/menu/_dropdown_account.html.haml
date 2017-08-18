@@ -20,7 +20,7 @@
       = link_to settings_path, class: "dropdown-item" do
         %i.fa.fa-cogs
         Settings
-      - if current_user.consented?
+      - if current_user.consented? && !current_user.first_login?
         = link_to surveys_path, class: "dropdown-item" do
           %i.fa.fa-tasks
           Surveys
@@ -56,7 +56,7 @@
     - if current_page?(settings_path)
       %span.sr-only (current)
 
-  - if current_user.consented?
+  - if current_user.consented? && !current_user.first_login?
     %li.nav-item.d-lg-none{ class: current_page?(surveys_path) ? "active" : nil }
       = link_to surveys_path, class: "nav-link" do
         %i.fa.fa-tasks

@@ -78,4 +78,8 @@ class ApplicationController < ActionController::Base
   def check_consented
     redirect_to dashboard_path unless current_user.consented?
   end
+
+  def check_not_first_login
+    redirect_to dashboard_path if current_user.first_login?
+  end
 end
