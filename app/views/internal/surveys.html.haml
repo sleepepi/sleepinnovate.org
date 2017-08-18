@@ -1,92 +1,42 @@
 - @title = "Surveys"
 
 .page-box.last-slide.background-p50-grey.center-vertically-xs-sm
-  .container
-    %h1= @title
-    - current_user.subject_events.each do |subject_event|
-      %div
-        %strong id
-        = subject_event.id
-      %div
-        %strong name
-        = subject_event.name
-      %div
-        %strong percent
-        = subject_event.percent
-      %div
-        %strong unblinded_responses_count
-        = subject_event.unblinded_responses_count
-      %div
-        %strong unblinded_questions_count
-        = subject_event.unblinded_questions_count
-
+  - current_user.subject_events.each do |subject_event|
+    .panel.panel-full-width
+      %h1= subject_event.name
       - if subject_event.percent.to_i.zero?
-        .progress
+        .progress.progress-simple
           .progress-bar.progress-bar-striped{ role: "progressbar", style: "width: 100%;background-color: #ededed;", aria: { valuenow: "0", valuemin: "0", valuemax: "100" } }
       - else
-        .progress
+        .progress.progress-simple
           .progress-bar.progress-bar-striped.bg-success{ role: "progressbar", style: "width: #{subject_event.percent}%;", aria: { valuenow: "#{subject_event.percent}", valuemin: "0", valuemax: "100" } }
-
-      %strong= subject_event.name
-      %ul
+      .float-right
+        %small.text-muted= "#{subject_event.percent}%"
+      .clearfix
+      .card-columns
         - subject_event.event_designs.each do |event_design|
-          %li
-            - if event_design.valid?
-              = link_to event_design.design_name, survey_start_path(event_design.event_id, event_design.design_id)
-            %div
-              %strong event_id
-              = event_design.event_id
-            %div
-              %strong design_id
-              = event_design.design_id
-            - if event_design.sheets.present?
-              %ul
-                - event_design.sheets.each do |sheet|
-                  %li
-                    %div
-                      %strong sheet name
-                      = sheet.name
-                      = link_to "Details", "#", data: { object: "toggle-visibility", target: "#sheet_info_#{sheet.id}" }
-                    - if sheet.percent.to_i.zero?
-                      .progress
-                        .progress-bar.progress-bar-striped{ role: "progressbar", style: "width: 100%;background-color: #ededed;", aria: { valuenow: "0", valuemin: "0", valuemax: "100" } }
-                    - else
-                      .progress
-                        .progress-bar.progress-bar-striped.bg-success{ role: "progressbar", style: "width: #{sheet.percent}%;", aria: { valuenow: "#{sheet.percent}", valuemin: "0", valuemax: "100" } }
+          .card
+            .card-body
+              .small.card-title
+                = event_design.design_name
+              - if event_design.percent.to_i.zero?
+                .progress.progress-simple
+                  .progress-bar.progress-bar-striped{ role: "progressbar", style: "width: 100%;background-color: #ededed;", aria: { valuenow: "0", valuemin: "0", valuemax: "100" } }
+              - else
+                .progress.progress-simple
+                  .progress-bar.progress-bar-striped.bg-success{ role: "progressbar", style: "width: #{event_design.percent}%;", aria: { valuenow: "#{event_design.percent}", valuemin: "0", valuemax: "100" } }
 
+            .card-footer
+              .float-right
+                %small.text-muted= "#{event_design.percent}%"
+              - if event_design.valid? && event_design.incomplete?
+                - if event_design.percent.zero?
+                  = link_to survey_start_path(event_design.event_id, event_design.design_id) do
+                    Start
+                    %i.fa.fa-caret-right
+                - else
+                  = link_to survey_resume_path(event_design.event_id, event_design.design_id) do
+                    Resume
+                    %i.fa.fa-caret-right
+              .clearfix
 
-                    %div{ id: "sheet_info_#{sheet.id}", style: "display: none;" }
-                      %div
-                        %strong id
-                        = sheet.id
-
-                      %div
-                        %strong project_id
-                        = sheet.project_id
-                      %div
-                        %strong design_id
-                        = sheet.design_id
-                      %div
-                        %strong subject_id
-                        = sheet.subject_id
-                      %div
-                        %strong subject_event_id
-                        = sheet.subject_event_id
-                      %div
-                        %strong response_count
-                        = sheet.response_count
-                      %div
-                        %strong total_response_count
-                        = sheet.total_response_count
-                      %div
-                        %strong percent
-                        = sheet.percent
-                      %div
-                        %strong missing
-                        = sheet.missing
-                      %div
-                        %strong created_at
-                        = sheet.created_at
-                      %div
-                        %strong updated_at
-                        = sheet.updated_at

@@ -3,6 +3,7 @@
 # Displays survey pages.
 class SurveyController < ApplicationController
   before_action :authenticate_user!
+  before_action :check_consented
   before_action :find_page, only: [:page, :submit_page]
 
   layout "full_page"

@@ -20,6 +20,10 @@
       = link_to settings_path, class: "dropdown-item" do
         %i.fa.fa-cogs
         Settings
+      - if current_user.consented?
+        = link_to surveys_path, class: "dropdown-item" do
+          %i.fa.fa-tasks
+          Surveys
       .dropdown-divider
       - if current_user.admin?
         = link_to admin_users_path, class: "dropdown-item dropdown-item-success" do
@@ -51,6 +55,14 @@
       Settings
     - if current_page?(settings_path)
       %span.sr-only (current)
+
+  - if current_user.consented?
+    %li.nav-item.d-lg-none{ class: current_page?(surveys_path) ? "active" : nil }
+      = link_to surveys_path, class: "nav-link" do
+        %i.fa.fa-tasks
+        Surveys
+      - if current_page?(surveys_path)
+        %span.sr-only (current)
 
   - if current_user.admin?
     %li.nav-item.d-lg-none{ class: current_page?(admin_users_path) ? "active" : nil }

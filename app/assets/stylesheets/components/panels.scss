@@ -4,6 +4,10 @@
   max-width: 840px;
   padding: 20px;
 
+  &.panel-full-width {
+    width: 100%;
+  }
+
   a {
     word-wrap: break-word;
   }
