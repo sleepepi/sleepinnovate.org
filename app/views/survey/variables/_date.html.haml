@@ -1,4 +1,4 @@
-.form-group
+.form-group.string-container
   .form-inline
     - case @variable.date_format
     - when "dd-mmm-yyyy"
@@ -27,7 +27,7 @@
       = render "survey/decoration/year", value: value
 
     = link_to "Today", "#", data: { object: "set-date-input-to-current-date", target_name: "response" }, class: "btn btn-sm btn-link" if @variable.show_current_button
-    = link_to "Clear", "#", data: { object: "clear-date-input", target_name: "response" }, class: "btn btn-sm btn-link text-danger"
+    = link_to "Clear", "#", data: { object: "clear-date-input", target_name: "response" }, class: "btn btn-sm btn-link text-muted"
 
   = render "survey/decoration/errors"
-= render "survey/decoration/field_note"
+  = render "survey/decoration/field_note"

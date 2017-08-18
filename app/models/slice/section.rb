@@ -2,7 +2,7 @@
 
 # Helps contain information about a survey.
 class Section
-  attr_accessor :json, :id, :name, :description
+  attr_accessor :json, :id, :name, :description, :level
 
   def initialize(json: {})
     load_from_json(json) if json.present?
@@ -20,7 +20,8 @@ class Section
     [
       :id,
       :name,
-      :description
+      :description,
+      :level
     ]
   end
 end

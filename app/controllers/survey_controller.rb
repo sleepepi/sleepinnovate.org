@@ -71,7 +71,7 @@ class SurveyController < ApplicationController
 
   # GET /survey/:event/:design/complete
   def complete
-    # @json = current_user.complete_event_survey(params[:event], params[:design])
+    redirect_to dashboard_path
   end
 
   private

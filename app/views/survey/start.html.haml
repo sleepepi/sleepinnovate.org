@@ -1,9 +1,15 @@
-- @title = [@json["design"]["name"], @json["event"]["name"]].join(" - ")
+- @title = [@json.dig("design", "name"), @json["event"]["name"]].join(" - ")
 
 .page-box.last-slide.background-p50-grey.center-vertically-xs-sm
   .container
-    %h1= @json["design"]["name"]
+    .survey-question
+      .alert.alert-white.alert-box-shadow{ role: "alert" }
+        %h1.alert-heading= @survey.name
+        %p.text-muted
+          = pluralize(@json.dig("design", "pages_count"), "question")
 
-    = link_to survey_page_path(params[:event], params[:design], 1) do
-      Get Started
-      %i.fa.fa-caret-right
+      .float-right
+        = link_to survey_page_path(params[:event], params[:design], 1), class: "btn btn-success btn-shadow" do
+          Start survey
+          %i.fa.fa-caret-right
+      .clearfix

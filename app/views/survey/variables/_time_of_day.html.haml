@@ -1,4 +1,4 @@
-.form-group
+.form-group.string-container
   .form-inline
     - case @json.dig("variable", "time_of_day_format")
     - when "24hour"
@@ -25,7 +25,7 @@
       = render "survey/decoration/period", value: value
 
     = link_to "Current Time", "#", data: { object: "set-time-input-to-current-time", target_name: "response", time_of_day_format: @json.dig("variable", "time_of_day_format") }, class: "btn btn-sm btn-link" if @json.dig("variable", "show_current_button")
-    = link_to "Clear", "#", data: { object: "clear-time-of-day-input", target_name: "response", time_of_day_format: @json.dig("variable", "time_of_day_format") }, class: "btn btn-sm btn-link text-danger"
+    = link_to "Clear", "#", data: { object: "clear-time-of-day-input", target_name: "response", time_of_day_format: @json.dig("variable", "time_of_day_format") }, class: "btn btn-sm btn-link text-muted"
 
   = render "survey/decoration/errors"
   = render "survey/decoration/field_note"

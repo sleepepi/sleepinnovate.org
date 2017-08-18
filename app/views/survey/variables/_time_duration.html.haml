@@ -1,4 +1,4 @@
-.form-group
+.form-group.string-container
   .form-inline
     - case @json.dig("variable", "time_duration_format")
     - when "hh:mm:ss"
@@ -16,7 +16,7 @@
       \:
       = render "survey/decoration/seconds", value: value
 
-    = link_to "Clear", "#", data: { object: "clear-time-duration-input", target_name: "response", time_duration_format: @json.dig("variable", "time_duration_format") }, class: "btn btn-sm btn-link text-danger"
+    = link_to "Clear", "#", data: { object: "clear-time-duration-input", target_name: "response", time_duration_format: @json.dig("variable", "time_duration_format") }, class: "btn btn-sm btn-link text-muted"
 
   = render "survey/decoration/errors"
   = render "survey/decoration/field_note"
