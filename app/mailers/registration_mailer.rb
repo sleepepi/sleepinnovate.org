@@ -7,6 +7,6 @@ class RegistrationMailer < ApplicationMailer
     @user = user
     @token = token
     @email_to = user.email
-    mail(to: @email_to, subject: "#{ENV["website_name"]} - Account Activation")
+    mail(to: @email_to, subject: "Welcome to #{ENV["website_name"]}")
   end
 end
