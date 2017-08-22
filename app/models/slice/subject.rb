@@ -35,7 +35,11 @@ class Subject < SliceRecord
   end
 
   def baseline_event
-    subject_events.find { |se| se.name == "Baseline" }
+    current_subject_event("Baseline")
+  end
+
+  def current_subject_event(subject_event_name)
+    subject_events.find { |se| se.name == subject_event_name }
   end
 
   def loaded?
