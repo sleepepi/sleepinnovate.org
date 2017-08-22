@@ -162,6 +162,10 @@ class User < ApplicationRecord
     !brain_completed_at.nil?
   end
 
+  def biobank_viewable?
+    !first_login? && profile_complete?
+  end
+
   def biobank_registration_step?
     brain_surveys_completed?
   end

@@ -64,8 +64,11 @@
           = render "cards/biobank_completed"
         - elsif current_user.biobank_registration_started?
           = render "cards/biobank_started"
-        - else
+        - elsif current_user.biobank_viewable?
           = render "cards/biobank"
+        - else
+          = render "cards/biobank_starting_soon"
+
 
       - if current_user.parking_voucher? && !parking_voucher_card_enabled
         .text-center
