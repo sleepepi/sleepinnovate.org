@@ -87,7 +87,7 @@ class InternalController < ApplicationController
   # POST /biobank/start
   def biobank_start
     current_user.biobank_registration_started!
-    redirect_to "https://biobank.partners.org"
+    redirect_to ENV["biobank_url"]
   end
 
   # POST /biobank/complete

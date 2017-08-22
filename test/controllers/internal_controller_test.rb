@@ -123,7 +123,7 @@ class InternalControllerTest < ActionDispatch::IntegrationTest
     post biobank_start_url
     @consented.reload
     assert_not_nil @consented.biobank_started_at
-    assert_redirected_to "https://biobank.partners.org"
+    assert_redirected_to ENV["biobank_url"]
   end
 
   test "should complete biobank registration for consented user" do
