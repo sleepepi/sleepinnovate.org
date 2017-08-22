@@ -1,15 +1,5 @@
 = form_with(model: user, url: admin_user_path(user), local: true) do |form|
   .form-group.row
-    = form.label :full_name, nil, class: "col-md-2 col-form-label"
-    .col-md-10
-      = form.text_field :full_name, class: "form-control"
-
-  .form-group.row
-    = form.label :email, nil, class: "col-md-2 col-form-label"
-    .col-md-10
-      = form.email_field :email, class: "form-control"
-
-  .form-group.row
     = form.label :biobank_status, nil, class: "col-md-2 col-form-label"
     .col-md-10
       = form.select :biobank_status, User::BIOBANK_STATUS, {}, class: "form-control"
