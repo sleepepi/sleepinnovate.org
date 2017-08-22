@@ -52,10 +52,6 @@ class InternalController < ApplicationController
   # def awards
   # end
 
-  # # GET /biobank
-  # def biobank
-  # end
-
   # # GET /dashboard
   # def dashboard
   # end

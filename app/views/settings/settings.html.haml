@@ -34,14 +34,3 @@
             %li= link_to "View consent.", consent_path
             - if current_user.consented?
               %li= link_to "Leave study.", consent_path, method: :delete, class: "text-danger", data: { confirm: "Withdraw from SleepINNOVATE study?" }
-
-          - if !current_user.first_login? && current_user.consented?
-            - if !current_user.biobank_registration_step? && !current_user.biobank_registration_started?
-              %h4.card-title Biobank
-              %ul
-                %li= link_to "Start Biobank registration.", biobank_start_path, method: :post
-
-            - if current_user.biobank_registration_started? && !current_user.biobank_registration_completed?
-              %h4.card-title Biobank
-              %ul
-                %li= link_to "I've completed the Biobank registration.", biobank_complete_path, method: :post

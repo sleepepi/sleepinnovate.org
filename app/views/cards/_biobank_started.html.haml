@@ -9,6 +9,9 @@
       %div{ style: "color: #bdbdbd;" } Continue your Biobank registration!
     .text-center
       %p.card-text
-        = link_to biobank_path, class: "btn btn-primary btn-shadow" do
-          Continue registration
+        = link_to biobank_start_path, method: :post, class: "btn btn-primary btn-shadow" do
+          Go to Biobank
           %i.fa.fa-caret-right
+  .card-footer
+    .overflow-hidden.nowrap.text-muted.small
+      = link_to "I've completed Biobank registration.", biobank_complete_path, method: :post

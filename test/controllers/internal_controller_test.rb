@@ -17,12 +17,6 @@ class InternalControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "should get biobank for consented user" do
-    login(@consented)
-    get biobank_url
-    assert_response :success
-  end
-
   test "should get consent signature page for unconsented user" do
     login(@unconsented)
     get consent_signature_url

@@ -37,7 +37,7 @@
           = render "layouts/logo"
           study.
     - else
-      .card-deck
+      .card-deck.mb-3
         - if current_user.subject_events.blank?
           = render "cards/no_surveys"
         - elsif current_user.next_survey
@@ -45,7 +45,9 @@
         - else
           = render "cards/completed", subject_event: current_user.subject_events.first
 
-        = render "cards/parking" if current_user.parking_voucher?
+        - parking_voucher_card_enabled = false
+
+        = render "cards/parking" if current_user.parking_voucher? && parking_voucher_card_enabled
 
         - if current_user.brain_surveys_completed?
           = render "cards/brain_completed"
@@ -56,16 +58,21 @@
         - else
           = render "cards/brain_starting_soon"
 
-        - if current_user.parking_voucher?
+        - if current_user.parking_voucher? && parking_voucher_card_enabled
           -# Nothing
         - elsif current_user.biobank_registration_completed?
           = render "cards/biobank_completed"
         - elsif current_user.biobank_registration_started?
           = render "cards/biobank_started"
-        - elsif current_user.biobank_registration_step?
+        - else
           = render "cards/biobank"
 
-      - if current_user.whats_next?
+      - if current_user.parking_voucher? && !parking_voucher_card_enabled
+        .text-center
+          View your
+          = succeed "." do
+            = link_to "parking voucher", parking_path
+      - elsif current_user.whats_next?
         .text-center
           Congrats, you are all done!
           = link_to "What's next?", whats_next_path

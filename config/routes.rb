@@ -37,7 +37,6 @@ Rails.application.routes.draw do
     get :dashboard
     get :signature
     get :test_my_brain, path: "test-my-brain"
-    get :biobank
     get :parking, path: "parking-voucher"
     get :whats_next, path: "whats-next"
     post :test_my_brain_start, path: "test-my-brain/start"
