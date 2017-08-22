@@ -10,7 +10,7 @@ class ExternalController < ApplicationController
 
   # GET /consent
   def consent
-    render layout: "full_page_no_header_no_footer" if current_user
+    render layout: "full_page_no_header_no_footer" if current_user && current_user.first_login?
   end
 
   # GET /consent.pdf
