@@ -259,9 +259,13 @@ class User < ApplicationRecord
     generate_pdf(jobname, output_folder, file_tex)
   end
 
+  def at_least_18?(date)
+    date.in?(Date.parse("1900-01-01")..(Time.zone.today - 18.years))
+  end
+
   def update_profile!(date, addr)
     return false if date.blank? || addr.blank?
-    return false unless date.in?(Date.parse("1900-01-01")..Time.zone.today)
+    return false unless at_least_18?(date)
     update(date_of_birth: date, address: addr)
   end
 
@@ -272,7 +276,7 @@ class User < ApplicationRecord
 
   def update_date_of_birth!(date)
     return false if date.blank?
-    return false unless date.in?(Date.parse("1900-01-01")..Time.zone.today)
+    return false unless at_least_18?(date)
     update(date_of_birth: date)
   end
 end

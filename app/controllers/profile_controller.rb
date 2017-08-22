@@ -19,7 +19,12 @@ class ProfileController < ApplicationController
       redirect_to dashboard_path
     else
       @address_error = params[:address].blank?
-      @date_error = dob.nil?
+      @date_error = \
+        if dob.blank?
+          "Please enter a valid date."
+        elsif !current_user.at_least_18?(dob)
+          "You must be at least 18 years old to join the study."
+        end
       render :complete, layout: "full_page_no_header_no_footer"
     end
   end
@@ -34,7 +39,7 @@ class ProfileController < ApplicationController
     if current_user.update_date_of_birth!(dob)
       redirect_to settings_path, notice: "Date of birth updated successfully."
     else
-      @date_error = true
+      @date_error = dob.blank? ? "Please enter a valid date." : "You must be at least 18 years old to join the study."
       render :dob
     end
   end
