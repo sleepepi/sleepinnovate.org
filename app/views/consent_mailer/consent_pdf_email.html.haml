@@ -7,7 +7,10 @@
   study.
 
 %p{ style: p_style }
-  Attached, you'll find a PDF of your signed consent.
+  You can download a copy of the consent through the link below:
+
+%p{ style: center_style }
+  = link_to "View consent", "#{ENV["website_url"]}/consent", style: link_style
 
 %p{ style: p_style }
   If you have any questions about SleepINNOVATE or need technical support,

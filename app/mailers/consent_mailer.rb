@@ -4,10 +4,10 @@
 class ConsentMailer < ApplicationMailer
   def consent_pdf_email(user)
     setup_email
-    attachments["SleepINNOVATE Consent.pdf"] = File.read(pdf_file(user)) rescue nil
+    # attachments["SleepINNOVATE Consent.pdf"] = File.read(pdf_file(user)) rescue nil
     @user = user
     @email_to = user.email
-    mail(to: @email_to, subject: "#{ENV["website_name"]} - Signed Consent Form")
+    mail(to: @email_to, subject: "#{ENV["website_name"]} Consent")
   end
 
   def pdf_file(user)
