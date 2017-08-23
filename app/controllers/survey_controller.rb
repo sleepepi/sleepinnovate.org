@@ -58,7 +58,7 @@ class SurveyController < ApplicationController
     else
       value = params[:response]
     end
-    (@json, @status) = current_user.submit_response_event_survey(params[:event], params[:design], @page, value)
+    (@json, @status) = current_user.submit_response_event_survey(params[:event], params[:design], @page, value, request.remote_ip)
     if @status.is_a?(Net::HTTPOK)
       redirect_to survey_page_path(params[:event], params[:design], @page + 1)
     elsif @json

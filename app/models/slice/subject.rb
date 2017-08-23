@@ -89,8 +89,8 @@ class Subject < SliceRecord
     json
   end
 
-  def submit_response_event_survey(event, design, page, response)
-    params = { _method: "patch", response: response }
+  def submit_response_event_survey(event, design, page, response, remote_ip)
+    params = { _method: "patch", response: response, remote_ip: remote_ip }
     Helpers::JsonRequest.post("#{project_url}/subjects/#{@id}/surveys/#{event}/#{design}/#{page}.json", params)
   end
 
