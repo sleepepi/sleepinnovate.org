@@ -4,7 +4,7 @@
 class Variable
   attr_accessor :json, :id, :name, :display_name, :description, :variable_type, :units,
                 :prepend, :append, :field_note, :time_duration_format, :time_of_day_format,
-                :show_current_button, :date_format, :domain_options
+                :show_current_button, :date_format, :domain_options, :show_seconds
 
   def initialize(json: {})
     load_from_json(json) if json.present?
@@ -23,7 +23,7 @@ class Variable
     [
       :id, :name, :display_name, :description, :variable_type, :units, :prepend,
       :append, :field_note, :time_duration_format, :time_of_day_format,
-      :show_current_button, :date_format
+      :show_current_button, :date_format, :show_seconds
     ]
   end
 end

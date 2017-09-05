@@ -6,6 +6,11 @@
     staging and production servers
 - **Profile Changes**
   - Improved routes to prevent users from reloading paths that do not exist
+- **Survey Changes**
+  - Time of day variables now correctly set PM variables that have PM set as
+    default value
+  - Time of day variables now correctly show and hide seconds based on time of
+    day format
 
 ## 1.0.0 (August 28, 2017)
 
