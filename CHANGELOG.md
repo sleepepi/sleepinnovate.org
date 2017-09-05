@@ -1,9 +1,6 @@
 ## 1.1.0
 
 ### Enhancements
-- **Test My Brain Changes**
-  - Subject codes are now configurable to provide a way to differentiate between
-    staging and production servers
 - **Profile Changes**
   - Improved routes to prevent users from reloading paths that do not exist
 - **Survey Changes**
@@ -11,6 +8,9 @@
     default value
   - Time of day variables now correctly show and hide seconds based on time of
     day format
+- **Test My Brain Changes**
+  - Subject codes are now configurable to provide a way to differentiate between
+    staging and production servers
 
 ## 1.0.0 (August 28, 2017)
 
