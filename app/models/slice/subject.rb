@@ -168,7 +168,7 @@ class Subject < SliceRecord
   end
 
   def generate_subject_code
-    "INN#{format('%05d', next_subject_code_number)}"
+    "#{ENV["code_prefix"]}#{format("%05d", next_subject_code_number)}"
   end
 
   def next_subject_code_number
@@ -176,7 +176,7 @@ class Subject < SliceRecord
   end
 
   def highest_subject_code_number
-    all_subject_codes.collect { |c| c.gsub("INN", "").to_i }.max || 0
+    all_subject_codes.collect { |c| c.gsub(ENV["code_prefix"], "").to_i }.max || 0
   end
 
   def all_subject_codes
@@ -185,7 +185,7 @@ class Subject < SliceRecord
       page = 1
       loop do
         new_subject_codes = subject_codes_on_page(page)
-        all_codes += new_subject_codes.reject { |c| (/^INN\d{5}$/ =~ c).nil? }
+        all_codes += new_subject_codes.reject { |c| (/^#{ENV["code_prefix"]}\d{5}$/ =~ c).nil? }
         page += 1
         break unless new_subject_codes.size == 20
       end

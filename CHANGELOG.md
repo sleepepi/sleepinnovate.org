@@ -1,5 +1,10 @@
 ## 1.1.0
 
+### Enhancements
+- **Test My Brain Changes**
+  - Subject codes are now configurable to provide a way to differentiate between
+    staging and production servers
+
 ## 1.0.0 (August 28, 2017)
 
 ### Enhancements
