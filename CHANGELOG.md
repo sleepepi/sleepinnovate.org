@@ -1,3 +1,5 @@
+## 1.1.0
+
 ## 1.0.0 (August 28, 2017)
 
 ### Enhancements
