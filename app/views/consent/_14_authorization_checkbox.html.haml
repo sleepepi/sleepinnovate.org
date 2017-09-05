@@ -16,6 +16,8 @@
   %li
     I understand the information given to me.
 
+%h3 Consent of Subject:
+
 - if current_user && current_user.consented?
   = label :read_consent, nil, class: "custom-control custom-checkbox" do
     = check_box_tag :read_consent, "1", true, class: "custom-control-input", disabled: true
