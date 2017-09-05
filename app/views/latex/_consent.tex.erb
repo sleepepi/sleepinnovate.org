@@ -351,18 +351,12 @@ such information after the research is finished. \\
     I have had the opportunity to ask questions.
   \item
     I understand the information given to me.
-
-\paragraph{Signature of Subject:}
+\end{itemize}
 
 I give my consent to take part in this research study and agree to allow my
 health information to be used and shared as described above. \\
 
 <% if @user && !@user.first_login? && @user.consented? %>
-  <% if @user.consent_signature.url %>
-    \begin{figure}[!htpb]
-      \includegraphics[max width=3in]{<%= @user.consent_signature.path %>}
-    \end{figure}
-  <% end %>
   \textbf{Subject} <%= latex_safe current_user.full_name %> \\
   \textbf{Date} <%= current_user.consented_at.strftime("%-m/%-d/%Y") %> \\
   \textbf{Time} <%= current_user.consented_at.strftime("%-l:%M %p") %> \\

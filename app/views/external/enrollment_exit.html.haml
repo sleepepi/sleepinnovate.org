@@ -1,0 +1,13 @@
+- @title = "Enrollment Exit"
+
+.page-box.last-slide.background-p50-grey.center-vertically-xs-sm
+  .container
+    .jumbotron.jumbotron-white
+      %h2 Refused to join Study
+      %p You refused to join the SleepINNOVATE study.
+      %p
+        Please
+        = link_to "notify the person", contact_path
+        in charge of this research study in writing.
+
+      .text-center= link_to "Start new session", landing_path, class: "btn btn-lg btn-outline-primary"

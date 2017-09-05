@@ -1,0 +1,53 @@
+%h2
+  Informed Consent and Authorization
+
+%h3
+  Statement of Person Giving Informed Consent and Authorization
+
+%ul
+  %li
+    I have read this consent form.
+  %li
+    This research study has been explained to me, including risks and possible
+    benefits (if any), other possible treatments or procedures, and other
+    important things about the study.
+  %li
+    I have had the opportunity to ask questions.
+  %li
+    I understand the information given to me.
+
+- if current_user && current_user.consented?
+  = label :read_consent, nil, class: "custom-control custom-checkbox" do
+    = check_box_tag :read_consent, "1", true, class: "custom-control-input", disabled: true
+    %span.custom-control-indicator{ style: "background-color: #333;" }
+    %span.custom-control-description{ style: "color: #333;" }
+      I give my consent to take part in this research study and agree to allow my health information to be used and shared as described above.
+- elsif !current_user && session["enrollment"] == "1"
+  = form_with url: enrollment_consent_path, method: :post, local: true, id: "consent-form" do |form|
+    .form-group.mb-5
+      = form.label :read_consent, class: "custom-control custom-checkbox", for: nil do
+        = form.check_box :read_consent, class: "custom-control-input", id: "read-consent"
+        %span.custom-control-indicator
+        %span.custom-control-description
+          I give my consent to take part in this research study and agree to allow my health information to be used and shared as described above.
+
+    .signature-form-footer
+      .row
+        .col
+          .d-none.d-md-block
+            = render "consent/i_do_not_consent_checkbox", size: "btn-lg"
+          .d-block.d-md-none
+            = render "consent/i_do_not_consent_checkbox", size: ""
+        .col
+          .text-right
+            .d-none.d-md-block
+              = render "consent/i_consent_checkbox", size: "btn-lg"
+            .d-block.d-md-none
+              = render "consent/i_consent_checkbox", size: ""
+- else
+
+  = label :read_consent, nil, class: "custom-control custom-checkbox" do
+    = check_box_tag :read_consent, "1", false, class: "custom-control-input", disabled: true
+    %span.custom-control-indicator
+    %span.custom-control-description{ style: "color: #333;" }
+      I give my consent to take part in this research study and agree to allow my health information to be used and shared as described above.

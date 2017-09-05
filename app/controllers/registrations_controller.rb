@@ -11,7 +11,10 @@ class RegistrationsController < Devise::RegistrationsController
   private
 
   def after_sign_up_path_for(resource)
-    consent_path
+    resource.update consented_at: session[:consented_at] if session[:consented_at].present?
+    session[:consented_at] = nil
+    session[:enrollment] = nil
+    profile_complete_path
   end
 
   def check_captcha

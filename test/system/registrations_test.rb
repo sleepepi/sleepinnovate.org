@@ -9,7 +9,10 @@ class RegistrationsTest < ApplicationSystemTestCase
     screenshot("register-consent")
     click_on "get started"
     screenshot("register-consent")
-    click_on "Register and enroll now"
+    click_on "Read consent"
+    assert_selector "h1", text: "Consent"
+    page.execute_script("$(\"#read-consent\").click();")
+    click_on "I Consent"
     assert_selector "div", text: "Create your account"
     fill_in "user[full_name]", with: "John Smith"
     fill_in "user[email]", with: "jsmith@example.com"
@@ -17,13 +20,7 @@ class RegistrationsTest < ApplicationSystemTestCase
     click_on "Create Account"
     assert_equal "John Smith", User.last.full_name
     assert_equal "jsmith@example.com", User.last.email
-    assert_selector "h1", text: "Consent"
     screenshot("register-consent")
-    click_on "Sign on next page"
-    sleep(0.5) # Allow time to setup canvas for drawing
-    draw_on_canvas
-    screenshot("register-consent")
-    click_on "I Consent"
     assert_equal true, User.last.consented?
     assert_selector "h1", text: "Complete Your Profile"
     select "Dec", from: "date_of_birth[month]"
@@ -43,25 +40,12 @@ class RegistrationsTest < ApplicationSystemTestCase
     screenshot("register-refuse")
     click_on "get started"
     screenshot("register-refuse")
-    click_on "Register and enroll now"
-    assert_selector "div", text: "Create your account"
-    fill_in "user[full_name]", with: "John Smith"
-    fill_in "user[email]", with: "jsmith@example.com"
-    screenshot("register-refuse")
-    click_on "Create Account"
-    assert_equal "John Smith", User.last.full_name
-    assert_equal "jsmith@example.com", User.last.email
-    assert_selector "h1", text: "Consent"
-    screenshot("register-refuse")
-    click_on "Sign on next page"
+    click_on "Read consent"
     screenshot("register-refuse")
     page.accept_confirm "Click \"OK\" to exit enrollment process." do
       click_on "I Do Not Consent"
     end
     assert_selector "h2", text: "Refused to join Study"
-    assert_equal false, User.last.consented?
-    assert_equal false, User.last.withdrawn?
-    assert_equal true, User.last.refused?
     screenshot("register-refuse")
   end
 
@@ -70,7 +54,7 @@ class RegistrationsTest < ApplicationSystemTestCase
     screenshot("register-skip-consent")
     click_on "get started"
     screenshot("register-skip-consent")
-    click_on "Register and enroll now"
+    visit new_user_registration_url
     assert_selector "div", text: "Create your account"
     fill_in "user[full_name]", with: "John Smith"
     fill_in "user[email]", with: "jsmith@example.com"
@@ -78,8 +62,6 @@ class RegistrationsTest < ApplicationSystemTestCase
     click_on "Create Account"
     assert_equal "John Smith", User.last.full_name
     assert_equal "jsmith@example.com", User.last.email
-    assert_selector "h1", text: "Consent"
-    screenshot("register-skip-consent")
     visit dashboard_url
     assert_equal false, User.last.consented?
     assert_selector "h2", text: "Consent to study"
@@ -91,7 +73,10 @@ class RegistrationsTest < ApplicationSystemTestCase
     screenshot("register-skip-profile")
     click_on "get started"
     screenshot("register-skip-profile")
-    click_on "Register and enroll now"
+    click_on "Read consent"
+    assert_selector "h1", text: "Consent"
+    page.execute_script("$(\"#read-consent\").click();")
+    click_on "I Consent"
     assert_selector "div", text: "Create your account"
     fill_in "user[full_name]", with: "John Smith"
     fill_in "user[email]", with: "jsmith@example.com"
@@ -99,13 +84,7 @@ class RegistrationsTest < ApplicationSystemTestCase
     click_on "Create Account"
     assert_equal "John Smith", User.last.full_name
     assert_equal "jsmith@example.com", User.last.email
-    assert_selector "h1", text: "Consent"
     screenshot("register-skip-profile")
-    click_on "Sign on next page"
-    sleep(0.5) # Allow time to setup canvas for drawing
-    draw_on_canvas
-    screenshot("register-skip-profile")
-    click_on "I Consent"
     assert_equal true, User.last.consented?
     visit dashboard_url
     assert_equal false, User.last.profile_complete?

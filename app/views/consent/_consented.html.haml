@@ -1,13 +1,13 @@
 %table{ style: "width: 100%;" }
-  %col{ width: "300px" }
+  %col{ width: "50%" }
   %col
   %col
   %tr
     %td
       - if current_user.first_login?
-        %small.text-muted Signature hidden for your privacy.
+        %small.text-muted Name hidden for your privacy.
       - else
-        = image_tag signature_path, style: "max-width: 100%; height: auto;"
+        = current_user.full_name
     %td{ style: "vertical-align: bottom;" }= current_user.consented_at.strftime("%-m/%-d/%Y")
     %td.nowrap{ style: "vertical-align: bottom;" }= current_user.consented_at.strftime("%-l:%M %p")
   %tr

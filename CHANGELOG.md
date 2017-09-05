@@ -1,6 +1,8 @@
 ## 1.1.0
 
 ### Enhancements
+- **Consent Changes**
+  - Consent moved ahead of registration and consent signature removed
 - **Profile Changes**
   - Improved routes to prevent users from reloading paths that do not exist
 - **Survey Changes**

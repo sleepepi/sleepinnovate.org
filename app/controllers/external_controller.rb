@@ -8,9 +8,27 @@ class ExternalController < ApplicationController
   # def about
   # end
 
+  # POST /enrollment/start
+  def enrollment_start
+    session[:enrollment] = "1"
+    redirect_to consent_path
+  end
+
   # GET /consent
   def consent
-    render layout: "full_page_no_header_no_footer" if current_user && current_user.first_login?
+    render layout: "full_page_no_header_no_footer" if session[:enrollment] == "1"
+  end
+
+  # POST /enrollment/consent
+  def enrollment_consent
+    session[:consented_at] = Time.zone.now
+    redirect_to new_user_registration_path
+  end
+
+  # GET /enrollment/exit
+  def enrollment_exit
+    session[:consented_at] = nil
+    session[:enrollment] = nil
   end
 
   # GET /consent.pdf

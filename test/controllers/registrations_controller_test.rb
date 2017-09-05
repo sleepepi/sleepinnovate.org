@@ -20,6 +20,6 @@ class RegistrationsControllerTest < ActionDispatch::IntegrationTest
       post user_registration_path(user: user_params)
     end
     assert_equal I18n.t("devise.registrations.signed_up"), flash[:notice]
-    assert_redirected_to consent_path
+    assert_redirected_to profile_complete_path
   end
 end
