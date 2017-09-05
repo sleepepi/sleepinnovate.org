@@ -1,5 +1,4 @@
 @extensionsReady = ->
-  signatureReady()
   tooltipsReady()
 
 @componentsReady = ->

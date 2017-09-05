@@ -30,22 +30,19 @@
         %span.custom-control-indicator
         %span.custom-control-description
           I give my consent to take part in this research study and agree to allow my health information to be used and shared as described above.
-
-    .signature-form-footer
-      .row
-        .col
+    .row
+      .col
+        .d-none.d-md-block
+          = render "consent/i_do_not_consent_checkbox", size: "btn-lg"
+        .d-block.d-md-none
+          = render "consent/i_do_not_consent_checkbox", size: ""
+      .col
+        .text-right
           .d-none.d-md-block
-            = render "consent/i_do_not_consent_checkbox", size: "btn-lg"
+            = render "consent/i_consent_checkbox", size: "btn-lg"
           .d-block.d-md-none
-            = render "consent/i_do_not_consent_checkbox", size: ""
-        .col
-          .text-right
-            .d-none.d-md-block
-              = render "consent/i_consent_checkbox", size: "btn-lg"
-            .d-block.d-md-none
-              = render "consent/i_consent_checkbox", size: ""
+            = render "consent/i_consent_checkbox", size: ""
 - else
-
   = label :read_consent, nil, class: "custom-control custom-checkbox" do
     = check_box_tag :read_consent, "1", false, class: "custom-control-input", disabled: true
     %span.custom-control-indicator

@@ -17,30 +17,6 @@ class InternalControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "should get consent signature page for unconsented user" do
-    login(@unconsented)
-    get consent_signature_url
-    assert_response :success
-  end
-
-  test "should not get consent signature page for consented user" do
-    login(@consented)
-    get consent_signature_url
-    assert_redirected_to consent_url
-  end
-
-  test "should not get consent signature page for user who refused to join study" do
-    login(@refused)
-    get consent_signature_url
-    assert_redirected_to consent_url
-  end
-
-  test "should not get consent signature page for user who withdrew from study" do
-    login(@withdrawn)
-    get consent_signature_url
-    assert_redirected_to consent_url
-  end
-
   test "should get dashboard for consented user" do
     login(@consented)
     get dashboard_url

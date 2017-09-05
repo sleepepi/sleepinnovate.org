@@ -36,10 +36,8 @@ Rails.application.routes.draw do
   scope module: :internal do
     post :consent, action: :submit_consent
     delete :consent, action: :revoke_consent
-    get :consent_signature, path: "consent/signature"
     get :awards
     get :dashboard
-    get :signature
     get :test_my_brain, path: "test-my-brain"
     get :parking, path: "parking-voucher"
     get :whats_next, path: "whats-next"

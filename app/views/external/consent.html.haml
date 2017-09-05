@@ -32,19 +32,3 @@
         = render "consent/consented"
     - else
       = render "consent/14_authorization_checkbox"
-
-- if false
-  =# render "consent/14_authorization" unless current_user && current_user.unconsented?
-  - if current_user
-    - if current_user.refused?
-      = render "consent/refused"
-    - elsif current_user.withdrawn?
-      = render "consent/withdrawn"
-    - elsif current_user.consented?
-      = render "consent/consented"
-  - if current_user && current_user.unconsented?
-    = render "consent/continue_to_signature"
-  - elsif current_user
-    = render "consent/back_to_dashboard"
-  - else
-    = render "consent/start_enrollment"
