@@ -72,6 +72,8 @@ Rails.application.routes.draw do
     get :leave_study, path: "leave-study"
     get :password
     patch :change_password, path: "password"
+    get :email
+    patch :change_email, path: "email"
   end
 
   namespace :survey do

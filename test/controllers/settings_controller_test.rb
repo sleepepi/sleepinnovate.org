@@ -72,4 +72,56 @@ class SettingsControllerTest < ActionDispatch::IntegrationTest
     assert_template "password"
     assert_response :success
   end
+
+  test "should change email" do
+    login(@regular_user)
+    patch settings_change_email_url, params: {
+      user: {
+        current_password: "PASSword1",
+        email: "yfish2@example.com",
+        email_confirmation: "yfish2@example.com"
+      }
+    }
+    assert_equal "Your email has been changed.", flash[:notice]
+    assert_redirected_to settings_path
+  end
+
+  test "should not change email as user with invalid current password" do
+    login(@regular_user)
+    patch settings_change_email_url, params: {
+      user: {
+        current_password: "invalid",
+        email: "yfish2@example.com",
+        email_confirmation: "yfish2@example.com"
+      }
+    }
+    assert_template "email"
+    assert_response :success
+  end
+
+  test "should not change email with new email mismatch" do
+    login(@regular_user)
+    patch settings_change_email_url, params: {
+      user: {
+        current_password: "PASSword1",
+        email: "yfish2@example.com",
+        email_confirmation: "mismatched"
+      }
+    }
+    assert_template "email"
+    assert_response :success
+  end
+
+  test "should not change email without meeting email requirements" do
+    login(@regular_user)
+    patch settings_change_email_url, params: {
+      user: {
+        current_password: "PASSword1",
+        email: "yfish2examplecom",
+        email_confirmation: "yfish2examplecom"
+      }
+    }
+    assert_template "email"
+    assert_response :success
+  end
 end

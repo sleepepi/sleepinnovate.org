@@ -13,8 +13,9 @@
 
           %ul
             - if current_user.consented?
-              %li= link_to "Update my date of birth.", profile_dob_path
-              %li= link_to "Update my address.", profile_address_path
+              - if false
+                %li= link_to "Update my date of birth.", profile_dob_path
+                %li= link_to "Update my address.", profile_address_path
             - elsif current_user.refused?
               %li.text-muted You have refused to join the study.
             - elsif current_user.withdrawn?
@@ -23,6 +24,7 @@
               %li.text-muted You have not yet consented to be part of the study.
 
             - if !current_user.consent_revoked? && !current_user.first_login?
+              %li= link_to "Update my email.", settings_email_path
               %li= link_to "Update my password.", settings_password_path
 
       .card

@@ -5,6 +5,9 @@
   - Consent moved ahead of registration and consent signature removed
 - **Profile Changes**
   - Improved routes to prevent users from reloading paths that do not exist
+- **Settings Changes**
+  - Removed ability to update Date of Birth and Address from settings
+  - Users can now update their email from settings page
 - **Survey Changes**
   - Time of day variables now correctly set PM variables that have PM set as
     default value
