@@ -47,13 +47,17 @@ Rails.application.routes.draw do
     get :returning_from, path: "returning-from/:external/:subject_code"
   end
 
+  scope module: :profile do
+    get :profile, to: redirect("settings")
+  end
+
   namespace :profile do
     get :address
     patch :change_address, path: "address"
     get :dob
     patch :change_dob, path: "dob"
     get :complete
-    patch :complete_submit, path: "profile"
+    patch :complete_submit, path: "complete"
   end
 
   scope module: :settings do

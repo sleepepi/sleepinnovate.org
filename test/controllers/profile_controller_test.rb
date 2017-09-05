@@ -8,6 +8,12 @@ class ProfileControllerTest < ActionDispatch::IntegrationTest
     @consented = users(:consented)
   end
 
+  test "should get profile and redirect to settings" do
+    login(@consented)
+    get profile_url
+    assert_redirected_to settings_url
+  end
+
   test "should get complete your profile for consented user" do
     login(@consented)
     get profile_complete_url
@@ -67,7 +73,7 @@ class ProfileControllerTest < ActionDispatch::IntegrationTest
     patch profile_address_url, params: { address: "123 Road Way, City, ST 12345" }
     @consented.reload
     assert_equal "123 Road Way, City, ST 12345", @consented.address
-    assert_redirected_to settings_path
+    assert_redirected_to settings_url
   end
 
   test "should not update address with blank address for consented user" do
@@ -84,7 +90,7 @@ class ProfileControllerTest < ActionDispatch::IntegrationTest
     }
     @consented.reload
     assert_equal "1984-12-31", @consented.date_of_birth
-    assert_redirected_to settings_path
+    assert_redirected_to settings_url
   end
 
   test "should not update date of birth with invalid date for consented user" do

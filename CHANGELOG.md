@@ -4,6 +4,8 @@
 - **Test My Brain Changes**
   - Subject codes are now configurable to provide a way to differentiate between
     staging and production servers
+- **Profile Changes**
+  - Improved routes to prevent users from reloading paths that do not exist
 
 ## 1.0.0 (August 28, 2017)
 
