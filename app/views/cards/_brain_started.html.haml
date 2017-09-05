@@ -13,7 +13,7 @@
       %div{ style: "color: #bdbdbd;" } Continue testing your brain!
     .text-center
       %p.card-text
-        = link_to "#{ENV["test_my_brain_url"]}?id=#{current_user.subject_code}", class: "btn btn-warning btn-shadow" do
+        = link_to "#{ENV["test_my_brain_url"]}?id=#{current_user.subject_code}#{current_user.current_event.upcase}", class: "btn btn-warning btn-shadow" do
           Next brain survey
           %i.fa.fa-caret-right
   .card-footer

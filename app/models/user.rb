@@ -52,6 +52,7 @@ class User < ApplicationRecord
   delegate :page_event_survey, to: :subject
   delegate :submit_response_event_survey, to: :subject
   delegate :complete_event_survey, to: :subject
+  delegate :current_event, to: :subject
 
   # Methods
 

@@ -71,7 +71,7 @@ class InternalController < ApplicationController
   # POST /test-my-brain/start
   def test_my_brain_start
     current_user.test_my_brain_started!
-    redirect_to "#{ENV["test_my_brain_url"]}?id=#{current_user.subject_code}"
+    redirect_to "#{ENV["test_my_brain_url"]}?id=#{current_user.subject_code}#{current_user.current_event.upcase}"
   end
 
   # POST /test-my-brain/complete

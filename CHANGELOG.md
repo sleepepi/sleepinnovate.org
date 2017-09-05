@@ -13,6 +13,7 @@
 - **Test My Brain Changes**
   - Subject codes are now configurable to provide a way to differentiate between
     staging and production servers
+  - Subject code now includes event slug when forwarding to Test My Brain
 
 ## 1.0.0 (August 28, 2017)
 

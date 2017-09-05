@@ -10,6 +10,10 @@ class Subject < SliceRecord
     find_or_create_subject
   end
 
+  def current_event
+    "Baseline"
+  end
+
   def total_baseline_surveys_count
     if baseline_event
       baseline_event.event_designs.size
