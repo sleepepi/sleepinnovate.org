@@ -29,6 +29,7 @@ class ProfileControllerTest < ActionDispatch::IntegrationTest
     @consented.reload
     assert_equal "1984-12-31", @consented.date_of_birth
     assert_equal "123 Road Way", @consented.address
+    assert_equal "Welcome to the study! Check your email to complete registration.", flash[:notice]
     assert_redirected_to dashboard_url
   end
 
