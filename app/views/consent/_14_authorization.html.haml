@@ -16,9 +16,67 @@
   %li
     I understand the information given to me.
 
-%h3
-  Signature of Subject:
+%h3 Consent of Subject:
 
-%p
-  I give my consent to take part in this research study and agree to allow my
-  health information to be used and shared as described above.
+- if current_user && current_user.consented?
+  = label :read_consent, nil, class: "custom-control custom-checkbox" do
+    = check_box_tag :read_consent, "1", true, class: "custom-control-input", disabled: true
+    %span.custom-control-indicator{ style: "background-color: #333;" }
+    %span.custom-control-description{ style: "color: #333;" }
+      I give my consent to take part in this research study and agree to allow my health information to be used and shared as described above.
+- elsif (!current_user && session["enrollment"] == "1") || (current_user && current_user.unconsented?)
+  = form_with url: enrollment_consent_path, method: :post, local: true, id: "consent-form" do |form|
+    .form-group.mb-5
+      = form.label :read_consent, class: "custom-control custom-checkbox", for: nil do
+        = form.check_box :read_consent, class: "custom-control-input", id: "read-consent"
+        %span.custom-control-indicator
+        %span.custom-control-description
+          I give my consent to take part in this research study and agree to allow my health information to be used and shared as described above.
+    .row
+      .col
+        .d-none.d-md-block
+          = render "consent/i_do_not_consent_checkbox", size: "btn-lg"
+        .d-block.d-md-none
+          = render "consent/i_do_not_consent_checkbox", size: ""
+      .col
+        .text-right
+          .d-none.d-md-block
+            = render "consent/i_consent_checkbox", size: "btn-lg"
+          .d-block.d-md-none
+            = render "consent/i_consent_checkbox", size: ""
+- else
+  = label :read_consent, nil, class: "custom-control custom-checkbox" do
+    = check_box_tag :read_consent, "1", false, class: "custom-control-input", disabled: true
+    %span.custom-control-indicator
+    %span.custom-control-description{ style: "color: #333;" }
+      I give my consent to take part in this research study and agree to allow my health information to be used and shared as described above.
+
+- if current_user
+  - if current_user.refused?
+    .alert.alert-warning.mb-0 You refused to join the SleepINNOVATE study.
+  - elsif current_user.withdrawn?
+    .alert.alert-warning.mb-0 You have withdrawn from the SleepINNOVATE study.
+  - elsif current_user.consented?
+    %table{ style: "width: 100%;" }
+      %col{ width: "50%" }
+      %col
+      %col
+      %tr
+        %td
+          - if current_user.first_login?
+            %small.text-muted Name hidden for your privacy.
+          - else
+            = current_user.full_name
+        %td{ style: "vertical-align: bottom;" }= current_user.consented_at.strftime("%-m/%-d/%Y")
+        %td.nowrap{ style: "vertical-align: bottom;" }= current_user.consented_at.strftime("%-l:%M %p")
+      %tr
+        %td
+          %div{ style: "border-top: 1px solid #333;" }
+            %strong Subject
+        %td
+          %div{ style: "border-top: 1px solid #333;" }
+            %strong Date
+        %td
+          %div{ style: "border-top: 1px solid #333;" }
+            %strong Time
+

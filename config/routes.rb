@@ -23,7 +23,7 @@ Rails.application.routes.draw do
     get :consent
     post :enrollment_start, path: "enrollment/start"
     get :enrollment_exit, path: "enrollment/exit"
-    # get :enrollment_consent, to: redirect("consent")
+    get :enrollment_consent, path: "enrollment/consent", to: redirect("consent")
     post :enrollment_consent, path: "enrollment/consent"
     get :contact
     get :landing

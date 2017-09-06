@@ -21,8 +21,13 @@ class ExternalController < ApplicationController
 
   # POST /enrollment/consent
   def enrollment_consent
-    session[:consented_at] = Time.zone.now
-    redirect_to new_user_registration_path
+    if current_user
+      current_user.consent!
+      redirect_to dashboard_path, notice: "Welcome to the study!"
+    else
+      session[:consented_at] = Time.zone.now
+      redirect_to new_user_registration_path
+    end
   end
 
   # GET /enrollment/exit

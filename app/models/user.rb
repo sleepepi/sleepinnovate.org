@@ -61,7 +61,7 @@ class User < ApplicationRecord
     end
   end
 
-  def consent!(data_uri)
+  def consent!
     update(consented_at: Time.zone.now, consent_revoked_at: nil)
     send_consent_pdf_email_in_background
   end
