@@ -11,7 +11,7 @@ class RegistrationsTest < ApplicationSystemTestCase
     screenshot("register-consent")
     click_on "Read consent"
     assert_selector "h1", text: "Consent"
-    page.execute_script("$(\"#read-consent\").click();")
+    page.execute_script("$(\"#read_consent\").click();")
     click_on "I Consent"
     assert_selector "div", text: "Create your account"
     fill_in "user[full_name]", with: "John Smith"
@@ -75,7 +75,7 @@ class RegistrationsTest < ApplicationSystemTestCase
     screenshot("register-skip-profile")
     click_on "Read consent"
     assert_selector "h1", text: "Consent"
-    page.execute_script("$(\"#read-consent\").click();")
+    page.execute_script("$(\"#read_consent\").click();")
     click_on "I Consent"
     assert_selector "div", text: "Create your account"
     fill_in "user[full_name]", with: "John Smith"
