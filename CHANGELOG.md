@@ -1,4 +1,4 @@
-## 1.1.0
+## 1.1.0 (September 12, 2017)
 
 ### Enhancements
 - **Consent Changes**
