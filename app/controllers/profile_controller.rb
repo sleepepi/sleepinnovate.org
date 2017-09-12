@@ -16,7 +16,7 @@ class ProfileController < ApplicationController
   def complete_submit
     dob = parse_date_of_birth
     if current_user.update_profile!(dob, params[:address])
-      redirect_to dashboard_path
+      redirect_to dashboard_path, notice: "Welcome to the study! Check your email to complete registration."
     else
       @address_error = params[:address].blank?
       @date_error = \

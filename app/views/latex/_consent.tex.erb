@@ -23,17 +23,17 @@ We will give you a signed copy of this form to keep. \\
 % Section 2
 \section*{Why is this research study being done?}
 
-The Sleep INNOVATE study is paid for by the National Heart, Lung, and Blood
+The SleepINNOVATE study is paid for by the National Heart, Lung, and Blood
 Institute (NHLBI) of the National Institutes of Health (NIH). The study is led
 by Dr. Susan Redline from Brigham and Women's Hospital in Boston, MA. She and
 her staff are available to answer any questions you may have. Please email
 support@sleepinnovate.org with any questions or call 617-732-5859. \\
 
-The purpose of the Sleep INNOVATE study is to engage people with sleep
-disorders to share health information needed for research that will improve
-the health and well-being of adults with sleep disorders. \\
+The purpose of the SleepINNOVATE study is to engage people with sleep disorders
+to share health information needed for research that will improve the health and
+well-being of adults with sleep disorders. \\
 
-We hope to enroll at least 2,000 people into the Sleep INNOVATE study. We are
+We hope to enroll at least 2,000 people into the SleepINNOVATE study. We are
 asking you to take part in this research study because you have had a sleep
 study, are scheduled to have a sleep study, or have a diagnosis of a sleep
 disorder. You need to be 18 or older and have access to a computer or mobile
@@ -63,9 +63,13 @@ The health surveys will take less than 30 minutes to complete for most people.
 In addition, we will ask you to take a 20 minute brain quiz to help us
 understand the relationship between sleep and brain functions. This quiz will
 ask you to pay attention to words or pictures on your computer screen and make
-responses using the keyboard and mouse. \\
+responses using the keyboard and mouse. The brain quizzes are administered by a
+non-profit organization called The Many Brains Project (testmybrain.org). This
+nonprofit organization works with researchers and educators to create testing
+tools for research studies. The Many Brains Project will have access to the
+testing results but no other information that could identify you.\\
 
-Periodically, we will ask you to log onto the Sleep Innovate study website and
+Periodically, we will ask you to log onto the SleepINNOVATE study website and
 complete a 15 minute health survey and another 20 minute brain quiz. We will
 ask you to do this approximately 3 months and every 6 to 12 months. \\
 
@@ -79,10 +83,12 @@ information we would like to collect are: \\
     sleep study, CPAP adherence data) (if you have had a sleep study or use CPAP
     type devices).
   \item
-    Your Partners Health electronic medical records (such as from Epic or
-    Biobank Partners Commons). We would like to extract information on your
-    health conditions, treatments, health behaviors, hospitalizations, and
-    procedures, and laboratory results.
+    Your Partners Health electronic medical records. We would like to extract
+    information on your health conditions, treatments, health behaviors,
+    hospitalizations, and procedures, and laboratory results.
+  \item
+    We may contact you in the future to get additional information and ask if
+    you are interested in joining other research studies.
 \end{itemize}
 
 After accessing this information, we would remove "identifying information"
@@ -94,11 +100,11 @@ record numbers, dates of procedures, etc) we would like you to give us
 permission to have your sleep and health information deposited in a research
 repository so they can be analyzed by other researchers. \\
 
-We are also asking you to enroll into the Partners Biobank if you have not
-already enrolled, or declined to enroll. We will give you more information
-about the Biobank after you decide to sign up for the Sleep Innovate study.
-You will sign a separate consent form to indicate your willingness to
-participate in the Partners Biobank. \\
+After you decide to sign up for the SleepINNOVATE study, we will also ask you to
+enroll into the Partners Biobank if you have not already enrolled, or declined
+to enroll. We understand you may have been asked to take part in the Partners
+Biobank in the past. We would like to review this study with you again, and if
+you wish to take part, we will review a separate consent form with you. \\
 
 The researchers will benefit from having these health data over many years to
 see how health changes over time. Information collected about you will be
@@ -108,10 +114,17 @@ information will not be used. \\
 
 \subsection*{We will send you reminder emails:}
 
-When there is a study activity that we want you to complete or consider, we
-will contact you. We plan to update your health status at period intervals
-such as after 3 months, 6 months, one year and approximately every year
-thereafter. We will contact you by email. \\
+After you consent to the SleepINNOVATE study, you will create an ID and password
+so that you can access your account in the study website. During the time you
+are enrolled in the study, we will contact you by email when there is a new
+survey or brain quiz that we want you to complete or consider. We plan to update
+your health status at period intervals such as after 3 months, 6 months, one
+year and approximately every year thereafter. \\
+
+These reminder emails will not be encrypted. However, we will never send your
+personal information in an email. We will only send you a link to the
+SleepINNOVATE study website for you to sign in with your ID and password. The
+reminder emails will be sent to the email address that you give us.
 
 % Section 5
 \section*{What are the risks and possible discomforts from being in this research study?}
@@ -138,7 +151,11 @@ sleep disorders and participate in forums and blogs to learn from other
 patients and clinicians about sleep disorders. \\
 
 We hope that your participation will help improve our understanding of sleep
-disorders and lead to improved treatments and diagnoses. \\
+disorders and lead to improved treatments and diagnoses. In addition, if other
+Partners research staff have approval from the Partners Ethics Board that
+oversees research, they will be able to request access of the data for
+additional research projects. These additional research projects may also lead
+to improved treatments and diagnoses. \\
 
 % Section 7
 \section*{Can I still get medical care within Partners if I don't take part in this research study, or if I stop taking part?}
@@ -351,18 +368,13 @@ such information after the research is finished. \\
     I have had the opportunity to ask questions.
   \item
     I understand the information given to me.
+\end{itemize}
 
-\paragraph{Signature of Subject:}
-
+\subsection*{Consent of Subject:}
 I give my consent to take part in this research study and agree to allow my
 health information to be used and shared as described above. \\
 
 <% if @user && !@user.first_login? && @user.consented? %>
-  <% if @user.consent_signature.url %>
-    \begin{figure}[!htpb]
-      \includegraphics[max width=3in]{<%= @user.consent_signature.path %>}
-    \end{figure}
-  <% end %>
   \textbf{Subject} <%= latex_safe current_user.full_name %> \\
   \textbf{Date} <%= current_user.consented_at.strftime("%-m/%-d/%Y") %> \\
   \textbf{Time} <%= current_user.consented_at.strftime("%-l:%M %p") %> \\

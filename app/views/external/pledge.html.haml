@@ -49,6 +49,6 @@
 
 
   .text-center
-    = link_to new_user_registration_path, class: "btn btn-lg btn-success btn-shadow" do
-      Register and enroll now
+    = link_to enrollment_start_path, method: :post, class: "btn btn-lg btn-success btn-shadow" do
+      Read consent
       %i.fa.fa-caret-right

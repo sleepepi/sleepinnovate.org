@@ -67,8 +67,8 @@ class ActionDispatch::IntegrationTest
       { "Content-Type" => "application/json" },
       [
         [
-          { id: 1, subject_code: "INN00001" },
-          { id: 2, subject_code: "INN00002" }
+          { id: 1, subject_code: "#{ENV["code_prefix"]}00001" },
+          { id: 2, subject_code: "#{ENV["code_prefix"]}00002" }
         ].to_json
       ]
     ]
@@ -79,7 +79,7 @@ class ActionDispatch::IntegrationTest
       201,
       { "Content-Type" => "application/json" },
       [
-        { id: 3, subject_code: "INN00003" }.to_json
+        { id: 3, subject_code: "#{ENV["code_prefix"]}00003" }.to_json
       ]
     ]
   end

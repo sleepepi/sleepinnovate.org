@@ -4,26 +4,10 @@
 class InternalController < ApplicationController
   before_action :authenticate_user!
   before_action :check_parking_voucher, only: :parking
-  before_action :check_unconsented, only: [:consent_signature, :submit_consent]
   before_action :check_consented, only: :surveys
   before_action :check_not_first_login, only: :surveys
 
   layout "full_page"
-
-  # GET /consent/signature
-  def consent_signature
-    render layout: "full_page_no_header_no_footer"
-  end
-
-  # POST /consent
-  def submit_consent
-    current_user.consent!(params[:data_uri])
-    if current_user.consented?
-      redirect_to profile_complete_path
-    else
-      render :consent_signature
-    end
-  end
 
   # DELETE /consent
   def revoke_consent
@@ -35,11 +19,6 @@ class InternalController < ApplicationController
         "You left the SleepINNOVATE study."
       end
     redirect_to dashboard_path, notice: notice
-  end
-
-  # GET /signature
-  def signature
-    send_file File.join(CarrierWave::Uploader::Base.root, current_user.consent_signature.url)
   end
 
   # GET /returning-from/:location/:subject_code
@@ -71,7 +50,7 @@ class InternalController < ApplicationController
   # POST /test-my-brain/start
   def test_my_brain_start
     current_user.test_my_brain_started!
-    redirect_to "#{ENV["test_my_brain_url"]}?id=#{current_user.subject_code}"
+    redirect_to "#{ENV["test_my_brain_url"]}?id=#{current_user.subject_code}#{current_user.current_event.upcase}"
   end
 
   # POST /test-my-brain/complete

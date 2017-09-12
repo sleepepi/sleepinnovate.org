@@ -21,6 +21,10 @@ Rails.application.routes.draw do
     get :pledge
     get :print_consent, path: "consent.pdf"
     get :consent
+    post :enrollment_start, path: "enrollment/start"
+    get :enrollment_exit, path: "enrollment/exit"
+    get :enrollment_consent, path: "enrollment/consent", to: redirect("consent")
+    post :enrollment_consent, path: "enrollment/consent"
     get :contact
     get :landing
     get :landing2
@@ -32,10 +36,8 @@ Rails.application.routes.draw do
   scope module: :internal do
     post :consent, action: :submit_consent
     delete :consent, action: :revoke_consent
-    get :consent_signature, path: "consent/signature"
     get :awards
     get :dashboard
-    get :signature
     get :test_my_brain, path: "test-my-brain"
     get :parking, path: "parking-voucher"
     get :whats_next, path: "whats-next"
@@ -47,13 +49,17 @@ Rails.application.routes.draw do
     get :returning_from, path: "returning-from/:external/:subject_code"
   end
 
+  scope module: :profile do
+    get :profile, to: redirect("settings")
+  end
+
   namespace :profile do
     get :address
     patch :change_address, path: "address"
     get :dob
     patch :change_dob, path: "dob"
     get :complete
-    patch :complete_submit, path: "profile"
+    patch :complete_submit, path: "complete"
   end
 
   scope module: :settings do
@@ -66,6 +72,8 @@ Rails.application.routes.draw do
     get :leave_study, path: "leave-study"
     get :password
     patch :change_password, path: "password"
+    get :email
+    patch :change_email, path: "email"
   end
 
   namespace :survey do

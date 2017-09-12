@@ -4,6 +4,26 @@
 - **Gem Changes**
   - Updated to rails 5.1.4.rc1
 
+## 1.1.0 (September 12, 2017)
+
+### Enhancements
+- **Consent Changes**
+  - Consent moved ahead of registration and consent signature removed
+- **Profile Changes**
+  - Improved routes to prevent users from reloading paths that do not exist
+- **Settings Changes**
+  - Removed ability to update Date of Birth and Address from settings
+  - Users can now update their email from settings page
+- **Survey Changes**
+  - Time of day variables now correctly set PM variables that have PM set as
+    default value
+  - Time of day variables now correctly show and hide seconds based on time of
+    day format
+- **Test My Brain Changes**
+  - Subject codes are now configurable to provide a way to differentiate between
+    staging and production servers
+  - Subject code now includes event slug when forwarding to Test My Brain
+
 ## 1.0.0 (August 28, 2017)
 
 ### Enhancements

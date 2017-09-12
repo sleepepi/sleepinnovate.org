@@ -61,7 +61,7 @@ def remote_subjects
     page = 1
     loop do
       new_subjects = subjects_on_page(page)
-      subjects += new_subjects.reject { |id, code| (/^INN\d{5}$/ =~ code).nil? }
+      subjects += new_subjects.reject { |_id, code| (/^#{ENV["code_prefix"]}\d{5}$/ =~ code).nil? }
       page += 1
       break unless new_subjects.size == 20
     end

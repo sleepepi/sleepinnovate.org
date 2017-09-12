@@ -8,7 +8,6 @@
           %i.fa.fa-print
           PDF
       = @title
-
     = render "consent/01_about"
     = render "consent/02_why_research"
     = render "consent/03_how_long"
@@ -22,17 +21,4 @@
     = render "consent/11_injured"
     = render "consent/12_questions"
     = render "consent/13_privacy"
-    = render "consent/14_authorization" unless current_user && current_user.unconsented?
-    - if current_user
-      - if current_user.refused?
-        = render "consent/refused"
-      - elsif current_user.withdrawn?
-        = render "consent/withdrawn"
-      - elsif current_user.consented?
-        = render "consent/consented"
-  - if current_user && current_user.unconsented?
-    = render "consent/continue_to_signature"
-  - elsif current_user
-    = render "consent/back_to_dashboard"
-  - else
-    = render "consent/start_enrollment"
+    = render "consent/14_authorization"

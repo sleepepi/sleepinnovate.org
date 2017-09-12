@@ -4,8 +4,8 @@
       .nowrap
         &copy;
         = Time.zone.today.year
-        = link_to "Boston Sleep", about_path
+        = link_to "Brigham Sleep", about_path
         .float-right{ style: "margin-top: -14px;" }
           = link_to "Questions?", contact_path
           &nbsp;
-          = link_to image_tag("logos/bwh-logo.png", size: "48x56"), "http://www.brighamandwomens.org/"
+          = image_tag "logos/bwh-logo.png", size: "48x56"

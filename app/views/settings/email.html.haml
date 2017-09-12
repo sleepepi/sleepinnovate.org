@@ -1,0 +1,22 @@
+- @title = "Change Email"
+
+.page-box.last-slide.background-p50-grey.center-vertically-xs-sm
+  .panel
+    %h1= @title
+
+    = form_with(model: current_user, url: settings_change_email_path, method: :patch, local: true, id: "email-form") do |form|
+      .form-group
+        = render "layouts/label_or_errors", form: form, object: current_user, key: :current_password, key_name: "Current Password"
+        = form.password_field :current_password, class: "form-control #{"is-invalid" if current_user.errors.key?(:current_password)}", autocomplete: "off"
+
+      .form-group
+        = render "layouts/label_or_errors", form: form, object: current_user, key: :email, key_name: "New Email"
+        = form.email_field :email, class: "form-control #{"is-invalid" if current_user.errors.key?(:email)}", autocomplete: "off", value: params.dig(:user, :email)
+
+      .form-group
+        = render "layouts/label_or_errors", form: form, object: current_user, key: :email_confirmation, key_name: "Email Confirmation"
+        = form.email_field :email_confirmation, class: "form-control #{"is-invalid" if current_user.errors.key?(:email_confirmation)}", autocomplete: "off", value: params.dig(:user, :email_confirmation)
+
+  .text-center
+    = link_to "#", class: "btn btn-lg btn-success btn-shadow", data: { object: "submit", target: "#email-form"  } do
+      Update email

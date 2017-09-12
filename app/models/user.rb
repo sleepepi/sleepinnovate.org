@@ -36,9 +36,6 @@ class User < ApplicationRecord
     message: "must include at least one lowercase letter, one uppercase letter, and one digit"
   }, allow_blank: true
 
-  # Uploaders
-  mount_uploader :consent_signature, SignatureUploader
-
   # Delegations
   delegate :subject_events, to: :subject
   delegate :subject_code, to: :subject
@@ -52,6 +49,7 @@ class User < ApplicationRecord
   delegate :page_event_survey, to: :subject
   delegate :submit_response_event_survey, to: :subject
   delegate :complete_event_survey, to: :subject
+  delegate :current_event, to: :subject
 
   # Methods
 
@@ -63,8 +61,7 @@ class User < ApplicationRecord
     end
   end
 
-  def consent!(data_uri)
-    save_signature!(data_uri)
+  def consent!
     update(consented_at: Time.zone.now, consent_revoked_at: nil)
     send_consent_pdf_email_in_background
   end
@@ -210,23 +207,6 @@ class User < ApplicationRecord
     Date.parse(date_of_birth)
   rescue
     nil
-  end
-
-  def save_signature!(data_uri)
-    file = Tempfile.new("consent_signature.png")
-    begin
-      encoded_image = data_uri.split(",")[1]
-      decoded_image = Base64.decode64(encoded_image)
-      File.open(file, "wb") { |f| f.write(decoded_image) }
-      file.define_singleton_method(:original_filename) do
-        "consent_signature.png"
-      end
-      self.consent_signature = file
-      save
-    ensure
-      file.close
-      file.unlink # deletes the temp file
-    end
   end
 
   def send_welcome_email_in_background(token)
