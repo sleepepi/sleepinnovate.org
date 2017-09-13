@@ -3,6 +3,7 @@
 ### Enhancements
 - **Consent Changes**
   - Updated text for "Withdrawn from study" and "Refused to join study" pages
+  - Added consent administrative footer
 - **Dashboard Changes**
   - Test My Brain quizzes and Biobank registration are now accessible
     immediately after registration
