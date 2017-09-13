@@ -6,6 +6,8 @@
 - **Dashboard Changes**
   - Test My Brain quizzes and Biobank registration are now accessible
     immediately after registration
+- **Password Changes**
+  - Helper text added to describe the minimum password requirements
 - **Registration Changes**
   - Added email confirmation to registration form
   - Signature is now required to complete user profile

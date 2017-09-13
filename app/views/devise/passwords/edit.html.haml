@@ -1,7 +1,7 @@
 .page-box.last-slide.background-p50-grey
   .sign-up-form
     .sign-up-form-title
-      Change your password
+      Set your password
 
     = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put, class: "form-vertical", autocomplete: "off" }) do |f|
       = f.hidden_field :reset_password_token
@@ -11,8 +11,17 @@
         = f.password_field :password, class: 'form-control'
         - if @minimum_password_length
           %small.form-text.text-muted
-            = @minimum_password_length
-            characters minimum
+            At least
+            %strong= @minimum_password_length
+            characters, including lowercase letters
+            = succeed "," do
+              %code a-z
+            uppercase letters
+            = succeed "," do
+              %code A-Z
+            and digits
+            = succeed "." do
+              %code 0-9
       .form-group
         = render 'layouts/label_or_errors', form: f, object: resource, key: :password_confirmation, key_name: 'Confirm new password'
         = f.password_field :password_confirmation, class: 'form-control'
@@ -22,4 +31,4 @@
         = link_to "Request a new reset token.", new_password_path(resource_name)
 
       .form-group.submit-btn-container
-        = f.submit "Change my password", class: "btn btn-success btn-block"
+        = f.submit "Update my password", class: "btn btn-success btn-block"
