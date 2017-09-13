@@ -5,6 +5,7 @@
   - Test My Brain quizzes and Biobank registration are now accessible
     immediately after registration
 - **Registration Changes**
+  - Added email confirmation to registration form
   - Signature is now required to complete user profile
 - **Gem Changes**
   - Updated to rails 5.1.4

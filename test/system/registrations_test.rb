@@ -19,6 +19,7 @@ class RegistrationsTest < ApplicationSystemTestCase
     assert_selector "div", text: "Create your account"
     fill_in "user[full_name]", with: "John Smith"
     fill_in "user[email]", with: "jsmith@example.com"
+    fill_in "user[email_confirmation]", with: "jsmith@example.com"
     screenshot("register-consent")
     click_on "Create Account"
     assert_equal "John Smith", User.last.full_name
@@ -65,6 +66,7 @@ class RegistrationsTest < ApplicationSystemTestCase
     assert_selector "div", text: "Create your account"
     fill_in "user[full_name]", with: "John Smith"
     fill_in "user[email]", with: "jsmith@example.com"
+    fill_in "user[email_confirmation]", with: "jsmith@example.com"
     screenshot("register-skip-consent")
     click_on "Create Account"
     assert_equal "John Smith", User.last.full_name
@@ -87,6 +89,7 @@ class RegistrationsTest < ApplicationSystemTestCase
     assert_selector "div", text: "Create your account"
     fill_in "user[full_name]", with: "John Smith"
     fill_in "user[email]", with: "jsmith@example.com"
+    fill_in "user[email_confirmation]", with: "jsmith@example.com"
     screenshot("register-skip-profile")
     click_on "Create Account"
     assert_equal "John Smith", User.last.full_name

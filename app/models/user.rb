@@ -31,6 +31,7 @@ class User < ApplicationRecord
 
   # Validations
   validates :full_name, presence: true
+  validates :email, confirmation: true
   validates :password, format: {
     with: /\A(?=.*[a-z])(?=.*[A-Z])(?=.*\d)./,
     message: "must include at least one lowercase letter, one uppercase letter, and one digit"

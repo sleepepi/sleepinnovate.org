@@ -10,6 +10,10 @@
       = render "layouts/label_or_errors", form: form, object: resource, key: :email
       = form.email_field :email, class: "form-control form-control-danger"
 
+    .form-group
+      = render "layouts/label_or_errors", form: form, object: resource, key: :email_confirmation
+      = form.email_field :email_confirmation, class: "form-control form-control-danger"
+
     - if RECAPTCHA_ENABLED
       .form-group
         %label.form-control-label Human Verification
