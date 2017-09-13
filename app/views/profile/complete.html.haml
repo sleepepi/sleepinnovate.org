@@ -7,11 +7,9 @@
     %p
       Thank you for agreeing to participate in the
       %strong= render "layouts/logo"
-      research study! You're almost ready to help sleep research. To access our
-      surveys, brain quizzes and (if eligible) a parking voucher, please
+      research study! You're almost ready to help sleep research. Please
       %u confirm your identity
       with a few easy questions:
-
 
     = form_with(url: profile_complete_submit_path, method: :patch, local: true, id: "profile-form") do |form|
       .panel-icon.boston-color
@@ -26,5 +24,5 @@
 
   .text-center
     = link_to "#", class: "btn btn-lg btn-success btn-shadow", data: { object: "submit", target: "#profile-form"  } do
-      Finish enrollment
+      Confirm identity
       %i.fa.fa-caret-right

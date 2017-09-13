@@ -16,7 +16,7 @@ class ProfileController < ApplicationController
   def complete_submit
     dob = parse_date_of_birth
     if current_user.update_profile!(dob, params[:address])
-      redirect_to dashboard_path, notice: "Welcome to the study! Check your email to complete registration."
+      redirect_to profile_signature_path
     else
       @address_error = params[:address].blank?
       @date_error = \
@@ -26,6 +26,20 @@ class ProfileController < ApplicationController
           "You must be at least 18 years old to join the study."
         end
       render :complete, layout: "full_page_no_header_no_footer"
+    end
+  end
+
+  # GET /profile/signature
+  def signature
+    render layout: "full_page_no_header_no_footer"
+  end
+
+  # POST /profile/signature
+  def signature_submit
+    if current_user.save_signature!(params[:data_uri])
+      redirect_to dashboard_path, notice: "Welcome to the study! Check your email to complete registration."
+    else
+      render :signature
     end
   end
 

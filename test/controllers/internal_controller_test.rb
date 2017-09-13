@@ -42,6 +42,7 @@ class InternalControllerTest < ActionDispatch::IntegrationTest
       address: "123 Road Way, City, ST 12345",
       sign_in_count: 1
     )
+    users(:consented).save_signature!(IO.readlines(File.join("test", "support", "signatures", "data_uri.txt")).first)
     get parking_url
     assert_response :success
   end
@@ -62,6 +63,7 @@ class InternalControllerTest < ActionDispatch::IntegrationTest
       address: "123 Road Way, City, ST 12345",
       sign_in_count: 2
     )
+    users(:consented).save_signature!(IO.readlines(File.join("test", "support", "signatures", "data_uri.txt")).first)
     get parking_url
     assert_redirected_to dashboard_url
   end

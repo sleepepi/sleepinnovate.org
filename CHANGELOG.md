@@ -4,6 +4,8 @@
 - **Dashboard Changes**
   - Test My Brain quizzes and Biobank registration are now accessible
     immediately after registration
+- **Registration Changes**
+  - Signature is now required to complete user profile
 - **Gem Changes**
   - Updated to rails 5.1.4
   - Updated to haml 5.0.3

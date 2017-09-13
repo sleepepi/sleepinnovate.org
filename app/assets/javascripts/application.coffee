@@ -16,5 +16,8 @@
 #= require popper
 #= require bootstrap
 
+# External
+#= require external/signature_pad-2.3.0.src.js
+
 # Application
 #= require_tree .

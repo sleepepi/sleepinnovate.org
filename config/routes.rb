@@ -60,6 +60,8 @@ Rails.application.routes.draw do
     patch :change_dob, path: "dob"
     get :complete
     patch :complete_submit, path: "complete"
+    get :signature
+    patch :signature_submit, path: "signature"
   end
 
   scope module: :settings do

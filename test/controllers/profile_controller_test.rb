@@ -29,8 +29,7 @@ class ProfileControllerTest < ActionDispatch::IntegrationTest
     @consented.reload
     assert_equal "1984-12-31", @consented.date_of_birth
     assert_equal "123 Road Way", @consented.address
-    assert_equal "Welcome to the study! Check your email to complete registration.", flash[:notice]
-    assert_redirected_to dashboard_url
+    assert_redirected_to profile_signature_url
   end
 
   test "should not complete profile with invalid date of birth for consented user" do
@@ -54,6 +53,34 @@ class ProfileControllerTest < ActionDispatch::IntegrationTest
     @consented.reload
     assert_equal "", @consented.address
     assert_template "complete"
+    assert_response :success
+  end
+
+  test "should get profile signature for consented user" do
+    login(@consented)
+    get profile_signature_url
+    assert_response :success
+  end
+
+  test "should submit signature for consented user" do
+    login(@consented)
+    patch profile_signature_submit_url(
+      data_uri: IO.readlines(File.join("test", "support", "signatures", "data_uri.txt")).first
+    )
+    @consented.reload
+    assert_equal true, @consented.signature.present?
+    assert_equal "Welcome to the study! Check your email to complete registration.", flash[:notice]
+    assert_redirected_to dashboard_url
+  end
+
+  test "should not save blank signature for consented user" do
+    login(@consented)
+    patch profile_signature_submit_url(
+      data_uri: ""
+    )
+    @consented.reload
+    assert_equal false, @consented.signature.present?
+    assert_template "signature"
     assert_response :success
   end
 

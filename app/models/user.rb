@@ -36,6 +36,9 @@ class User < ApplicationRecord
     message: "must include at least one lowercase letter, one uppercase letter, and one digit"
   }, allow_blank: true
 
+  # Uploaders
+  mount_uploader :signature, SignatureUploader
+
   # Delegations
   delegate :subject_events, to: :subject
   delegate :subject_code, to: :subject
@@ -194,7 +197,7 @@ class User < ApplicationRecord
   end
 
   def profile_complete?
-    consented? && dob.present? && address.present?
+    consented? && dob.present? && address.present? && signature.present?
   end
 
   def whats_next?
@@ -264,5 +267,24 @@ class User < ApplicationRecord
     return false if date.blank?
     return false unless at_least_18?(date)
     update(date_of_birth: date)
+  end
+
+  def save_signature!(data_uri)
+    file = Tempfile.new("signature.png")
+    begin
+      encoded_image = data_uri.split(",")[1]
+      decoded_image = Base64.decode64(encoded_image)
+      File.open(file, "wb") { |f| f.write(decoded_image) }
+      file.define_singleton_method(:original_filename) do
+        "signature.png"
+      end
+      self.signature = file
+      save
+    rescue
+      false
+    ensure
+      file.close
+      file.unlink # deletes the temp file
+    end
   end
 end
