@@ -3,11 +3,18 @@
 .page-box.last-slide.background-p50-grey.center-vertically-xs-sm
   .container
     .jumbotron.jumbotron-white
-      %h2 Refused to join Study
-      %p You refused to join the SleepINNOVATE study.
       %p
-        Please
-        = link_to "notify the person", contact_path
-        in charge of this research study in writing.
+        Thank you for considering to participate in
+        = succeed "." do
+          = render "layouts/logo"
 
-      .text-center= link_to "Start new session", landing_path, class: "btn btn-lg btn-outline-primary"
+      %p
+        If you change your mind, please review the consent again. If you have
+        any questions, please
+        = succeed "." do
+          = link_to "contact us", contact_path
+
+    .text-center
+      = link_to landing_path, class: "btn btn-lg btn-success" do
+        Start new session
+        %i.fa.fa-caret-right
