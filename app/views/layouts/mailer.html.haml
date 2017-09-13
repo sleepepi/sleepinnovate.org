@@ -43,11 +43,16 @@
                               You may
                               = succeed '.' do
                                 %a{ href: "#{ENV["website_url"]}/account", style: link_style, target: '_blank' } change your email preferences here
+                            %br
+                            Please remember - SleepINNOVATE emails will not be encrypted. Avoid sending any personal information in an email.
+                        %p{ style: 'font-size:12px;line-height:20px;margin:0 0 16px;margin-top:16px' }
+                          %span{ style: 'max-width:380px;display:block' }
+
                         %p{ style: 'font-size:12px;line-height:20px;margin:0 0 16px;margin-top:16px' }
                           %a{ href: ENV["website_url"], style: link_style, target: '_blank' }= ENV["website_name"]
                           \&nbsp;&bull;&nbsp;
-                          %a{ href: "#{ENV["website_url"]}", style: link_style, target: '_blank' } Sleep and Circadian Disorders
+                          %a{ href: "#{ENV["website_url"]}/contact", style: link_style, target: '_blank' } Sleep and Circadian Disorders
                           %br
-                            %a{ href: "#{ENV["website_url"]}", style: 'color:#989ea6;font-weight:normal;text-decoration:none;word-break:break-word' }
+                            %a{ href: "#{ENV["website_url"]}/contact", style: 'color:#989ea6;font-weight:normal;text-decoration:none;word-break:break-word' }
                               221 Longwood Avenue, BLI 225 &nbsp;&bull;&nbsp; Boston, MA
                               \&nbsp;&bull;&nbsp; 02115

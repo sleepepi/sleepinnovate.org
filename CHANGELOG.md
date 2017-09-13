@@ -9,6 +9,7 @@
   - Made the link to redeeming parking voucher more visible
 - **Email Changes**
   - Added text from consent email to the welcome email
+  - Added footer text on unencrypted emails to email layout
 - **Password Changes**
   - Helper text added to describe the minimum password requirements
 - **Registration Changes**
