@@ -148,7 +148,8 @@ class User < ApplicationRecord
   end
 
   def brain_surveys_viewable?
-    !first_login? && profile_complete?
+    # !first_login? && profile_complete?
+    profile_complete?
   end
 
   def brain_surveys_started?
@@ -160,7 +161,8 @@ class User < ApplicationRecord
   end
 
   def biobank_viewable?
-    !first_login? && profile_complete?
+    # !first_login? && profile_complete?
+    profile_complete?
   end
 
   def biobank_registration_step?

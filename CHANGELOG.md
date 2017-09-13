@@ -1,6 +1,9 @@
 ## 2.0.0
 
 ### Enhancements
+- **Dashboard Changes**
+  - Test My Brain quizzes and Biobank registration are now accessible
+    immediately after registration
 - **Gem Changes**
   - Updated to rails 5.1.4
   - Updated to haml 5.0.3
