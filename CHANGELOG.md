@@ -11,6 +11,8 @@
 - **Registration Changes**
   - Added email confirmation to registration form
   - Signature is now required to complete user profile
+- **Survey Changes**
+  - Starting survey now jumps directly to the first page of the survey
 - **Gem Changes**
   - Updated to rails 5.1.4
   - Updated to haml 5.0.3
