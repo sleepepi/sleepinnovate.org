@@ -6,6 +6,7 @@
 - **Dashboard Changes**
   - Test My Brain quizzes and Biobank registration are now accessible
     immediately after registration
+  - Made the link to redeeming parking voucher more visible
 - **Password Changes**
   - Helper text added to describe the minimum password requirements
 - **Registration Changes**

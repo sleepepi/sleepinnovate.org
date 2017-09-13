@@ -88,11 +88,12 @@
 
 
       - if current_user.parking_voucher? && !parking_voucher_card_enabled
-        .text-center
-          View your
+        %p.lead.text-center
+          %i.fa.fa-car
+          Redeem your
           = succeed "." do
             = link_to "parking voucher", parking_path
       - elsif current_user.whats_next?
-        .text-center
+        %p.lead.text-center
           Congrats, you are all done!
           = link_to "What's next?", whats_next_path
