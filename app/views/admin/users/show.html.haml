@@ -124,7 +124,29 @@
             = @user.brain_baseline_surveys_completed
             of
             = @user.brain_baseline_surveys_count
+      .row{ style: "margin-bottom: 20px;" }
+        .col-md-2
+          .col-form-label
+            %strong Brain Tests
+        .col-md-10
+          %p.form-control-plaintext
+            - @user.brain_tests.each do |brain_test|
+              .card.mb-3
+                .card-body
+                  %p
+                    %strong Battery
+                    - battery = User::TEST_MY_BRAIN_SURVEYS.find { |_battery_name, battery_number| battery_number == brain_test.battery_number }
+                    = battery.first if battery
+                    %code= brain_test.battery_number
 
+                  %p
+                    %strong Test
+                    = brain_test.test_name
+                    %code= brain_test.test_number
+                  %p
+                    %strong Outcomes
+                    = brain_test.test_outcomes
+                .card-footer= brain_test.event.capitalize
 
     - if @user.brain_surveys_completed?
       .row{ style: "margin-bottom: 20px;" }

@@ -10,6 +10,7 @@ end
 
 def reset_survey_counts
   User.update_all(brain_surveys_count: 0)
+  BrainTest.delete_all
 end
 
 def parse_brain_csvs
@@ -35,18 +36,49 @@ def print_header(row)
 end
 
 def print_row(row)
-  puts "Subject: #{subject_code(row)}"
-  puts "Test ID: #{row["test_id"]}"
+  puts "       Subject: #{subject_code(row)}"
+  puts "         Event: #{event(row)}"
+  puts "Battery Number: #{battery_number(row)}"
+  puts "   Test Number: #{test_number(row)}"
+  puts "     Test Name: #{test_name(row)}"
+  puts "      Outcomes: #{test_outcomes(row)}"
 end
 
 def subject_code(row)
-  row["participant_id"]
+  row["userId"].to_s.gsub(event(row), "")
+end
+
+def event(row)
+  row["userId"].to_s.gsub(/^#{ENV["code_prefix"]}\d{5}/, "")
+end
+
+def battery_number(row)
+  row["batteryId"]
+end
+
+def test_number(row)
+  row["testId"]
+end
+
+def test_name(row)
+  row["testName"]
+end
+
+def test_outcomes(row)
+  row["outcomes"]
 end
 
 def increment_subject(row)
   (subject_id, _subject_code) = remote_subjects.select { |_id, code| code == subject_code(row) }
   user = User.find_by(slice_subject_id: subject_id) if subject_id.present?
   if user
+    user.brain_tests.create(
+      event: event(row).downcase,
+      battery_number: battery_number(row),
+      test_name: test_name(row),
+      test_number: test_number(row),
+      test_outcomes: test_outcomes(row)
+    )
     user.increment!(:brain_surveys_count)
     puts "         #{subject_code(row)} surveys: #{user.brain_surveys_count}"
   else

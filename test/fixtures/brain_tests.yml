@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  event: baseline
+  battery_number: 536
+  test_name: test_name
+  test_number: 693
+  test_outcomes: MyText
+  user: one
+
+two:
+  event: baseline
+  battery_number: 536
+  test_name: test_name
+  test_number: 693
+  test_outcomes: MyText
+  user: two

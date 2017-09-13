@@ -25,8 +25,13 @@ class User < ApplicationRecord
   ]
 
   TEST_MY_BRAIN_SURVEYS = [
-    ["Matching Shapes and Numbers", 1],
-    ["Placeholder", 2]
+    ["Matching Shapes and Numbers", 536],
+    ["Memorizing Numbers", 538],
+    ["Connect the Dots", 540],
+    ["Word Knowledge", 541],
+    ["Memorizing Words", 542],
+    ["Maintaining Concentration", 543],
+    ["Follow the Hidden Smileys", 544]
   ]
 
   # Validations
@@ -39,6 +44,9 @@ class User < ApplicationRecord
 
   # Uploaders
   mount_uploader :signature, SignatureUploader
+
+  # Relationships
+  has_many :brain_tests
 
   # Delegations
   delegate :subject_events, to: :subject
@@ -106,6 +114,14 @@ class User < ApplicationRecord
   def brain_baseline_percent
     return 100 if brain_baseline_surveys_count.zero?
     brain_baseline_surveys_completed * 100 / brain_baseline_surveys_count
+  end
+
+  def next_brain_test
+    all_tests_taken = brain_tests.pluck(:battery_number)
+    remaining_tests = TEST_MY_BRAIN_SURVEYS.reject do |_battery_name, battery_number|
+      battery_number.in?(all_tests_taken)
+    end
+    remaining_tests.first.first if remaining_tests.first
   end
 
   def biobank_registration_started!

@@ -16,6 +16,8 @@
   - Signature is now required to complete user profile
 - **Survey Changes**
   - Starting survey now jumps directly to the first page of the survey
+- **Test My Brain Changes**
+  - Improved the import of data from Test My Brain
 - **Gem Changes**
   - Updated to rails 5.1.4
   - Updated to haml 5.0.3
