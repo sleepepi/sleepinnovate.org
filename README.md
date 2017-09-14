@@ -14,6 +14,8 @@ Running on Rails 5.1+ and Ruby 2.4+.
 Instructions for installing prerequisites like Ruby, Git, JavaScript compiler,
 etc.
 
+[Install ImageMagick](https://github.com/nsrr/www.sleepdata.org#installing-mini-magick---image-upload-resizing)
+
 Once you have the prerequisites in place, you can proceed to install bundler
 which will handle most of the remaining dependencies.
 

@@ -2,6 +2,8 @@
 
 # Allows images to be attached to a record.
 class SignatureUploader < CarrierWave::Uploader::Base
+  include CarrierWave::MiniMagick
+
   # Choose what kind of storage to use for this uploader:
   storage :file
   # storage :s3
@@ -26,4 +28,12 @@ class SignatureUploader < CarrierWave::Uploader::Base
   # def filename
   #   "something.jpg" if original_filename
   # end
+
+  def trim
+    manipulate! do |img|
+      img = img.trim
+    end
+  end
+
+  process :trim
 end

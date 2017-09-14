@@ -39,7 +39,7 @@ class ProfileController < ApplicationController
     if current_user.save_signature!(params[:data_uri])
       redirect_to dashboard_path, notice: "Welcome to the study! Check your email to complete registration."
     else
-      render :signature
+      render :signature, layout: "full_page_no_header_no_footer"
     end
   end
 

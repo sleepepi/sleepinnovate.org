@@ -26,6 +26,7 @@
   - Updated to ruby 2.4.2
   - Updated to rails 5.1.4
   - Updated to haml 5.0.3
+  - Updated to mini_magick 4.8.0
   - Updated to simplecov 0.15.1
   - Updated to signature_pad 2.3.1
 
