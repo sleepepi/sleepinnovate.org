@@ -1,5 +1,5 @@
 - if @user.admin?
-  - @title = @user.name
+  - @title = @user.full_name
 - elsif @user.subject_code.present?
   - @title = @user.subject_code
 - else
@@ -25,7 +25,7 @@
           .col-form-label
             %strong Name
         .col-md-10
-          %p.form-control-plaintext= @user.name
+          %p.form-control-plaintext= @user.full_name
 
     .row{ style: "margin-bottom: 20px;" }
       .col-md-2

@@ -69,7 +69,7 @@ def test_outcomes(row)
 end
 
 def increment_subject(row)
-  (subject_id, _subject_code) = remote_subjects.select { |_id, code| code == subject_code(row) }
+  (subject_id, _subject_code) = Subject.remote_subjects.select { |_id, code| code == subject_code(row) }
   user = User.find_by(slice_subject_id: subject_id) if subject_id.present?
   if user
     user.brain_tests.create(
@@ -87,26 +87,3 @@ def increment_subject(row)
   puts
 end
 
-def remote_subjects
-  @remote_subjects ||= begin
-    subjects = []
-    page = 1
-    loop do
-      new_subjects = subjects_on_page(page)
-      subjects += new_subjects.reject { |_id, code| (/^#{ENV["code_prefix"]}\d{5}$/ =~ code).nil? }
-      page += 1
-      break unless new_subjects.size == 20
-    end
-    subjects
-  end
-end
-
-def subjects_on_page(page)
-  params = { page: page }
-  (json, _status) = Helpers::JsonRequest.get("#{SliceRecord.new.project_url}/subjects.json", params)
-  return [] unless json
-  subjects = json.collect do |subject_json|
-    [subject_json["id"], subject_json["subject_code"]]
-  end
-  subjects
-end

@@ -20,7 +20,7 @@
               - if user.admin?
                 = link_to admin_user_path(user), class: "text-success" do
                   %i.fa.fa-user-md
-                  = user.name
+                  = user.full_name
               - elsif user.refused?
                 = link_to admin_user_path(user), class: "small text-muted" do
                   %i.fa.fa-street-view
@@ -29,10 +29,10 @@
                 = link_to admin_user_path(user), class: "small text-muted" do
                   %i.fa.fa-street-view
                   Subject withdrew from study
-              - elsif user.subject_code.present?
+              - elsif Subject.remote_subject_code(user).present?
                 = link_to admin_user_path(user) do
                   %i.fa.fa-bed{ title: "Sleep" }
-                  = user.subject_code
+                  = Subject.remote_subject_code(user)
               - elsif user.unconsented?
                 = link_to admin_user_path(user), class: "small text-muted" do
                   %i.fa.fa-user-secret

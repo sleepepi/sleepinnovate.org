@@ -206,4 +206,34 @@ class Subject < SliceRecord
     end
     subject_codes
   end
+
+  # Returns array of [:user_id, :subject_code] pairs.
+  def self.remote_subjects
+    @remote_subjects ||= begin
+      subjects = []
+      page = 1
+      loop do
+        new_subjects = subjects_on_page(page)
+        subjects += new_subjects
+        page += 1
+        break unless new_subjects.size == 20
+      end
+      subjects
+    end
+  end
+
+  def self.subjects_on_page(page)
+    params = { page: page }
+    (json, _status) = Helpers::JsonRequest.get("#{SliceRecord.new.project_url}/subjects.json", params)
+    return [] unless json
+    subjects = json.collect do |subject_json|
+      [subject_json["id"], subject_json["subject_code"]]
+    end
+    subjects
+  end
+
+  def self.remote_subject_code(user)
+    subject = remote_subjects.find { |user_id, _code| user_id == user.slice_subject_id }
+    subject.last if subject
+  end
 end

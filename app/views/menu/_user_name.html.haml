@@ -1,5 +1,5 @@
 - if current_user.admin?
-  = current_user.name
+  = current_user.full_name
 - elsif current_user.refused?
   Subject Refused
 - elsif current_user.withdrawn?

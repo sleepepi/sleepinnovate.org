@@ -1,7 +1,7 @@
 - if user.admin?
   %h1
     %i.fa.fa-user-md
-    = user.name
+    = user.full_name
 - elsif user.consent_revoked?
   %h1
     %i.fa.fa-street-view

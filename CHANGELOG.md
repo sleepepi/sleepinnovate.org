@@ -1,6 +1,8 @@
 ## 2.0.0
 
 ### Enhancements
+- **Admin Changes**
+  - Added admin export task
 - **Consent Changes**
   - Updated text for "Withdrawn from study" and "Refused to join study" pages
   - Added consent administrative footer

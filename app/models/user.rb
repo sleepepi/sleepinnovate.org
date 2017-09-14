@@ -65,14 +65,6 @@ class User < ApplicationRecord
 
   # Methods
 
-  def name
-    if admin?
-      full_name
-    elsif consented?
-      subject_code
-    end
-  end
-
   def consent!
     update(consented_at: Time.zone.now, consent_revoked_at: nil)
     send_consent_pdf_email_in_background
@@ -153,6 +145,18 @@ class User < ApplicationRecord
 
   def unconsented?
     consented_at.nil? && consent_revoked_at.nil?
+  end
+
+  def status
+    if consented?
+      "consented"
+    elsif withdrawn?
+      "withdrawn"
+    elsif refused?
+      "refused"
+    else
+      "unconsented"
+    end
   end
 
   def awards_count
