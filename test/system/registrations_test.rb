@@ -50,10 +50,15 @@ class RegistrationsTest < ApplicationSystemTestCase
     screenshot("register-refuse")
     click_on "Read consent"
     screenshot("register-refuse")
+    page.execute_script("window.scrollBy(0, $(\"body\").height());")
+    screenshot("register-refuse")
     page.accept_confirm "Click \"OK\" to exit enrollment process." do
       click_on "I Do Not Consent"
     end
     assert_selector "p", text: "Thank you for considering to participate"
+    screenshot("register-refuse")
+    click_on "Start new session"
+    assert_selector "h1", text: "SleepINNOVATE"
     screenshot("register-refuse")
   end
 
