@@ -53,7 +53,7 @@ class RegistrationsTest < ApplicationSystemTestCase
     page.accept_confirm "Click \"OK\" to exit enrollment process." do
       click_on "I Do Not Consent"
     end
-    assert_selector "h2", text: "Refused to join Study"
+    assert_selector "p", text: "Thank you for considering to participate"
     screenshot("register-refuse")
   end
 
