@@ -60,7 +60,7 @@ Edit Cron Jobs `sudo crontab -e` to run scheduled tasks.
 
 ```
 SHELL=/bin/bash
-0 2 * * * source /etc/profile.d/rvm.sh && cd /var/www/sleepinnovate.org && /usr/local/rvm/gems/ruby-2.4.1/bin/bundle exec rake sitemap:refresh RAILS_ENV=production
+0 2 * * * source /etc/profile.d/rvm.sh && cd /var/www/sleepinnovate.org && /usr/local/rvm/gems/ruby-2.4.2/bin/bundle exec rake sitemap:refresh RAILS_ENV=production
 ```
 
 ## Contributing to SleepINNOVATE

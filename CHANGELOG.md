@@ -21,6 +21,7 @@
 - **Test My Brain Changes**
   - Improved the import of data from Test My Brain
 - **Gem Changes**
+  - Updated to ruby 2.4.2
   - Updated to rails 5.1.4
   - Updated to haml 5.0.3
   - Updated to simplecov 0.15.1
