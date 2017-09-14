@@ -27,6 +27,7 @@
   - Updated to rails 5.1.4
   - Updated to haml 5.0.3
   - Updated to simplecov 0.15.1
+  - Updated to signature_pad 2.3.1
 
 ## 1.1.0 (September 12, 2017)
 
