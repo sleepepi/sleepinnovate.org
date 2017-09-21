@@ -54,6 +54,6 @@ class Admin::UsersController < Admin::AdminController
   end
 
   def user_params
-    params.require(:user).permit(:biobank_status)
+    params.require(:user).permit(:biobank_status, :clinic)
   end
 end

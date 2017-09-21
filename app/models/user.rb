@@ -41,6 +41,9 @@ class User < ApplicationRecord
     with: /\A(?=.*[a-z])(?=.*[A-Z])(?=.*\d)./,
     message: "must include at least one lowercase letter, one uppercase letter, and one digit"
   }, allow_blank: true
+  validates :clinic, format: {
+    with: /\A[a-z\d\-]*\Z/
+  }, allow_blank: true
 
   # Uploaders
   mount_uploader :signature, SignatureUploader
