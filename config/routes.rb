@@ -26,8 +26,8 @@ Rails.application.routes.draw do
     get :enrollment_consent, path: "enrollment/consent", to: redirect("consent")
     post :enrollment_consent, path: "enrollment/consent"
     get :contact
+    get :clinic, path: "clinic(/:clinic)"
     get :landing
-    get :landing2
     get :settings_password_reset, path: "settings/password/reset"
     get :sitemap_xml, path: "sitemap.xml.gz"
     get :version

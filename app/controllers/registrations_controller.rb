@@ -11,10 +11,15 @@ class RegistrationsController < Devise::RegistrationsController
   private
 
   def after_sign_up_path_for(resource)
-    resource.update consented_at: session[:consented_at] if session[:consented_at].present?
+    add_from_session(resource, :consented_at)
+    add_from_session(resource, :clinic)
     session[:consented_at] = nil
     session[:enrollment] = nil
     profile_complete_path
+  end
+
+  def add_from_session(resource, key)
+    resource.update key => session[key] if session[key].present?
   end
 
   def check_captcha

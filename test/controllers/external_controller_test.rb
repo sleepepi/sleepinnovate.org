@@ -13,6 +13,18 @@ class ExternalControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test "should set clinic" do
+    get clinic_url(clinic: "abc")
+    assert_equal "abc", session[:clinic]
+    assert_redirected_to root_url
+  end
+
+  test "should unset clinic" do
+    get clinic_url
+    assert_nil session[:clinic]
+    assert_redirected_to root_url
+  end
+
   test "should get contact" do
     get contact_url
     assert_response :success

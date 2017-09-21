@@ -44,6 +44,9 @@
 /carrierwave/**/*
 /test/support/*
 
+# Admin export.
+/admin/*
+
 # Test My Brain nightly export.
 /brains
 

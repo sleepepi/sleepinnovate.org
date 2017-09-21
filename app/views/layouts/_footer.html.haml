@@ -5,6 +5,10 @@
         &copy;
         = Time.zone.today.year
         = link_to "Brigham Sleep", about_path
+        - if session[:clinic].present? && (current_page?(root_path) || current_page?(landing_path))
+          %small{ style: "color: #bdbdbd;" }
+            &middot; Clinic
+            = session[:clinic].upcase
         .float-right{ style: "margin-top: -14px;" }
           = link_to "Questions?", contact_path
           &nbsp;

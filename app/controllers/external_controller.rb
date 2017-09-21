@@ -19,6 +19,13 @@ class ExternalController < ApplicationController
     render layout: "full_page_no_header_no_footer" if session[:enrollment] == "1"
   end
 
+  # GET /clinic/:clinic
+  def clinic
+    clinic = params[:clinic].to_s.gsub(/[^a-z\d\-]/i, "").downcase
+    session[:clinic] = (clinic.present? ? clinic : nil)
+    redirect_to root_path
+  end
+
   # POST /enrollment/consent
   def enrollment_consent
     if current_user

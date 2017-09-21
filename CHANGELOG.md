@@ -18,6 +18,8 @@
 - **Registration Changes**
   - Added email confirmation to registration form
   - Signature is now required to complete user profile
+  - Clinics can now specify a clinic code to allow users to be assigned the
+    correct clinic on registration
 - **Survey Changes**
   - Starting survey now jumps directly to the first page of the survey
 - **Test My Brain Changes**
