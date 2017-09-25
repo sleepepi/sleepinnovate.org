@@ -22,12 +22,22 @@
 
 \fancyhf{}
 
-\lhead{}
-\chead{}
-\rhead{}
-\lfoot{SleepINNOVATE Consent}
-\cfoot{Printed on <%= latex_safe Time.zone.today.strftime("%B %-d, %Y") %>}
-\rfoot{Page \thepage\ of \pageref{LastPage}}
+\lhead{SleepINNOVATE Consent}
+\chead{Printed on <%= latex_safe Time.zone.today.strftime("%B %-d, %Y") %>}
+\rhead{Page \thepage\ of \pageref{LastPage}}
+\lfoot{
+Consent Form Title: Consent-clean \\
+IRB Protocol No: 2017P001547 \\
+Sponsor Protocol No: N/A \\
+}
+\cfoot{
+Consent Form Valid Date: 9/11/2017 \\
+Sponsor AME No: N/A
+}
+\rfoot{
+IRB Expiration Date: 8/23/2018 \\
+IRB AME No: N/A
+}
 
 \renewcommand{\headrulewidth}{0pt}
 \renewcommand{\footrulewidth}{0pt}
