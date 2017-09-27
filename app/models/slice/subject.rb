@@ -222,6 +222,10 @@ class Subject < SliceRecord
     end
   end
 
+  def self.remote_subjects_clear
+    @remote_subjects = nil
+  end
+
   def self.subjects_on_page(page)
     params = { page: page }
     (json, _status) = Helpers::JsonRequest.get("#{SliceRecord.new.project_url}/subjects.json", params)
