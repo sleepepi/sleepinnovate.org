@@ -90,6 +90,8 @@ class RegistrationsTest < ApplicationSystemTestCase
     click_on "Read consent"
     assert_selector "h1", text: "Consent"
     page.execute_script("$(\"#read_consent\").click();")
+    page.execute_script("window.scrollBy(0, $(\"body\").height());")
+    screenshot("consent-register-skip-profile")
     click_on "I Consent"
     assert_selector "div", text: "Create your account"
     fill_in "user[full_name]", with: "John Smith"
