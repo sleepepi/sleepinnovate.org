@@ -1,0 +1,21 @@
+.link-muted {
+  color: $text-muted;
+
+  &:hover,
+  &:focus,
+  &:active {
+    // color: $text-muted;
+    // text-decoration: none;
+  }
+}
+
+.link-unstyled {
+  color: $body-color;
+
+  &:hover,
+  &:focus,
+  &:active {
+    // color: $body-color;
+    // text-decoration: none;
+  }
+}

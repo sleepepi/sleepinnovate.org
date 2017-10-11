@@ -2,7 +2,35 @@
 
 .page-box.last-slide.background-p50-grey.center-vertically-xs-sm
   .container
-    - if current_user.refused?
+    - if current_user.admin?
+      .jumbotron.jumbotron-white
+        %p
+          Welcome to
+          = succeed "!" do
+            = render "layouts/logo"
+          As an admin you may
+          = succeed ":" do
+            = link_to "view and administrate users", admin_users_path
+
+        %ul
+          %li Assign missing subject codes
+          %li Undo accidental study withdrawals
+          %li Update users' clinic and Biobank status
+          %li View completed Test My Brain surveys
+          %li Jump to users' Slice subject pages
+
+      - user_scope = User.current.where(consent_revoked_at: nil)
+      .row
+        .col-12.col-sm.text-center
+          .jumbotron.jumbotron-white
+            .lead.text-muted.nowrap Consented This Week
+            .display-1= number_with_delimiter user_scope.where("DATE(consented_at) >= ?", Time.zone.today.beginning_of_week(:sunday)).count
+        .col-12.col-sm.text-center
+          .jumbotron.jumbotron-white
+            .lead.nowrap= link_to "Total Consented", admin_consented_path, class: "link-muted"
+            .display-1= number_with_delimiter user_scope.where.not(consented_at: nil).count
+
+    - elsif current_user.refused?
       .jumbotron.jumbotron-white
         %p
           Thank you for considering to participate in

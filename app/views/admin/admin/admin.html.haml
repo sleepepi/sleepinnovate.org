@@ -4,4 +4,6 @@
   .container
     %h1= @title
 
-    = link_to "Users", admin_users_path
+    %ul
+      %li= link_to "Users", admin_users_path
+      %li= link_to "Consent Report", admin_consented_path

@@ -11,6 +11,16 @@ class Admin::AdminController < ApplicationController
   # def admin
   # end
 
+  # # GET /admin/consented
+  # def consented
+  # end
+
+  # GET /admin/consented/:clinic
+  def consented_clinic
+    @clinic = params[:clinic].downcase
+    render :consented
+  end
+
   protected
 
   def check_admin

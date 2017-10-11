@@ -1,0 +1,16 @@
+.per-page {
+  display: none;
+  font-size: $font-size-base;
+  font-weight: normal;
+  vertical-align: middle;
+
+  ul {
+    margin-bottom: 0;
+  }
+}
+
+@include media-breakpoint-up(sm) {
+  .per-page {
+    display: inline-block;
+  }
+}

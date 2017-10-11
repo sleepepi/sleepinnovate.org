@@ -5,6 +5,11 @@ Rails.application.routes.draw do
 
   scope module: :admin do
     get "admin" => "admin#admin"
+
+    namespace :admin do
+      get :consented
+      get :consented_clinic, path: "consented/:clinic"
+    end
   end
 
   namespace :admin do
