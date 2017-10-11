@@ -1,5 +1,9 @@
 ## 2.1.0
 
+### Enhancements
+- **Gem Changes**
+  - Updated to carrierwave 1.2.1
+
 ## 2.0.0 (October 2, 2017)
 
 ### Enhancements
