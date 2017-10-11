@@ -43,4 +43,6 @@
                   Subject code unassigned
             %td.text-center= simple_check user.consented?
 
+    .d-flex.justify-content-center= paginate @users, theme: "bootstrap"
+
 = Subject.remote_subjects_clear
