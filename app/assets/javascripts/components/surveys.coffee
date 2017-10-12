@@ -77,6 +77,15 @@
   $("##{target_name}_hours").change()
   $("##{target_name}_hours").blur()
 
+@toggleMutuallyExclusive = (element) ->
+  group_name = "response[]"
+  if $("input[name='#{group_name}'][data-mutually-exclusive=true]").length > 0
+    if $(element).data("mutually-exclusive") && $(element).prop('checked') == true
+      $("input[name='#{group_name}']").prop('checked', false)
+      $(element).prop('checked', true)
+    else
+      $("input[name='#{group_name}'][data-mutually-exclusive=true]").prop('checked', false)
+
 $(document)
   .on('click', '[data-object~="set-time-input-to-current-time"]', ->
     if $(this).data('time-of-day-format') == "24hour"
@@ -105,7 +114,8 @@ $(document)
     setCurrentDate($(this))
     false
   )
-  .on('click', '.survey-choices', ->
+  .on('click', '.survey-choices input', ->
+    toggleMutuallyExclusive($(this))
     $(".survey-choices input").closest("label").removeClass("active")
     $(".survey-choices input:checked").closest("label").addClass("active")
   )

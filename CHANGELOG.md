@@ -16,6 +16,8 @@
 - **Survey Changes**
   - Completed surveys are now tracked to allow users to skip questions and
     continue to next surveys
+  - Checkboxes with mutually exclusive options now update choices based on the
+    selection of mutually exclusive or non-exclusive options
 - **Gem Changes**
   - Updated to carrierwave 1.2.1
   - Updated to sitemap_generator 6.0.0
