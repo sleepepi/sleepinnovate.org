@@ -7,6 +7,7 @@
   - Added a consent report by site and by month
 - **Consent Changes**
   - Added consent administrative header
+  - Removed links from emails and telephone numbers on consent
 - **Gem Changes**
   - Updated to carrierwave 1.2.1
   - Updated to sitemap_generator 6.0.0
