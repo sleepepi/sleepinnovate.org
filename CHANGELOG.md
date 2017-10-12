@@ -11,6 +11,8 @@
 - **Landing Changes**
   - The pledge is now displayed on the landing page
   - Updated text for the pledge
+- **Footer Changes**
+  - Simplified footer on smaller devices
 - **Gem Changes**
   - Updated to carrierwave 1.2.1
   - Updated to sitemap_generator 6.0.0
