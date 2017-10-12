@@ -13,6 +13,9 @@
   - Updated text for the pledge
 - **Footer Changes**
   - Simplified footer on smaller devices
+- **Survey Changes**
+  - Completed surveys are now tracked to allow users to skip questions and
+    continue to next surveys
 - **Gem Changes**
   - Updated to carrierwave 1.2.1
   - Updated to sitemap_generator 6.0.0

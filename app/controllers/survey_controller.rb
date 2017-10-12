@@ -12,6 +12,7 @@ class SurveyController < ApplicationController
   def start
     # @json = current_user.start_event_survey(params[:event], params[:design])
     # @survey = Survey.new(json: @json)
+    survey_in_progress
     redirect_to survey_page_path(params[:event], params[:design], 1)
   end
 
@@ -28,6 +29,7 @@ class SurveyController < ApplicationController
 
   # GET /survey/:event/:design/:resume
   def resume
+    survey_in_progress
     @json = current_user.resume_event_survey(params[:event], params[:design])
     @survey = Survey.new(json: @json)
     if @json.blank?
@@ -73,10 +75,23 @@ class SurveyController < ApplicationController
 
   # GET /survey/:event/:design/complete
   def complete
+    survey_completed
     redirect_to dashboard_path
   end
 
   private
+
+  def find_user_survey
+    current_user.user_surveys.where(event: params[:event].downcase, design: params[:design].downcase).first_or_create
+  end
+
+  def survey_in_progress
+    find_user_survey.update(completed: false)
+  end
+
+  def survey_completed
+    find_user_survey.update(completed: true)
+  end
 
   def find_page
     @page = [params[:page].to_i, 1].max

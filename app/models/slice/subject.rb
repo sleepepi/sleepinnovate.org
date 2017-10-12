@@ -70,8 +70,19 @@ class Subject < SliceRecord
 
   def next_survey
     @next_survey ||= begin
-      event = subject_events.find { |se| se.percent != 100 }
-      event.event_designs.find { |ed| !ed.complete? } if event
+      completed_surveys = @user.user_surveys.where(completed: true).pluck(:event, :design)
+      event = subject_events.find do |se|
+        se.percent != 100 &&
+          se.event_designs.count do |ed|
+            !completed_surveys.include?([ed.event_id.downcase, ed.design_id.downcase])
+          end.positive?
+      end
+      if event
+        event.event_designs.find do |ed|
+          !ed.complete? &&
+            !completed_surveys.include?([ed.event_id.downcase, ed.design_id.downcase])
+        end
+      end
     end
   end
 

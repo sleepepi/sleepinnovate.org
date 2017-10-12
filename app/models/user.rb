@@ -50,6 +50,7 @@ class User < ApplicationRecord
 
   # Relationships
   has_many :brain_tests
+  has_many :user_surveys
 
   # Delegations
   delegate :subject_events, to: :subject
