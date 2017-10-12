@@ -3,50 +3,53 @@
 .page-box.last-slide.background-p50-grey.center-vertically-xs-sm
   .pledge
     %h1
-      Everyone needs sleep.
-      %br.d-inline.d-sm-none
-      Sleep research needs you.
-
-    .pledge-icon.boston-color
-      %i.fa.fa-bed
-
-    %p
-      %strong We want to understand how sleep influences health and well-being.
-      Our study,
-      = succeed "," do
-        %strong= render "layouts/logo"
-      is led by Dr. Susan Redline in the Division of Sleep and Circadian
-      Disorders at Brigham & Women's Hospital and funded by the National
-      Institutes of Health.
-
-
-    .pledge-icon.sleep-color
-      %i.fa.fa-wifi
+      Help sleep research.
+      %br
+      Participate in our innovative sleep health research study!
 
     %p
       %strong
-        It's easy to complete our brief surveys and fun brain quizzes online.
-      We are recruiting
-      %u adult patients
-      at Partners Healthcare sleep centers who have
-      %u internet access
-      and can
-      = succeed "." do
-        %u read English
-      We'll give you feedback on your responses and enter you in a drawing for a
-      $100 gift certificate every time you return for a follow-up.
-
-
-    .pledge-icon.innovate-color
-      %i.fa.fa-users
-
+        We hope that your participation will help improve our understanding of
+        sleep disorders and lead to improved treatments and diagnoses.
+      Our study,
+      = succeed "," do
+        %strong= render "layouts/logo"
+      is led by Dr. Susan Redline at Partners HealthCare System, and is funded
+      by the National Institutes of Health.
 
     %p
-      %strong Participation is completely voluntary and confidential.
-      Participation will not affect your medical care and you can withdraw at
-      any time. We will store all information securely at Brigham & Women's
-      Hospital and never reveal your identity.
+      %strong
+        What will happen in this research study?
 
+      We will ask you to complete surveys about yourself and your health,
+      general functioning and sleep habits. In addition, we will ask you to take
+      brain quizzes to help us understand the relationship between sleep and
+      brain functions.
+
+    %p.mb-0
+      %strong
+        To participate you must:
+
+    %ul
+      %li Be an adult of 18 years of age or older
+      %li Have internet access
+      %li Read English
+
+    %p
+      %strong Will I be paid to take part in this research study?
+      Participants will receive a parking voucher (worth up to $10) if you are
+      recruited to join the study while you are at the clinic or sleep
+      laboratory. When you complete each set of surveys and brain quizzes, you
+      will be entered into a lottery to receive a $100 gift card. The lottery is
+      drawn quarterly.
+
+    %p
+      %strong
+        Can I still get medical care within Partners if I don't take part in
+        this research study, or if I stop taking part?
+      Yes. Your decision won't change the medical care you get within Partners
+      now or in the future. There will be no penalty, and you won't lose any
+      benefits you receive now or have a right to receive.
 
   .text-center
     = link_to enrollment_start_path, method: :post, class: "btn btn-lg btn-success btn-shadow" do

@@ -8,6 +8,8 @@
 - **Consent Changes**
   - Added consent administrative header
   - Removed links from emails and telephone numbers on consent
+- **Pledge Changes**
+  - Updated text on the pledge page
 - **Gem Changes**
   - Updated to carrierwave 1.2.1
   - Updated to sitemap_generator 6.0.0
