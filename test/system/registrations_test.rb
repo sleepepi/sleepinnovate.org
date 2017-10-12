@@ -7,8 +7,6 @@ class RegistrationsTest < ApplicationSystemTestCase
   test "registering and consenting" do
     visit root_url
     screenshot("consent-register-profile")
-    click_on "get started"
-    screenshot("consent-register-profile")
     click_on "Read consent"
     screenshot("consent-register-profile")
     assert_selector "h1", text: "Consent"
@@ -46,8 +44,6 @@ class RegistrationsTest < ApplicationSystemTestCase
   test "read consent and refuse" do
     visit root_url
     screenshot("refuse-consent")
-    click_on "get started"
-    screenshot("refuse-consent")
     click_on "Read consent"
     screenshot("refuse-consent")
     page.execute_script("window.scrollBy(0, $(\"body\").height());")
@@ -64,8 +60,6 @@ class RegistrationsTest < ApplicationSystemTestCase
 
   test "register without consenting" do
     visit root_url
-    screenshot("register-skip-consent")
-    click_on "get started"
     screenshot("register-skip-consent")
     visit new_user_registration_url
     assert_selector "div", text: "Create your account"
@@ -84,8 +78,6 @@ class RegistrationsTest < ApplicationSystemTestCase
 
   test "read consent register and skip profile" do
     visit root_url
-    screenshot("consent-register-skip-profile")
-    click_on "get started"
     screenshot("consent-register-skip-profile")
     click_on "Read consent"
     assert_selector "h1", text: "Consent"
