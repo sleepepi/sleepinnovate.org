@@ -5,6 +5,8 @@
   - Users index is now paginated
   - Admin dashboard now provides relevant reports and links
   - Added a consent report by site and by month
+- **Consent Changes**
+  - Added consent administrative header
 - **Gem Changes**
   - Updated to carrierwave 1.2.1
   - Updated to sitemap_generator 6.0.0
