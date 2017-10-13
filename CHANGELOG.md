@@ -9,6 +9,7 @@
   - Added consent administrative header
   - Removed links from emails and telephone numbers on consent
   - Added meta tag to prevent automatic telephone links on iPads on consent form
+  - Date of birth input now displays better on mobile
 - **Landing Changes**
   - The pledge is now displayed on the landing page
   - Updated text for the pledge

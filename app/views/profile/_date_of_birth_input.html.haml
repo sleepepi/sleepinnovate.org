@@ -1,22 +1,20 @@
-.form-group
-  = form.label :date_of_birth, class: "form-control-label" do
-    What is your
-    = succeed "?" do
-      %strong Date of Birth
-  .form-inline
-    .input-group
-      = form.select "date_of_birth[month]", Date::ABBR_MONTHNAMES[1..12].each_with_index.collect { |m, i| [m, i + 1] }, { include_blank: "mm", selected: params.dig(:date_of_birth, :month).present? ? params[:date_of_birth][:month] : nil }, class: "form-control #{"is-invalid" if @date_error.present?}"
+= form.label :date_of_birth, class: "form-control-label" do
+  What is your
+  = succeed "?" do
+    %strong Date of Birth
+.form-inline
+  = form.select "date_of_birth[month]", Date::ABBR_MONTHNAMES[1..12].each_with_index.collect { |m, i| [m, i + 1] }, { include_blank: "mm", selected: params.dig(:date_of_birth, :month).present? ? params[:date_of_birth][:month] : nil }, class: "form-control #{"is-invalid" if @date_error.present?}", style: "width: inherit;"
+  .d-inline-block
     &nbsp;
     \/
     &nbsp;
-    .input-group
-      = form.select "date_of_birth[day]", (1..31), { include_blank: "dd", selected: params.dig(:date_of_birth, :day).present? ? params[:date_of_birth][:day] : nil }, class: "form-control #{"is-invalid" if @date_error.present?}"
+  = form.select "date_of_birth[day]", (1..31), { include_blank: "dd", selected: params.dig(:date_of_birth, :day).present? ? params[:date_of_birth][:day] : nil }, class: "form-control #{"is-invalid" if @date_error.present?}", style: "width: inherit;"
+  .d-inline-block
     &nbsp;
     \/
     &nbsp;
-    .input-group
-      = form.select "date_of_birth[year]", (1900..Time.zone.today.year).to_a.reverse, { include_blank: "yyyy", selected: params.dig(:date_of_birth, :year).present? ? params[:date_of_birth][:year] : nil }, class: "form-control #{"is-invalid" if @date_error.present?}"
-  - if @date_error.present?
-    %small.form-text.text-danger= @date_error
-  - else
-    %small.form-text.text-muted mm/dd/yyyy
+  = form.select "date_of_birth[year]", (1900..Time.zone.today.year).to_a.reverse, { include_blank: "yyyy", selected: params.dig(:date_of_birth, :year).present? ? params[:date_of_birth][:year] : nil }, class: "form-control #{"is-invalid" if @date_error.present?}", style: "width: inherit;"
+- if @date_error.present?
+  %small.form-text.text-danger= @date_error
+- else
+  %small.form-text.text-muted mm/dd/yyyy
