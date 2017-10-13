@@ -1,7 +1,14 @@
 .card {
+  margin-bottom: 1rem;
+
+  @include media-breakpoint-up(md) {
+    margin-bottom: 0;
+  }
+
   &.card-disabled {
     position: relative;
     overflow: hidden;
+
     &::after {
       position: absolute;
       content: " ";

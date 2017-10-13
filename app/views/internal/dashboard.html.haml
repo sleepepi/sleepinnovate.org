@@ -82,7 +82,7 @@
           = render "layouts/logo"
           study.
     - else
-      .card-deck.mb-3
+      .card-deck.mb-3.flex-column.flex-md-row
         - if current_user.subject_events.blank?
           = render "cards/no_surveys"
         - elsif current_user.next_survey

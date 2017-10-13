@@ -5,6 +5,8 @@
   - Users index is now paginated
   - Admin dashboard now provides relevant reports and links
   - Added a consent report by site and by month
+- **Dashboard Changes**
+  - Improved arrangement of dashboard cards on smaller devices
 - **Consent Changes**
   - Added consent administrative header
   - Removed links from emails and telephone numbers on consent
