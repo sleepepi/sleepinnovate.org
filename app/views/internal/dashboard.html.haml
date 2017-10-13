@@ -94,11 +94,11 @@
 
         = render "cards/parking" if current_user.parking_voucher? && parking_voucher_card_enabled
 
-        - if current_user.brain_surveys_completed?
+        - if current_user.brain_surveys_completed? && ENV["test_my_brain_enabled"] == "true"
           = render "cards/brain_completed"
-        - elsif current_user.brain_surveys_started?
+        - elsif current_user.brain_surveys_started? && ENV["test_my_brain_enabled"] == "true"
           = render "cards/brain_started"
-        - elsif current_user.brain_surveys_viewable?
+        - elsif current_user.brain_surveys_viewable? && ENV["test_my_brain_enabled"] == "true"
           = render "cards/brain"
         - else
           = render "cards/brain_starting_soon"
