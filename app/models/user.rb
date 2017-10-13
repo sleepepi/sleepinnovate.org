@@ -244,7 +244,7 @@ class User < ApplicationRecord
   end
 
   def send_welcome_email(token)
-    RegistrationMailer.welcome_email(self, token).deliver_now if EMAILS_ENABLED
+    RegistrationMailer.welcome_email(self, token).deliver_now if EMAILS_ENABLED && ENV["welcome_email_enabled"] == "true"
   end
 
   def send_consent_pdf_email_in_background
