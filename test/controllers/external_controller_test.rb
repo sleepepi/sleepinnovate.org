@@ -30,6 +30,17 @@ class ExternalControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test "should start enrollment as public user" do
+    post enrollment_start_url
+    assert_equal "1", session[:enrollment]
+    assert_redirected_to consent_url
+  end
+
+  test "should get start enrollment and redirect" do
+    get enrollment_start_url
+    assert_redirected_to consent_url
+  end
+
   test "should get consent for public user" do
     get consent_url
     assert_response :success
