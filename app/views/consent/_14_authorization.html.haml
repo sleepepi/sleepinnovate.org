@@ -24,7 +24,7 @@
     %span.custom-control-indicator{ style: "background-color: #333;" }
     %span.custom-control-description{ style: "color: #333;" }
       I give my consent to take part in this research study and agree to allow my health information to be used and shared as described above.
-- elsif (!current_user && session["enrollment"] == "1") || (current_user && current_user.unconsented?)
+- elsif !current_user || (current_user && current_user.unconsented?)
   = form_with url: enrollment_consent_path, method: :post, local: true, id: "consent-form" do |form|
     .form-group.mb-5
       = form.label :read_consent, class: "custom-control custom-checkbox" do

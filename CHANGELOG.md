@@ -24,6 +24,10 @@
   - Updated to carrierwave 1.2.1
   - Updated to sitemap_generator 6.0.0
 
+### Bug Fix
+- Fixed a bug that prevented consenting when navigating directly to the consent
+  page
+
 ## 2.0.0 (October 2, 2017)
 
 ### Enhancements
