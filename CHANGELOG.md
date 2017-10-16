@@ -1,4 +1,4 @@
-## 2.1.0
+## 2.1.0 (October 16, 2017)
 
 ### Enhancements
 - **Admin Changes**
