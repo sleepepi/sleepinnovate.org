@@ -33,5 +33,5 @@
 
           %ul
             %li= link_to "View consent.", consent_path
-            - if current_user.consented?
+            - if current_user.consented? && ENV["leave_study_enabled"] == "true"
               %li= link_to "Leave study.", consent_path, method: :delete, class: "text-danger", data: { confirm: "Withdraw from SleepINNOVATE study?" }

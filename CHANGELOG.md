@@ -1,5 +1,9 @@
 ## 2.1.1
 
+### Enhancements
+- **Settings Changes**
+  - The "Leave Study" button can now be disabled in the application settings
+
 ## 2.1.0 (October 16, 2017)
 
 ### Enhancements

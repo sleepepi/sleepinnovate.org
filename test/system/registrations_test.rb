@@ -101,6 +101,39 @@ class RegistrationsTest < ApplicationSystemTestCase
     screenshot("consent-register-skip-profile")
   end
 
+  test "consent and withdraw" do
+    visit root_url
+    screenshot("consent-and-withdraw")
+    click_on "Read consent"
+    screenshot("consent-and-withdraw")
+    assert_selector "h1", text: "Consent"
+    page.execute_script("$(\"#read_consent\").click();")
+    page.execute_script("window.scrollBy(0, $(\"body\").height());")
+    screenshot("consent-and-withdraw")
+    click_on "I Consent"
+    assert_selector "div", text: "Create your account"
+    fill_in "user[full_name]", with: "John Smith"
+    fill_in "user[email]", with: "jsmith@example.com"
+    fill_in "user[email_confirmation]", with: "jsmith@example.com"
+    screenshot("consent-and-withdraw")
+    click_on "Create Account"
+    assert_equal "John Smith", User.last.full_name
+    assert_equal "jsmith@example.com", User.last.email
+    screenshot("consent-and-withdraw")
+    assert_equal true, User.last.consented?
+    visit dashboard_url
+    click_on "ATE00003"
+    screenshot("consent-and-withdraw")
+    click_on "Settings"
+    screenshot("consent-and-withdraw")
+    assert_selector "h1", text: "Settings"
+    page.accept_confirm "Withdraw from SleepINNOVATE study?" do
+      click_on "Leave study."
+    end
+    assert_selector "h2", text: "Withdrawn from Study"
+    screenshot("consent-and-withdraw")
+  end
+
   # data = window.$signaturePad.toData()
   # data[0].map(function(x) { return "{ x: " + x["x"] + ", y: " + x["y"] + ", time: " + x["time"] + " }"  }).join()
   def draw_on_canvas
