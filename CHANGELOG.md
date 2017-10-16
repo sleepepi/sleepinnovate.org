@@ -1,4 +1,4 @@
-## 2.1.1
+## 2.1.1 (October 16, 2017)
 
 ### Enhancements
 - **Settings Changes**
