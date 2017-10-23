@@ -33,7 +33,7 @@
 
 # Generated
 
-/Gemfile.lock
+/gems.locked
 /db/schema.rb
 
 # Operating System
