@@ -4,6 +4,7 @@
 
 @componentsReady = ->
   animateProgressBar()
+  sessionsReady()
 
 @globalReady = ->
   extensionsReady()

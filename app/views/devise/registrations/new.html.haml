@@ -1,2 +1,7 @@
 .page-box.last-slide.background-p50-grey
   = render "devise/registrations/form"
+
+  .d-none.text-center
+    = link_to landing_path, data: { object: "start-new-session" }, class: "btn btn-light btn-sm" do
+      %i.fa.fa-caret-left
+      Start new session

@@ -3,6 +3,8 @@
 ### Enhancements
 - **General Changes**
   - Removed extraneous session expired notification
+  - The Enrollment Exit and Registration pages now redirect back to the
+    dashboard after three minutes of inactivity
 - **Dashboard Changes**
   - Parking voucher links now only show up if the clinic has been set
 - **Settings Changes**
