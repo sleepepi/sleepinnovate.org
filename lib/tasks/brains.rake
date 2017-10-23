@@ -3,20 +3,16 @@
 namespace :brains do
   desc "Import nightly Test My Brains CSVs."
   task nightly_import: :environment do
-    reset_survey_counts
     parse_brain_csvs
   end
 end
 
-def reset_survey_counts
-  User.update_all(brain_surveys_count: 0)
-  BrainTest.delete_all
-end
-
 def parse_brain_csvs
-  csv_files = Dir.glob(Rails.root.join("brains", "**", "*.csv"), File::FNM_CASEFOLD)
+  FileUtils.mkpath Rails.root.join("brains", "archive")
+  csv_files = Dir.glob(Rails.root.join("brains", "*.csv"), File::FNM_CASEFOLD)
   csv_files.each do |csv_file|
     read_csv(csv_file)
+    FileUtils.mv csv_file, Rails.root.join("brains", "archive")
   end
 end
 
@@ -86,4 +82,3 @@ def increment_subject(row)
   end
   puts
 end
-
