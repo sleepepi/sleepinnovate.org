@@ -8,6 +8,9 @@
 - **Gem Changes**
   - Updated to bootstrap 4.0.0.beta2
 
+### Tests
+- Added tests to assure user passwords can be reset
+
 ## 2.1.1 (October 16, 2017)
 
 ### Enhancements
