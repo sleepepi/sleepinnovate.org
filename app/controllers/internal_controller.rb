@@ -74,7 +74,7 @@ class InternalController < ApplicationController
   private
 
   def check_parking_voucher
-    redirect_to dashboard_path unless current_user.parking_voucher?
+    redirect_to dashboard_path unless current_user.parking_voucher? && session[:clinic].present?
   end
 
   def check_unconsented

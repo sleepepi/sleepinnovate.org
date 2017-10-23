@@ -36,6 +36,7 @@ class InternalControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should get parking voucher for newly consented user with a completed profile" do
+    get clinic_path("sleep")
     login(users(:consented))
     users(:consented).update(
       date_of_birth: "1984-12-31",
@@ -48,6 +49,7 @@ class InternalControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should not get parking voucher for a user without a completed profile" do
+    get clinic_path("sleep")
     login(users(:consented))
     users(:consented).update(
       sign_in_count: 1
@@ -57,6 +59,7 @@ class InternalControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should not get parking voucher for a user who has logged in more than once" do
+    get clinic_path("sleep")
     login(users(:consented))
     users(:consented).update(
       date_of_birth: "1984-12-31",

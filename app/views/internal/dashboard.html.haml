@@ -90,10 +90,6 @@
         - else
           = render "cards/completed", subject_event: current_user.subject_events.first
 
-        - parking_voucher_card_enabled = false
-
-        = render "cards/parking" if current_user.parking_voucher? && parking_voucher_card_enabled
-
         - if current_user.brain_surveys_completed? && ENV["test_my_brain_enabled"] == "true"
           = render "cards/brain_completed"
         - elsif current_user.brain_surveys_started? && ENV["test_my_brain_enabled"] == "true"
@@ -103,9 +99,7 @@
         - else
           = render "cards/brain_starting_soon"
 
-        - if current_user.parking_voucher? && parking_voucher_card_enabled
-          -# Nothing
-        - elsif current_user.biobank_registration_completed?
+        - if current_user.biobank_registration_completed?
           = render "cards/biobank_completed"
         - elsif current_user.biobank_registration_started?
           = render "cards/biobank_started"
@@ -115,7 +109,7 @@
           = render "cards/biobank_starting_soon"
 
 
-      - if current_user.parking_voucher? && !parking_voucher_card_enabled
+      - if current_user.parking_voucher? && session[:clinic].present?
         %p.lead.text-center
           %i.fa.fa-car
           Redeem your

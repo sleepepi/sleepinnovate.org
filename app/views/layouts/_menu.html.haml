@@ -20,7 +20,7 @@
             = render "menu/item", title: "Dashboard", path: dashboard_path, icon: "home"
             = render "menu/item", title: "Consent", path: consent_path, icon: "file-text-o" unless current_user.consent_revoked?
         %ul.navbar-nav
-          = render "menu/item_icon", title: "Parking", path: parking_path, icon: "car", color: "primary" if current_user.parking_voucher?
+          = render "menu/item_icon", title: "Parking", path: parking_path, icon: "car", color: "primary" if current_user.parking_voucher? && session[:clinic].present?
           = render "menu/dropdown_account"
     - else
       %ul.navbar-nav
