@@ -3,17 +3,17 @@
     - case @variable.time_duration_format
     - when "hh:mm:ss"
       = render "survey/decoration/hours", value: value
-      \:
+      %span.px-1 :
       = render "survey/decoration/minutes", value: value
-      \:
+      %span.px-1 :
       = render "survey/decoration/seconds", value: value
     - when "hh:mm"
       = render "survey/decoration/hours", value: value
-      \:
+      %span.px-1 :
       = render "survey/decoration/minutes", value: value
     - else # "mm:ss"
       = render "survey/decoration/minutes", value: value
-      \:
+      %span.px-1 :
       = render "survey/decoration/seconds", value: value
 
     = link_to "Clear", "#", data: { object: "clear-time-duration-input", target_name: "response", time_duration_format: @variable.time_duration_format }, class: "btn btn-sm btn-link text-muted"

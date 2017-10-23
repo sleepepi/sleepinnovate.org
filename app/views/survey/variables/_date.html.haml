@@ -3,27 +3,27 @@
     - case @variable.date_format
     - when "dd-mmm-yyyy"
       = render "survey/decoration/day", value: value
-      \-
+      %span.px-1 -
       = render "survey/decoration/month_select", value: value
-      \-
+      %span.px-1 -
       = render "survey/decoration/year", value: value
     - when "yyyy-mm-dd"
       = render "survey/decoration/year", value: value
-      \-
+      %span.px-1 -
       = render "survey/decoration/month", value: value
-      \-
+      %span.px-1 -
       = render "survey/decoration/day", value: value
     - when "dd/mm/yyyy"
       = render "survey/decoration/day", value: value
-      \/
+      %span.px-1 /
       = render "survey/decoration/month", value: value
-      \/
+      %span.px-1 /
       = render "survey/decoration/year", value: value
     - else # "mm/dd/yyyy"
       = render "survey/decoration/month", value: value
-      \/
+      %span.px-1 /
       = render "survey/decoration/day", value: value
-      \/
+      %span.px-1 /
       = render "survey/decoration/year", value: value
 
     = link_to "Today", "#", data: { object: "set-date-input-to-current-date", target_name: "response" }, class: "btn btn-sm btn-link" if @variable.show_current_button
