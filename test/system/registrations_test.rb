@@ -127,9 +127,11 @@ class RegistrationsTest < ApplicationSystemTestCase
     click_on "Settings"
     screenshot("consent-and-withdraw")
     assert_selector "h1", text: "Settings"
-    page.accept_confirm "Withdraw from SleepINNOVATE study?" do
-      click_on "Leave study."
-    end
+    click_on "Leave study."
+    assert_selector "h1", text: "Leave Study"
+    fill_in "withdraw", with: "withdraw"
+    screenshot("consent-and-withdraw")
+    click_on "Leave Study"
     assert_selector "h2", text: "Withdrawn from Study"
     screenshot("consent-and-withdraw")
   end

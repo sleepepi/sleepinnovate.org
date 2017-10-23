@@ -108,4 +108,28 @@ class InternalControllerTest < ActionDispatch::IntegrationTest
     assert_not_nil @consented.biobank_completed_at
     assert_redirected_to dashboard_url
   end
+
+  test "should get leave study page for consented user" do
+    login(@consented)
+    get leave_study_url
+    assert_response :success
+  end
+
+  test "should withdraw from study for consented user" do
+    login(@consented)
+    post submit_leave_study_url(withdraw: "WITHDRAW")
+    @consented.reload
+    assert_equal true, @consented.withdrawn?
+    assert_equal "You left the SleepINNOVATE study.", flash[:notice]
+    assert_redirected_to dashboard_url
+  end
+
+  test "should not withdraw without typing withdraw for consented user" do
+    login(@consented)
+    post submit_leave_study_url(withdraw: "Nope")
+    @consented.reload
+    assert_equal true, @consented.consented?
+    assert_template "leave_study"
+    assert_response :success
+  end
 end

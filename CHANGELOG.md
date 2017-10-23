@@ -5,6 +5,8 @@
   - Removed extraneous session expired notification
 - **Dashboard Changes**
   - Parking voucher links now only show up if the clinic has been set
+- **Settings Changes**
+  - Users are now prompted to type "WITHDRAW" to leave the SleepINNOVATE study
 - **Survey Changes**
   - Removed survey skip question button
   - Removed auto-advance for single response questions

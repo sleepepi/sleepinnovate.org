@@ -4,7 +4,7 @@
 class InternalController < ApplicationController
   before_action :authenticate_user!
   before_action :check_parking_voucher, only: :parking
-  before_action :check_consented, only: :surveys
+  before_action :check_consented, only: [:surveys, :leave_study, :submit_leave_study]
   before_action :check_not_first_login, only: :surveys
 
   layout "full_page"
@@ -42,6 +42,21 @@ class InternalController < ApplicationController
   # # GET /surveys
   # def surveys
   # end
+
+  # # GET /leave-study
+  # def leave_study
+  # end
+
+  # POST /leave-study
+  def submit_leave_study
+    if params[:withdraw].to_s.casecmp("withdraw").zero?
+      current_user.revoke_consent!
+      redirect_to dashboard_path, notice: "You left the SleepINNOVATE study."
+    else
+      @withdraw_error = true
+      render :leave_study
+    end
+  end
 
   # # GET /test-my-brain
   # def test_my_brain

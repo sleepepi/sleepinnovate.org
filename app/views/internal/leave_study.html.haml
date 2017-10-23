@@ -1,0 +1,17 @@
+- @title = "Leave Study"
+
+.page-box.last-slide.background-p50-grey.center-vertically-xs-sm
+  .panel
+    %h1= @title
+
+    = form_with url: submit_leave_study_path, method: :post, local: true do |form|
+      .form-group
+        = form.label :withdraw, "Are you sure you want to withdraw from the #{render "layouts/logo"} study?".html_safe, class: "form-control-label"
+        = form.text_field :withdraw, class: "form-control#{" is-invalid" if @withdraw_error}", value: params[:withdraw], style: "max-width: 14rem;", maxlength: 8, placeholder: "<type here>"
+        %small.form-text{ class: @withdraw_error ? "text-danger" : "text-muted" }
+          Type
+          %span.badge.badge-light WITHDRAW
+          to leave the study.
+      .form-group.mt-4
+        = form.submit "Leave Study", class: "btn btn-danger"
+        = link_to "Cancel", dashboard_path, class: "btn btn-light"

@@ -52,6 +52,8 @@ Rails.application.routes.draw do
     post :biobank_start, path: "biobank/start"
     post :biobank_complete, path: "biobank/complete"
     get :surveys
+    get :leave_study, path: "leave-study"
+    post :submit_leave_study, path: "leave-study"
     get :returning_from, path: "returning-from/:external/:subject_code"
   end
 
@@ -77,7 +79,6 @@ Rails.application.routes.draw do
   namespace :settings do
     # root to: "settings#index"
     get :consents
-    get :leave_study, path: "leave-study"
     get :password
     patch :change_password, path: "password"
     get :email
