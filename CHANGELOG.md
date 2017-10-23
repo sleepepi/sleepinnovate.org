@@ -13,6 +13,7 @@
   - Removed survey skip question button
   - Removed auto-advance for single response questions
   - Improved spacing of separators in date and time questions
+  - Clicking "Continue" now disables and animates the button
 - **Test My Brain Changes**
   - Brain quizzes import now archives processed CSV files
 - **Gem Changes**

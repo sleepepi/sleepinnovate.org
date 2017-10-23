@@ -12,7 +12,7 @@
     = form_with(url: survey_submit_page_path(params[:event], params[:design], @page), method: :patch, local: true, autocomplete: "off", id: "survey-form") do |form|
       - if @section
         = render "survey/section", section: @section
-        = link_to "#", data: { object: "submit", target: "#survey-form" }, class: "btn btn-success btn-shadow float-right" do
+        = link_to "#", data: { object: "submit-and-continue", target: "#survey-form" }, class: "btn btn-success btn-shadow float-right" do
           Continue
           %i.fa.fa-caret-right
         .clearfix
@@ -31,7 +31,7 @@
               %p.lead.text-muted.d-none= @variable.variable_type
 
         .float-right
-          = link_to "#", data: { object: "submit", target: "#survey-form" }, class: "btn btn-success btn-shadow" do
+          = link_to "#", data: { object: "submit-and-continue", target: "#survey-form" }, class: "btn btn-success btn-shadow" do
             Continue
             %i.fa.fa-caret-right
         .clearfix
