@@ -1,5 +1,9 @@
 ## 3.0.0
 
+### Enhancements
+- **Gem Changes**
+  - Updated to bootstrap 4.0.0.beta2
+
 ## 2.1.1 (October 16, 2017)
 
 ### Enhancements
