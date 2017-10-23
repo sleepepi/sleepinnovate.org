@@ -1,6 +1,8 @@
 ## 3.0.0
 
 ### Enhancements
+- **General Changes**
+  - Removed extraneous session expired notification
 - **Gem Changes**
   - Updated to bootstrap 4.0.0.beta2
 
