@@ -30,9 +30,6 @@
             - else
               %p.lead.text-muted.d-none= @variable.variable_type
 
-        .float-left
-          = link_to survey_page_path(params[:event], params[:design], @page + 1), data: { confirm: "Skip this question?" }, class: "btn btn-link", tabindex: "-1" do
-            Skip question
         .float-right
           = link_to "#", data: { object: "submit", target: "#survey-form" }, class: "btn btn-success btn-shadow" do
             Continue
