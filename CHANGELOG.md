@@ -19,6 +19,7 @@
 - **Gem Changes**
   - Updated to bootstrap 4.0.0.beta2
   - Updated to haml 5.0.4
+  - Added bootsnap 1.1.5
 
 ### Tests
 - Added tests to assure user passwords can be reset
