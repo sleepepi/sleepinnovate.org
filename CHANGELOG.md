@@ -5,6 +5,7 @@
   - Removed extraneous session expired notification
 - **Survey Changes**
   - Removed survey skip question button
+  - Removed auto-advance for single response questions
 - **Gem Changes**
   - Updated to bootstrap 4.0.0.beta2
   - Updated to haml 5.0.4

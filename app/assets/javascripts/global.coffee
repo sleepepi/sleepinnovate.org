@@ -33,6 +33,3 @@ $(document)
     $($(this).data('target')).submit()
     false
   )
-  .on('click', '[data-object~="radio-submit"]', ->
-    $($(this).data('target')).submit()
-  )
