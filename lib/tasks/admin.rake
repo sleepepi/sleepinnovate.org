@@ -10,7 +10,7 @@ namespace :admin do
         "Date of Birth", "Address", "Clinic", "Consent Status", "Consented At",
         "Consent Revoked At"
       ]
-      User.where.not(consented_at: nil).order(:id).find_each do |user|
+      User.consented.order(:id).find_each do |user|
         csv << [
           user.id,
           Subject.remote_subject_code(user),

@@ -7,6 +7,7 @@
   - Fixed position of footer icons in Firefox
 - **Admin Changes**
   - Fixed color of header on users index
+  - Reports and exports no longer include users flagged as testers
 - **Consent Changes**
   - Improved language for alert when clicking Consent without checking box
 - **Landing Changes**

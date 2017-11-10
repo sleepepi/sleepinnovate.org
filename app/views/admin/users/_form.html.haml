@@ -1,15 +1,5 @@
-= form_with(model: user, url: admin_user_path(user), local: true) do |form|
-  .form-group.row
-    = form.label :clinic, nil, class: "col-md-2 col-form-label"
-    .col-md-10
-      = form.text_field :clinic, class: "form-control"
-
-  .form-group.row
-    = form.label :biobank_status, nil, class: "col-md-2 col-form-label"
-    .col-md-10
-      = form.select :biobank_status, User::BIOBANK_STATUS, {}, class: "form-control"
-
-  .form-group.row
-    .col-md-10.offset-md-2
-      = form.submit nil, class: "btn btn-primary"
-      = link_to "cancel", admin_user_path(user), class: "btn btn-link"
+= form_with model: user, url: admin_user_path(user), local: true do |form|
+  = render "forms/horizontal/text_field", form: form, object: user, key: :clinic
+  = render "forms/horizontal/select", form: form, object: user, key: :biobank_status, options: User::BIOBANK_STATUS
+  = render "forms/horizontal/check_box", form: form, object: user, key: :tester, help_text: "Testers are not included in reports or exports."
+  = render "forms/horizontal/submit", form: form, object: user, cancel: admin_user_path(user)

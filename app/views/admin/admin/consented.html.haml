@@ -1,5 +1,5 @@
 - @title = "Consent Report - Admin"
-- user_scope = User.current.where(consent_revoked_at: nil).where.not(consented_at: nil)
+- user_scope = User.consented.where(consent_revoked_at: nil)
 - user_scope = user_scope.where(clinic: @clinic) if @clinic.present?
 .page-box.last-slide.background-p50-grey.center-vertically-xs-sm
   .container

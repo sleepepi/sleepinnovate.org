@@ -41,6 +41,8 @@
                 = link_to admin_user_path(user), class: "small text-muted" do
                   %i.fa.fa-user-secret
                   Subject code unassigned
+              - if user.tester?
+                %i.fa.fa-magic{ data: { toggle: "tooltip", title: "Tester" } }
             %td.text-center= simple_check user.consented?
 
     .d-flex.justify-content-center= paginate @users, theme: "bootstrap"

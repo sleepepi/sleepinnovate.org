@@ -34,6 +34,9 @@ class User < ApplicationRecord
     ["Follow the Hidden Smileys", 544]
   ]
 
+  # Scopes
+  scope :consented, -> { current.where.not(consented_at: nil).where(tester: false) }
+
   # Validations
   validates :full_name, presence: true
   validates :email, confirmation: true
