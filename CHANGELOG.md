@@ -5,6 +5,8 @@
   - Autocomplete removed from registration and sign in pages
   - About page button now links to dashboard for logged in users
   - Fixed position of footer icons in Firefox
+- **Admin Changes**
+  - Fixed color of header on users index
 - **Consent Changes**
   - Improved language for alert when clicking Consent without checking box
 - **Landing Changes**

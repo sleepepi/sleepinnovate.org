@@ -15,3 +15,12 @@
     }
   }
 }
+
+.table {
+  &.table-borderless {
+    td,
+    th {
+      border-width: 0;
+    }
+  }
+}
