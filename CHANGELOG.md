@@ -13,6 +13,7 @@
   - Autocomplete now turned off on the "WITHDRAW" leave study prompt
 - **Survey Changes**
   - Numeric input questions should now default to numeric keyboard
+  - Dropdowns now include text for blank default options
 
 ## 3.0.0 (October 30, 2017)
 
