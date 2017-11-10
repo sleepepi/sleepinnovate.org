@@ -6,6 +6,8 @@
   - About page button now links to dashboard for logged in users
 - **Consent Changes**
   - Improved language for alert when clicking Consent without checking box
+- **Landing Changes**
+  - Landing page now includes text about longitudinal followup by email
 - **Settings Changes**
   - Autocomplete now turned off on the "WITHDRAW" leave study prompt
 
