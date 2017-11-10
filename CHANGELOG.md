@@ -11,6 +11,8 @@
   - Landing page now includes text about longitudinal followup by email
 - **Settings Changes**
   - Autocomplete now turned off on the "WITHDRAW" leave study prompt
+- **Survey Changes**
+  - Numeric input questions should now default to numeric keyboard
 
 ## 3.0.0 (October 30, 2017)
 
