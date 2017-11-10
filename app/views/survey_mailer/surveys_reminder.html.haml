@@ -1,0 +1,26 @@
+%p{ style: p_style }
+  Thank you for being part of
+  = succeed "!" do
+    = render "layouts/mailer/logo"
+  We would not be able to conduct research on important topics like sleep health
+  without your help.
+
+%p{ style: p_style }
+  We noticed that you have not yet completed your brief surveys and brain
+  quizzes. These activities provide us with valuable information about how
+  health changes over time.
+  %span{ style: emphasis_style }
+    Please follow the link below to login and complete the rest of your surveys
+    and brain quizzes.
+
+%p{ style: center_style }
+  = link_to "Continue Helping Sleep Research", "#{ENV["website_url"]}?token=#{@token}", style: link_style
+
+= render "layouts/mailer/technical_help"
+
+%p{ style: p_style }
+  Thanks again for your help!
+%p{ style: p_style }
+  The
+  = render "layouts/mailer/logo"
+  Team

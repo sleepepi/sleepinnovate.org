@@ -1,0 +1,31 @@
+%p{ style: p_style }
+  = @event.dig(:number).capitalize
+  months ago, you joined our innovative sleep research project. Thank you
+  for being part of
+  = succeed "!" do
+    = render "layouts/mailer/logo"
+  Sleep is different for everyone. Your valuable input will help researchers
+  learn more about how sleep affects the health of people like you. We hope that
+  future research will help doctors determine the best treatment for each
+  patient.
+
+%p{ style: p_style }
+  Now we ask that you complete another set of brief survey questions and brain
+  quizzes whenever it's convenient for you. These activities will take about
+  15-20 minutes for the surveys and 10-15 minutes for the brain quizzes. You do
+  not need to complete all the activities in one sitting.
+  %span{ style: emphasis_style }
+    Please follow the link below to login and complete your surveys and brain
+    quizzes.
+
+%p{ style: center_style }
+  = link_to "Begin Your #{@event.dig(:name)}", "#{ENV["website_url"]}?token=#{@token}", style: link_style
+
+= render "layouts/mailer/technical_help"
+
+%p{ style: p_style }
+  Thanks again for all your support!
+%p{ style: p_style }
+  The
+  = render "layouts/mailer/logo"
+  Team

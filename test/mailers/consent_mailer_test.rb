@@ -4,7 +4,7 @@ require "test_helper"
 
 # Tests consent emails.
 class ConsentMailerTest < ActionMailer::TestCase
-  test "consent pdfemail" do
+  test "consent pdf email" do
     mail = ConsentMailer.consent_pdf_email(users(:consented))
     assert_equal "#{ENV["website_name"]} Consent", mail.subject
     assert_equal ["consented@example.com"], mail.to

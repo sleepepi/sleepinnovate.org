@@ -1,0 +1,18 @@
+<%= @event.dig(:number).capitalize %> months ago, you joined our innovative sleep research project. Thank you
+for being part of SleepINNOVATE! Sleep is different for everyone. Your valuable
+input will help researchers learn more about how sleep affects the health of
+people like you. We hope that future research will help doctors determine the
+best treatment for each patient.
+
+Now we ask that you complete another set of brief survey questions and brain
+quizzes whenever it's convenient for you. These activities will take about
+15-20 minutes for the surveys and 10-15 minutes for the brain quizzes. You do
+not need to complete all the activities in one sitting. Please follow the link
+below to login and complete your surveys and brain quizzes.
+
+<%= "#{ENV["website_url"]}?token=#{@token}" %>
+
+<%= render "layouts/mailer/technical_help" %>
+Thanks again for all your support!
+
+The SleepINNOVATE Team

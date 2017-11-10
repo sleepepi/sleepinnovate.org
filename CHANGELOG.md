@@ -10,6 +10,8 @@
   - Reports and exports no longer include users flagged as testers
 - **Consent Changes**
   - Improved language for alert when clicking Consent without checking box
+- **Email Changes**
+  - Added brain quizzes and surveys available and reminder emails
 - **Landing Changes**
   - Landing page now includes text about longitudinal followup by email
 - **Settings Changes**

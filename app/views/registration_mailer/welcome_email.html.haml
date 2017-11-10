@@ -1,9 +1,6 @@
 %p{ style: p_style }
   Welcome to the
-
-  %span
-    %span{ style: "color: #03a9f4;" }> Sleep
-    %span{ style: "color: #5c6bc0;" } INNOVATE
+  = render "layouts/mailer/logo"
   portal! We truly value your support and thank you
   for your interest. Your participation will help us better understand how sleep
   influences health and well-being and hopefully improve sleep healthcare.
@@ -18,19 +15,11 @@
 %p{ style: center_style }
   = link_to "Create my password", "#{ENV["website_url"]}/settings/password/reset?reset_password_token=#{@token}", style: link_style
 
-%p{ style: p_style }
-  If you have any questions about SleepINNOVATE or need technical support,
-  please contact
-  = mail_to "support@sleepinnovate.org", "support@sleepinnovate.org", style: link_style
-  or Carolina Dos Santos at
-  = succeed "." do
-    = link_to "617-278-0746", "tel:617-278-0746", style: link_style
+= render "layouts/mailer/technical_help"
 
 %p{ style: p_style }
   Thanks again,
 %p{ style: p_style }
   The
-  %span
-    %span{ style: "color: #03a9f4;" }> Sleep
-    %span{ style: "color: #5c6bc0;" } INNOVATE
+  = render "layouts/mailer/logo"
   Team
