@@ -2,13 +2,6 @@
   .container
     .footer
       .nowrap
-        &copy;
-        .d-none.d-sm-inline= Time.zone.today.year
-        = link_to "Brigham Sleep", about_path
-        - if session[:clinic].present? && (current_page?(root_path) || current_page?(landing_path))
-          %small{ style: "color: #bdbdbd;" }
-            &middot; Clinic
-            = session[:clinic].upcase
         .float-right{ style: "margin-top: -14px;" }
           .d-none.d-sm-inline= link_to "Questions?", contact_path
           .d-inline.d-sm-none
@@ -17,3 +10,11 @@
           &nbsp;
           = image_tag "logos/bwh-logo.png", size: "48x56", alt: ""
           = image_tag "logos/mgh-logo.png", size: "48x56", alt: ""
+
+        &copy;
+        .d-none.d-sm-inline= Time.zone.today.year
+        = link_to "Brigham Sleep", about_path
+        - if session[:clinic].present? && (current_page?(root_path) || current_page?(landing_path))
+          %small{ style: "color: #bdbdbd;" }
+            &middot; Clinic
+            = session[:clinic].upcase
