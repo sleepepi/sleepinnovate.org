@@ -1,5 +1,9 @@
 ## 4.0.0
 
+### Enhancements
+- **Consent Changes**
+  - Improved language for alert when clicking Consent without checking box
+
 ## 3.0.0 (October 30, 2017)
 
 ### Enhancements

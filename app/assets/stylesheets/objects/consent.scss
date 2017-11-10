@@ -56,3 +56,12 @@
   border: 1px solid $p200-grey;
   color: $p400-grey;
 }
+
+.consent-checkbox {
+  background-color: $p50-grey;
+  border-radius: $border-radius;
+  box-shadow: $box-shadow;
+  padding-bottom: $spacer;
+  padding-left: $spacer;
+  padding-top: $spacer;
+}

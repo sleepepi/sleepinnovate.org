@@ -3,6 +3,6 @@ $(document)
     if $("#read_consent:checked").length > 0
       $("#consent-form").submit()
     else
-      alert 'Please mark that you give your consent.'
+      alert 'Please check the box if you give your consent.'
     false
   )
