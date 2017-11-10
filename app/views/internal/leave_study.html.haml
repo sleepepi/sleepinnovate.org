@@ -7,7 +7,7 @@
     = form_with url: submit_leave_study_path, method: :post, local: true do |form|
       .form-group
         = form.label :withdraw, "Are you sure you want to withdraw from the #{render "layouts/logo"} study?".html_safe, class: "form-control-label"
-        = form.text_field :withdraw, class: "form-control#{" is-invalid" if @withdraw_error}", value: params[:withdraw], style: "max-width: 14rem;", maxlength: 8, placeholder: "<type here>"
+        = form.text_field :withdraw, class: "form-control#{" is-invalid" if @withdraw_error}", value: params[:withdraw], style: "max-width: 14rem;", maxlength: 8, placeholder: "<type here>", autocomplete: "off"
         %small.form-text{ class: @withdraw_error ? "text-danger" : "text-muted" }
           Type
           %span.badge.badge-light WITHDRAW

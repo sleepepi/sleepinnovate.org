@@ -3,6 +3,8 @@
 ### Enhancements
 - **Consent Changes**
   - Improved language for alert when clicking Consent without checking box
+- **Settings Changes**
+  - Autocomplete now turned off on the "WITHDRAW" leave study prompt
 
 ## 3.0.0 (October 30, 2017)
 
