@@ -3,6 +3,7 @@
 ### Enhancements
 - **General Changes**
   - Autocomplete removed from registration and sign in pages
+  - About page button now links to dashboard for logged in users
 - **Consent Changes**
   - Improved language for alert when clicking Consent without checking box
 - **Settings Changes**
