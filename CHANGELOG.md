@@ -1,6 +1,8 @@
 ## 4.0.0
 
 ### Enhancements
+- **General Changes**
+  - Autocomplete removed from registration and sign in pages
 - **Consent Changes**
   - Improved language for alert when clicking Consent without checking box
 - **Settings Changes**

@@ -3,12 +3,12 @@
     .sign-up-form-title
       Set your password
 
-    = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put, class: "form-vertical", autocomplete: "off" }) do |f|
-      = f.hidden_field :reset_password_token
+    = form_with model: resource, as: resource_name, url: password_path(resource_name), method: :put, local: true do |form|
+      = form.hidden_field :reset_password_token
 
       .form-group
-        = render 'layouts/label_or_errors', form: f, object: resource, key: :password, key_name: 'New Password'
-        = f.password_field :password, class: 'form-control'
+        = render "layouts/label_or_errors", form: form, object: resource, key: :password, key_name: "New password"
+        = form.password_field :password, class: "form-control"
         - if @minimum_password_length
           %small.form-text.text-muted
             At least
@@ -23,12 +23,12 @@
             = succeed "." do
               %code 0-9
       .form-group
-        = render 'layouts/label_or_errors', form: f, object: resource, key: :password_confirmation, key_name: 'Confirm new password'
-        = f.password_field :password_confirmation, class: 'form-control'
+        = render "layouts/label_or_errors", form: form, object: resource, key: :password_confirmation, key_name: "Confirm new password"
+        = form.password_field :password_confirmation, class: "form-control"
 
       - if resource.errors[:reset_password_token].present?
-        = f.label :reset_password_token, "Reset token has expired.", class: "form-control-label"
+        = form.label :reset_password_token, "Reset token has expired.", class: "form-control-label"
         = link_to "Request a new reset token.", new_password_path(resource_name)
 
       .form-group.submit-btn-container
-        = f.submit "Update my password", class: "btn btn-success btn-block"
+        = form.submit "Update my password", class: "btn btn-success btn-block"

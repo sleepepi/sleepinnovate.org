@@ -1,18 +1,18 @@
 .sign-up-form
   .sign-up-form-title
     Create your account
-  = form_with(model: resource, url: registration_path(resource_name), local: true, class: "form-vertical", autocomplete: "off") do |form|
+  = form_with model: resource, url: registration_path(resource_name), local: true do |form|
     .form-group
       = render "layouts/label_or_errors", form: form, object: resource, key: :full_name
-      = form.text_field :full_name, class: "form-control form-control-danger"
+      = form.text_field :full_name, class: "form-control form-control-danger", autocomplete: "off"
 
     .form-group
       = render "layouts/label_or_errors", form: form, object: resource, key: :email
-      = form.email_field :email, class: "form-control form-control-danger"
+      = form.email_field :email, class: "form-control form-control-danger", autocomplete: "off"
 
     .form-group
       = render "layouts/label_or_errors", form: form, object: resource, key: :email_confirmation
-      = form.email_field :email_confirmation, class: "form-control form-control-danger"
+      = form.email_field :email_confirmation, class: "form-control form-control-danger", autocomplete: "off"
 
     - if RECAPTCHA_ENABLED
       .form-group

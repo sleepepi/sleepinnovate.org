@@ -5,10 +5,10 @@
     .sign-up-form-title
       Sign in
 
-    = form_with(model: resource, url: session_path(resource_name), local: true, class: "form-vertical", autocomplete: "off") do |form|
+    = form_with model: resource, url: session_path(resource_name), local: true do |form|
       .form-group{ class: flash[:alert].present? ? "has-danger" : "" }
         = form.label :email, class: "form-control-label"
-        = form.text_field :email, class: "form-control form-control-danger"
+        = form.text_field :email, class: "form-control form-control-danger", autocomplete: "off"
 
       .form-group{ class: flash[:alert].present? ? "has-danger" : "" }
         = form.label :password, class: "form-control-label"
