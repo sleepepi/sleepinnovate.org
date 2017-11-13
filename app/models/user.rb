@@ -120,10 +120,12 @@ class User < ApplicationRecord
   end
 
   def brain_surveys_completed(event)
+    return 0 unless event
     brain_tests.where(event: event.slug).count
   end
 
-  def brain_surveys_count(_event)
+  def brain_surveys_count(event)
+    return 0 unless event
     TEST_MY_BRAIN_SURVEYS.size
   end
 

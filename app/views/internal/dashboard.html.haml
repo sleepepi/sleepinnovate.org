@@ -90,7 +90,9 @@
         - else
           = render "cards/completed", subject_event: current_user.subject_events.first
 
-        - if current_user.brain_surveys_completed? && ENV["test_my_brain_enabled"] == "true"
+        - if current_user.subject_events.blank?
+          = render "cards/brain_starting_soon"
+        - elsif current_user.brain_surveys_completed? && ENV["test_my_brain_enabled"] == "true"
           = render "cards/brain_completed"
         - elsif current_user.brain_surveys_started? && ENV["test_my_brain_enabled"] == "true"
           = render "cards/brain_started"
