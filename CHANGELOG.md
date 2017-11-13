@@ -19,6 +19,8 @@
 - **Survey Changes**
   - Numeric input questions should now default to numeric keyboard
   - Dropdowns now include text for blank default options
+- **Gem Changes**
+  - Updated to kaminari 1.1.1
 
 ## 3.0.0 (October 30, 2017)
 
