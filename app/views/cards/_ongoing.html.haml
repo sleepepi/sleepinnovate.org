@@ -10,12 +10,13 @@
     %h4.card-title
       = subject_event.name
       Surveys
-    - if subject_event.percent.to_i.zero?
+    - if survey_number.zero? || number_of_surveys.zero?
       .progress
         .progress-bar.progress-bar-striped{ role: "progressbar", style: "width: 100%;background-color: #ededed;", aria: { valuenow: "0", valuemin: "0", valuemax: "100" } }
     - else
+      - percent = (survey_number - 1) * 100.0 / number_of_surveys
       .progress
-        .progress-bar.progress-bar-striped.bg-success{ role: "progressbar", style: "width: #{subject_event.percent}%;", aria: { valuenow: "#{subject_event.percent}", valuemin: "0", valuemax: "100" } }
+        .progress-bar.progress-bar-striped.bg-success{ role: "progressbar", style: "width: #{percent}%;", aria: { valuenow: "#{percent}", valuemin: "0", valuemax: "100" } }
     - if event_design.sheets.present?
       %p.card-text
         %div{ style: "color: #bdbdbd;" }

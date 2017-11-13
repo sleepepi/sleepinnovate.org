@@ -22,6 +22,8 @@
 - **Survey Changes**
   - Numeric input questions should now default to numeric keyboard
   - Dropdowns now include text for blank default options
+  - Survey completion bar now display percent of overall surveys completed
+    instead of overall questions completed
 - **Gem Changes**
   - Updated to kaminari 1.1.1
 
