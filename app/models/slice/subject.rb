@@ -11,39 +11,33 @@ class Subject < SliceRecord
   end
 
   def current_event
-    "Baseline"
+    Event.find_by(slug: subject_events.last&.event)
   end
 
-  def total_baseline_surveys_count
-    if baseline_event
-      baseline_event.event_designs.size
-    else
-      0
-    end
+  def event_launched?(event)
+    current_subject_event(event.slug).present?
   end
 
-  def baseline_surveys_completed_count
-    if baseline_event
-      baseline_event.event_designs.count(&:complete?)
-    else
-      0
-    end
+  def event_surveys_completed(event)
+    subject_event = current_subject_event(event.slug)
+    return 0 unless subject_event
+    subject_event.event_designs.count(&:complete?)
   end
 
-  def baseline_surveys_completed?
-    if baseline_event
-      baseline_event.event_designs.count(&:incomplete?).zero?
-    else
-      false
-    end
+  def event_surveys_total(event)
+    subject_event = current_subject_event(event.slug)
+    return 0 unless subject_event
+    subject_event.event_designs.count
   end
 
-  def baseline_event
-    current_subject_event("Baseline")
+  def event_completed?(event)
+    subject_event = current_subject_event(event.slug)
+    return false unless subject_event
+    subject_event.complete?
   end
 
-  def current_subject_event(subject_event_name)
-    subject_events.find { |se| se.name == subject_event_name }
+  def current_subject_event(subject_event_slug)
+    subject_events.find { |se| se.event == subject_event_slug }
   end
 
   def loaded?
@@ -113,6 +107,13 @@ class Subject < SliceRecord
     start_event_survey(event, design)
   end
 
+  def create_event!(event)
+    return unless linked?
+    params = { event_id: event.slug }
+    (json, status) = Helpers::JsonRequest.post("#{project_url}/subjects/#{@id}/events.json", params)
+    load_events_from_json(json, status)
+  end
+
   private
 
   def set_defaults
@@ -169,7 +170,7 @@ class Subject < SliceRecord
 
   def create_baseline_event
     return unless linked?
-    params = { event_id: ENV["baseline_id"] }
+    params = { event_id: Event.first.slug }
     (json, status) = Helpers::JsonRequest.post("#{project_url}/subjects/#{@id}/events.json", params)
     load_events_from_json(json, status)
   end

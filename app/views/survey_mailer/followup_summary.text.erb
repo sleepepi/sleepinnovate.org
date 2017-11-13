@@ -1,0 +1,30 @@
+Event <% if @activations.present? %>activations<% end %><% if @activations.present? && @reminders.present? %> and <% end %><% if @reminders.present? %>reminders<% end %> for <%= Time.zone.today.strftime("%A, %B %-d, %Y") %>.
+
+
+<% if @activations.present? %>
+Activation Emails
+
+<% @activations.each do |activation| %>
+<%= activation[:subject] %>
+<% activation[:events].each do |event| %>
+<%= event[:event] %> activated <%= pluralize event[:days_after_consent], "day" %> after consent
+<% end %>
+
+<% end %>
+
+<% end %>
+<% if @reminders.present? %>
+Reminder Emails
+
+<% @reminders.each do |reminder| %>
+<%= reminder[:subject] %>
+<% reminder[:events].each do |event| %>
+<%= event[:event] %> reminder <%= pluralize event[:days_after_consent], "day" %> after consent
+<% end %>
+
+<% end %>
+
+<% end %>
+Overall statistics.
+
+<% if @activations.present? %><%= pluralize @activations.sum { |i| i[:events].size }, "activation" %><% end %><% if @activations.present? && @reminders.present? %> and <% end %><% if @reminders.present? %><%= pluralize @reminders.sum { |i| i[:events].size }, "reminder" %><% end %>

@@ -1,4 +1,4 @@
-<%= @event.dig(:number).capitalize %> months ago, you joined our innovative sleep research project. Thank you
+<%= @event.time_ago %>, you joined our innovative sleep research project. Thank you
 for being part of SleepINNOVATE! Sleep is different for everyone. Your valuable
 input will help researchers learn more about how sleep affects the health of
 people like you. We hope that future research will help doctors determine the
@@ -10,7 +10,7 @@ quizzes whenever it's convenient for you. These activities will take about
 not need to complete all the activities in one sitting. Please follow the link
 below to login and complete your surveys and brain quizzes.
 
-<%= "#{ENV["website_url"]}?token=#{@token}" %>
+<%= ENV["website_url"] %>
 
 <%= render "layouts/mailer/technical_help" %>
 Thanks again for all your support!

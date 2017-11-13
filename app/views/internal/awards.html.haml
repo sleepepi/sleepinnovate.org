@@ -6,14 +6,28 @@
 
     - if current_user.consented?
       %p
-        Earn a lottery ticket for completing your baseline surveys.
-        - unless current_user.baseline_surveys_completed_count.zero?
-          %small.text-muted
-            = surround "[", "]" do
-              = current_user.baseline_surveys_completed_count
-              of
-              = current_user.total_baseline_surveys_count
-              completed
+        Earn a lottery ticket for completing sets of surveys.
+        %ul
+          - Event.order(:month).each do |event|
+            - unless current_user.event_surveys_total(event).zero?
+              - if current_user.event_surveys_total(event) == current_user.event_surveys_total(event)
+                %li.small
+                  %i.fa.fa-check-square-o.text-success
+                  = event.name
+                  = surround "[", "]" do
+                    = current_user.event_surveys_completed(event)
+                    of
+                    = current_user.event_surveys_total(event)
+                    completed
+              - else
+                %li.small.text-muted
+                  %i.fa.fa-square-o
+                  = event.name
+                  = surround "[", "]" do
+                    = current_user.event_surveys_completed(event)
+                    of
+                    = current_user.event_surveys_total(event)
+                    completed
 
       %p
         You have earned

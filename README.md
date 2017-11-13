@@ -69,6 +69,9 @@ SHELL=/bin/bash
 # Import TestMyBrain CSVs
 0 6 * * * source /etc/profile.d/rvm.sh && cd /var/www/sleepinnovate.org && /usr/local/rvm/gems/ruby-2.4.2/bin/bundle exec rake brains:nightly_import RAILS_ENV=production
 
+# Launch Followup Events
+30 6 * * * source /etc/profile.d/rvm.sh && cd /var/www/sleepinnovate.org && /usr/local/rvm/gems/ruby-2.4.2/bin/bundle exec rake events:followup RAILS_ENV=production
+
 # Export Admin CSV
 15,45 * * * * source /etc/profile.d/rvm.sh && cd /var/www/sleepinnovate.org && /usr/local/rvm/gems/ruby-2.4.2/bin/bundle exec rake admin:export RAILS_ENV=production
 ```

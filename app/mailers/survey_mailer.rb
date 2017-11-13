@@ -5,40 +5,35 @@ class SurveyMailer < ApplicationMailer
   def brain_quizzes_available(user)
     setup_email
     @user = user
-    @token = token
     @email_to = user.email
     mail(to: @email_to, subject: "SleepINNOVATE Brain Quizzes Available")
   end
 
-  def surveys_available(user)
+  def surveys_available(user, event)
     setup_email
     @user = user
-    @token = token
     @event = event
     @email_to = user.email
-    mail(to: @email_to, subject: "SleepINNOVATE #{@event.dig(:name)} Available")
+    mail(to: @email_to, subject: "SleepINNOVATE #{@event.name} Available")
   end
 
-  def surveys_reminder(user)
+  def surveys_reminder(user, event)
     setup_email
     @user = user
-    @token = token
     @event = event
     @email_to = user.email
-    mail(to: @email_to, subject: "Continue Your #{@event.dig(:name)}")
+    mail(to: @email_to, subject: "Continue Your #{@event.name}")
   end
 
-  private
-
-  def token
-    SecureRandom.hex(8)
-  end
-
-  def event
-    {
-      number: "three",
-      name: "3-Month Follow-up",
-      slug: "followup-3month"
-    }
+  def followup_summary(user, activations, reminders)
+    setup_email
+    @user = user
+    @activations = activations
+    @reminders = reminders
+    @email_to = user.email
+    mail(
+      to: @email_to,
+      subject: "Followup Summary for #{Time.zone.today.strftime("%a %d %b %Y")}"
+    )
   end
 end

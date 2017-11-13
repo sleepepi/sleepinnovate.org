@@ -11,7 +11,7 @@
     Please follow the link below to login and complete your brain quizzes.
 
 %p{ style: center_style }
-  = link_to "Start Testing Your Brain", "#{ENV["website_url"]}?token=#{@token}", style: link_style
+  = link_to "Start Testing Your Brain", ENV["website_url"], style: link_style
 
 = render "layouts/mailer/technical_help"
 

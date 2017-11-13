@@ -2,12 +2,13 @@
 
 # Tracks a series of designs filled out on an event date for a subject.
 class SubjectEvent
-  attr_accessor :json, :id, :name, :event_designs, :percent, :unblinded_responses_count, :unblinded_questions_count
+  attr_accessor :json, :id, :name, :event, :event_designs, :percent, :unblinded_responses_count, :unblinded_questions_count
 
   def initialize(json)
     @json = json
     @id = json["id"]
     @name = json["name"]
+    @event = json["event"]
     @unblinded_percent = json["unblinded_percent"]
     @unblinded_responses_count = json["unblinded_responses_count"]
     @unblinded_questions_count = json["unblinded_questions_count"]
@@ -30,5 +31,9 @@ class SubjectEvent
 
   def sheets_where(sheet_id)
     @event_designs.collect { |ed| ed.sheets_where(sheet_id) }.flatten
+  end
+
+  def complete?
+    event_designs.count(&:incomplete?).zero?
   end
 end

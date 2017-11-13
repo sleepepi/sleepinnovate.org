@@ -36,6 +36,7 @@ class User < ApplicationRecord
 
   # Scopes
   scope :consented, -> { current.where.not(consented_at: nil).where(tester: false) }
+  scope :consented_with_testers, -> { current.where.not(consented_at: nil) }
 
   # Validations
   validates :full_name, presence: true
@@ -53,6 +54,7 @@ class User < ApplicationRecord
 
   # Relationships
   has_many :brain_tests
+  has_many :user_events
   has_many :user_surveys
 
   # Delegations
@@ -60,9 +62,6 @@ class User < ApplicationRecord
   delegate :subject_code, to: :subject
   delegate :launch_survey!, to: :subject
   delegate :next_survey, to: :subject
-  delegate :baseline_surveys_completed?, to: :subject
-  delegate :total_baseline_surveys_count, to: :subject
-  delegate :baseline_surveys_completed_count, to: :subject
   delegate :start_event_survey, to: :subject
   delegate :resume_event_survey, to: :subject
   delegate :page_event_survey, to: :subject
@@ -70,7 +69,21 @@ class User < ApplicationRecord
   delegate :complete_event_survey, to: :subject
   delegate :current_event, to: :subject
 
+  delegate :create_event!, to: :subject
+  delegate :event_launched?, to: :subject
+  delegate :event_completed?, to: :subject
+  delegate :event_surveys_completed, to: :subject
+  delegate :event_surveys_total, to: :subject
+
   # Methods
+
+  def current_event_brain_code
+    if current_event
+      current_event.slug.upcase.gsub("-", "dash")
+    else
+      "BASELINE"
+    end
+  end
 
   def consent!
     update(consented_at: Time.zone.now, consent_revoked_at: nil)
@@ -106,17 +119,21 @@ class User < ApplicationRecord
     brain_surveys_count
   end
 
-  def brain_baseline_surveys_count
+  def brain_surveys_completed(event)
+    brain_tests.where(event: event.slug).count
+  end
+
+  def brain_surveys_count(_event)
     TEST_MY_BRAIN_SURVEYS.size
   end
 
-  def brain_baseline_percent
-    return 100 if brain_baseline_surveys_count.zero?
-    brain_baseline_surveys_completed * 100 / brain_baseline_surveys_count
+  def brain_percent(event)
+    return 100 if brain_surveys_count(event).zero?
+    brain_surveys_completed(event) * 100 / brain_surveys_count(event)
   end
 
   def next_brain_test
-    all_tests_taken = brain_tests.pluck(:battery_number)
+    all_tests_taken = brain_tests.where(event: current_event.slug).pluck(:battery_number)
     remaining_tests = TEST_MY_BRAIN_SURVEYS.reject do |_battery_name, battery_number|
       battery_number.in?(all_tests_taken)
     end
@@ -167,11 +184,11 @@ class User < ApplicationRecord
   end
 
   def awards_count
-    if baseline_surveys_completed?
-      1
-    else
-      0
+    events_completed = 0
+    Event.order(:month).each do |event|
+      events_completed += 1 if event_completed?(event)
     end
+    events_completed
   end
 
   def slice_surveys_step?
@@ -229,7 +246,14 @@ class User < ApplicationRecord
   end
 
   def whats_next?
-    baseline_surveys_completed? && brain_surveys_completed? && (biobank_registration_completed? || biobank_opted_out?)
+    next_survey.nil? && brain_surveys_completed? && (biobank_registration_completed? || biobank_opted_out?)
+  end
+
+  def next_event_title
+    Event.order(:month).each do |event|
+      return event.name unless event_launched?(event)
+    end
+    nil
   end
 
   def subject

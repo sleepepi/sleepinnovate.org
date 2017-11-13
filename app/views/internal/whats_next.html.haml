@@ -4,7 +4,11 @@
   .container
     .row
       .col-lg-4.col-buffer
-      .col-lg-4.col-buffer= render "cards/coming_soon", title: "3 Month Phonecall"
+      .col-lg-4.col-buffer
+        - if current_user.next_event_title
+          = render "cards/coming_soon", title: current_user.next_event_title
+        - else
+          = render "cards/all_events_completed"
 
     .text-center
       Back to

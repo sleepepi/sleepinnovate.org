@@ -1,0 +1,49 @@
+%div{ style: "text-align: center;" }
+  Event
+  - if @activations.present?
+    activations
+  - if @activations.present? && @reminders.present?
+    and
+  - if @reminders.present?
+    reminders
+  for
+  = succeed "." do
+    %span{ style: "#{emphasis_style};white-space:nowrap" }= Time.zone.today.strftime("%A, %B %-d, %Y")
+
+- if @activations.present?
+  - content_for :extra_blocks do
+    %div{ style: "background-color:#{background_color};height:16px;line-height:16px;font-size:1px;" } &nbsp;
+    %table{ align: "center", border: "0", cellpadding: "32", cellspacing: "0", style: "border-collapse:collapse;background:white;" }
+      %tbody
+        %tr
+          %td{ style: "border-collapse:collapse", valign: "top", width: "546" }
+            %div{ style: "max-width:600px;margin:0 auto;" }
+              = render "survey_mailer/activations", activations: @activations
+
+- if @reminders.present?
+  - content_for :extra_blocks do
+    %div{ style: "background-color:#{background_color};height:16px;line-height:16px;font-size:1px;" } &nbsp;
+    %table{ align: "center", border: "0", cellpadding: "32", cellspacing: "0", style: "border-collapse:collapse;background:white;" }
+      %tbody
+        %tr
+          %td{ style: "border-collapse:collapse", valign: "top", width: "546" }
+            %div{ style: "max-width:600px;margin:0 auto;" }
+              = render "survey_mailer/reminders", reminders: @reminders
+
+- content_for :extra_blocks do
+  %div{ style: "background-color:#{background_color};height:16px;line-height:16px;font-size:1px;" } &nbsp;
+  %table{ align: "center", border: "0", cellpadding: "32", cellspacing: "0", style: "border-collapse:collapse;background:white;" }
+    %tbody
+      %tr
+        %td{ style: "border-collapse:collapse", valign: "top", width: "546" }
+          %div{ style: "max-width:600px;margin:0 auto;" }
+            %p{ style: center_style }
+              %span{ style: emphasis_style } Overall statistics.
+
+            %div{ style: "text-align: center;" }
+              - if @activations.present?
+                %span{ style: success_style }= pluralize @activations.sum { |i| i[:events].size }, "activation"
+              - if @activations.present? && @reminders.present?
+                %span and
+              - if @reminders.present?
+                %span{ style: link_style }= pluralize @reminders.sum { |i| i[:events].size }, "reminder"

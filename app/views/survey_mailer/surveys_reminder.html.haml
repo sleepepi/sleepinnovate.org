@@ -14,7 +14,7 @@
     and brain quizzes.
 
 %p{ style: center_style }
-  = link_to "Continue Helping Sleep Research", "#{ENV["website_url"]}?token=#{@token}", style: link_style
+  = link_to "Continue Helping Sleep Research", ENV["website_url"], style: link_style
 
 = render "layouts/mailer/technical_help"
 

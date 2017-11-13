@@ -1,0 +1,17 @@
+%p{ style: center_style }
+  %span{ style: emphasis_style }
+    Reminder Emails
+
+- reminders.each do |reminder|
+  %p{ style: p_style }
+    %span{ style: emphasis_style }
+      = reminder[:subject]
+    - reminder[:events].each do |event|
+      %br
+      %span
+        = event[:event]
+      %span{ style: link_style }
+        reminder
+      %span{ style: emphasis_style }
+        = pluralize event[:days_after_consent], "day"
+      %span after consent

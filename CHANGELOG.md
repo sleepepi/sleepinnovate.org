@@ -8,10 +8,13 @@
 - **Admin Changes**
   - Fixed color of header on users index
   - Reports and exports no longer include users flagged as testers
+  - Admins receive an overview email of activation and reminder emails sent
 - **Consent Changes**
   - Improved language for alert when clicking Consent without checking box
 - **Email Changes**
   - Added brain quizzes and surveys available and reminder emails
+- **Event Changes**
+  - Followup events activation emails and reminders are now sent out
 - **Landing Changes**
   - Landing page now includes text about longitudinal followup by email
 - **Settings Changes**

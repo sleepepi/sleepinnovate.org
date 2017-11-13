@@ -1,0 +1,17 @@
+%p{ style: center_style }
+  %span{ style: emphasis_style }
+    Activation Emails
+
+- activations.each do |activation|
+  %p{ style: p_style }
+    %span{ style: emphasis_style }
+      = activation[:subject]
+    - activation[:events].each do |event|
+      %br
+      %span
+        = event[:event]
+      %span{ style: success_style }
+        activated
+      %span{ style: emphasis_style }
+        = pluralize event[:days_after_consent], "day"
+      %span after consent

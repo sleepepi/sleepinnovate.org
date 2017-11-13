@@ -1,0 +1,29 @@
+baseline:
+  name: Baseline
+  slug: baseline
+  month: 0
+  time_ago:
+
+followup_3month:
+  name: 3-Month Follow-up
+  slug: followup-3month
+  month: 3
+  time_ago: Three months ago
+
+followup_6month:
+  name: 6-Month Follow-up
+  slug: followup-6month
+  month: 6
+  time_ago: Six months ago
+
+followup_12month:
+  name: 12-Month Follow-up
+  slug: followup-12month
+  month: 12
+  time_ago: One year ago
+
+followup_24month:
+  name: 24-Month Follow-up
+  slug: followup-24month
+  month: 24
+  time_ago: Two years ago

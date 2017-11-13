@@ -69,13 +69,12 @@ def increment_subject(row)
   user = User.find_by(slice_subject_id: subject_id) if subject_id.present?
   if user
     user.brain_tests.create(
-      event: event(row).downcase,
+      event: event(row).gsub(/dash/, "-").downcase,
       battery_number: battery_number(row),
       test_name: test_name(row),
       test_number: test_number(row),
       test_outcomes: test_outcomes(row)
     )
-    user.increment!(:brain_surveys_count)
     puts "         #{subject_code(row)} surveys: #{user.brain_surveys_count}"
   else
     puts "         #{subject_code(row)} not found"

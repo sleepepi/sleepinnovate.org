@@ -1,7 +1,7 @@
 %p{ style: p_style }
-  = @event.dig(:number).capitalize
-  months ago, you joined our innovative sleep research project. Thank you
-  for being part of
+  = succeed "," do
+    = @event.time_ago
+  you joined our innovative sleep research project. Thank you for being part of
   = succeed "!" do
     = render "layouts/mailer/logo"
   Sleep is different for everyone. Your valuable input will help researchers
@@ -19,7 +19,7 @@
     quizzes.
 
 %p{ style: center_style }
-  = link_to "Begin Your #{@event.dig(:name)}", "#{ENV["website_url"]}?token=#{@token}", style: link_style
+  = link_to "Begin Your #{@event.name}", ENV["website_url"], style: link_style
 
 = render "layouts/mailer/technical_help"
 
