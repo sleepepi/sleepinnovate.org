@@ -9,6 +9,7 @@
   - Fixed color of header on users index
   - Reports and exports no longer include users flagged as testers
   - Admins receive an overview email of activation and reminder emails sent
+  - Improved display of Test My Brain results
 - **Consent Changes**
   - Improved language for alert when clicking Consent without checking box
 - **Email Changes**

@@ -175,7 +175,12 @@
                       %code= brain_test.test_number
                     %p
                       %strong Outcomes
-                      = brain_test.test_outcomes
+                      - json = JSON.parse(brain_test.test_outcomes) rescue json = {}
+                      - json.each do |key, value|
+                        .row.mb-1.mb-md-0
+                          .col-12.col-md.text-md-right
+                            %code= key
+                          .col-12.col-md= value
                   .card-footer= brain_test.event.capitalize
 
     - if @user.brain_surveys_completed?
