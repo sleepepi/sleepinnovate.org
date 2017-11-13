@@ -62,7 +62,15 @@ Edit Cron Jobs `sudo crontab -e` to run scheduled tasks.
 
 ```
 SHELL=/bin/bash
+
+# Refresh Sitemap
 0 2 * * * source /etc/profile.d/rvm.sh && cd /var/www/sleepinnovate.org && /usr/local/rvm/gems/ruby-2.4.2/bin/bundle exec rake sitemap:refresh RAILS_ENV=production
+
+# Import TestMyBrain CSVs
+0 6 * * * source /etc/profile.d/rvm.sh && cd /var/www/sleepinnovate.org && /usr/local/rvm/gems/ruby-2.4.2/bin/bundle exec rake brains:nightly_import RAILS_ENV=production
+
+# Export Admin CSV
+15,45 * * * * source /etc/profile.d/rvm.sh && cd /var/www/sleepinnovate.org && /usr/local/rvm/gems/ruby-2.4.2/bin/bundle exec rake admin:export RAILS_ENV=production
 ```
 
 ## Contributing to SleepINNOVATE
