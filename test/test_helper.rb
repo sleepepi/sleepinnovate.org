@@ -93,11 +93,12 @@ class ActionDispatch::IntegrationTest
           {
             id: 1,
             name: "Baseline",
-            event_id: "baseline",
+            event_id: 207,
             event_date: "2017-01-01",
             unblinded_responses_count: 1,
             unblinded_questions_count: 10,
             unblinded_percent: 10,
+            event: "baseline",
             event_designs: [
               {
                 event: {
