@@ -1,7 +1,7 @@
 - @title = "Surveys"
 
 .page-box.last-slide.background-p50-grey.center-vertically-xs-sm
-  - current_user.subject_events.each do |subject_event|
+  - current_user.subject_events.reverse_each do |subject_event|
     .panel.panel-full-width
       %h1= subject_event.name
       - if subject_event.percent.to_i.zero?
