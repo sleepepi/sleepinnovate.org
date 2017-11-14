@@ -1,6 +1,25 @@
 # frozen_string_literal: true
 
 namespace :events do
+  desc "Generate all scheduled events."
+  task populate: :environment do
+    Event.where(slug: "baseline").first_or_create(
+      name: "Baseline", month: 0, time_ago: ""
+    )
+    Event.where(slug: "followup-3month").first_or_create(
+      name: "3-Month Follow-up", month: 3, time_ago: "Three months ago"
+    )
+    Event.where(slug: "followup-6month").first_or_create(
+      name: "6-Month Follow-up", month: 6, time_ago: "Six months ago"
+    )
+    Event.where(slug: "followup-12month").first_or_create(
+      name: "12-Month Follow-up", month: 12, time_ago: "One year ago"
+    )
+    Event.where(slug: "followup-24month").first_or_create(
+      name: "24-Month Follow-up", month: 24, time_ago: "Two years ago"
+    )
+  end
+
   desc "Activate events and sent surveys available and surveys reminder emails."
   task followup: :environment do
     activations = []
@@ -38,25 +57,6 @@ namespace :events do
     end
     puts "Activations: #{activations}"
     puts "Reminders: #{reminders}"
-  end
-
-  desc "Generate all scheduled events."
-  task populate: :environment do
-    Event.where(slug: "baseline").first_or_create(
-      name: "Baseline", month: 0, time_ago: ""
-    )
-    Event.where(slug: "followup-3month").first_or_create(
-      name: "3-Month Follow-up", month: 3, time_ago: "Three months ago"
-    )
-    Event.where(slug: "followup-6month").first_or_create(
-      name: "6-Month Follow-up", month: 6, time_ago: "Six months ago"
-    )
-    Event.where(slug: "followup-12month").first_or_create(
-      name: "12-Month Follow-up", month: 12, time_ago: "One year ago"
-    )
-    Event.where(slug: "followup-24month").first_or_create(
-      name: "24-Month Follow-up", month: 24, time_ago: "Two years ago"
-    )
   end
 
   def activate_event?(event, user)
