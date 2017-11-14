@@ -85,14 +85,6 @@ class InternalControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to "#{ENV["test_my_brain_url"]}?id=#{@consented.subject_code}#{@consented.current_event_brain_code}"
   end
 
-  test "should complete test my brain for consented user" do
-    login(@consented)
-    post test_my_brain_complete_url
-    @consented.reload
-    assert_not_nil @consented.brain_completed_at
-    assert_redirected_to dashboard_url
-  end
-
   test "should start biobank registration for consented user" do
     login(@consented)
     post biobank_start_url

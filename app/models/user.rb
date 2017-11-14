@@ -110,15 +110,6 @@ class User < ApplicationRecord
     update(brain_started_at: Time.zone.now)
   end
 
-  def test_my_brain_completed!
-    return unless brain_completed_at.nil?
-    update(brain_completed_at: Time.zone.now)
-  end
-
-  def brain_baseline_surveys_completed
-    brain_surveys_count
-  end
-
   def brain_surveys_completed(event)
     return 0 unless event
     brain_tests.where(event: event.slug).count
@@ -206,17 +197,13 @@ class User < ApplicationRecord
     !brain_started_at.nil?
   end
 
-  def brain_surveys_completed?
-    !brain_completed_at.nil?
+  def brain_surveys_completed?(event)
+    brain_surveys_completed(event) == brain_surveys_count(event)
   end
 
   def biobank_viewable?
     # !first_login? && profile_complete?
     profile_complete?
-  end
-
-  def biobank_registration_step?
-    brain_surveys_completed?
   end
 
   def biobank_registration_started?
@@ -248,7 +235,7 @@ class User < ApplicationRecord
   end
 
   def whats_next?
-    next_survey.nil? && brain_surveys_completed? && (biobank_registration_completed? || biobank_opted_out?)
+    next_survey.nil? && brain_surveys_completed?(current_event) && (biobank_registration_completed? || biobank_opted_out?)
   end
 
   def next_event_title

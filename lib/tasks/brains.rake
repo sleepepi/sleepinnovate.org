@@ -75,7 +75,7 @@ def increment_subject(row)
       test_number: test_number(row),
       test_outcomes: test_outcomes(row)
     )
-    puts "         #{subject_code(row)} surveys: #{user.brain_surveys_count}"
+    puts "         #{subject_code(row)} survey added"
   else
     puts "         #{subject_code(row)} not found"
   end
