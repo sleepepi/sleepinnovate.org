@@ -119,11 +119,9 @@ $(document)
     $(".survey-choices input").closest("label").removeClass("active")
     $(".survey-choices input:checked").closest("label").addClass("active")
   )
-  .on('click', '[data-object~="submit-and-continue"]', ->
-    $(this).css("width", $(this).css("width"))
-    $(this).prop('disabled', true)
-    $(this).addClass('disabled')
-    $($(this).data('target')).submit()
-    $(this).html("<i class=\"fa fa-spin fa-spinner\"></i>")
+  .on("click", "[data-object~=submit-and-continue]", ->
+    disablerWithSpinner($(this))
+    $target = $($(this).data("target"))
+    setTimeout (-> $target.submit()), 50
     false
   )
