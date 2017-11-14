@@ -25,6 +25,8 @@
   - Dropdowns now include text for blank default options
   - Survey completion bar now display percent of overall surveys completed
     instead of overall questions completed
+- **Test My Brain Changes**
+  - Test My Brain CSV files are now archived by year and month
 - **Gem Changes**
   - Updated to kaminari 1.1.1
 

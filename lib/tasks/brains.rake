@@ -12,7 +12,7 @@ def parse_brain_csvs
   csv_files = Dir.glob(Rails.root.join("brains", "*.csv"), File::FNM_CASEFOLD)
   csv_files.each do |csv_file|
     read_csv(csv_file)
-    FileUtils.mv csv_file, Rails.root.join("brains", "archive")
+    archive_file(csv_file)
   end
 end
 
@@ -25,6 +25,19 @@ def read_csv(csv_file)
     increment_subject(row)
     current_line += 1
   end
+end
+
+def archive_file(csv_file)
+  (year, month) = csv_file.scan(/(\d{4})-(\d{2})-\d{2}/).first
+  month_name = Date::ABBR_MONTHNAMES[month.to_i]
+  archive_folder = \
+    if year && month && month_name
+      Rails.root.join("brains", "archive", year.to_s, "#{month}-#{month_name}")
+    else
+      Rails.root.join("brains", "archive")
+    end
+  FileUtils.mkdir_p(archive_folder)
+  FileUtils.mv(csv_file, archive_folder)
 end
 
 def print_header(row)
