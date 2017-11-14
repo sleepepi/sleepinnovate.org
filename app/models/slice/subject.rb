@@ -109,6 +109,7 @@ class Subject < SliceRecord
 
   def create_event!(event)
     return unless linked?
+    return if event_launched?(event)
     params = { event_id: event.slug }
     (json, status) = Helpers::JsonRequest.post("#{project_url}/subjects/#{@id}/events.json", params)
     load_events_from_json(json, status)
