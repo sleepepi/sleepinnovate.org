@@ -1,4 +1,4 @@
-## 4.0.0
+## 4.0.0 (November 15, 2017)
 
 ### Enhancements
 - **General Changes**
