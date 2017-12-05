@@ -28,7 +28,6 @@
   }
 }
 
-
 .survey-question {
   margin-bottom: 1.5rem;
 
@@ -108,46 +107,6 @@
 
   .survey-choice-description {
     font-size: 14px;
-  }
-}
-
-.survey-question-next {
-  background-color: $p500-teal;
-  border-radius: 4px;
-  box-shadow: 0 1px 5px $box-shadow-color;
-  color: $brand-white;
-  display: block;
-  padding: 10px;
-  text-align: center;
-
-  &:hover,
-  &:focus,
-  &:active {
-    background-color: $p600-teal;
-    box-shadow: none;
-    color: $brand-white;
-    text-decoration: none;
-  }
-}
-
-.survey-question-skip {
-  margin-top: 20px;
-  margin-bottom: 20px;
-  text-align: center;
-}
-
-.survey-study-name {
-  font-size: 20px;
-  color: $brand-white;
-  text-align: right;
-  padding-bottom: 5px;
-  padding-right: 5px;
-}
-
-@include media-breakpoint-up(sm) {
-  .survey-study-name {
-    font-size: 28px;
-    padding-right: 10px;
   }
 }
 
