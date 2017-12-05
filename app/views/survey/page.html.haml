@@ -6,7 +6,9 @@
 - percent = (@json.dig("design", "current_page")) * 100 / @json.dig("design", "pages_count")
 - start = percent if @json.dig("errors").present?
 
-.page-box.last-slide.background-p50-grey.center-vertically-xs-sm
+- background_class = "background-p50-grey"
+
+.page-box.last-box.center-vertically-xs-sm{ class: background_class }
   = render "survey/progress_bar", start: start, percent: percent
   .container
     = form_with(url: survey_submit_page_path(params[:event], params[:design], @page), method: :patch, local: true, autocomplete: "off", id: "survey-form") do |form|

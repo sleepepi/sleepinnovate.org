@@ -47,10 +47,6 @@
   }
 }
 
-.survey-choices {
-
-}
-
 .survey-choice {
   background-color: $p50-grey;
   border-radius: 4px;
@@ -78,35 +74,15 @@
   margin-left: 32px;
 }
 
-.survey-choice-description {
-  font-size: 14px;
-}
-
 @include media-breakpoint-up(sm) {
   .survey-question {
     .survey-question-lead {
       font-size: 28px;
     }
 
-    .survey-question-text {
-
-    }
-
     .survey-question-desc {
       font-size: 14px;
     }
-  }
-
-  .survey-choices {
-
-  }
-
-  .survey-choice {
-
-  }
-
-  .survey-choice-description {
-    font-size: 14px;
   }
 }
 

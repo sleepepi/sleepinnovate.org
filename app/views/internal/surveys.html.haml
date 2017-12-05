@@ -1,6 +1,6 @@
 - @title = "Surveys"
 
-.page-box.last-slide.background-p50-grey.center-vertically-xs-sm
+.page-box.last-box.background-p50-grey.center-vertically-xs-sm
   - current_user.subject_events.reverse_each do |subject_event|
     .panel.panel-full-width
       %h1= subject_event.name
