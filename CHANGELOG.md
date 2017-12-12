@@ -4,6 +4,12 @@
 - **Gem Changes**
   - Updated to rails 5.2.0.beta2
 
+## 4.1.0 (December 12, 2017)
+
+### Enhancements
+- **General Changes**
+  - Removed parking voucher text from landing page
+
 ## 4.0.0 (November 15, 2017)
 
 ### Enhancements
