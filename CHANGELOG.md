@@ -1,5 +1,9 @@
 ## 4.1.0
 
+### Enhancements
+- **General Changes**
+  - Removed parking voucher text from landing page
+
 ## 4.0.0 (November 15, 2017)
 
 ### Enhancements
