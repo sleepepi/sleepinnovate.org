@@ -26,9 +26,15 @@
                   %i.fa.fa-street-view
                   Subject refused to join study
               - elsif user.withdrawn?
-                = link_to admin_user_path(user), class: "small text-muted" do
-                  %i.fa.fa-street-view
-                  Subject withdrew from study
+                - if Subject.remote_subject_code(user).present?
+                  = link_to admin_user_path(user), class: "text-muted" do
+                    %i.fa.fa-street-view
+                    = Subject.remote_subject_code(user)
+                  %small.text-muted Subject withdrew from study
+                - else
+                  = link_to admin_user_path(user), class: "small text-muted" do
+                    %i.fa.fa-street-view
+                    Subject withdrew from study
               - elsif Subject.remote_subject_code(user).present?
                 = link_to admin_user_path(user) do
                   %i.fa.fa-bed{ title: "Sleep" }

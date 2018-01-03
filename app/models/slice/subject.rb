@@ -126,13 +126,10 @@ class Subject < SliceRecord
   end
 
   def find_or_create_subject
-    return unless @user.consented?
-    if linked?
-      load_remote_subject
-    else
-      create_remote_subject
-      create_baseline_event
-    end
+    return load_remote_subject if linked?
+    return if @user.consented_at.nil?
+    create_remote_subject
+    create_baseline_event
   end
 
   def load_remote_subject
