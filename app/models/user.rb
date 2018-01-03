@@ -77,6 +77,11 @@ class User < ApplicationRecord
 
   # Methods
 
+  # Overriding Devise built-in active_for_authentication? method
+  def active_for_authentication?
+    super && !deleted?
+  end
+
   def current_event_brain_code
     if current_event
       current_event.slug.upcase.gsub("-", "dash")

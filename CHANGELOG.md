@@ -7,6 +7,9 @@
   - Updated to bootstrap 4.0.0.beta3
   - Updated to devise 4.4.0
 
+### Bug Fix
+- Deleted users can now no longer login
+
 ## 4.1.0 (December 12, 2017)
 
 ### Enhancements

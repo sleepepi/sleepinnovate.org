@@ -30,3 +30,8 @@ admin:
   full_name: Research Staff
   email: admin@example.com
   admin: true
+
+deleted:
+  full_name: Deleted User
+  email: deleted@example.com
+  deleted: true
