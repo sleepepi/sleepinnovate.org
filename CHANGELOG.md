@@ -10,6 +10,8 @@
 ### Bug Fix
 - Deleted users can now no longer login
 - Admins no longer receive an error when attempting to view a deleted user
+- Users who have revoked consent no longer receive survey followup reminder
+  emails
 
 ## 4.1.0 (December 12, 2017)
 

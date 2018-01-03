@@ -25,7 +25,7 @@ namespace :events do
     activations = []
     reminders = []
     events = Event.where.not(month: 0).order(:month).to_a
-    User.consented_with_testers.find_each do |user| # TODO remove where() and limit()
+    User.consented_with_testers.find_each do |user|
       activations_row = { subject: Subject.remote_subject_code(user), events: [] }
       reminders_row = { subject: Subject.remote_subject_code(user), events: [] }
       puts "#{Subject.remote_subject_code(user)}"

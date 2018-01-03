@@ -36,7 +36,7 @@ class User < ApplicationRecord
 
   # Scopes
   scope :consented, -> { current.where.not(consented_at: nil).where(tester: false) }
-  scope :consented_with_testers, -> { current.where.not(consented_at: nil) }
+  scope :consented_with_testers, -> { current.where.not(consented_at: nil).where(consent_revoked_at: nil) }
 
   # Validations
   validates :full_name, presence: true
