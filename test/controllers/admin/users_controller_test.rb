@@ -35,6 +35,12 @@ class Admin::UsersControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test "should not show deleted user for admin" do
+    login(@admin)
+    get admin_user_url(users(:deleted))
+    assert_redirected_to admin_users_url
+  end
+
   test "should get edit for admin" do
     login(@admin)
     get edit_admin_user_url(@user)

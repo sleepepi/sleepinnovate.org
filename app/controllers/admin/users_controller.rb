@@ -50,7 +50,7 @@ class Admin::UsersController < Admin::AdminController
 
   def find_user_or_redirect
     @user = User.current.find_by(id: params[:id])
-    empty_response_or_root_path(users_path) unless @user
+    empty_response_or_root_path(admin_users_path) unless @user
   end
 
   def user_params
