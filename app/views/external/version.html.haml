@@ -1,8 +1,7 @@
 - @title = "Version"
 
-.page-box.last-box.background-p50-grey.center-vertically-xs-sm
-  .container
-    %h1{ style: "color: #bdbdbd;font-weight: 300;" }= @title
-    %p.lead
-      Version
-      %strong= SleepInnovate::VERSION::STRING
+.background-fixed-image
+  .page-box.last-box.innovate-background.d-flex.align-items-center
+    .container
+      .text-center
+        .page-heading.text-white{ style: "font-size: 2rem;" }= "v#{SleepInnovate::VERSION::STRING}"
