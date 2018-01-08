@@ -3,6 +3,7 @@
 ### Enhancements
 - **Admin Changes**
   - Subject codes for withdrawn subjects are now displayed
+  - Survey activation and reminder email times are now included in admin export
 - **Email Changes**
   - Updated survey available email
   - Updated survey reminder email

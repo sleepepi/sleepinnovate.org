@@ -31,7 +31,7 @@ namespace :events do
       puts "#{Subject.remote_subject_code(user)}"
       events.each do |event|
         launched = event_launched?(event, user)
-        if !launched && activate_event?(event, user) && !event.month.zero?
+        if !launched && activate_event?(event, user)
           if activate_event!(event, user)
             activations_row[:events] << { event: event.name, days_after_consent: days_after_consent(user) }
           end
@@ -48,8 +48,8 @@ namespace :events do
       activations << activations_row if activations_row[:events].present?
       reminders << reminders_row if reminders_row[:events].present?
     end
-    activations.sort_by! { |h| h[:subject] }
-    reminders.sort_by! { |h| h[:subject] }
+    activations.sort_by! { |h| h[:subject].to_s }
+    reminders.sort_by! { |h| h[:subject].to_s }
     if activations.present? || reminders.present?
       User.where(admin: true).find_each do |user|
         SurveyMailer.followup_summary(user, activations, reminders).deliver_now if EMAILS_ENABLED
@@ -74,7 +74,11 @@ namespace :events do
 
   def event_launched?(event, user)
     print "event_launched?(#{event.slug}, #{Subject.remote_subject_code(user)})"
-    user_event = user.user_events.find_by(event: event)
+    if event.month.zero?
+      user_event = user.user_events.where(event: event).first_or_create(activation_email_sent_at: user.consented_at)
+    else
+      user_event = user.user_events.find_by(event: event)
+    end
     result = user_event&.activation_email_sent_at.present?
     puts " => #{result}".colorize(result ? :green : :red)
     result

@@ -25,6 +25,7 @@ namespace :admin do
         ]
       end
     end
+    export_email_notifications
   end
 end
 
@@ -36,4 +37,19 @@ end
 def format_date(date)
   return unless date
   date.strftime("%Y-%m-%d")
+end
+
+def export_email_notifications
+  csv_file = Rails.root.join("admin", "email_notifications.csv")
+  CSV.open(csv_file, "wb") do |csv|
+    csv << ["SleepINNOVATE ID", "Event", "Activation Sent", "Reminder Sent"]
+    UserEvent.includes(:event).each do |user_event|
+      csv << [
+        Subject.remote_subject_code(user_event.user),
+        user_event.event.slug,
+        format_datetime(user_event.activation_email_sent_at),
+        format_datetime(user_event.reminder_email_sent_at)
+      ]
+    end
+  end
 end
