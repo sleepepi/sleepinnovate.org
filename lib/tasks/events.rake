@@ -24,14 +24,14 @@ namespace :events do
   task followup: :environment do
     activations = []
     reminders = []
-    events = Event.where.not(month: 0).order(:month).to_a
+    events = Event.order(:month).to_a
     User.consented_with_testers.find_each do |user|
       activations_row = { subject: Subject.remote_subject_code(user), events: [] }
       reminders_row = { subject: Subject.remote_subject_code(user), events: [] }
       puts "#{Subject.remote_subject_code(user)}"
       events.each do |event|
         launched = event_launched?(event, user)
-        if !launched && activate_event?(event, user)
+        if !launched && activate_event?(event, user) && !event.month.zero?
           if activate_event!(event, user)
             activations_row[:events] << { event: event.name, days_after_consent: days_after_consent(user) }
           end

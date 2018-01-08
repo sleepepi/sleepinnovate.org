@@ -71,7 +71,6 @@ class User < ApplicationRecord
 
   delegate :create_event!, to: :subject
   delegate :event_launched?, to: :subject
-  delegate :event_completed?, to: :subject
   delegate :event_surveys_completed, to: :subject
   delegate :event_surveys_total, to: :subject
 
@@ -108,6 +107,10 @@ class User < ApplicationRecord
   def assign_subject!
     return if subject_code.present?
     update(slice_subject_id: nil)
+  end
+
+  def event_completed?(event)
+    subject.event_completed?(event) && brain_percent(event) == 100
   end
 
   def test_my_brain_started!
