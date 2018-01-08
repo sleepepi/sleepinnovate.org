@@ -1,26 +1,32 @@
 %p{ style: p_style }
-  Thank you for being part of
-  = succeed "!" do
-    = render "layouts/mailer/logo"
-  We would not be able to conduct research on important topics like sleep health
-  without your help.
+  Dear Study Participant,
 
 %p{ style: p_style }
-  We noticed that you have not yet completed your brief surveys and brain
-  quizzes. These activities provide us with valuable information about how
-  health changes over time.
+  Thank you for being part of the
+  = render "layouts/mailer/logo"
+  study.
+  We appreciate your input! We hope that your participation will help improve
+  our understanding of sleep disorders and lead to improved treatments and
+  diagnoses.
+
+%p{ style: p_style }
+  We noticed that you have not yet completed your survey questions and brief
+  brain quizzes.
   %span{ style: emphasis_style }
-    Please follow the link below to login and complete the rest of your surveys
-    and brain quizzes.
+    Please follow the link below to access the rest of your survey questions and
+    brain quizzes!
 
 %p{ style: center_style }
-  = link_to "Continue Helping Sleep Research", ENV["website_url"], style: link_style
+  = link_to "SleepINNOVATE Surveys", ENV["website_url"], style: link_style
+
+%p{ style: p_style }
+  Thank you again for your participation and contribution to the progress of
+  sleep health research!
 
 = render "layouts/mailer/technical_help"
 
 %p{ style: p_style }
-  Thanks again for your help!
+  Best,
 %p{ style: p_style }
-  The
   = render "layouts/mailer/logo"
-  Team
+  study team
