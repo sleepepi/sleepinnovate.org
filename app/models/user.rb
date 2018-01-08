@@ -122,7 +122,7 @@ class User < ApplicationRecord
 
   def brain_surveys_count(event)
     return 0 unless event
-    TEST_MY_BRAIN_SURVEYS.size
+    TEST_MY_BRAIN_SURVEYS.size + 2
   end
 
   def brain_percent(event)

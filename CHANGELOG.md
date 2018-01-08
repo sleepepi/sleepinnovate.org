@@ -6,6 +6,9 @@
 - **Email Changes**
   - Updated survey available email
   - Updated survey reminder email
+- **Test My Brain Changes**
+  - Total number of brain surveys now matches number of surveys instead of
+    number of batteries
 - **Gem Changes**
   - Updated to ruby 2.5.0
   - Updated to rails 5.2.0.beta2
