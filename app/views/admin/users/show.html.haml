@@ -52,6 +52,11 @@
           - else
             %span Unassigned
 
+
+    - if @user.consented?
+      %p.lead.text-center.mt-5 Study Timeline
+      .mb-5= render "users/timeline", user: @user
+
     %h2{ style: "margin-top: 40px;" } SleepINNOVATE
     %hr
     - if @user.clinic.present?
