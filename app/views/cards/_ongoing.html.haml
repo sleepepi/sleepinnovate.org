@@ -48,7 +48,7 @@
               = number_of_surveys
       .text-center
         - if event_design.valid?
-          = link_to survey_start_path(event_design.event_id, event_design.design_id), class: "btn btn-success btn-shadow" do
+          = link_to survey_start_path(event_design.event_id, event_design.design_id), class: "btn btn-success btn-shadow", data: { object: "disable-spinner" } do
             Start survey
             %i.fa.fa-caret-right
         - else

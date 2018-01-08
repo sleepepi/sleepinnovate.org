@@ -31,7 +31,7 @@
                 %small.text-muted= "#{event_design.percent}%"
               - if event_design.valid? && event_design.incomplete?
                 - if event_design.percent.to_i.zero?
-                  = link_to survey_start_path(event_design.event_id, event_design.design_id) do
+                  = link_to survey_start_path(event_design.event_id, event_design.design_id), data: { object: "disable-spinner" } do
                     Start
                     %i.fa.fa-caret-right
                 - else

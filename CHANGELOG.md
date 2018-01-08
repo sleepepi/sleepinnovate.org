@@ -11,6 +11,8 @@
   - Reminder emails now take into account Test My Brain survey completion
 - **Dashboard Changes**
   - Added study timeline to dashboard
+  - Disabled survey start buttons in order to reduce the likelihood of launching
+    the survey twice
 - **Test My Brain Changes**
   - Total number of brain surveys now matches number of surveys instead of
     number of batteries
