@@ -26,7 +26,7 @@
   - Updated to bootstrap 4.0.0.beta3
   - Updated to devise 4.4.0
 
-### Bug Fix
+### Bug Fixes
 - Deleted users can now no longer login
 - Admins no longer receive an error when attempting to view a deleted user
 - Users who have revoked consent no longer receive survey followup reminder
