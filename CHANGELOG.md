@@ -15,6 +15,7 @@
     the survey twice
 - **Survey Changes**
   - Imperial height is now displayed as two dropdowns for feet and inches
+  - Time of day is now displayed as dropdowns for hours, minutes, and seconds
 - **Test My Brain Changes**
   - Total number of brain surveys now matches number of surveys instead of
     number of batteries
