@@ -3,6 +3,8 @@
 ### Enhancements
 - **Admin Changes**
   - Subject codes for withdrawn subjects are now displayed
+- **Email Changes**
+  - Updated survey available email
 - **Gem Changes**
   - Updated to ruby 2.5.0
   - Updated to rails 5.2.0.beta2

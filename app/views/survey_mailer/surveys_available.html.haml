@@ -1,31 +1,36 @@
 %p{ style: p_style }
-  = succeed "," do
-    = @event.time_ago
-  you joined our innovative sleep research project. Thank you for being part of
-  = succeed "!" do
-    = render "layouts/mailer/logo"
-  Sleep is different for everyone. Your valuable input will help researchers
-  learn more about how sleep affects the health of people like you. We hope that
-  future research will help doctors determine the best treatment for each
-  patient.
+  Dear Study Participant,
 
 %p{ style: p_style }
-  Now we ask that you complete another set of brief survey questions and brain
-  quizzes whenever it's convenient for you. These activities will take about
-  15-20 minutes for the surveys and 10-15 minutes for the brain quizzes. You do
-  not need to complete all the activities in one sitting.
+  Thank you for your continued participation in the
+  = render "layouts/mailer/logo"
+  study.
+
+%p{ style: p_style }
+  We appreciate your prior input and would like you to complete another set of
+  survey questions and brief brain quizzes. Your input is valuable to us as we
+  see how health changes over time.
+
+%p{ style: p_style }
+  These survey questions will take approximately 15-20 minutes to complete and
+  the brain quizzes will take 10-15 minutes.
+
+%p{ style: p_style }
   %span{ style: emphasis_style }
-    Please follow the link below to login and complete your surveys and brain
-    quizzes.
+    Please follow the link below to access your survey account on the
+    = render "layouts/mailer/logo"
+    website.
 
 %p{ style: center_style }
   = link_to "Begin Your #{@event.name}", ENV["website_url"], style: link_style
 
+%p{ style: p_style }
+  Thank you again for your participation!
+
 = render "layouts/mailer/technical_help"
 
 %p{ style: p_style }
-  Thanks again for all your support!
+  Thank you,
 %p{ style: p_style }
-  The
   = render "layouts/mailer/logo"
-  Team
+  study team

@@ -17,7 +17,7 @@ class SurveyMailerTest < ActionMailer::TestCase
     assert_equal "SleepINNOVATE 3-Month Follow-up Available", mail.subject
     assert_equal ["consented@example.com"], mail.to
     assert_equal ["travis-ci@example.com"], mail.from
-    assert_match "Three months ago, you joined our innovative sleep research project.", mail.body.encoded
+    assert_match "Thank you for your continued participation in the SleepINNOVATE study.", mail.body.encoded
   end
 
   test "surveys reminder email" do
