@@ -8,6 +8,8 @@
   - Updated survey reminder email
   - Baseline surveys now have reminder email
   - Reminder emails now take into account Test My Brain survey completion
+- **Dashboard Changes**
+  - Added study timeline to dashboard
 - **Test My Brain Changes**
   - Total number of brain surveys now matches number of surveys instead of
     number of batteries
