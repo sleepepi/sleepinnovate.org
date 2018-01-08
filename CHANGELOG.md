@@ -13,6 +13,8 @@
   - Added study timeline to dashboard
   - Disabled survey start buttons in order to reduce the likelihood of launching
     the survey twice
+- **Survey Changes**
+  - Imperial height is now displayed as two dropdowns for feet and inches
 - **Test My Brain Changes**
   - Total number of brain surveys now matches number of surveys instead of
     number of batteries
