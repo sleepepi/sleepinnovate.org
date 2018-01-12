@@ -20,7 +20,17 @@
             = render "menu/item", title: "Dashboard", path: dashboard_path, icon: "home"
             = render "menu/item", title: "Consent", path: consent_path, icon: "file-text-o" unless current_user.consent_revoked?
         %ul.navbar-nav
-          = render "menu/item_icon", title: "Parking", path: parking_path, icon: "car", color: "primary" if current_user.parking_voucher? && session[:clinic].present?
+          - if current_user.parking_voucher? && session[:clinic].present?
+            %li.nav-item{ class: current_page?(parking_path) ? "active" : nil }
+              = link_to parking_path, class: "nav-link d-block d-lg-none" do
+                %i.fa.fa-car
+                Parking
+              = link_to parking_path, class: "nav-link text-primary d-none d-lg-block" do
+                %i.fa.fa-car
+              - if current_page?(parking_path)
+                %span.sr-only (current)
+
+
           = render "menu/dropdown_account"
     - else
       %ul.navbar-nav
