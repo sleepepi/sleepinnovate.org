@@ -16,6 +16,8 @@ end
 
 # Set up ActionDispatch tests.
 class ActionDispatch::IntegrationTest
+  include Devise::Test::IntegrationHelpers
+
   setup do
     Artifice.activate_with(slice_generic_response)
   end
