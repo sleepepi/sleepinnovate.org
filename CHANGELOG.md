@@ -13,6 +13,7 @@
   - Added study timeline to dashboard
   - Disabled survey start buttons in order to reduce the likelihood of launching
     the survey twice
+  - The dashboard now highlights an active panel for users
 - **Survey Changes**
   - Imperial height is now displayed as two dropdowns for feet and inches
   - Time of day is now displayed as dropdowns for hours, minutes, and seconds

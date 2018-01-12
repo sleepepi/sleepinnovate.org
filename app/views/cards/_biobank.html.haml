@@ -1,4 +1,4 @@
-.card
+.card{ class: current_user.highlight_biobank? ? "card-biobank-focus" : "card-dimmed" }
   .card-body
     .text-center{ style: "font-size: 6rem;" }
       %i.fa.fa-database.text-primary
@@ -6,7 +6,7 @@
     .progress
       .progress-bar.progress-bar-striped{ role: "progressbar", style: "width: 100%;background-color: #ededed;", aria: { valuenow: "0", valuemin: "0", valuemax: "100" } }
     %p.card-text
-      %div{ style: "color: #bdbdbd;" } Join our partner, Biobank.
+      .card-information Join our partner, Biobank.
     .text-center
       %p.card-text
         = link_to biobank_start_path, method: :post, class: "btn btn-primary btn-shadow" do

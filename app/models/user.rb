@@ -113,6 +113,14 @@ class User < ApplicationRecord
     subject.event_completed?(event) && brain_percent(event) == 100
   end
 
+  def highlight_brain?
+    subject.event_completed?(current_event)
+  end
+
+  def highlight_biobank?
+    event_completed?(current_event)
+  end
+
   def test_my_brain_started!
     return unless brain_started_at.nil?
     update(brain_started_at: Time.zone.now)
