@@ -12,6 +12,9 @@
 
           %ul
             - if current_user.consented?
+              %li.text-muted
+                You will be able to update your email and password here after
+                your next login to the site.
               - if false
                 %li= link_to "Update my date of birth.", profile_dob_path
                 %li= link_to "Update my address.", profile_address_path
