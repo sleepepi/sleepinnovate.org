@@ -3,26 +3,27 @@
 .d-flex.justify-content-around.align-items-center.flex-column.flex-md-row
   - Event.order(:month).each do |event|
     - unless event.month.zero?
-      .text-center.d-none.d-md-block
-        %i.fa.fa-long-arrow-right.text-muted
-      .text-center.d-block.d-md-none
-        %i.fa.fa-long-arrow-down.text-muted
+      .event-timeline-arrow
+        .text-center.d-none.d-md-block
+          %i.fa.fa-long-arrow-right.text-muted
+        .text-center.d-block.d-md-none
+          %i.fa.fa-long-arrow-down.text-muted
     - if current_event == event
       - event_found = true
-      .text-center.d-flex.flex-row.flex-md-column
-        .mr-1
+      .event-timeline.d-flex.flex-row.flex-md-column
+        .mr-1.mr-md-0
           %i.fa.fa-user.text-primary
         %div
           %span.badge.badge-primary= event.name
     - elsif event_found
-      .text-center.d-flex.flex-row.flex-md-column
-        .mr-1
+      .event-timeline.d-flex.flex-row.flex-md-column
+        .mr-1.mr-md-0
           %i.fa.fa-square-o
         %div
           %span.badge.badge-secondary= event.name
     - else
-      .text-center.d-flex.flex-row.flex-md-column
-        .mr-1
+      .event-timeline.d-flex.flex-row.flex-md-column
+        .mr-1.mr-md-0
           %i.fa.fa-check-square.text-success
         %div
           %span.badge.badge-success= event.name
