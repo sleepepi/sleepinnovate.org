@@ -1,4 +1,4 @@
-## 5.0.1
+## 5.0.1 (January 16, 2018)
 
 ### Bug Fix
 - Removed bootsnap due to asset compilation issues
