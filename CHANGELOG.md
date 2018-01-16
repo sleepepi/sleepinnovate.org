@@ -1,4 +1,4 @@
-## 5.0.0
+## 5.0.0 (January 16, 2018)
 
 ### Enhancements
 - **Admin Changes**
