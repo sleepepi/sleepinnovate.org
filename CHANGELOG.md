@@ -1,5 +1,8 @@
 ## 5.0.1
 
+### Bug Fix
+- Removed bootsnap due to asset compilation issues
+
 ## 5.0.0 (January 16, 2018)
 
 ### Enhancements
