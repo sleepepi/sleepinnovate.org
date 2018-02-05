@@ -12,6 +12,8 @@
     surveys with skipped questions
   - Added unique indices for tracking completion of brain tests and slice
     surveys
+- **Test My Brain Changes**
+  - Added progress bar text to indicate that updates only occur once a day
 - **Gem Changes**
   - Updated to rails 5.2.0.rc1
   - Updated to pg 1.0.0
