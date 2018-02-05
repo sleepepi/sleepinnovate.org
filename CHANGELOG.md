@@ -3,6 +3,8 @@
 ### Enhancements
 - **Email Changes**
   - Email links now link directly to the login page
+  - The login page now highlights the "Forgot your password?" link after failure
+    to login
 - **Survey Changes**
   - Added a survey review page to review responses before submitting and
     completing a survey
