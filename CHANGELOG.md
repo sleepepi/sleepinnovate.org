@@ -1,6 +1,8 @@
 ## 6.0.0
 
 ### Enhancements
+- **Email Changes**
+  - Email links now link directly to the login page
 - **Survey Changes**
   - Added a survey review page to review responses before submitting and
     completing a survey
