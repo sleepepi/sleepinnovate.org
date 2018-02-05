@@ -6,6 +6,7 @@
   - Updated to pg 1.0.0
   - Updated to bootstrap 4.0.0
   - Updated to carrierwave 1.2.2
+  - Updated to devise 4.4.1
 
 ## 5.0.1 (January 16, 2018)
 
