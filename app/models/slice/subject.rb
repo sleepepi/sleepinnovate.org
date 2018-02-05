@@ -21,7 +21,7 @@ class Subject < SliceRecord
   def event_surveys_completed(event)
     subject_event = current_subject_event(event.slug)
     return 0 unless subject_event
-    subject_event.event_designs.count(&:complete?)
+    subject_event.event_designs.count { |ed| ed.complete?(@user) }
   end
 
   def event_surveys_total(event)
@@ -33,7 +33,7 @@ class Subject < SliceRecord
   def event_completed?(event)
     subject_event = current_subject_event(event.slug)
     return false unless subject_event
-    subject_event.complete?
+    subject_event.complete?(@user)
   end
 
   def current_subject_event(subject_event_slug)
@@ -73,7 +73,7 @@ class Subject < SliceRecord
       end
       if event
         event.event_designs.find do |ed|
-          !ed.complete? &&
+          !ed.complete?(@user) &&
             !completed_surveys.include?([ed.event_id.downcase, ed.design_id.downcase])
         end
       end

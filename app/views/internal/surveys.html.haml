@@ -3,33 +3,50 @@
 .page-box.last-box.background-p50-grey.center-vertically-xs-sm
   - current_user.subject_events.reverse_each do |subject_event|
     .panel.panel-full-width
-      %h1= subject_event.name
-      - if subject_event.percent.to_i.zero?
-        .progress.progress-simple
-          .progress-bar.progress-bar-striped{ role: "progressbar", style: "width: 100%;background-color: #ededed;", aria: { valuenow: "0", valuemin: "0", valuemax: "100" } }
+      %h1.mb-0= subject_event.name
+      - if subject_event.complete?(current_user)
+        %div{ style: "margin-left: -20px; margin-right: -20px;" }
+          .progress.progress-simple
+            .progress-bar.progress-bar-striped.bg-success{ role: "progressbar", style: "width: 100%;", aria: { valuenow: "100", valuemin: "0", valuemax: "100" } }
+          .float-right
+            %small.text-muted 100%
+      - elsif subject_event.percent.to_i.zero?
+        %div{ style: "margin-left: -20px; margin-right: -20px;" }
+          .progress.progress-simple
+            .progress-bar.progress-bar-striped{ role: "progressbar", style: "width: 100%;background-color: #ededed;", aria: { valuenow: "0", valuemin: "0", valuemax: "100" } }
+          .float-right
+            %small.text-muted 0%
       - else
-        .progress.progress-simple
-          .progress-bar.progress-bar-striped.bg-success{ role: "progressbar", style: "width: #{subject_event.percent}%;", aria: { valuenow: "#{subject_event.percent}", valuemin: "0", valuemax: "100" } }
-      .float-right
-        %small.text-muted= "#{subject_event.percent}%"
-      .clearfix
-      .card-columns
-        - subject_event.event_designs.each do |event_design|
-          .card
-            .card-body
-              .small.card-title
-                = event_design.design_name
-              - if event_design.percent.to_i.zero?
-                .progress.progress-simple
-                  .progress-bar.progress-bar-striped{ role: "progressbar", style: "width: 100%;background-color: #ededed;", aria: { valuenow: "0", valuemin: "0", valuemax: "100" } }
-              - else
-                .progress.progress-simple
-                  .progress-bar.progress-bar-striped.bg-success{ role: "progressbar", style: "width: #{event_design.percent}%;", aria: { valuenow: "#{event_design.percent}", valuemin: "0", valuemax: "100" } }
+        %div{ style: "margin-left: -20px; margin-right: -20px;" }
+          .progress.progress-simple
+            .progress-bar.progress-bar-striped.bg-success{ role: "progressbar", style: "width: #{subject_event.percent}%;", aria: { valuenow: "#{subject_event.percent}", valuemin: "0", valuemax: "100" } }
+          .float-right
+            %small.text-muted= "#{subject_event.percent}%"
+      .clearfix.mb-2
+      - subject_event.event_designs.each do |event_design|
+        .card.mb-3.mx-auto{ style: "max-width: 100%;" }
+          .card-body
+            .small.card-title
+              = event_design.design_name
+            - if event_design.complete?(current_user)
+              .progress.progress-simple
+                .progress-bar.progress-bar-striped.bg-success{ role: "progressbar", style: "width: 100%;", aria: { valuenow: "100", valuemin: "0", valuemax: "100" } }
+            - elsif event_design.percent.to_i.zero?
+              .progress.progress-simple
+                .progress-bar.progress-bar-striped{ role: "progressbar", style: "width: 100%;background-color: #ededed;", aria: { valuenow: "0", valuemin: "0", valuemax: "100" } }
+            - else
+              .progress.progress-simple
+                .progress-bar.progress-bar-striped.bg-success{ role: "progressbar", style: "width: #{event_design.percent}%;", aria: { valuenow: "#{event_design.percent}", valuemin: "0", valuemax: "100" } }
 
-            .card-footer
+          .card-footer
+            - if event_design.complete?(current_user)
+              .float-right
+                %small.text-muted 100%
+            - else
               .float-right
                 %small.text-muted= "#{event_design.percent}%"
-              - if event_design.valid? && event_design.incomplete?
+            - if event_design.valid?
+              - if event_design.incomplete?(current_user)
                 - if event_design.percent.to_i.zero?
                   = link_to survey_start_path(event_design.event_id, event_design.design_id), data: { object: "disable-spinner" } do
                     Start
@@ -38,5 +55,8 @@
                   = link_to survey_resume_path(event_design.event_id, event_design.design_id) do
                     Resume
                     %i.fa.fa-caret-right
-              .clearfix
-
+              - else
+                = link_to survey_review_path(event_design.event_id, event_design.design_id), data: { object: "disable-spinner" } do
+                  Review
+                  %i.fa.fa-caret-right
+            .clearfix

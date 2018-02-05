@@ -33,7 +33,7 @@ class SubjectEvent
     @event_designs.collect { |ed| ed.sheets_where(sheet_id) }.flatten
   end
 
-  def complete?
-    event_designs.count(&:incomplete?).zero?
+  def complete?(user)
+    event_designs.count { |ed| ed.incomplete?(user) }.zero?
   end
 end

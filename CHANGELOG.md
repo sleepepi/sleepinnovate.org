@@ -4,6 +4,8 @@
 - **Survey Changes**
   - Added a survey review page to review responses before submitting and
     completing a survey
+  - Survey reminder emails and the dashboard now take into account completed
+    surveys with skipped questions
 - **Gem Changes**
   - Updated to rails 5.2.0.rc1
   - Updated to pg 1.0.0
