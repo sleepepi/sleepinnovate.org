@@ -24,7 +24,7 @@ class SurveyController < ApplicationController
       @section = Section.new(json: @json.dig("section")) if @json.dig("section").present?
       @variable = Variable.new(json: @json.dig("variable")) if @json.dig("variable").present?
     end
-    redirect_to survey_complete_path(params[:event], params[:design]) if @json.blank?
+    redirect_to survey_review_path(params[:event], params[:design]) if @json.blank?
   end
 
   # GET /survey/:event/:design/:resume
@@ -33,7 +33,7 @@ class SurveyController < ApplicationController
     @json = current_user.resume_event_survey(params[:event], params[:design])
     @survey = Survey.new(json: @json)
     if @json.blank?
-      redirect_to survey_complete_path(params[:event], params[:design])
+      redirect_to survey_review_path(params[:event], params[:design])
     else
       @page = @json.dig("design", "current_page")
       @section = Section.new(json: @json.dig("section")) if @json.dig("section").present?
@@ -63,7 +63,11 @@ class SurveyController < ApplicationController
     end
     (@json, @status) = current_user.submit_response_event_survey(params[:event], params[:design], @page, value, request.remote_ip)
     if @status.is_a?(Net::HTTPOK)
-      redirect_to survey_page_path(params[:event], params[:design], @page + 1)
+      if params[:review] == "1"
+        redirect_to survey_review_path(params[:event], params[:design])
+      else
+        redirect_to survey_page_path(params[:event], params[:design], @page + 1)
+      end
     elsif @json
       @section = Section.new(json: @json.dig("section")) if @json.dig("section").present?
       @variable = Variable.new(json: @json.dig("variable")) if @json.dig("variable").present?
@@ -73,7 +77,12 @@ class SurveyController < ApplicationController
     end
   end
 
-  # GET /survey/:event/:design/complete
+  # GET /survey/:event/:design/review
+  def review
+    (@json, @status) = current_user.review_event_survey(params[:event].downcase, params[:design].downcase)
+  end
+
+  # POST /survey/:event/:design/review
   def complete
     survey_completed
     redirect_to dashboard_path

@@ -1,6 +1,9 @@
 ## 6.0.0
 
 ### Enhancements
+- **Survey Changes**
+  - Added a survey review page to review responses before submitting and
+    completing a survey
 - **Gem Changes**
   - Updated to rails 5.2.0.rc1
   - Updated to pg 1.0.0

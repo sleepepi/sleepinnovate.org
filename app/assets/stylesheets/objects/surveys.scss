@@ -16,10 +16,6 @@
       margin-bottom: 0;
     }
   }
-
-  + .center > .pagination {
-    margin-top: 0;
-  }
 }
 
 @include media-breakpoint-up(sm) {
@@ -121,4 +117,49 @@
       margin: 0;
     }
   }
+}
+
+.hours-box,
+.minutes-box,
+.seconds-box,
+.month-box,
+.day-box {
+  input {
+    &[type="text"],
+    &[type="number"] {
+      min-width: 55px;
+      width: 55px;
+    }
+  }
+}
+
+.year-box {
+  input {
+    &[type="text"],
+    &[type="number"] {
+      min-width: 63px;
+      width: 63px;
+    }
+  }
+}
+
+.survey-report-title {
+  font-size: 1.125rem;
+  margin-bottom: $spacer * .5;
+}
+
+.survey-report-my-response {
+  // text-align: center;
+}
+
+.survey-review {
+  margin-bottom: $spacer;
+  border-left: 2px solid $p200-grey;
+  padding: $spacer;
+  background-color: $p100-grey;
+}
+
+.survey-review-missing {
+  border-color: $p500-amber;
+  background-color: $p50-amber;
 }

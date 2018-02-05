@@ -68,6 +68,8 @@ class User < ApplicationRecord
   delegate :submit_response_event_survey, to: :subject
   delegate :complete_event_survey, to: :subject
   delegate :current_event, to: :subject
+  delegate :review_event_survey, to: :subject
+  delegate :report_event_survey, to: :subject
 
   delegate :create_event!, to: :subject
   delegate :event_launched?, to: :subject

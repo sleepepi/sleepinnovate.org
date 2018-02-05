@@ -9,4 +9,8 @@ module ApplicationHelper
       content_tag :i, nil, class: %w(fa fa-square-o)
     end
   end
+
+  def simple_bold(text)
+    sanitize(text.to_s.gsub(/\*\*(.*?)\*\*/, "<strong>\\1</strong>"), tags: %w(strong))
+  end
 end

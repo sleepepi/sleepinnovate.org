@@ -107,6 +107,16 @@ class Subject < SliceRecord
     start_event_survey(event, design)
   end
 
+  def review_event_survey(event, design)
+    params = { subject_id: @id }
+    Helpers::JsonRequest.get("#{project_url}/reports/review/#{event}/#{design}.json", params)
+  end
+
+  def report_event_survey(event, design)
+    params = { subject_id: @id }
+    Helpers::JsonRequest.get("#{project_url}/reports/#{event}/#{design}.json", params)
+  end
+
   def create_event!(event)
     return unless linked?
     return if event_launched?(event)

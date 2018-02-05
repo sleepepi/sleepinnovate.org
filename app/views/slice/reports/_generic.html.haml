@@ -1,0 +1,6 @@
+.survey-report-my-response
+  - if my_response.present?
+    %strong.text-accent= "#{my_response}"
+    = design_option.dig("units")
+  - else
+    = render "slice/reports/not_answered"
