@@ -10,6 +10,8 @@
     completing a survey
   - Survey reminder emails and the dashboard now take into account completed
     surveys with skipped questions
+  - Added unique indices for tracking completion of brain tests and slice
+    surveys
 - **Gem Changes**
   - Updated to rails 5.2.0.rc1
   - Updated to pg 1.0.0

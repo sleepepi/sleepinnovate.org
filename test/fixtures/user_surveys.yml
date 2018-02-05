@@ -1,13 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  user_id: 1
-  event: MyString
-  design: MyString
+  user: consented
+  event: baseline
+  design: demographics
   completed: false
 
 two:
-  user_id: 1
-  event: MyString
-  design: MyString
+  user: consented
+  event: baseline
+  design: health-behaviors
   completed: false
