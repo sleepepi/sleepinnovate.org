@@ -1,4 +1,4 @@
-## 6.0.1
+## 6.0.1 (February 6, 2018)
 
 ### Bug Fix
 - Fixed a bug importing nightly Test My Brain data
