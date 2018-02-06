@@ -81,7 +81,7 @@ def increment_subject(row)
   (subject_id, _subject_code) = Subject.remote_subjects.select { |_id, code| code == subject_code(row) }
   user = User.find_by(slice_subject_id: subject_id) if subject_id.present?
   if user
-    brain_test = user.where(
+    brain_test = user.brain_tests.where(
       event: event(row).gsub(/dash/, "-").downcase,
       battery_number: battery_number(row),
       test_number: test_number(row)
