@@ -1,5 +1,10 @@
 ## 7.0.0
 
+### Enhancements
+- **Consent Changes**
+  - The consent form language has been updated to reflect the new lottery prize
+    amount and the change in principal investigators
+
 ## 6.0.1 (February 6, 2018)
 
 ### Bug Fix
