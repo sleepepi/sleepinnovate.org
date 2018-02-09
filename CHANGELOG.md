@@ -4,6 +4,9 @@
 - **Consent Changes**
   - The consent form language has been updated to reflect the new lottery prize
     amount and the change in principal investigators
+- **Email Changes**
+  - Reminder email text updated to include eligiblity for quarterly lottery
+    drawing
 
 ## 6.0.1 (February 6, 2018)
 

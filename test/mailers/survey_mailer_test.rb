@@ -25,7 +25,10 @@ class SurveyMailerTest < ActionMailer::TestCase
     assert_equal "Continue Your 3-Month Follow-up", mail.subject
     assert_equal ["consented@example.com"], mail.to
     assert_equal ["travis-ci@example.com"], mail.from
-    assert_match "We noticed that you have not yet completed your survey questions and brief brain quizzes.", mail.body.encoded
+    assert_match(
+      "We noticed that you have not yet completed your survey questions and brief\r\nbrain quizzes.",
+      mail.body.encoded
+    )
   end
 
   test "followup summary email" do
