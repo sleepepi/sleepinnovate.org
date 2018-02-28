@@ -20,5 +20,7 @@ class RegistrationsControllerTest < ActionDispatch::IntegrationTest
       post user_registration_path(user: user_params)
     end
     assert_redirected_to profile_complete_path
+  ensure
+    puts assigns(:user).errors.full_messages if assigns(:user)&.errors.present?
   end
 end
