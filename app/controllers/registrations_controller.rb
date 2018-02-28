@@ -50,7 +50,13 @@ class RegistrationsController < Devise::RegistrationsController
 
   def generate_password
     params[:user] ||= {}
-    params[:user][:password] = Devise.friendly_token
+    loop do
+      params[:user][:password] = Devise.friendly_token
+      # Make sure generated password is valid.
+      u = User.new(password: params[:user][:password])
+      u.validate
+      break unless u.errors.keys.include?(:password)
+    end
   end
 
   def generate_welcome_email

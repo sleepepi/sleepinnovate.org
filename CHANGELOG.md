@@ -4,6 +4,9 @@
 - **General Changes**
   - Added a page to track consent revisions
 
+### Bug Fix
+- Fixed a bug that could occasionally prevent a user account from being created
+
 ## 7.0.0 (February 11, 2018)
 
 ### Enhancements
