@@ -88,7 +88,7 @@
         - elsif current_user.next_survey
           = render "cards/ongoing", event_design: current_user.next_survey
         - else
-          = render "cards/completed", subject_event: current_user.subject_events.first
+          = render "cards/completed", subject_event: current_user.subject_events.last
 
         - if current_user.subject_events.blank?
           = render "cards/brain_starting_soon"
