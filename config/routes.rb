@@ -26,6 +26,7 @@ Rails.application.routes.draw do
     get :pledge
     get :print_consent, path: "consent.pdf"
     get :consent
+    get :consent_revisions, path: "consent/revisions"
     get :enrollment_start, path: "enrollment/start", to: redirect("consent")
     post :enrollment_start, path: "enrollment/start"
     get :enrollment_exit, path: "enrollment/exit"

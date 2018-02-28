@@ -52,6 +52,11 @@ class ExternalControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test "should get consent revisions" do
+    get consent_revisions_url
+    assert_response :success
+  end
+
   test "should consent as public user" do
     post enrollment_consent_url
     assert_not_nil session[:consented_at]
