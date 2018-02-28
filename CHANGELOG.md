@@ -3,6 +3,9 @@
 ### Enhancements
 - **General Changes**
   - Added a page to track consent revisions
+- **Consent Changes**
+  - The consent form language has been updated to reflect that the lottery is
+    now drawn twice each quarter
 
 ### Bug Fix
 - Fixed a bug that could occasionally prevent a user account from being created
