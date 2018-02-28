@@ -1,3 +1,5 @@
+## 8.0.0
+
 ## 7.0.0 (February 11, 2018)
 
 ### Enhancements
