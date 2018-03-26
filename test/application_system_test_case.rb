@@ -4,6 +4,7 @@ require "test_helper"
 
 # Set up ApplicationSystemTestCase system tests.
 class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
+  # Download chrome driver here: https://sites.google.com/a/chromium.org/chromedriver/downloads
   driven_by :selenium, using: :chrome, screen_size: [1400, 1400]
 
   setup do
@@ -16,7 +17,7 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
     @counter += 1
     relative_location = File.join("tmp", "screenshots", SleepInnovate::VERSION::STRING, "#{file_name}-#{format("%02d", @counter)}.png")
     page.save_screenshot(Rails.root.join(relative_location))
-    puts "[Screenshot]: #{relative_location}"
+    # puts "[Screenshot]: #{relative_location}"
   end
 
   def click_form_submit
