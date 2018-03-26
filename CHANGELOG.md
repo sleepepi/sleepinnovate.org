@@ -1,6 +1,8 @@
 ## 9.0.0
 
 ### Enhancements
+- **General Changes**
+  - Added printable core survey report with calculated sleep scores
 - **Gem Changes**
   - Updated to rails 5.2.0.rc2
   - Updated to devise 4.4.3

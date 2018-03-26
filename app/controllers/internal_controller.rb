@@ -31,9 +31,13 @@ class InternalController < ApplicationController
   # def awards
   # end
 
-  # # GET /dashboard
-  # def dashboard
-  # end
+  # GET /dashboard
+  def dashboard
+    if current_user.consented?
+      variables = promis_disturbance_variables + promis_impairment_variables + meq_variables + wpai_variables + well_being_pcornet_variables + bmi_variables
+      @data = current_user.subject.data(variables)
+    end
+  end
 
   # # GET /parking-voucher
   # def parking
@@ -88,5 +92,62 @@ class InternalController < ApplicationController
 
   def check_unconsented
     redirect_to consent_path unless current_user.unconsented?
+  end
+
+  def promis_disturbance_variables
+    [
+      { event: "baseline", variable: "quality_sleep_quality" },
+      { event: "baseline", variable: "quality_refreshing" },
+      { event: "baseline", variable: "quality_problem" },
+      { event: "baseline", variable: "quality_difficulty" },
+      { event: "baseline", variable: "quality_restless" },
+      { event: "baseline", variable: "quality_tried_hard" },
+      { event: "baseline", variable: "quality_worried" },
+      { event: "baseline", variable: "quality_satisfied" }
+    ]
+  end
+
+  def promis_impairment_variables
+    [
+      { event: "baseline", variable: "quality_sleepy" },
+      { event: "baseline", variable: "quality_alert_woke" },
+      { event: "baseline", variable: "quality_tired" },
+      { event: "baseline", variable: "quality_problems" },
+      { event: "baseline", variable: "quality_concentrating" },
+      { event: "baseline", variable: "quality_irritable" },
+      { event: "baseline", variable: "quality_sleepy_daytime" },
+      { event: "baseline", variable: "quality_staying_awake" }
+    ]
+  end
+
+  def meq_variables
+    [
+      { event: "baseline", variable: "daynight_feeling_best" }
+    ]
+  end
+
+  def wpai_variables
+    [
+      { event: "baseline", variable: "work_sick_missed_work" },
+      { event: "baseline", variable: "work_working_hours" },
+      { event: "baseline", variable: "work_productivity" },
+      { event: "baseline", variable: "work_leisure" }
+    ]
+  end
+
+  def well_being_pcornet_variables
+    [
+      { event: "baseline", variable: "general_depressed" },
+      { event: "baseline", variable: "general_fatigued" },
+      { event: "baseline", variable: "general_mental_health" },
+      { event: "baseline", variable: "general_uneasy" }
+    ]
+  end
+
+  def bmi_variables
+    [
+      { event: "baseline", variable: "demo_height" },
+      { event: "baseline", variable: "demo_weight" }
+    ]
   end
 end

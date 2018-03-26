@@ -32,13 +32,10 @@ module SleepInnovate
     # Run "rails time:zones" for a list of tasks for finding time zone names. Default is UTC.
     config.time_zone = "Eastern Time (US & Canada)"
 
-    # Overwrite Rails errors to use Bootstrap CSS classes.
-    config.action_view.field_error_proc = Proc.new do |html_tag, instance|
-      html_tag
-    end
+    # Ignores custom error DOM elements created by Rails.
+    config.action_view.field_error_proc = proc { |html_tag, _instance| html_tag }
 
     # Add Slice models to autoload_paths.
-    config.autoload_paths << Rails.root.join("app", "models", "helpers")
     config.autoload_paths << Rails.root.join("app", "models", "slice")
   end
 end

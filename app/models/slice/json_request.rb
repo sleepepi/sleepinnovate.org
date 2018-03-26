@@ -5,7 +5,7 @@ require "net/http"
 require "json"
 require "cgi"
 
-module Helpers
+module Slice
   # Generates JSON web requests for GET, POST, and PATCH.
   class JsonRequest
     class << self

@@ -1,0 +1,58 @@
+\begin{center}
+  {\Large SleepINNOVATE Sleep Report} \\[0.5cm]
+\end{center}
+
+\textit{Print your personal sleep health report and bring it to your doctor. All of the scores on this report are regularly used by sleep specialists.} \\ \\
+
+<% @promis_disturbance = @subject.report_promis_disturbance(@data) %>
+\begin{Large}\textbf{Sleep Quality}\end{Large} (PROMIS Sleep Disturbance) \hfill
+<% if @promis_disturbance %>\begin{Large}\textbf{<%= latex_safe @promis_disturbance %>}\end{Large}<% else %>\textit{Complete surveys at SleepINNOVATE.org to get your score.}<% end %> \\
+
+The Sleep Quality Assessment asked you how well you slept and how well-rested
+you felt during the past seven days. A score greater than 55 suggest problems
+with sleep quality. You can follow your score over time- if it decreases, this
+suggests improvement. \\ \\
+
+
+<% @promis_impairment = @subject.report_promis_impairment(@data) %>
+\begin{Large}\textbf{Sleep Quality}\end{Large} (PROMIS Sleep Related Impairment) \hfill
+<% if @promis_impairment %>\begin{Large}\textbf{<%= latex_safe @promis_impairment %>}\end{Large}<% else %>\textit{Complete surveys at SleepINNOVATE.org to get your score.}<% end %> \\
+
+The Sleep Quality Assessment asked you how alert, sleepy or tired you are,
+and how this impacted your daily activities during the past seven days. A
+score greater than 55 suggest problems with sleep quality. You can follow
+your score over time- if it decreases, this suggests improvement. \\ \\
+
+
+<% @meq = @subject.report_meq(@data) %>
+\begin{Large}\textbf{Day-Night Rhythms Assessment}\end{Large} (MEQ) \hfill
+<% if @meq %>\begin{Large}\textbf{<%= latex_safe @meq %>}\end{Large}<% else %>\textit{Complete surveys at SleepINNOVATE.org to get your score.}<% end %> \\
+
+The Horne-Ostberg Morningness-eveningness Questionnaire (MEQ) evaluates
+whether you are likely to be a lark (a morning person) or an owl
+(an evening person). Low scores indicate evening types (scores less than
+30), and high scores indicate morning types (score of greater than 30). \\ \\
+
+<% @wpai_work = @subject.report_wpai_overall_work_impairment(@data) %>
+\begin{Large}\textbf{WPAI:GH}\end{Large} (Work Productivity and Activity Impairment) \hfill
+<% if @wpai_work %>\begin{Large}\textbf{<%= latex_safe format("%0.1f", @wpai_work) %>}\end{Large}<% else %>\textit{Complete surveys at SleepINNOVATE.org to get your score.}<% end %> \\
+
+The scale measures the effect of your health problems on your ability to
+work and perform regular activities. Higher scores indicate more
+difficulty with work and/or productivity. \\ \\
+
+
+<% @well_being_pcornet = @subject.report_well_being_pcornet(@data) %>
+\begin{Large}\textbf{Well-Being Questions}\end{Large} (PCORNET) \hfill
+<% if @well_being_pcornet %>\begin{Large}\textbf{<%= latex_safe @well_being_pcornet %>}\end{Large}<% else %>\textit{Complete surveys at SleepINNOVATE.org to get your score.}<% end %> \\
+
+These questions measure your mood and your ability to think. They are scored on
+a 1-5 scale with 1 being the best score (indicating a high level of well-being). \\ \\
+
+
+<% @bmi = @subject.report_bmi(@data) %>
+\begin{Large}\textbf{BMI}\end{Large} (Body mass index) \hfill
+<% if @bmi %>\begin{Large}\textbf{<%= latex_safe format("%0.1f", @bmi) %>}\end{Large}<% else %>\textit{Complete surveys at SleepINNOVATE.org to get your score.}<% end %> \\
+
+BMI is calculated based on your height and weight. \\
+A BMI over 25 puts you in the 'overweight' category. Research has shown that people in this category are more likely to develop severe obstructive sleep apnea. \\ \\

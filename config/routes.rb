@@ -85,6 +85,10 @@ Rails.application.routes.draw do
     patch :change_email, path: "email"
   end
 
+  namespace :slice, path: "" do # OR: scope module: :slice
+    get :print_overview_report, path: "research/sleep-innovate/overview-report.pdf"
+  end
+
   namespace :survey do
     get :start, path: ":event/:design/start"
     get :resume, path: ":event/:design/resume"

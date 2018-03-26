@@ -2,6 +2,10 @@
 
 # Tracks subject events and form completion.
 class Subject < SliceRecord
+  # Concerns
+  include Latexable
+  include Reportable
+
   attr_accessor :json, :id, :subject_code, :user
 
   def initialize(user)
@@ -52,13 +56,13 @@ class Subject < SliceRecord
 
   def load_subject_events
     return [] unless linked?
-    (json, status) = Helpers::JsonRequest.get("#{project_url}/subjects/#{@id}/events.json")
+    (json, status) = Slice::JsonRequest.get("#{project_url}/subjects/#{@id}/events.json")
     load_events_from_json(json, status)
   end
 
   def launch_survey!(subject_event_id, design_id, remote_ip)
     params = { subject_event_id: subject_event_id, design_id: design_id, remote_ip: remote_ip }
-    (json, _status) = Helpers::JsonRequest.post("#{project_url}/subjects/#{@id}/sheets.json", params)
+    (json, _status) = Slice::JsonRequest.post("#{project_url}/subjects/#{@id}/sheets.json", params)
     json["id"]
   end
 
@@ -81,26 +85,26 @@ class Subject < SliceRecord
   end
 
   def start_event_survey(event, design)
-    (json, _status) = Helpers::JsonRequest.get("#{project_url}/subjects/#{@id}/surveys/#{event}/#{design}.json")
+    (json, _status) = Slice::JsonRequest.get("#{project_url}/subjects/#{@id}/surveys/#{event}/#{design}.json")
     # return unless status.is_a?(Net::HTTPSuccess)
     json
   end
 
   def resume_event_survey(event, design)
-    (json, _status) = Helpers::JsonRequest.get("#{project_url}/subjects/#{@id}/surveys/#{event}/#{design}/resume.json")
+    (json, _status) = Slice::JsonRequest.get("#{project_url}/subjects/#{@id}/surveys/#{event}/#{design}/resume.json")
     # return unless status.is_a?(Net::HTTPSuccess)
     json
   end
 
   def page_event_survey(event, design, page)
-    (json, _status) = Helpers::JsonRequest.get("#{project_url}/subjects/#{@id}/surveys/#{event}/#{design}/#{page}.json")
+    (json, _status) = Slice::JsonRequest.get("#{project_url}/subjects/#{@id}/surveys/#{event}/#{design}/#{page}.json")
     # return unless status.is_a?(Net::HTTPSuccess)
     json
   end
 
   def submit_response_event_survey(event, design, page, response, remote_ip)
     params = { _method: "patch", response: response, remote_ip: remote_ip }
-    Helpers::JsonRequest.post("#{project_url}/subjects/#{@id}/surveys/#{event}/#{design}/#{page}.json", params)
+    Slice::JsonRequest.post("#{project_url}/subjects/#{@id}/surveys/#{event}/#{design}/#{page}.json", params)
   end
 
   def complete_event_survey(event, design)
@@ -109,20 +113,47 @@ class Subject < SliceRecord
 
   def review_event_survey(event, design)
     params = { subject_id: @id }
-    Helpers::JsonRequest.get("#{project_url}/reports/review/#{event}/#{design}.json", params)
+    Slice::JsonRequest.get("#{project_url}/reports/review/#{event}/#{design}.json", params)
   end
 
   def report_event_survey(event, design)
     params = { subject_id: @id }
-    Helpers::JsonRequest.get("#{project_url}/reports/#{event}/#{design}.json", params)
+    Slice::JsonRequest.get("#{project_url}/reports/#{event}/#{design}.json", params)
   end
 
   def create_event!(event)
     return unless linked?
     return if event_launched?(event)
     params = { event_id: event.slug }
-    (json, status) = Helpers::JsonRequest.post("#{project_url}/subjects/#{@id}/events.json", params)
+    (json, status) = Slice::JsonRequest.post("#{project_url}/subjects/#{@id}/events.json", params)
     load_events_from_json(json, status)
+  end
+
+  def data(data_points)
+    params = { data_points: data_points }
+    (json, _status) = Slice::JsonRequest.get("#{project_url}/subjects/#{@id}/data.json", params)
+    # return unless status.is_a?(Net::HTTPSuccess)
+    json
+  end
+
+  # Print Consent
+  def latex_partial(partial)
+    File.read(File.join("app", "views", "subjects", "latex", "_#{partial}.tex.erb"))
+  end
+
+  def generate_overview_report_pdf!(data)
+    jobname = "overview_report_#{id}"
+    output_folder = File.join("tmp", "files", "tex")
+    FileUtils.mkdir_p output_folder
+    file_tex = File.join("tmp", "files", "tex", "#{jobname}.tex")
+    @subject = self
+    @data = data
+    File.open(file_tex, "w") do |file|
+      file.syswrite(ERB.new(latex_partial("header")).result(binding))
+      file.syswrite(ERB.new(latex_partial("overview_report")).result(binding))
+      file.syswrite(ERB.new(latex_partial("footer")).result(binding))
+    end
+    Subject.generate_pdf(jobname, output_folder, file_tex)
   end
 
   private
@@ -143,7 +174,7 @@ class Subject < SliceRecord
   end
 
   def load_remote_subject
-    (json, status) = Helpers::JsonRequest.get("#{project_url}/subjects/#{@id}.json")
+    (json, status) = Slice::JsonRequest.get("#{project_url}/subjects/#{@id}.json")
     load_subject_from_json(json, status)
   end
 
@@ -154,7 +185,7 @@ class Subject < SliceRecord
         site_id: ENV["site_id"]
       }
     }
-    (json, status) = Helpers::JsonRequest.post("#{project_url}/subjects.json", params)
+    (json, status) = Slice::JsonRequest.post("#{project_url}/subjects.json", params)
     load_subject_from_json(json, status)
     link_subject
   end
@@ -179,7 +210,7 @@ class Subject < SliceRecord
   def create_baseline_event
     return unless linked?
     params = { event_id: Event.first.slug }
-    (json, status) = Helpers::JsonRequest.post("#{project_url}/subjects/#{@id}/events.json", params)
+    (json, status) = Slice::JsonRequest.post("#{project_url}/subjects/#{@id}/events.json", params)
     load_events_from_json(json, status)
   end
 
@@ -219,7 +250,7 @@ class Subject < SliceRecord
 
   def subject_codes_on_page(page)
     params = { page: page }
-    (json, _status) = Helpers::JsonRequest.get("#{project_url}/subjects.json", params)
+    (json, _status) = Slice::JsonRequest.get("#{project_url}/subjects.json", params)
     return [] unless json
     subject_codes = json.collect do |subject_json|
       subject_json["subject_code"]
@@ -248,7 +279,7 @@ class Subject < SliceRecord
 
   def self.subjects_on_page(page)
     params = { page: page }
-    (json, _status) = Helpers::JsonRequest.get("#{SliceRecord.new.project_url}/subjects.json", params)
+    (json, _status) = Slice::JsonRequest.get("#{SliceRecord.new.project_url}/subjects.json", params)
     return [] unless json
     subjects = json.collect do |subject_json|
       [subject_json["id"], subject_json["subject_code"]]

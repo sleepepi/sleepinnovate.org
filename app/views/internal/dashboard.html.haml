@@ -111,17 +111,21 @@
           = render "cards/biobank_starting_soon"
 
 
-      - if current_user.parking_voucher? && session[:clinic].present?
-        %p.lead.text-center
-          %i.fa.fa-car
-          Redeem your
-          = succeed "." do
-            = link_to "parking voucher", parking_path
-      - elsif current_user.whats_next?
-        %p.lead.text-center
-          Congrats, you are all done!
-          = link_to "What's next?", whats_next_path
-      - else
-        %p.lead.text-center.mt-5
-          Study Timeline
-        = render "users/timeline", user: current_user
+      .my-5
+        - if current_user.parking_voucher? && session[:clinic].present?
+          %p.lead.text-center
+            %i.fa.fa-car
+            Redeem your
+            = succeed "." do
+              = link_to "parking voucher", parking_path
+        - elsif current_user.whats_next?
+          %p.lead.text-center
+            Congrats, you are all done!
+            = link_to "What's next?", whats_next_path
+        - else
+          %p.lead.text-center
+            Study Timeline
+          = render "users/timeline", user: current_user
+
+      - @subject = current_user.subject
+      = render "slice/overview_report"

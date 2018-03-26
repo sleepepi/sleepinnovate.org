@@ -1,0 +1,40 @@
+.dashboard-container-margins,
+.dashboard-container {
+  @include scale-images;
+
+  background-color: $dashboard-bg;
+  border-radius: $border-radius;
+  box-shadow: 0 1px 5px $box-shadow-color;
+  color: $body-color;
+  margin-bottom: map-get($spacers, 4);
+  padding: 10px;
+
+  > div,
+  > table {
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  &.dashboard-disclaimer {
+    background-color: $p100-orange;
+    font-size: 12px;
+  }
+
+  &.dashboard-no-padding {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  @include media-breakpoint-up(sm) {
+    padding: 30px;
+  }
+}
+
+.dashboard-container {
+  @include remove-last-child-bottom-margin;
+}
+
+.dashboard-container-border-accent {
+  border-left: 4px solid $p200-orange;
+}
