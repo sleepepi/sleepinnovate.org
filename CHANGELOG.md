@@ -4,6 +4,7 @@
 - **General Changes**
   - Added printable core survey report with calculated sleep scores
 - **Gem Changes**
+  - Updated to ruby 2.5.1
   - Updated to rails 5.2.0.rc2
   - Updated to devise 4.4.3
   - Updated to simplecov 0.16.1
