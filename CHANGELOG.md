@@ -4,6 +4,9 @@
 - **General Changes**
   - Added printable core survey report with calculated sleep scores
   - Disabled spellcheck and autocorrect on registration form
+- **Consent Changes**
+  - Consent checkbox is now highlighted if a user forgets to check "I give my
+    consent" before clicking "I Consent"
 - **Gem Changes**
   - Updated to ruby 2.5.1
   - Updated to rails 5.2.0.rc2
