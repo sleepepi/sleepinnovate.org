@@ -16,6 +16,7 @@
   - Updated to ruby 2.5.1
   - Updated to rails 5.2.0.rc2
   - Updated to devise 4.4.3
+  - Updated to capybara 3.0
   - Updated to simplecov 0.16.1
 
 ## 8.0.0 (March 1, 2018)
