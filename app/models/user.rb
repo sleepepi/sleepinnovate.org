@@ -40,6 +40,7 @@ class User < ApplicationRecord
 
   # Validations
   validates :full_name, presence: true
+  validates :full_name, format: { with: /\A.+\s.+\Z/, message: "must include first and last name" }
   validates :email, confirmation: true
   validates :password, format: {
     with: /\A(?=.*[a-z])(?=.*[A-Z])(?=.*\d)./,

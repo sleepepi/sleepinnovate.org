@@ -1,7 +1,15 @@
 .page-box.last-box.background-p50-grey
-  = render "devise/registrations/form"
+
+  .sign-up-form
+    .sign-up-form-title
+      Create your account
+    = render "devise/registrations/form"
+
+  .sign-up-form.text-center
+    = link_to "I already have an account.", new_user_session_path
 
   .d-none.text-center
     = link_to landing_path, data: { object: "start-new-session" }, class: "btn btn-light btn-sm" do
       %i.fa.fa-caret-left
       Start new session
+

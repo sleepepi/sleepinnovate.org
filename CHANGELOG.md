@@ -3,6 +3,7 @@
 ### Enhancements
 - **General Changes**
   - Added printable core survey report with calculated sleep scores
+  - Disabled spellcheck and autocorrect on registration form
 - **Gem Changes**
   - Updated to ruby 2.5.1
   - Updated to rails 5.2.0.rc2
