@@ -18,8 +18,7 @@ class EventDesign
   end
 
   def complete?(user)
-    @sheets.count { |s| s.percent == 100 }.positive? ||
-      user.user_surveys.find_by(event: @event_id, design: @design_id)&.completed?
+    user.user_surveys.find_by(event: @event_id, design: @design_id)&.completed?
   end
 
   def incomplete?(user)

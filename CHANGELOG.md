@@ -9,6 +9,9 @@
 - **Consent Changes**
   - Consent checkbox is now highlighted if a user forgets to check "I give my
     consent" before clicking "I Consent"
+- **Survey Changes**
+  - Surveys now advance to the next survey if available
+  - Surveys on older events are locked when a new event is launched
 - **Gem Changes**
   - Updated to ruby 2.5.1
   - Updated to rails 5.2.0.rc2

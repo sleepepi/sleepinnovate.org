@@ -85,7 +85,11 @@ class SurveyController < ApplicationController
   # POST /survey/:event/:design/review
   def complete
     survey_completed
-    redirect_to dashboard_path
+    if current_user.next_survey
+      redirect_to survey_start_path(current_user.next_survey.event_id, current_user.next_survey.design_id)
+    else
+      redirect_to dashboard_path
+    end
   end
 
   private

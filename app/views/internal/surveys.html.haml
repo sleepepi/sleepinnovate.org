@@ -1,7 +1,8 @@
 - @title = "Surveys"
 
 .page-box.last-box.background-p50-grey.center-vertically-xs-sm
-  - current_user.subject_events.reverse_each do |subject_event|
+  - subject_event = current_user.subject_events.last
+  - if subject_event
     .panel.panel-full-width
       %h1.mb-0= subject_event.name
       - if subject_event.complete?(current_user)
