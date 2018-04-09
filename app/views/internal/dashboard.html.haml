@@ -127,5 +127,4 @@
             Study Timeline
           = render "users/timeline", user: current_user
 
-      - @subject = current_user.subject
-      = render "slice/overview_report"
+      = render "slice/overview_report", subject: current_user.subject if SLEEP_REPORT_ENABLED
