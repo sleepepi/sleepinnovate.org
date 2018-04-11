@@ -23,6 +23,9 @@
   - Updated to capybara 3.0
   - Updated to simplecov 0.16.1
 
+### Bug Fix
+- Fixed a bug that prevented radio buttons from being unselected
+
 ## 8.0.0 (March 1, 2018)
 
 ### Enhancements
