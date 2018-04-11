@@ -8,7 +8,7 @@ namespace :admin do
       csv << [
         "SleepINNOVATE ID", "Slice Subject Code", "Full Name", "Email",
         "Date of Birth", "Address", "Clinic", "Consent Status", "Consented At",
-        "Consent Revoked At"
+        "Consent Revoked At", "Sign In Count"
       ]
       User.consented.order(:id).find_each do |user|
         csv << [
@@ -21,7 +21,8 @@ namespace :admin do
           user.clinic,
           user.status,
           format_datetime(user.consented_at),
-          format_datetime(user.consent_revoked_at)
+          format_datetime(user.consent_revoked_at),
+          user.sign_in_count
         ]
       end
     end

@@ -6,6 +6,8 @@
   - Disabled spellcheck and autocorrect on registration form
   - Surveys, brain quizzes, and biobank are now only dimmed when they are
     completed
+- **Admin Changes**
+  - User sign in count added to admin export
 - **Consent Changes**
   - Consent checkbox is now highlighted if a user forgets to check "I give my
     consent" before clicking "I Consent"
