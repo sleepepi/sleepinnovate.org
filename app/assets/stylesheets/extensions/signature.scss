@@ -59,3 +59,22 @@
     display: block;
   }
 }
+
+.sign-with-finger-inline {
+  display: inline;
+}
+
+.sign-with-mouse-inline {
+  display: none;
+}
+
+// https://www.w3.org/TR/mediaqueries-4/#mf-interaction
+@media (hover) {
+  .sign-with-finger-inline {
+    display: none;
+  }
+
+  .sign-with-mouse-inline {
+    display: inline;
+  }
+}

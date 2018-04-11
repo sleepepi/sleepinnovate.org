@@ -5,10 +5,13 @@
     %h1= @title
 
     %p
-      To access our surveys, brain quizzes and (if eligible) a parking voucher,
-      please
+      Please
       %u sign below
-      to complete your profile:
+      to complete your profile.
+      %span.sign-with-mouse-inline
+        Sign by holding the left mouse button down in the signature box.
+      %span.sign-with-finger-inline
+        Sign using your finger in the signature box.
 
     = form_with(url: profile_signature_submit_path, method: :patch, local: true, id: "profile-form") do |form|
       = hidden_field_tag :data_uri
@@ -24,15 +27,9 @@
             %div{ style: "margin-top: 15px;margin-left: 15px;" }
               %small.form-text{ style: "color: #bdbdbd;font-style: italic;" } Sign here
             %canvas
-          .text-center.sign-with-mouse
+          .text-center
             %small.text-muted
-              Sign by holding the left mouse button down in the signature box.
-              Press
-              %strong Clear Signature
-              to try again.
-          .text-center.sign-with-finger
-            %small.text-muted
-              Sign using your finger in the signature box.
+              Sign using your mouse or finger.
               Press
               %strong Clear Signature
               to try again.

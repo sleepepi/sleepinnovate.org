@@ -11,6 +11,8 @@
 - **Consent Changes**
   - Consent checkbox is now highlighted if a user forgets to check "I give my
     consent" before clicking "I Consent"
+  - Improved visibility of text describing how to sign during the consent
+    process
 - **Survey Changes**
   - Surveys now advance to the next survey if available
   - Surveys on older events are locked when a new event is launched
