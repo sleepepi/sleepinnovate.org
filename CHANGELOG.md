@@ -1,4 +1,4 @@
-## 9.0.0
+## 9.0.0 (April 16, 2018)
 
 ### Enhancements
 - **General Changes**
