@@ -1,6 +1,8 @@
 ## 9.1.0
 
 ### Enhancements
+- **Consent Changes**
+  - Updated the principal investigators listed on the consent
 - **Gem Changes**
   - Updated to bootstrap 4.1.0
 
