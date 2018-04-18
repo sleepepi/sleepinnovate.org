@@ -9,7 +9,7 @@ gem "pg",                   "1.0.0"
 
 # Gems used by project
 gem "autoprefixer-rails"
-gem "bootstrap",            "~> 4.0.0"
+gem "bootstrap",            "~> 4.1.0"
 gem "carrierwave",          "~> 1.2.2"
 gem "colorize",             "~> 0.8.1"
 gem "devise",               "~> 4.4.3"
