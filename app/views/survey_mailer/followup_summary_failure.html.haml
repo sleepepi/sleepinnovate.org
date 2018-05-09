@@ -1,0 +1,7 @@
+%div{ style: "text-align: center;" }
+  Event activations and reminders
+  %span{ style: danger_style } failed
+  due to Slice connection error
+  for
+  = succeed "." do
+    %span{ style: "#{emphasis_style};white-space:nowrap" }= Time.zone.today.strftime("%A, %B %-d, %Y")

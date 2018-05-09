@@ -54,4 +54,12 @@ class SurveyMailerTest < ActionMailer::TestCase
       { subject: "INN00002", events: [{ event: "3-Month Follow-up", days_after_consent: 97 }] }
     ]
   end
+
+  test "followup summary failure email" do
+    mail = SurveyMailer.followup_summary_failure(users(:admin))
+    assert_equal "Followup Summary FAILURE for #{Time.zone.today.strftime("%a %d %b %Y")}", mail.subject
+    assert_equal ["admin@example.com"], mail.to
+    assert_equal ["travis-ci@example.com"], mail.from
+    assert_match "Event activations and reminders failed due to Slice connection error for #{Time.zone.today.strftime("%A, %B %-d, %Y")}.", mail.body.encoded
+  end
 end

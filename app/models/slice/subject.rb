@@ -279,4 +279,13 @@ class Subject < SliceRecord
     subject = remote_subjects.find { |user_id, _code| user_id == user.slice_subject_id }
     subject.last if subject
   end
+
+  def self.slice_online?
+    (_json, status) = Slice::JsonRequest.get("#{SliceRecord.new.project_url}.json")
+    status.is_a?(Net::HTTPSuccess)
+  end
+
+  def self.slice_offline?
+    !slice_online?
+  end
 end

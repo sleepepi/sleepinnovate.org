@@ -36,4 +36,14 @@ class SurveyMailer < ApplicationMailer
       subject: "Followup Summary for #{Time.zone.today.strftime("%a %d %b %Y")}"
     )
   end
+
+  def followup_summary_failure(user)
+    setup_email
+    @user = user
+    @email_to = user.email
+    mail(
+      to: @email_to,
+      subject: "Followup Summary FAILURE for #{Time.zone.today.strftime("%a %d %b %Y")}"
+    )
+  end
 end

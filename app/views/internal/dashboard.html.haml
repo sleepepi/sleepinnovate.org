@@ -84,14 +84,14 @@
     - else
       .card-deck.mb-3.flex-column.flex-md-row
         - if current_user.subject_events.blank?
-          = render "cards/no_surveys"
+          = render "cards/surveys_unavailable"
         - elsif current_user.next_survey
           = render "cards/ongoing", event_design: current_user.next_survey
         - else
           = render "cards/completed", subject_event: current_user.subject_events.last
 
         - if current_user.subject_events.blank?
-          = render "cards/brain_starting_soon"
+          = render "cards/brain_surveys_unavailable"
         - elsif current_user.brain_surveys_completed?(current_user.current_event) && ENV["test_my_brain_enabled"] == "true"
           = render "cards/brain_completed"
         - elsif current_user.brain_surveys_started? && ENV["test_my_brain_enabled"] == "true"
@@ -110,7 +110,6 @@
         - else
           = render "cards/biobank_starting_soon"
 
-
       .my-5
         - if current_user.parking_voucher? && session[:clinic].present?
           %p.lead.text-center
@@ -122,9 +121,9 @@
           %p.lead.text-center
             Congrats, you are all done!
             = link_to "What's next?", whats_next_path
-        - else
+        - elsif current_user.current_event
           %p.lead.text-center
             Study Timeline
           = render "users/timeline", user: current_user
-
-      = render "slice/overview_report", subject: current_user.subject if SLEEP_REPORT_ENABLED
+      - if current_user.current_event
+        = render "slice/overview_report", subject: current_user.subject if SLEEP_REPORT_ENABLED

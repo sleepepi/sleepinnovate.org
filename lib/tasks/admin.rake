@@ -3,6 +3,7 @@
 namespace :admin do
   desc "Export for admin interface."
   task export: :environment do
+    next if Subject.slice_offline? # Quit if Slice is unavailable.
     csv_file = Rails.root.join("admin", "admin.csv")
     CSV.open(csv_file, "wb") do |csv|
       csv << [

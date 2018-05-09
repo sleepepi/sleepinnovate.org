@@ -117,10 +117,12 @@ class User < ApplicationRecord
   end
 
   def highlight_brain?
+    return false unless current_event
     subject.event_completed?(current_event)
   end
 
   def highlight_biobank?
+    return true unless current_event
     event_completed?(current_event)
   end
 

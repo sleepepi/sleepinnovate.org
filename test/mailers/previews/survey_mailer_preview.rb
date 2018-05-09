@@ -28,4 +28,9 @@ class SurveyMailerPreview < ActionMailer::Preview
     ]
     SurveyMailer.followup_summary(user, activations, reminders)
   end
+
+  def followup_summary_failure
+    user = User.where(admin: true).first
+    SurveyMailer.followup_summary_failure(user)
+  end
 end

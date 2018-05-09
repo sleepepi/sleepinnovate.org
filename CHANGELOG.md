@@ -1,11 +1,13 @@
 ## 9.2.0
 
 ### Enhancements
-- **Gem Changes**
-  - Updated to bootstrap 4.1.1
 - **Survey Changes**
   - Survey completeness is no longer affected by changes to survey event and
     design slug changes
+  - Improved handling survey event activations and reminders when Slice is
+    offline
+- **Gem Changes**
+  - Updated to bootstrap 4.1.1
 
 ## 9.1.0 (April 18, 2018)
 

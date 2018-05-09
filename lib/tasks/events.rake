@@ -22,6 +22,12 @@ namespace :events do
 
   desc "Activate events and sent surveys available and surveys reminder emails."
   task followup: :environment do
+    if Subject.slice_offline?
+      User.where(admin: true).find_each do |user|
+        SurveyMailer.followup_summary_failure(user).deliver_now if EMAILS_ENABLED
+      end
+      next # Quit
+    end
     activations = []
     reminders = []
     events = Event.order(:month).to_a

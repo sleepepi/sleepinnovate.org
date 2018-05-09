@@ -3,6 +3,7 @@
 namespace :brains do
   desc "Import nightly Test My Brains CSVs."
   task nightly_import: :environment do
+    next if Subject.slice_offline? # Quit if Slice is unavailable.
     parse_brain_csvs
   end
 end
