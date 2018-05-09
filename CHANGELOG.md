@@ -3,6 +3,9 @@
 ### Enhancements
 - **Gem Changes**
   - Updated to bootstrap 4.1.1
+- **Survey Changes**
+  - Survey completeness is no longer affected by changes to survey event and
+    design slug changes
 
 ## 9.1.0 (April 18, 2018)
 

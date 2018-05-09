@@ -86,7 +86,7 @@ class SurveyController < ApplicationController
   def complete
     survey_completed
     if current_user.next_survey
-      redirect_to survey_start_path(current_user.next_survey.event_id, current_user.next_survey.design_id)
+      redirect_to survey_start_path(current_user.next_survey.event_slug, current_user.next_survey.design_slug)
     else
       redirect_to dashboard_path
     end
@@ -95,15 +95,26 @@ class SurveyController < ApplicationController
   private
 
   def find_user_survey
-    current_user.user_surveys.where(event: params[:event].downcase, design: params[:design].downcase).first_or_create
+    request_params = { event: params[:event], design: params[:design] }
+    (json, status) = Slice::JsonRequest.get("#{SliceRecord.new.project_url}/survey-info.json", request_params)
+    return unless status.is_a?(Net::HTTPSuccess)
+    event_design = EventDesign.new(json, nil)
+    params[:event] = event_design.event_slug
+    params[:design] = event_design.design_slug
+    user_survey = \
+      current_user.user_surveys
+                  .where(event: event_design.event_id, design: event_design.design_id)
+                  .first_or_create
+    user_survey.update_cache!(event_design)
+    user_survey
   end
 
   def survey_in_progress
-    find_user_survey.update(completed: false)
+    find_user_survey&.update(completed: false)
   end
 
   def survey_completed
-    find_user_survey.update(completed: true)
+    find_user_survey&.update(completed: true)
   end
 
   def find_page

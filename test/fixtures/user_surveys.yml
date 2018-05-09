@@ -5,9 +5,15 @@ one:
   event: baseline
   design: demographics
   completed: false
+  design_name_cache: Demographics
+  design_slug_cache: demographics
+  event_slug_cache: baseline
 
 two:
   user: consented
   event: baseline
   design: health-behaviors
   completed: false
+  design_name_cache: Family History
+  design_slug_cache: familyhx
+  event_slug_cache: baseline
