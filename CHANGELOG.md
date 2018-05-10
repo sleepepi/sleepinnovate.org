@@ -6,6 +6,9 @@
     design slug changes
   - Improved handling survey event activations and reminders when Slice is
     offline
+- **Test My Brain Changes**
+  - Added text to inform participants that the number pad doesn't work for
+    numeric entry on Test My Brain quizzes
 - **Gem Changes**
   - Updated to bootstrap 4.1.1
 
