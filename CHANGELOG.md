@@ -1,4 +1,4 @@
-## 9.2.0
+## 9.2.0 (May 10, 2018)
 
 ### Enhancements
 - **Survey Changes**
