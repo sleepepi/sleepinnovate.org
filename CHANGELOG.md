@@ -1,5 +1,9 @@
 ## 10.0.0
 
+### Enhancements
+- **Survey Changes**
+  - Updated events and designs to match new Slice survey API format
+
 ## 9.2.0 (May 10, 2018)
 
 ### Enhancements
