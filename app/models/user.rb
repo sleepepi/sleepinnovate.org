@@ -25,13 +25,13 @@ class User < ApplicationRecord
   ]
 
   TEST_MY_BRAIN_SURVEYS = [
-    ["Matching Shapes and Numbers", 536],
-    ["Memorizing Numbers", 538],
-    ["Connect the Dots", 540],
-    ["Word Knowledge", 541],
-    ["Memorizing Words", 542],
-    ["Maintaining Concentration", 543],
-    ["Follow the Hidden Smileys", 544]
+    { battery_name: "Matching Shapes and Numbers", battery_number: 536, test_numbers: [693] },
+    # { battery_name: "Memorizing Numbers", battery_number: 538, test_numbers: [694] },
+    { battery_name: "Connect the Dots", battery_number: 540, test_numbers: [696, 697] },
+    { battery_name: "Word Knowledge", battery_number: 541, test_numbers: [698] }, # Will be removed.
+    { battery_name: "Memorizing Words", battery_number: 542, test_numbers: [700, 701] },
+    { battery_name: "Maintaining Concentration", battery_number: 543, test_numbers: [702] }
+    # { battery_name: "Follow the Hidden Smileys", battery_number: 544, test_numbers: [703] }
   ]
 
   # Scopes
@@ -133,12 +133,12 @@ class User < ApplicationRecord
 
   def brain_surveys_completed(event)
     return 0 unless event
-    brain_tests.where(event: event.slug).count
+    brain_tests.active_tests.where(event: event.slug).count
   end
 
   def brain_surveys_count(event)
     return 0 unless event
-    TEST_MY_BRAIN_SURVEYS.size + 2
+    TEST_MY_BRAIN_SURVEYS.collect { |h| h[:test_numbers] }.flatten.size
   end
 
   def brain_percent(event)
@@ -148,10 +148,10 @@ class User < ApplicationRecord
 
   def next_brain_test
     all_tests_taken = brain_tests.where(event: current_event.slug).pluck(:battery_number)
-    remaining_tests = TEST_MY_BRAIN_SURVEYS.reject do |_battery_name, battery_number|
-      battery_number.in?(all_tests_taken)
+    remaining_tests = TEST_MY_BRAIN_SURVEYS.reject do |hash|
+      hash[:battery_number].in?(all_tests_taken)
     end
-    remaining_tests.first.first if remaining_tests.first
+    remaining_tests.first[:battery_name] if remaining_tests.first
   end
 
   def biobank_registration_started!

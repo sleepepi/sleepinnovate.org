@@ -163,13 +163,13 @@
               %strong Brain Tests
           .col-md-10
             %p.form-control-plaintext
-              - @user.brain_tests.where(event: event.slug).each do |brain_test|
+              - @user.brain_tests.active_tests.where(event: event.slug).each do |brain_test|
                 .card.mb-3
                   .card-body
                     %p
                       %strong Battery
-                      - battery = User::TEST_MY_BRAIN_SURVEYS.find { |_battery_name, battery_number| battery_number == brain_test.battery_number }
-                      = battery.first if battery
+                      - battery = User::TEST_MY_BRAIN_SURVEYS.find { |hash| hash[:battery_number] == brain_test.battery_number }
+                      = battery[:battery_name] if battery
                       %code= brain_test.battery_number
 
                     %p

@@ -3,6 +3,8 @@
 ### Enhancements
 - **Survey Changes**
   - Updated events and designs to match new Slice survey API format
+- **Test My Brain Changes**
+  - Updated tests that are provided by Test My Brain
 
 ## 9.2.0 (May 10, 2018)
 
