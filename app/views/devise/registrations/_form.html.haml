@@ -3,12 +3,5 @@
   = render "forms/vertical/email_field", form: form, object: resource, key: :email, placeholder: "you@example.com"
   = render "forms/vertical/email_field", form: form, object: resource, key: :email_confirmation, placeholder: "you@example.com"
 
-  - if RECAPTCHA_ENABLED
-    .form-group
-      %label.form-control-label Human Verification
-      %div{ style: "height: 78px;margin-left: 27.5px" }
-        .g-recaptcha{ data: { sitekey: ENV["recaptcha_site_key"] } }
-        <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-
   .form-group.submit-btn-container
     = form.submit "Create Account", class: "btn btn-success btn-block"
