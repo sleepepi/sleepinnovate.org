@@ -27,6 +27,8 @@
         .col-md-10
           %p.form-control-plaintext= @user.full_name
 
+    = render "forms/horizontal/show/check_box", object: @user, key: :emails_enabled
+
     - if @user.tester?
       .row{ style: "margin-bottom: 20px;" }
         .col-md-2

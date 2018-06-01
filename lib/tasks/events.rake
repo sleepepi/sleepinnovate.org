@@ -23,7 +23,7 @@ namespace :events do
   desc "Activate events and sent surveys available and surveys reminder emails."
   task followup: :environment do
     if Subject.slice_offline?
-      User.where(admin: true).find_each do |user|
+      User.where(admin: true, emails_enabled: true).find_each do |user|
         SurveyMailer.followup_summary_failure(user).deliver_now if EMAILS_ENABLED
       end
       next # Quit
@@ -57,7 +57,7 @@ namespace :events do
     activations.sort_by! { |h| h[:subject].to_s }
     reminders.sort_by! { |h| h[:subject].to_s }
     if activations.present? || reminders.present?
-      User.where(admin: true).find_each do |user|
+      User.where(admin: true, emails_enabled: true).find_each do |user|
         SurveyMailer.followup_summary(user, activations, reminders).deliver_now if EMAILS_ENABLED
       end
     end
@@ -97,9 +97,13 @@ namespace :events do
       user_event.update(activation_email_sent_at: Time.zone.now)
       puts "#{Subject.remote_subject_code(user)}.create_event!(#{event.slug}) in Slice"
       user.create_event!(event)
-      puts "Send #{Subject.remote_subject_code(user)} #{event.slug} activation email"
-      SurveyMailer.surveys_available(user, event).deliver_now if EMAILS_ENABLED
-      true
+      if user.emails_enabled?
+        puts "Send #{Subject.remote_subject_code(user)} #{event.slug} activation email"
+        SurveyMailer.surveys_available(user, event).deliver_now if EMAILS_ENABLED
+        true
+      else
+        false
+      end
     else
       puts "Activateon email #{"SKIPPED".colorize(:white)}."
       puts "#{event.slug} already activated! No activation email sent."
@@ -125,9 +129,13 @@ namespace :events do
     user_event = user.user_events.where(event: event).first_or_create
     if user_event.reminder_email_sent_at.blank?
       user_event.update(reminder_email_sent_at: Time.zone.now)
-      puts "Send #{Subject.remote_subject_code(user)} #{event.slug} reminder email"
-      SurveyMailer.surveys_reminder(user, event).deliver_now if EMAILS_ENABLED
-      true
+      if user.emails_enabled?
+        puts "Send #{Subject.remote_subject_code(user)} #{event.slug} reminder email"
+        SurveyMailer.surveys_reminder(user, event).deliver_now if EMAILS_ENABLED
+        true
+      else
+        false
+      end
     else
       puts "Reminder email #{"SKIPPED".colorize(:white)}."
       false

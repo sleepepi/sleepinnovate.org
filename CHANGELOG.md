@@ -1,6 +1,8 @@
 ## 10.0.0
 
 ### Enhancements
+- **Email Changes**
+  - Event activation and reminder emails can now be disabled for specific users
 - **Survey Changes**
   - Updated events and designs to match new Slice survey API format
 - **Test My Brain Changes**
