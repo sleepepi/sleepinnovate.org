@@ -5,6 +5,7 @@
   - Event activation and reminder emails can now be disabled for specific users
 - **Survey Changes**
   - Updated events and designs to match new Slice survey API format
+  - Added overall progress indicator to surveys
 - **Test My Brain Changes**
   - Updated tests that are provided by Test My Brain
 

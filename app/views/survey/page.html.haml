@@ -6,6 +6,11 @@
 - percent = (@json.dig("design", "current_page")) * 100 / @json.dig("design", "pages_count")
 - start = percent if @json.dig("errors").present?
 
+- subject_event = current_user.subject.current_subject_event(params[:event])
+- index = subject_event.event_designs.index { |ed| ed.design_slug.to_s == params[:design].to_s } if subject_event
+- survey_number = (index ? index + 1 : 0)
+- number_of_surveys = subject_event.event_designs.size if subject_event
+
 - background_class = "background-p50-grey"
 
 .page-box.last-box.center-vertically-xs-sm{ class: background_class }
@@ -18,6 +23,12 @@
         = link_to "#", data: { object: "submit-and-continue", target: "#survey-form" }, class: "btn btn-success btn-shadow float-right" do
           Continue
           %i.fa.fa-caret-right
+        - if survey_number && number_of_surveys
+          .small.ml-4.text-muted
+            Survey
+            = survey_number
+            of
+            = number_of_surveys
         .clearfix
       - elsif @variable
         .survey-question-container
@@ -37,4 +48,10 @@
           = link_to "#", data: { object: "submit-and-continue", target: "#survey-form" }, class: "btn btn-success btn-shadow" do
             Continue
             %i.fa.fa-caret-right
+        - if survey_number && number_of_surveys
+          .small.ml-4.text-muted
+            Survey
+            = survey_number
+            of
+            = number_of_surveys
         .clearfix
