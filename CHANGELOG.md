@@ -1,4 +1,4 @@
-## 10.0.0
+## 10.0.0 (June 5, 2018)
 
 ### Enhancements
 - **Email Changes**
