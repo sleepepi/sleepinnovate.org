@@ -10,7 +10,7 @@ en:
       already_authenticated: "" # "You are already signed in."
       inactive: "Your account is not activated yet."
       invalid: "Wrong email or password. Did you <a href=\"password/new\">forget your password?</a>"
-      locked: "Your account is locked."
+      locked: "Your account is locked. <a href=\"unlock\">Unlock my account.</a>"
       last_attempt: "You have one more attempt before your account is locked."
       not_found_in_database: "Wrong email or password. Did you <a href=\"password/new\">forget your password?</a>"
       timeout: "" # "Your session expired. Please sign in again to continue."

@@ -1,12 +1,15 @@
-.page-box.last-box.background-p50-grey
-  .sign-up-form
-    .sign-up-form-title
-      Forgot your password?
+- @title = "Forgot your password?"
 
-    = form_with model: resource, as: resource_name, url: password_path(resource_name), method: :post, local: true do |form|
-      .form-group
-        = render "layouts/label_or_errors", form: form, object: resource, key: :email
-        = form.email_field :email, autofocus: true, class: "form-control form-control-danger", autocomplete: "off", autocorrect: "off", autocapitalize: "none", spellcheck: "false"
+.page-box.last-box.d-flex.flex-column.justify-content-center.background-p50-grey
+  .container
+    .sign-up-form
+      .sign-up-form-title
+        Forgot your password?
 
-      .form-group.submit-btn-container
-        = form.submit "Send me reset password instructions", class: "btn btn-success btn-block"
+      = form_with model: resource, as: resource_name, url: password_path(resource_name), method: :post, local: true do |form|
+        .form-group
+          = render "layouts/label_or_errors", form: form, object: resource, key: :email
+          = form.email_field :email, autofocus: true, class: "form-control form-control-danger", autocomplete: "off", autocorrect: "off", autocapitalize: "none", spellcheck: "false"
+
+        .form-group.submit-btn-container
+          = form.submit "Send me reset password instructions", class: "btn btn-success btn-block"

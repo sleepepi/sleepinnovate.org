@@ -1,15 +1,18 @@
-.page-box.last-box.background-p50-grey
-  .sign-up-form
-    .sign-up-form-title
-      Resend unlock instructions
+.page-box.last-box.d-flex.flex-column.justify-content-center.background-p50-grey
+  .container
+    %p.lead.text-center Resend unlock instructions
 
-    = form_with model: resource, as: resource_name, url: unlock_path(resource_name), method: :post, local: true do |form|
-      .form-group
-        = render "layouts/label_or_errors", form: form, object: resource, key: :email
-        = form.email_field :email, autofocus: true, class: "form-control form-control-danger", autocomplete: "off", autocorrect: "off", autocapitalize: "none", spellcheck: "false"
+    .sign-up-form
+      .sign-up-form-title
+        Unlock account
 
-      .form-group.submit-btn-container
-        = form.submit "Resend unlock instructions", class: "btn btn-success btn-block"
+      = form_with model: resource, as: resource_name, url: unlock_path(resource_name), method: :post, local: true do |form|
+        = render "forms/vertical/email_field", form: form, object: resource, key: :email
 
-  .sign-up-form.text-center
-    = render "devise/shared/links"
+        - if resource.errors.any? && resource.errors.messages.keys.include?(:unlock_token) && false
+          %small.form-text.text-danger
+            Your unlock token has expired. Please enter an email to regenerate
+            a new unlock token and URL.
+
+        .form-group.submit-btn-container
+          = form.submit "Resend unlock instructions", class: "btn btn-success btn-block"

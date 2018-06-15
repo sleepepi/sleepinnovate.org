@@ -3,6 +3,8 @@
 ### Enhancements
 - **General Changes**
   - Made reference to brain quizzes more consistent
+  - Logging in with a locked account will now provide a message with a link to
+    the account unlock page
 
 ## 10.0.0 (June 5, 2018)
 
