@@ -1,4 +1,4 @@
-## 10.1.0
+## 10.1.0 (June 15, 2018)
 
 ### Enhancements
 - **General Changes**
