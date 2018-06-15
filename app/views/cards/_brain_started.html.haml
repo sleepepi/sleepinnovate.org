@@ -16,7 +16,7 @@
     .text-center
       %p.card-text
         = link_to "#{ENV["test_my_brain_url"]}?id=#{current_user.subject_code}#{current_user.current_event_brain_code}", class: "btn btn-warning btn-shadow" do
-          Next brain survey
+          Next brain quiz
           %i.fa.fa-caret-right
     = render "cards/brain_keyboard"
 

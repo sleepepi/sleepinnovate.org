@@ -1,5 +1,9 @@
 ## 10.1.0
 
+### Enhancements
+- **General Changes**
+  - Made reference to brain quizzes more consistent
+
 ## 10.0.0 (June 5, 2018)
 
 ### Enhancements
