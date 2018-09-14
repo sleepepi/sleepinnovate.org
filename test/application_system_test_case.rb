@@ -15,13 +15,22 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
   def screenshot(file_name)
     return unless @screenshots_enabled
     @counter += 1
-    relative_location = File.join("tmp", "screenshots", SleepInnovate::VERSION::STRING, "#{file_name}-#{format("%02d", @counter)}.png")
+    relative_location = File.join(
+      "docs",
+      SleepInnovate::VERSION::STRING,
+      "screenshots",
+      "#{file_name}-#{format("%02d", @counter)}.png"
+    )
     page.save_screenshot(Rails.root.join(relative_location))
     # puts "[Screenshot]: #{relative_location}"
   end
 
   def click_form_submit
     find("input[type=submit]").click
+  end
+
+  def click_element(selector)
+    page.execute_script("$(\"#{selector}\").click();")
   end
 
   def complete_profile!(user)
