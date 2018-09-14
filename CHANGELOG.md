@@ -5,6 +5,7 @@
   - Update framework files to resemble Rails 5.2 defaults more closely
   - Add additional sign in button to pledge page
 - **Gem Changes**
+  - Update to bootstrap 4.1.3
   - Remove colorize
 
 ## 10.1.0 (June 15, 2018)

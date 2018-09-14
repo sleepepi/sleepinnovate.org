@@ -3,7 +3,7 @@
 .page-box.last-box.background-p50-grey.center-vertically-xs-sm
   - subject_event = current_user.subject_events.last
   - if subject_event
-    .panel.panel-full-width
+    .panel
       %h1.mb-0= subject_event.name
       - if subject_event.complete?(current_user)
         %div{ style: "margin-left: -20px; margin-right: -20px;" }
