@@ -5,7 +5,7 @@
     %h1= @title
 
     = form_with(model: current_user, url: settings_change_email_path, method: :patch, local: true, id: "email-form") do |form|
-      = render "forms/vertical/password_field", form: form, object: current_user, key: :current_password, autocomplete: "current-password"
+      = render "forms/vertical/password_field", form: form, object: current_user, key: :current_password, autocomplete: "current-password", help_text: "At least <strong>8</strong> characters, including letters <code>a-z</code> and digits <code>0-9</code>.".html_safe
       = render "forms/vertical/email_field", form: form, object: current_user, key: :email, key_name: "New email"
       = render "forms/vertical/email_field", form: form, object: current_user, key: :email_confirmation
 
