@@ -8,6 +8,7 @@
   - Update to bootstrap 4.1.3
   - Update to carrierwave 1.2.3
   - Update to devise 4.5.0
+  - Update to rails 5.2.1
   - Remove colorize
 
 ## 10.1.0 (June 15, 2018)
