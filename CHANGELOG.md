@@ -3,6 +3,7 @@
 ### Enhancements
 - **General Changes**
   - Update framework files to resemble Rails 5.2 defaults more closely
+  - Add additional sign in button to pledge page
 - **Gem Changes**
   - Remove colorize
 

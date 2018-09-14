@@ -41,7 +41,10 @@
       now or in the future. There will be no penalty, and you won't lose any
       benefits you receive now or have a right to receive.
 
-  .text-center
+  .text-center.mb-3
     = link_to enrollment_start_path, method: :post, class: "btn btn-lg btn-success btn-shadow" do
       Read consent
       %i.fa.fa-caret-right
+  .text-center
+    Already have an account?
+    = link_to "Sign in", new_user_session_path
