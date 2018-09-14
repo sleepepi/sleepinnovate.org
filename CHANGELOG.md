@@ -6,6 +6,7 @@
   - Add additional sign in button to pledge page
 - **Gem Changes**
   - Update to bootstrap 4.1.3
+  - Update to carrierwave 1.2.3
   - Remove colorize
 
 ## 10.1.0 (June 15, 2018)
