@@ -4,12 +4,7 @@
       Resend confirmation instructions
 
     = form_with model: resource, as: resource_name, url: confirmation_path(resource_name), method: :post, local: true do |form|
-      .form-group
-        = render "layouts/label_or_errors", form: form, object: resource, key: :email
-        = form.email_field :email, autofocus: true, value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email), class: "form-control form-control-danger", autocorrect: "off", autocapitalize: "none", spellcheck: "false"
+      = render "forms/vertical/email_field", form: form, object: resource, key: :email
 
       .form-group.submit-btn-container
         = form.submit "Resend confirmation instructions", class: "btn btn-success btn-block"
-
-  .sign-up-form.text-center
-    = render "devise/shared/links"
