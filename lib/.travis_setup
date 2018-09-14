@@ -1,11 +1,5 @@
 http://localhost
 SleepINNOVATE
-localhost
-25
-plain
-smtp@example.com
-smtp_username
-smtp_password
 echo /usr/bin/pdflatex
 
 

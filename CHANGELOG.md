@@ -1,5 +1,9 @@
 ## 11.0.0
 
+### Enhancements
+- **General Changes**
+  - Update framework files to resemble Rails 5.2 defaults more closely
+
 ## 10.1.0 (June 15, 2018)
 
 ### Enhancements
