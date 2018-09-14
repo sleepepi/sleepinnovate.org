@@ -42,7 +42,7 @@ namespace :events do
             activations_row[:events] << { event: event.name, days_after_consent: days_after_consent(user) }
           end
         else
-          puts "Activation #{"SKIPPED".colorize(:white)}."
+          puts "Activation #{"SKIPPED".white}."
         end
         if launched && !user.event_completed?(event) && remind_event?(event, user)
           if remind_event!(event, user)
@@ -68,12 +68,12 @@ namespace :events do
   def activate_event?(event, user)
     print "activate_event?(#{event.slug}, #{Subject.remote_subject_code(user)})"
     if user.consented_at.blank?
-      puts " => #{false}".colorize(:red)
+      puts " => #{false}".red
       return false
     end
     activation_date = user.consented_at.to_date + event.month.months
     result = activation_date <= Time.zone.today
-    puts " => #{result}".colorize(result ? :green : :red)
+    puts " => #{result}".send(result ? :green : :red)
     puts "#{days_after_consent(user)} days since consent. Activation needs at least #{(activation_date - user.consented_at.to_date).to_i} days."
     result
   end
@@ -86,7 +86,7 @@ namespace :events do
       user_event = user.user_events.find_by(event: event)
     end
     result = user_event&.activation_email_sent_at.present?
-    puts " => #{result}".colorize(result ? :green : :red)
+    puts " => #{result}".send(result ? :green : :red)
     result
   end
 
@@ -105,7 +105,7 @@ namespace :events do
         false
       end
     else
-      puts "Activateon email #{"SKIPPED".colorize(:white)}."
+      puts "Activateon email #{"SKIPPED".white}."
       puts "#{event.slug} already activated! No activation email sent."
       false
     end
@@ -114,12 +114,12 @@ namespace :events do
   def remind_event?(event, user)
     print "remind_event?(#{event.slug}, #{Subject.remote_subject_code(user)})"
     if user.consented_at.blank?
-      puts " => #{false}".colorize(:red)
+      puts " => #{false}".red
       return false
     end
     reminder_date = user.consented_at.to_date + event.month.months + 1.week
     result = reminder_date <= Time.zone.today
-    puts " => #{result}".colorize(result ? :green : :red)
+    puts " => #{result}".send(result ? :green : :red)
     puts "#{days_after_consent(user)} days since consent. Reminder needs at least #{(reminder_date - user.consented_at.to_date).to_i} days."
     result
   end
@@ -137,7 +137,7 @@ namespace :events do
         false
       end
     else
-      puts "Reminder email #{"SKIPPED".colorize(:white)}."
+      puts "Reminder email #{"SKIPPED".white}."
       false
     end
   end
