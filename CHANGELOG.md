@@ -1,4 +1,4 @@
-## 11.0.0
+## 11.0.0 (September 17, 2018)
 
 ### Enhancements
 - **General Changes**
