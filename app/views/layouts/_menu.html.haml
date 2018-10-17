@@ -1,4 +1,4 @@
-%nav.navbar.fixed-top.navbar-expand-lg.navbar-light.background-p100-grey
+%nav.navbar.navbar-expand-lg.navbar-light.background-p100-grey
   .container
     = link_to current_user ? dashboard_path : landing_path, class: "navbar-brand" do
       = render "layouts/logo"

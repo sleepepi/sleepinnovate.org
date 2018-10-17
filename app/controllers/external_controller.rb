@@ -83,6 +83,11 @@ class ExternalController < ApplicationController
     end
   end
 
+  # GET /privacy-policy
+  def privacy_policy
+    # render layout: "application"
+  end
+
   # # GET /version
   # # GET /version.json
   # def version

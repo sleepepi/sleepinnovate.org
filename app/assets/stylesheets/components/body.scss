@@ -6,23 +6,15 @@ html {
 body {
   &.full-page {
     margin-bottom: $footer-height;
-    padding-top: $header-height;
   }
 
   &.full-page-no-header {
     margin-bottom: $footer-height;
-    padding-top: 0;
   }
 
   &.full-page-no-header-no-footer {
     margin-bottom: 0;
-    padding-top: 0;
   }
-}
-
-.body-content {
-  padding-bottom: 20px;
-  padding-top: 20px;
 }
 
 $p200-teal-rgba: rgba(128, 203, 196, .99);

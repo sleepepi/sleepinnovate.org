@@ -35,6 +35,7 @@ Rails.application.routes.draw do
     get :contact
     get :clinic, path: "clinic(/:clinic)"
     get :landing
+    get :privacy_policy, path: "privacy-policy"
     get :settings_password_reset, path: "settings/password/reset"
     get :sitemap_xml, path: "sitemap.xml.gz"
     get :version
