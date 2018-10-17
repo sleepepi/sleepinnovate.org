@@ -16,7 +16,7 @@ gem "figaro",               "~> 1.1.1"
 gem "font-awesome-rails",   "~> 4.7.0"
 gem "haml",                 "~> 5.0.4"
 gem "kaminari",             "~> 1.1.1"
-gem "mini_magick",          "~> 4.8.0"
+gem "mini_magick",          "~> 4.9.2"
 gem "redcarpet",            "~> 3.4.0"
 gem "sitemap_generator",    "~> 6.0.0"
 

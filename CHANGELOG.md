@@ -3,6 +3,8 @@
 ### Enhancements
 - **General Changes**
   - Add updated Privacy Policy
+- **Gem Changes**
+  - Update to mini_magick 4.9.2
 
 ## 11.0.0 (September 17, 2018)
 
