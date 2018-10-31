@@ -4,6 +4,9 @@
 - **Survey Changes**
   - Improve survey stability and submission of responses to Slice API
 
+### Bug Fix
+- Fix position of survey progress bar
+
 ## 12.0.0 (October 17, 2018)
 
 ### Enhancements

@@ -13,7 +13,7 @@
 
 - background_class = "background-p50-grey"
 
-.page-box.last-box.center-vertically-xs-sm{ class: background_class }
+.page-box.last-box.center-vertically-xs-sm{ class: background_class, style: "position: relative;" }
   = render "survey/progress_bar", start: start, percent: percent
   .container
     = form_with url: survey_submit_page_path(params[:event], params[:design], @page), method: :patch, local: true, autocomplete: "off", id: "survey-form" do |form|
