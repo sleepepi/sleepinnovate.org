@@ -16,7 +16,8 @@
 .page-box.last-box.center-vertically-xs-sm{ class: background_class }
   = render "survey/progress_bar", start: start, percent: percent
   .container
-    = form_with(url: survey_submit_page_path(params[:event], params[:design], @page), method: :patch, local: true, autocomplete: "off", id: "survey-form") do |form|
+    = form_with url: survey_submit_page_path(params[:event], params[:design], @page), method: :patch, local: true, autocomplete: "off", id: "survey-form" do |form|
+      = form.hidden_field :design_option_id, value: @json.dig("design_option_id")
       = form.hidden_field :review, value: params[:review] || 0
       - if @section
         = render "survey/section", section: @section

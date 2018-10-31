@@ -63,7 +63,6 @@ class User < ApplicationRecord
   delegate :subject_code, to: :subject
   delegate :launch_survey!, to: :subject
   delegate :next_survey, to: :subject
-  delegate :start_event_survey, to: :subject
   delegate :resume_event_survey, to: :subject
   delegate :page_event_survey, to: :subject
   delegate :submit_response_event_survey, to: :subject

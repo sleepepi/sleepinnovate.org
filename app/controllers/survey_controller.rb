@@ -10,35 +10,34 @@ class SurveyController < ApplicationController
 
   # GET /survey/:event/:design/start
   def start
-    # @json = current_user.start_event_survey(params[:event], params[:design])
-    # @survey = Survey.new(json: @json)
     survey_in_progress
     redirect_to survey_page_path(params[:event], params[:design], 1)
   end
 
   # GET /survey/:event/:design/:page
   def page
-    @json = current_user.page_event_survey(params[:event], params[:design], @page)
-    @survey = Survey.new(json: @json)
-    if @json.present?
+    (@json, status) = current_user.page_event_survey(params[:event], params[:design], @page)
+    if status.is_a?(Net::HTTPOK) && @json.present?
+      @survey = Survey.new(json: @json)
       @section = Section.new(json: @json.dig("section")) if @json.dig("section").present?
       @variable = Variable.new(json: @json.dig("variable")) if @json.dig("variable").present?
+    else
+      redirect_to survey_review_path(params[:event], params[:design])
     end
-    redirect_to survey_review_path(params[:event], params[:design]) if @json.blank?
   end
 
   # GET /survey/:event/:design/:resume
   def resume
     survey_in_progress
-    @json = current_user.resume_event_survey(params[:event], params[:design])
+    (@json, status) = current_user.resume_event_survey(params[:event], params[:design])
     @survey = Survey.new(json: @json)
-    if @json.blank?
-      redirect_to survey_review_path(params[:event], params[:design])
-    else
+    if status.is_a?(Net::HTTPOK) && @json.present?
       @page = @json.dig("design", "current_page")
       @section = Section.new(json: @json.dig("section")) if @json.dig("section").present?
       @variable = Variable.new(json: @json.dig("variable")) if @json.dig("variable").present?
       render :page
+    else
+      redirect_to survey_review_path(params[:event], params[:design])
     end
   end
 
@@ -61,14 +60,14 @@ class SurveyController < ApplicationController
     else
       value = params[:response]
     end
-    (@json, @status) = current_user.submit_response_event_survey(params[:event], params[:design], @page, value, request.remote_ip)
-    if @status.is_a?(Net::HTTPOK)
+    (@json, status) = current_user.submit_response_event_survey(params[:event], params[:design], @page, params[:design_option_id], value, request.remote_ip)
+    if status.is_a?(Net::HTTPOK)
       if params[:review] == "1"
         redirect_to survey_review_path(params[:event], params[:design])
       else
         redirect_to survey_page_path(params[:event], params[:design], @page + 1)
       end
-    elsif @json
+    elsif status.is_a?(Net::HTTPUnprocessableEntity) && @json.present?
       @section = Section.new(json: @json.dig("section")) if @json.dig("section").present?
       @variable = Variable.new(json: @json.dig("variable")) if @json.dig("variable").present?
       render :page
@@ -79,7 +78,10 @@ class SurveyController < ApplicationController
 
   # GET /survey/:event/:design/review
   def review
-    (@json, @status) = current_user.review_event_survey(params[:event].downcase, params[:design].downcase)
+    (@json, status) = current_user.review_event_survey(params[:event].downcase, params[:design].downcase)
+    unless status.is_a?(Net::HTTPOK) && @json.present?
+      redirect_to dashboard_path, notice: "Surveys are currently unavailable."
+    end
   end
 
   # POST /survey/:event/:design/review
