@@ -30,8 +30,8 @@ class SurveyController < ApplicationController
   def resume
     survey_in_progress
     (@json, status) = current_user.resume_event_survey(params[:event], params[:design])
-    @survey = Survey.new(json: @json)
     if status.is_a?(Net::HTTPOK) && @json.present?
+      @survey = Survey.new(json: @json)
       @page = @json.dig("design", "current_page")
       @section = Section.new(json: @json.dig("section")) if @json.dig("section").present?
       @variable = Variable.new(json: @json.dig("variable")) if @json.dig("variable").present?
