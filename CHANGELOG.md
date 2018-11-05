@@ -1,4 +1,4 @@
-## 13.0.0
+## 13.0.0 (November 5, 2018)
 
 ### Enhancements
 - **Survey Changes**
