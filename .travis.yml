@@ -1,7 +1,7 @@
 sudo: false
 language: ruby
 rvm:
-- 2.5.1
+- 2.5.3
 - ruby-head
 gemfile: "gems.rb"
 before_install: gem install bundler --no-document

@@ -3,6 +3,8 @@
 ### Enhancements
 - **Consent Changes**
   - Update consent form
+- **Gem Changes**
+  - Update to ruby 2.5.3
 
 ## 13.0.0 (November 5, 2018)
 
