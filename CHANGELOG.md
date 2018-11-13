@@ -1,5 +1,9 @@
 ## 14.0.0
 
+### Enhancements
+- **Consent Changes**
+  - Update consent form
+
 ## 13.0.0 (November 5, 2018)
 
 ### Enhancements

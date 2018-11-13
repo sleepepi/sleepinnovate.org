@@ -33,6 +33,10 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
     page.execute_script("$(\"#{selector}\").click();")
   end
 
+  def scroll_down
+    page.execute_script("window.scrollBy(0, $(window).height());")
+  end
+
   def complete_profile!(user)
     user.update(date_of_birth: "1984-12-31", address: "123 Road Way, City, ST 12345")
     user.save_signature!(IO.readlines(File.join("test", "support", "signatures", "data_uri.txt")).first)

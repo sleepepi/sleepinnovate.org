@@ -1,50 +1,12 @@
-%h2
-  Informed Consent and Authorization
-
-%h3
-  Statement of Person Giving Informed Consent and Authorization
-
-%ul
-  %li
-    I have read this consent form.
-  %li
-    This research study has been explained to me, including risks and possible
-    benefits (if any), other possible treatments or procedures, and other
-    important things about the study.
-  %li
-    I have had the opportunity to ask questions.
-  %li
-    I understand the information given to me.
-
-%h3 Consent of Subject:
-
 - if !current_user || (current_user && current_user.unconsented?)
   = form_with url: enrollment_consent_path, method: :post, local: true, id: "consent-form" do |form|
-    .form-group.mb-5.consent-checkbox
-      .custom-control.custom-checkbox
-        = form.check_box :read_consent, class: "custom-control-input", id: "read_consent"
-        = form.label :read_consent, for: :read_consent, class: "custom-control-label" do
-          I give my consent to take part in this research study and agree to allow my health information to be used and shared as described above.
-    .row
-      .col
-        .d-none.d-md-block
-          = render "consent/i_do_not_consent_checkbox", size: "btn-lg"
-        .d-block.d-md-none
-          = render "consent/i_do_not_consent_checkbox", size: ""
-      .col
-        .text-right
-          .d-none.d-md-block
-            = render "consent/i_consent_checkbox", size: "btn-lg"
-          .d-block.d-md-none
-            = render "consent/i_consent_checkbox", size: ""
+    .d-none.d-md-block.text-center
+      = render "consent/i_consent_checkbox", size: "btn-lg"
+    .d-block.d-md-none.text-center
+      = render "consent/i_consent_checkbox", size: ""
 - else
   -# This will also show for current users who have revoked consent, but the consent box will be unchecked.
   - consented = current_user.consented?
-  .consent-checkbox
-    .custom-control.custom-checkbox
-      = check_box_tag :read_consent, "1", consented, class: "custom-control-input", id: "read_consent", disabled: "true"
-      = label_tag :read_consent, class: "custom-control-label" do
-        I give my consent to take part in this research study and agree to allow my health information to be used and shared as described above.
 
 - if current_user
   - if current_user.refused?
