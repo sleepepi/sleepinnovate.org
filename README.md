@@ -15,13 +15,6 @@ etc.
 
 [Install ImageMagick](https://github.com/nsrr/www.sleepdata.org#installing-mini-magick---image-upload-resizing)
 
-Once you have the prerequisites in place, you can proceed to install bundler
-which will handle most of the remaining dependencies.
-
-```
-gem install bundler --no-document
-```
-
 This readme assumes the following installation directory: /var/www/sleepinnovate.org
 
 ```
