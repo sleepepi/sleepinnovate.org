@@ -1,4 +1,4 @@
-## 15.0.0
+## 15.0.0 (January 3, 2019)
 
 ### Enhancements
 - **Email Changes**
