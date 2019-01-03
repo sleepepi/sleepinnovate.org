@@ -1,6 +1,8 @@
 ## 15.0.0
 
 ### Enhancements
+- **Email Changes**
+  - Password reset emails now include SleepINNOVATE in the subject line
 - **Gem Changes**
   - Update to ruby 2.6.0
   - Update to rails 5.2.2
