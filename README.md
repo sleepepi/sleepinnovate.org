@@ -1,6 +1,6 @@
 # SleepINNOVATE (https://sleepinnovate.org)
 
-[![Build Status](https://travis-ci.org/sleepepi/sleepinnovate.org.svg?branch=master)](https://travis-ci.org/sleepepi/sleepinnovate.org)
+[![Build Status](https://travis-ci.com/sleepepi/sleepinnovate.org.svg?branch=master)](https://travis-ci.com/sleepepi/sleepinnovate.org)
 [![Code Climate](https://codeclimate.com/github/sleepepi/sleepinnovate.org/badges/gpa.svg)](https://codeclimate.com/github/sleepepi/sleepinnovate.org)
 
 Website for the [SleepINNOVATE](https://sleepinnovate.org) project.
