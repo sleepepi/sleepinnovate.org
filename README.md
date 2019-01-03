@@ -41,10 +41,10 @@ rails assets:precompile RAILS_ENV=production
 Run Rails Server (or use Apache or nginx)
 
 ```
-rails s -p80
+rails s
 ```
 
-Open a browser and go to: [http://localhost](http://localhost)
+Open a browser and go to: http://localhost:3000
 
 All done!
 
