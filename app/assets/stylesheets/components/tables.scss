@@ -5,7 +5,8 @@
   th {
     background-color: $p50-grey;
     position: sticky;
-    top: $header-height - 1px;
+    // top: $header-height - 1px;
+    top: 0; // Header isn't sticky.
     z-index: $zindex-sticky;
   }
 
