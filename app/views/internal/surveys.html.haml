@@ -51,13 +51,13 @@
                 - if event_design.percent.to_i.zero?
                   = link_to survey_start_path(event_design.event_slug, event_design.design_slug), data: { object: "disable-spinner" } do
                     Start
-                    %i.fa.fa-caret-right
+                    = icon("fas", "caret-right")
                 - else
                   = link_to survey_resume_path(event_design.event_slug, event_design.design_slug) do
                     Resume
-                    %i.fa.fa-caret-right
+                    = icon("fas", "caret-right")
               - else
                 = link_to survey_review_path(event_design.event_slug, event_design.design_slug), data: { object: "disable-spinner" } do
                   Review
-                  %i.fa.fa-caret-right
+                  = icon("fas", "caret-right")
             .clearfix

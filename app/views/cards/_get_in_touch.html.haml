@@ -1,12 +1,12 @@
 .card
   .card-body
     .text-center{ style: "font-size: 6rem;" }
-      %i.fa.fa-comments.text-primary
+      = icon("fas", "comments", class: "text-primary")
     %h4.card-title Contact Us
     %p.card-text
       .card-information Questions, need help?
     .text-center
       %p.card-text
         = link_to contact_path, class: "btn btn-outline-dark" do
-          %i.fa.fa-envelope
+          = icon("fas", "envelope")
           Get in touch

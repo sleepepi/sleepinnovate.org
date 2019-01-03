@@ -12,17 +12,13 @@
       with a few easy questions:
 
     = form_with url: profile_complete_submit_path, method: :patch, local: true, id: "profile-form" do |form|
-      .panel-icon.boston-color
-        %i.fa.fa-birthday-cake
-
+      .panel-icon.boston-color= icon("fas", "birthday-cake")
       = render "profile/date_of_birth_input", form: form
 
-      .panel-icon.sleep-color
-        %i.fa.fa-home
-
+      .panel-icon.sleep-color= icon("fas", "home")
       = render "profile/address_input", form: form
 
   .text-center
     = link_to "#", class: "btn btn-lg btn-success btn-shadow", data: { object: "submit", target: "#profile-form"  } do
       Confirm identity
-      %i.fa.fa-caret-right
+      = icon("fas", "caret-right")

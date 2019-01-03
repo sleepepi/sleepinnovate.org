@@ -1,12 +1,12 @@
 .card
   .card-body
     .text-center{ style: "font-size: 6rem;" }
-      %i.fa.fa-book.text-muted
+      = icon("fas", "book", class: "text-muted")
     %h4.card-title Review Consents
     %p.card-text
       .card-information View, print, or change your consents.
     .text-center
       %p.card-text
         = link_to settings_consents_path, class: "btn btn-outline-dark" do
-          %i.fa.fa-book
+          = icon("fas", "book")
           See my consents

@@ -19,36 +19,36 @@
             %td
               - if user.admin?
                 = link_to admin_user_path(user), class: "text-success" do
-                  %i.fa.fa-user-md
+                  = icon("fas", "user-md")
                   = user.full_name
               - elsif user.refused?
                 = link_to admin_user_path(user), class: "small text-muted" do
-                  %i.fa.fa-street-view
+                  = icon("fas", "street-view")
                   Subject refused to join study
               - elsif user.withdrawn?
                 - if Subject.remote_subject_code(user).present?
                   = link_to admin_user_path(user), class: "text-muted" do
-                    %i.fa.fa-street-view
+                    = icon("fas", "street-view")
                     = Subject.remote_subject_code(user)
                   %small.text-muted Subject withdrew from study
                 - else
                   = link_to admin_user_path(user), class: "small text-muted" do
-                    %i.fa.fa-street-view
+                    = icon("fas", "street-view")
                     Subject withdrew from study
               - elsif Subject.remote_subject_code(user).present?
                 = link_to admin_user_path(user) do
-                  %i.fa.fa-bed{ title: "Sleep" }
+                  = icon("fas", "bed")
                   = Subject.remote_subject_code(user)
               - elsif user.unconsented?
                 = link_to admin_user_path(user), class: "small text-muted" do
-                  %i.fa.fa-user-secret
+                  = icon("fas", "user-secret")
                   Subject has not yet consented
               - else
                 = link_to admin_user_path(user), class: "small text-muted" do
-                  %i.fa.fa-user-secret
+                  = icon("fas", "user-secret")
                   Subject code unassigned
               - if user.tester?
-                %i.fa.fa-magic{ data: { toggle: "tooltip", title: "Tester" } }
+                = icon("fas", "magic", data: { toggle: "tooltip", title: "Tester" })
             %td.text-center= simple_check user.consented?
 
     .d-flex.justify-content-center= paginate @users, theme: "bootstrap"

@@ -1,13 +1,13 @@
 = succeed " " do
   = link_to admin_users_path, class: "btn btn-link btn-sm" do
-    %i.fa.fa-caret-left
+    = icon("fas", "caret-left")
     Users
 = succeed " " do
   = link_to edit_admin_user_path(user), class: "btn btn-outline-dark btn-sm" do
-    %i.fa.fa-pencil
+    = icon("fas", "pencil-alt")
     Edit
 - if user.subject_code.present?
   = succeed " " do
     = link_to "#{ENV["slice_url"]}/projects/#{ENV["project_id"]}/subjects/#{user.slice_subject_id}", class: "btn btn-outline-dark btn-sm" do
-      %i.fa.fa-link
+      = icon("fas", "link")
       View in Slice

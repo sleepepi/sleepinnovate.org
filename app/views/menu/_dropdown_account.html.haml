@@ -1,78 +1,52 @@
 - if !current_user.admin? && current_user.consent_revoked?
   %li.nav-item
-    = link_to destroy_user_session_path, method: :delete, class: "nav-link" do
-      %i.fa.fa-sign-out
-      Sign out
+    = link_to "Sign out", destroy_user_session_path, method: :delete, class: "nav-link"
 - else
   %li.nav-item.dropdown.d-none.d-lg-block
     = link_to "#", data: { toggle: "dropdown" }, aria: { haspopup: "true", expanded: "false" }, class: "nav-link dropdown-toggle", id: "navbarDropdownMenuLink" do
       = render "menu/user_name"
     .dropdown-menu.dropdown-menu-right{ aria: { labelledby: "navbarDropdownMenuLink" } }
       - if @survey
-        = link_to dashboard_path, class: "dropdown-item" do
-          %i.fa.fa-home
-          Dashboard
+        = link_to "Dashboard", dashboard_path, class: "dropdown-item"
+        = link_to "Consent", consent_path, class: "dropdown-item"
 
-        = link_to consent_path, class: "dropdown-item" do
-          %i.fa.fa-file-text-o
-          Consent
+      = link_to "Settings", settings_path, class: "dropdown-item"
 
-      = link_to settings_path, class: "dropdown-item" do
-        %i.fa.fa-cogs
-        Settings
       - if current_user.consented? && !current_user.first_login?
-        = link_to surveys_path, class: "dropdown-item" do
-          %i.fa.fa-tasks
-          Surveys
+        = link_to "Surveys", surveys_path, class: "dropdown-item"
       .dropdown-divider
       - if current_user.admin?
-        = link_to admin_users_path, class: "dropdown-item dropdown-item-success" do
-          %i.fa.fa-user-md
-          Admin
+        = link_to "Admin", admin_users_path, class: "dropdown-item dropdown-item-success"
         .dropdown-divider
-      = link_to destroy_user_session_path, method: :delete, class: "dropdown-item" do
-        %i.fa.fa-sign-out
-        Sign out
+      = link_to "Sign out", destroy_user_session_path, method: :delete, class: "dropdown-item"
 
   - if @survey
     %li.nav-item.d-lg-none{ class: current_page?(dashboard_path) ? "active" : nil }
-      = link_to dashboard_path, class: "nav-link" do
-        %i.fa.fa-home
-        Dashboard
+      = link_to "Dashboard", dashboard_path, class: "nav-link"
       - if current_page?(dashboard_path)
         %span.sr-only (current)
 
     %li.nav-item.d-lg-none{ class: current_page?(consent_path) ? "active" : nil }
-      = link_to consent_path, class: "nav-link" do
-        %i.fa.fa-file-text-o
-        Consent
+      = link_to "Consent", consent_path, class: "nav-link"
       - if current_page?(consent_path)
         %span.sr-only (current)
 
   %li.nav-item.d-lg-none{ class: current_page?(settings_path) ? "active" : nil }
-    = link_to settings_path, class: "nav-link" do
-      %i.fa.fa-cogs
-      Settings
+    = link_to "Settings", settings_path, class: "nav-link"
     - if current_page?(settings_path)
       %span.sr-only (current)
 
   - if current_user.consented? && !current_user.first_login?
     %li.nav-item.d-lg-none{ class: current_page?(surveys_path) ? "active" : nil }
-      = link_to surveys_path, class: "nav-link" do
-        %i.fa.fa-tasks
-        Surveys
+      = link_to "Surveys", surveys_path, class: "nav-link"
       - if current_page?(surveys_path)
         %span.sr-only (current)
 
   - if current_user.admin?
     %li.nav-item.d-lg-none{ class: current_page?(admin_users_path) ? "active" : nil }
-      = link_to admin_users_path, class: "nav-link text-success" do
-        %i.fa.fa-user-md
-        Admin
+      = link_to "Admin", admin_users_path, class: "nav-link text-success"
       - if current_page?(admin_users_path)
         %span.sr-only (current)
 
   %li.nav-item.d-lg-none
-    = link_to destroy_user_session_path, method: :delete, class: "nav-link" do
-      %i.fa.fa-sign-out
-      Sign out
+    = link_to "Sign out", destroy_user_session_path, method: :delete, class: "nav-link"

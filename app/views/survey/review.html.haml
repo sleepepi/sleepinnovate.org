@@ -34,7 +34,7 @@
 
         .mt-3.small
           = link_to survey_page_path(params[:event], params[:design], page, review: "1") do
-            %i.fa.fa-pencil
+            = icon("fas", "pencil-alt")
             - if my_response.present?
               Change response
             - else
@@ -79,9 +79,9 @@
       - if first_page.present?
         = succeed " " do
           = link_to survey_page_path(params[:event], params[:design], first_page, review: "1"), class: "btn btn-link" do
-            %i.fa.fa-caret-left
+            = icon("fas", "caret-left")
             Return to survey
 
       = link_to survey_complete_path(params[:event], params[:design]), method: :post, class: "btn btn-success btn-shadow", data: { object: "disable-spinner" } do
         Continue
-        %i.fa.fa-caret-right
+        = icon("fas", "caret-right")

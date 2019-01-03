@@ -12,7 +12,7 @@
             - unless current_user.event_surveys_total(event).zero?
               - if current_user.event_surveys_total(event) == current_user.event_surveys_total(event)
                 %li.small
-                  %i.fa.fa-check-square-o.text-success
+                  = icon("far", "check-square", class: "text-success")
                   = event.name
                   = surround "[", "]" do
                     = current_user.event_surveys_completed(event)
@@ -21,7 +21,7 @@
                     completed
               - else
                 %li.small.text-muted
-                  %i.fa.fa-square-o
+                  = icon("far", "square")
                   = event.name
                   = surround "[", "]" do
                     = current_user.event_surveys_completed(event)

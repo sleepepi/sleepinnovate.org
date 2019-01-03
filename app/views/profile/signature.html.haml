@@ -19,7 +19,7 @@
       #signature-pad.signature-form
         .float-right{ style: "padding-right: 20px;margin-top: -10px;" }
           = link_to "#", data: { action: "clear" }, class: "small" do
-            %i.fa.fa-eraser
+            = icon("fas", "eraser")
             %span Clear
             %span.d-none.d-sm-inline Signature
         .m-signature-pad
@@ -37,4 +37,4 @@
   .text-center
     = link_to "#", class: "btn btn-lg btn-success btn-shadow", data: { object: "submit-signature", target: "#profile-form"  } do
       Finish enrollment
-      %i.fa.fa-caret-right
+      = icon("fas", "caret-right")

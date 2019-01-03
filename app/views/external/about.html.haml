@@ -26,8 +26,8 @@
     - if current_user
       = link_to dashboard_path, class: "btn btn-lg btn-success btn-shadow" do
         My dashboard
-        %i.fa.fa-caret-right
+        = icon("fas", "caret-right")
     - else
       = link_to pledge_path, class: "btn btn-lg btn-success btn-shadow" do
         Get started
-        %i.fa.fa-caret-right
+        = icon("fas", "caret-right")

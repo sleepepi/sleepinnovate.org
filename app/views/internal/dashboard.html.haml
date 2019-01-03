@@ -44,7 +44,7 @@
       .text-center
         = link_to destroy_user_session_path, method: :delete, class: "btn btn-lg btn-success" do
           Start new session
-          %i.fa.fa-caret-right
+          = icon("fas", "caret-right")
     - elsif current_user.withdrawn?
       .jumbotron.jumbotron-white
         %h2 Withdrawn from Study
@@ -62,7 +62,7 @@
       .text-center
         = link_to destroy_user_session_path, method: :delete, class: "btn btn-lg btn-success" do
           Start new session
-          %i.fa.fa-caret-right
+          = icon("fas", "caret-right")
     - elsif current_user.unconsented?
       .jumbotron.jumbotron-white
         %h2 Consent to study
@@ -113,7 +113,7 @@
       .my-5
         - if current_user.parking_voucher? && session[:clinic].present?
           %p.lead.text-center
-            %i.fa.fa-car
+            = icon("fas", "car")
             Redeem your
             = succeed "." do
               = link_to "parking voucher", parking_path

@@ -11,11 +11,8 @@
         %ul.navbar-nav.mr-auto
           - if @survey
             %li.nav-item.active
-              = link_to "#", class: "nav-link", data: { object: "suppress-click" } do
-                %i.fa.fa-heartbeat.d-inline.d-lg-none
-                = @survey.name || "Survey"
+              = link_to @survey.name || "Survey", "#", class: "nav-link", data: { object: "suppress-click" }
               %span.sr-only (current)
-
           - else
             = render "menu/item", title: "Dashboard", path: dashboard_path, icon: "home"
             = render "menu/item", title: "Consent", path: consent_path, icon: "file-text-o" unless current_user.consent_revoked?
@@ -23,20 +20,17 @@
           - if current_user.parking_voucher? && session[:clinic].present?
             %li.nav-item{ class: current_page?(parking_path) ? "active" : nil }
               = link_to parking_path, class: "nav-link d-block d-lg-none" do
-                %i.fa.fa-car
+                = icon("fas", "car")
                 Parking
               = link_to parking_path, class: "nav-link text-primary d-none d-lg-block" do
-                %i.fa.fa-car
+                = icon("fas", "car")
               - if current_page?(parking_path)
                 %span.sr-only (current)
-
 
           = render "menu/dropdown_account"
     - else
       %ul.navbar-nav
         %li.nav-item{ class: current_page?(new_user_session_path) ? "active" : nil }
-          = link_to new_user_session_path, class: "nav-link" do
-            %i.fa.fa-lock
-            Sign in
+          = link_to "Sign in", new_user_session_path, class: "nav-link"
           - if current_page?(new_user_session_path)
             %span.sr-only (current)

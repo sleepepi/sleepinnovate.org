@@ -1,7 +1,7 @@
 .card{ class: current_user.highlight_biobank? ? "card-biobank-focus" : nil }
   .card-body
     .text-center{ style: "font-size: 6rem;" }
-      %i.fa.fa-database.text-primary
+      = icon("fas", "database", class: "text-primary")
     %h4.card-title Biobank
     .progress
       .progress-bar.progress-bar-striped.bg-primary{ role: "progressbar", style: "width: 50%;", aria: { valuenow: "50", valuemin: "0", valuemax: "100" } }
@@ -11,7 +11,7 @@
       %p.card-text
         = link_to biobank_start_path, method: :post, class: "btn btn-primary btn-shadow" do
           Go to Biobank
-          %i.fa.fa-caret-right
+          = icon("fas", "caret-right")
   .card-footer
     .overflow-hidden.nowrap.text-muted.small
       = link_to "I've completed Biobank registration.", biobank_complete_path, method: :post

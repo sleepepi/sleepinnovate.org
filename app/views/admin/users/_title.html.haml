@@ -1,20 +1,20 @@
 - if user.admin?
   %h1
-    %i.fa.fa-user-md
+    = icon("fas", "user-md")
     = user.full_name
 - elsif user.consent_revoked?
   %h1
-    %i.fa.fa-street-view
+    = icon("fas", "street-view")
     Subject
 - elsif user.unconsented?
   %h1
-    %i.fa.fa-user-secret
+    = icon("fas", "user-secret")
     Subject
 - elsif user.subject_code.present?
   %h1
-    %i.fa.fa-bed{ title: "Sleep" }
+    = icon("fas", "bed")
     = user.subject_code
 - else
   %h1
-    %i.fa.fa-user-secret
+    = icon("fas", "user-secret")
     Subject

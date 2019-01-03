@@ -10,8 +10,7 @@
           at
           %span.badge.badge-light= @clinic
         %sup
-          = link_to "#info", data: { object: "scroll-anchor" }, class: "link-muted" do
-            %i.fa.fa-asterisk
+          = link_to icon("fas", "asterisk"), "#info", data: { object: "scroll-anchor" }, class: "link-muted"
       .display-1= number_with_delimiter user_scope.count
 
     - unless @clinic.present?
@@ -59,8 +58,7 @@
 
     #info.jumbotron.jumbotron-white
       .small.text-muted
-        %sup
-          %i.fa.fa-asterisk
+        %sup= icon("fas", "asterisk")
         %strong Total Consented
         does NOT include users who have withdrawn from the
         = render "layouts/logo"

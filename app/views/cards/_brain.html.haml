@@ -1,7 +1,7 @@
 .card{ class: current_user.highlight_brain? ? "card-brain-focus" : nil }
   .card-body
     .text-center{ style: "font-size: 6rem;" }
-      %i.fa.fa-lightbulb-o.text-warning
+      = icon("far", "lightbulb", class: "text-warning")
     %h4.card-title Brain Quizzes
     - if current_user.brain_percent(current_user.current_event).to_i.zero?
       .progress
@@ -17,5 +17,5 @@
       %p.card-text
         = link_to test_my_brain_start_path, method: :post, class: "btn btn-warning btn-shadow" do
           Start quizzes
-          %i.fa.fa-caret-right
+          = icon("fas", "caret-right")
     = render "cards/brain_keyboard"

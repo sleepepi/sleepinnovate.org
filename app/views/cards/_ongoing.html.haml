@@ -5,7 +5,7 @@
 .card.card-surveys-focus
   .card-body
     .text-center{ style: "font-size: 6rem;" }
-      %i.fa.fa-tasks.text-success
+      = icon("fas", "tasks", class: "text-success")
 
     %h4.card-title
       = subject_event.name
@@ -29,10 +29,10 @@
         - if event_design.valid?
           = link_to survey_resume_path(event_design.event_slug, event_design.design_slug), class: "btn btn-success btn-shadow" do
             Continue survey
-            %i.fa.fa-caret-right
+            = icon("fas", "caret-right")
         - else
           .btn.btn-success.btn-shadow.disabled
-            %i.fa.fa-exclamation-triangle
+            = icon("fas", "exclamation-triangle")
             Survey Unavailable
 
     - else
@@ -50,10 +50,10 @@
         - if event_design.valid?
           = link_to survey_start_path(event_design.event_slug, event_design.design_slug), class: "btn btn-success btn-shadow", data: { object: "disable-spinner" } do
             Start survey
-            %i.fa.fa-caret-right
+            = icon("fas", "caret-right")
         - else
           .btn.btn-success.btn-shadow.disabled
-            %i.fa.fa-exclamation-triangle
+            = icon("fas", "exclamation-triangle")
             Survey unavailable
   - if event_design.valid?
     .card-footer

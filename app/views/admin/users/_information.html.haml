@@ -4,7 +4,7 @@
       Subject refused to join study.
       = succeed "." do
         = link_to unrevoke_admin_user_path(user), method: :post, data: { confirm: "Undo study refusal?" } do
-          %i.fa.fa-undo
+          = icon("fas", "undo")
           Undo study refusal
           %span>
 - elsif user.withdrawn?
@@ -13,7 +13,7 @@
       Subject withdrew from study.
       = succeed "." do
         = link_to unrevoke_admin_user_path(user), method: :post, data: { confirm: "Undo study withdrawal?" } do
-          %i.fa.fa-undo
+          = icon("fas", "undo")
           Undo study withdrawal
           %span>
 - elsif user.unconsented?
@@ -26,7 +26,7 @@
       Subject code unassigned.
       = succeed "." do
         = link_to assign_subject_admin_user_path(user), method: :post do
-          %i.fa.fa-user-plus
+          = icon("fas", "user-plus")
           Assign subject code
           %span>
 
