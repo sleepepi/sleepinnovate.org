@@ -5,7 +5,7 @@
 
 Website for the [SleepINNOVATE](https://sleepinnovate.org) project.
 
-Running on Rails 5.2+ and Ruby 2.6+.
+Running on Rails 6.0+ and Ruby 2.6+.
 
 ## Installation
 

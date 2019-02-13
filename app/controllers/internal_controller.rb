@@ -69,13 +69,13 @@ class InternalController < ApplicationController
   # POST /test-my-brain/start
   def test_my_brain_start
     current_user.test_my_brain_started!
-    redirect_to "#{ENV["test_my_brain_url"]}?id=#{current_user.subject_code}#{current_user.current_event_brain_code}"
+    redirect_to "#{ENV["test_my_brain_url"]}?id=#{current_user.subject_code}#{current_user.current_event_brain_code}", allow_other_host: true
   end
 
   # POST /biobank/start
   def biobank_start
     current_user.biobank_registration_started!
-    redirect_to ENV["biobank_url"]
+    redirect_to ENV["biobank_url"], allow_other_host: true
   end
 
   # POST /biobank/complete
