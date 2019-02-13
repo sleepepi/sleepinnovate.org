@@ -52,6 +52,9 @@ class User < ApplicationRecord
 
   # Uploaders
   mount_uploader :signature, SignatureUploader
+  mount_uploader :consent_latest_pdf, PDFUploader
+  mount_uploader :consent_original_pdf, PDFUploader
+  mount_uploader :overview_report_pdf, PDFUploader
 
   # Relationships
   has_many :brain_tests
@@ -275,6 +278,10 @@ class User < ApplicationRecord
     nil
   end
 
+  def initials
+    full_name.split(/[^a-zA-Z]/).collect(&:first).join("")
+  end
+
   def send_welcome_email_in_background(token)
     fork_process(:send_welcome_email, token)
   end
@@ -289,24 +296,6 @@ class User < ApplicationRecord
 
   def send_consent_pdf_email
     ConsentMailer.consent_pdf_email(self).deliver_now if EMAILS_ENABLED
-  end
-
-  def self.latex_partial(partial)
-    File.read(File.join("app", "views", "latex", "_#{partial}.tex.erb"))
-  end
-
-  def self.generate_printed_pdf!(current_user)
-    jobname = current_user ? "consent_#{current_user.id}" : "consent"
-    output_folder = File.join("tmp", "files", "tex")
-    FileUtils.mkdir_p output_folder
-    file_tex = File.join("tmp", "files", "tex", "#{jobname}.tex")
-    @user = current_user # Needed by Binding
-    File.open(file_tex, "w") do |file|
-      file.syswrite(ERB.new(latex_partial("header")).result(binding))
-      file.syswrite(ERB.new(latex_partial("consent")).result(binding))
-      file.syswrite(ERB.new(latex_partial("footer")).result(binding))
-    end
-    generate_pdf(jobname, output_folder, file_tex)
   end
 
   def at_least_18?(date)
@@ -334,18 +323,74 @@ class User < ApplicationRecord
     file = Tempfile.new("signature.png")
     begin
       encoded_image = data_uri.split(",")[1]
-      decoded_image = Base64.decode64(encoded_image)
+      decoded_image = Base64.decode64(encoded_image.to_s)
       File.open(file, "wb") { |f| f.write(decoded_image) }
       file.define_singleton_method(:original_filename) do
         "signature.png"
       end
       self.signature = file
       save
-    rescue
-      false
     ensure
       file.close
       file.unlink # deletes the temp file
+    end
+  end
+
+  def original_consent
+    consent = Consent.find_by("start_date <= ? and end_date >= ?", consented_at.to_date, consented_at.to_date) if consented_at.present?
+    consent = Consent.find_latest unless consent
+    consent
+  end
+
+  # Print Consent
+  def consent_partial(partial, version: nil)
+    if version
+      File.read(File.join("app", "views", "consents", "v#{version}", "_#{partial}.tex.erb"))
+    else
+      File.read(File.join("app", "views", "consents", "_#{partial}.tex.erb"))
+    end
+  end
+
+  def consent_signature_partial
+    File.read(File.join("app", "views", "consents", "_signature.tex.erb"))
+  end
+
+  def generate_consent_pdf!(history)
+    jobname = "consent"
+    temp_dir = Dir.mktmpdir
+    case history
+    when :latest
+      consent = Consent.find_latest
+    when :original
+      consent = original_consent
+    end
+    return unless consent
+
+    temp_tex = File.join(temp_dir, "#{jobname}.tex")
+    write_tex_file(temp_tex, consent.version.to_s)
+    self.class.compile(jobname, temp_dir, temp_tex)
+    temp_pdf = File.join(temp_dir, "#{jobname}.pdf")
+    if File.exist?(temp_pdf)
+      case history
+      when :latest
+        update consent_latest_pdf: File.open(temp_pdf, "r"), consent_latest_pdf_file_size: File.size(temp_pdf)
+      when :original
+        update consent_original_pdf: File.open(temp_pdf, "r"), consent_original_pdf_file_size: File.size(temp_pdf)
+      end
+    end
+  ensure
+    # Remove the directory.
+    FileUtils.remove_entry temp_dir
+  end
+
+  def write_tex_file(temp_tex, version)
+    # Needed by binding
+    @user = self
+    File.open(temp_tex, "w") do |file|
+      file.syswrite(ERB.new(consent_partial("header", version: version)).result(binding))
+      file.syswrite(ERB.new(consent_partial("consent", version: version)).result(binding))
+      file.syswrite(ERB.new(consent_partial("signature")).result(binding))
+      file.syswrite(ERB.new(consent_partial("footer")).result(binding))
     end
   end
 end

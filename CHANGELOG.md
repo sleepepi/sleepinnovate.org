@@ -1,6 +1,8 @@
 ## 16.0.0
 
 ### Enhancements
+- **Consent Changes**
+  - Add task to export original and latest consents
 - **Gem Changes**
   - Update to ruby 2.6.1
   - Update to rails 6.0.0.beta1

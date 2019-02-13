@@ -11,9 +11,6 @@ Aleksandar Vilenovic, MD - MGH \\
 James E. Mojica, MD - Spaulding \\
 Sponsor: National Heart, Lung, and Blood Institute (NHLBI) of the National Institutes of Health (NIH). \\
 
-
-
-
 \section*{What is the purpose of the research?}
 
 The purpose of the SleepINNOVATE study is to learn more about why patients get
@@ -260,10 +257,3 @@ continue with it, they want to know and can help. \\
 
 We may contact you in the future to get additional information and ask if
 you are interested in joining other research studies. \\
-
-
-<% if @user && !@user.first_login? && @user.consented? %>
-  \textbf{Subject} <%= latex_safe current_user.full_name %> \\
-  \textbf{Date} <%= current_user.consented_at.strftime("%-m/%-d/%Y") %> \\
-  \textbf{Time} <%= current_user.consented_at.strftime("%-l:%M %p") %> \\
-<% end %>

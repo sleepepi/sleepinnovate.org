@@ -1,0 +1,45 @@
+\begin{center}
+  \textbf{Signatures begin on next page}
+\end{center}
+
+\newpage
+
+\begin{addmargin}[1em]{1em}
+  \textbf{Signature}
+  \begin{addmargin}[1em]{1em}
+    <% if @user&.consented_at.present? && @user&.signature.present? %>
+      \begin{figure}[!htpb]
+        \includegraphics[max width=3.5in]{<%= @user.signature.path %>}
+      \end{figure}
+    <% else %>
+      \begin{addmargin}[1em]{1em}
+        \\
+      \end{addmargin}
+      \line(1,0){200}\\
+    <% end %>
+  \end{addmargin}
+
+  \textbf{By (print name)}
+  \begin{addmargin}[1em]{1em}
+    <% if @user&.consented_at.present? %>
+      <%= latex_safe @user.full_name %> \\
+    <% else %>
+      \begin{addmargin}[1em]{1em}
+        \\
+      \end{addmargin}
+      \line(1,0){200}\\
+    <% end %>
+    \\
+  \end{addmargin}
+
+  \textbf{Date}
+  \begin{addmargin}[1em]{1em}
+    <% if @user&.consented_at.present? %>
+      <%= latex_safe @user.consented_at.strftime("%-m/%-d/%Y") %> at <%= @user.consented_at.strftime("%-l:%M %p") %> \\
+    <% else %>
+      \dotuline{~~~~~~~~~/~~~~~~~~/~~~~~~~~~} \\
+      \line(1,0){85}\\
+      \indent\textcolor[gray]{0.5}{MM / DD / YYYY}
+    <% end %>
+  \end{addmargin}
+\end{addmargin}

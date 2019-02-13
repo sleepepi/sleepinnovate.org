@@ -19,8 +19,10 @@ class SliceController < ApplicationController
     redirect_to slice_research_path unless current_user
     variables = promis_disturbance_variables + promis_impairment_variables + meq_variables + wpai_variables + well_being_pcornet_variables + bmi_variables
     @data = @subject.data(variables)
-    pdf_file = Rails.root.join(@subject.generate_overview_report_pdf!(@data))
-    if File.exist?(pdf_file)
+
+    @subject.generate_overview_report_pdf!(@data)
+    pdf_file = @subject.user.overview_report_pdf.path
+    if File.exist?(pdf_file.to_s)
       send_file(pdf_file, filename: "SleepINNOVATESleepReport.pdf", type: "application/pdf", disposition: "inline")
     else
       redirect_to dashboard_path, alert: "Unable to generate PDF at this time."
