@@ -342,19 +342,6 @@ class User < ApplicationRecord
     consent
   end
 
-  # Print Consent
-  def consent_partial(partial, version: nil)
-    if version
-      File.read(File.join("app", "views", "consents", "v#{version}", "_#{partial}.tex.erb"))
-    else
-      File.read(File.join("app", "views", "consents", "_#{partial}.tex.erb"))
-    end
-  end
-
-  def consent_signature_partial
-    File.read(File.join("app", "views", "consents", "_signature.tex.erb"))
-  end
-
   def generate_consent_pdf!(history)
     jobname = "consent"
     temp_dir = Dir.mktmpdir
@@ -367,7 +354,7 @@ class User < ApplicationRecord
     return unless consent
 
     temp_tex = File.join(temp_dir, "#{jobname}.tex")
-    write_tex_file(temp_tex, consent.version.to_s)
+    consent.write_tex_file(temp_tex, user: self)
     self.class.compile(jobname, temp_dir, temp_tex)
     temp_pdf = File.join(temp_dir, "#{jobname}.pdf")
     if File.exist?(temp_pdf)
@@ -381,16 +368,5 @@ class User < ApplicationRecord
   ensure
     # Remove the directory.
     FileUtils.remove_entry temp_dir
-  end
-
-  def write_tex_file(temp_tex, version)
-    # Needed by binding
-    @user = self
-    File.open(temp_tex, "w") do |file|
-      file.syswrite(ERB.new(consent_partial("header", version: version)).result(binding))
-      file.syswrite(ERB.new(consent_partial("consent", version: version)).result(binding))
-      file.syswrite(ERB.new(consent_partial("signature")).result(binding))
-      file.syswrite(ERB.new(consent_partial("footer")).result(binding))
-    end
   end
 end

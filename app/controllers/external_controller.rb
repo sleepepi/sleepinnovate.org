@@ -45,10 +45,16 @@ class ExternalController < ApplicationController
 
   # GET /consent.pdf
   def print_consent
-    if current_user
-      current_user.generate_consent_pdf!(:original)
-      pdf_file = current_user.consent_original_pdf.path
-    end
+    pdf_file = \
+      if current_user
+        current_user.generate_consent_pdf!(:original)
+        current_user.consent_original_pdf.path
+      else
+        consent = Consent.find_latest
+        consent&.cached_or_generate_pdf!
+        consent&.pdf_file&.path
+      end
+
     if File.exist?(pdf_file.to_s)
       send_file(pdf_file, filename: "SleepINNOVATEConsentForm.pdf", type: "application/pdf", disposition: "inline")
     else
