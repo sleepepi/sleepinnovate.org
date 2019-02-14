@@ -1,4 +1,4 @@
-## 16.0.0
+## 16.0.0 (February 14, 2019)
 
 ### Enhancements
 - **Consent Changes**
