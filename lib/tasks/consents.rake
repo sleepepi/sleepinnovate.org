@@ -4,11 +4,11 @@ namespace :consents do
   desc "Initialize consents in database"
   # Update existing cosnet
   task initialize: :environment do
-    Consent.where(version: "1").first_or_create.update(start_date: "2017-09-11", end_date: "2018-02-07")
-    Consent.where(version: "2").first_or_create.update(start_date: "2018-02-08", end_date: "2018-02-20")
-    Consent.where(version: "3").first_or_create.update(start_date: "2018-02-21", end_date: "2018-04-11")
-    Consent.where(version: "4").first_or_create.update(start_date: "2018-04-12", end_date: "2018-11-08")
-    Consent.where(version: "5").first_or_create.update(start_date: "2018-11-09", end_date: nil)
+    Consent.where(version: "1").first_or_create.update(start_date: "2017-09-11", end_date: "2018-02-10")
+    Consent.where(version: "2").first_or_create.update(start_date: "2018-02-11", end_date: "2018-02-28")
+    Consent.where(version: "3").first_or_create.update(start_date: "2018-03-01", end_date: "2018-04-17")
+    Consent.where(version: "4").first_or_create.update(start_date: "2018-04-18", end_date: "2018-11-15")
+    Consent.where(version: "5").first_or_create.update(start_date: "2018-11-16", end_date: nil)
   end
 
   desc "Export consents in PDF format."
