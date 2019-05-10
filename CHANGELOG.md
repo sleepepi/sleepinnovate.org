@@ -5,6 +5,7 @@
   - Update to ruby 2.6.3
   - Update to rails 6.0.0.beta3
   - Update to devise 4.6.2
+  - Update to font-awesome-sass 5.8.1
 
 ## 16.0.0 (February 14, 2019)
 
