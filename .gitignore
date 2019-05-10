@@ -42,7 +42,6 @@
 # Configuration
 
 /config/application.yml
-/config/database.yml
 
 # Generated
 
