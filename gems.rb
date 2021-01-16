@@ -18,7 +18,7 @@ gem "font-awesome-sass",          "~> 5.12.0"
 gem "haml",                       "~> 5.2.1"
 gem "kaminari",                   "~> 1.2.1"
 gem "mini_magick",                "~> 4.11.0"
-gem "redcarpet",                  "~> 3.4.0"
+gem "redcarpet",                  "~> 3.5.1"
 gem "sitemap_generator",          "~> 6.0.2"
 
 # Rails defaults.

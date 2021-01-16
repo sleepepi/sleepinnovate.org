@@ -12,6 +12,7 @@
   - Update to haml 5.2.1
   - Update to kaminari 1.2.1
   - Update to mini_magick 4.11.0
+  - Update to redcarpet 3.5.1
 
 ## 17.0.0 (May 10, 2019)
 
