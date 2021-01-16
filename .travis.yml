@@ -1,6 +1,7 @@
 language: ruby
 rvm:
 - 2.6.3
+- 3.0.0
 - ruby-head
 gemfile: "gems.rb"
 addons:
