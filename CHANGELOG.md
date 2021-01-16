@@ -7,6 +7,7 @@
   - Update to bootstrap 4.4.1
   - Update to carrierwave 2.1.0
   - Update to devise 4.7.3
+  - Update to figaro 1.2.0
 
 ## 17.0.0 (May 10, 2019)
 
