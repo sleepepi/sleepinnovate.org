@@ -10,6 +10,7 @@
   - Update to figaro 1.2.0
   - Update to font-awesome-sass 5.12.0
   - Update to haml 5.2.1
+  - Update to kaminari 1.2.1
 
 ## 17.0.0 (May 10, 2019)
 
