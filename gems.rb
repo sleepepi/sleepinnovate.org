@@ -3,7 +3,7 @@
 # rubocop:disable Layout/ExtraSpacing
 source "https://rubygems.org"
 
-gem "rails",                      "6.0.0.beta3"
+gem "rails",                      "6.0.3.4"
 
 # PostgreSQL as the Active Record database.
 gem "pg",                         "1.1.4"
@@ -22,13 +22,12 @@ gem "redcarpet",                  "~> 3.4.0"
 gem "sitemap_generator",          "~> 6.0.2"
 
 # Rails defaults.
-gem "coffee-rails",               "~> 4.2"
-gem "sass-rails",                 "~> 5.0"
-gem "uglifier",                   ">= 1.3.0"
-
-gem "jbuilder",                   "~> 2.5"
-gem "jquery-rails",               "~> 4.3.3"
+gem "coffee-rails",               "~> 5.0"
+gem "jbuilder",                   "~> 2.9"
+gem "jquery-rails",               "~> 4.3.5"
+gem "sass-rails",                 "~> 5"
 gem "turbolinks",                 "~> 5"
+gem "uglifier",                   ">= 1.3.0"
 
 group :development do
   gem "listen",                   ">= 3.0.5", "< 3.2"

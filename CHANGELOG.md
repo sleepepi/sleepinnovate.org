@@ -1,5 +1,9 @@
 ## 18.0.0
 
+### Enhancements
+- **Gem Changes**
+  - Update to rails 6.0.3.4
+
 ## 17.0.0 (May 10, 2019)
 
 ### Enhancements
