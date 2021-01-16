@@ -1,6 +1,8 @@
 ## 18.0.0 (January 16, 2021)
 
 ### Enhancements
+- **Consent Changes**
+  - Update information under "How will sensitive information be handled and kept confidential and secure?"
 - **Gem Changes**
   - Update to rails 6.0.3.4
   - Update to pg 1.2.3
