@@ -10,7 +10,7 @@ class Consent < ApplicationRecord
 
   # Methods
   def self.find_latest
-    find_by end_date: nil
+    order(:version).last
   end
 
   def cached_or_generate_pdf!
