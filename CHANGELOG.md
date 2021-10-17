@@ -1,3 +1,5 @@
+## 19.0.0
+
 ## 18.0.0 (January 16, 2021)
 
 ### Enhancements
