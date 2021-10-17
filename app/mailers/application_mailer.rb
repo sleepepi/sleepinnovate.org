@@ -3,7 +3,7 @@
 # Default mailer for application.
 class ApplicationMailer < ActionMailer::Base
   default from: "#{ENV["website_name"]} <#{ActionMailer::Base.smtp_settings[:email]}>"
-  add_template_helper(EmailHelper)
+  helper EmailHelper
   layout "mailer"
 
   protected

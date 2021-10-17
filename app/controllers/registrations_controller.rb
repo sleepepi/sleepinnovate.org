@@ -28,7 +28,7 @@ class RegistrationsController < Devise::RegistrationsController
       # Make sure generated password is valid.
       u = User.new(password: params[:user][:password])
       u.validate
-      break unless u.errors.keys.include?(:password)
+      break unless u.errors.attribute_names.include?(:password)
     end
   end
 

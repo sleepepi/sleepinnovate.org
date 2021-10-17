@@ -5,7 +5,7 @@
 
 Website for the [SleepINNOVATE](https://sleepinnovate.org) project.
 
-Running on Rails 6.0+ and Ruby 2.6+.
+Running on Rails 6.1+ and Ruby 3.0+.
 
 ## Installation
 
@@ -56,16 +56,16 @@ Edit Cron Jobs `sudo crontab -e` to run scheduled tasks.
 SHELL=/bin/bash
 
 # Refresh Sitemap
-0 2 * * * source /etc/profile.d/rvm.sh && cd /var/www/sleepinnovate.org && rvm 2.6.3 && rails sitemap:refresh RAILS_ENV=production
+0 2 * * * source /etc/profile.d/rvm.sh && cd /var/www/sleepinnovate.org && rvm 3.0.2 && rails sitemap:refresh RAILS_ENV=production
 
 # Import TestMyBrain CSVs
-0 6 * * * source /etc/profile.d/rvm.sh && cd /var/www/sleepinnovate.org && rvm 2.6.3 && rails brains:nightly_import RAILS_ENV=production
+0 6 * * * source /etc/profile.d/rvm.sh && cd /var/www/sleepinnovate.org && rvm 3.0.2 && rails brains:nightly_import RAILS_ENV=production
 
 # Launch Followup Events
-30 6 * * * source /etc/profile.d/rvm.sh && cd /var/www/sleepinnovate.org && rvm 2.6.3 && rails events:followup RAILS_ENV=production
+30 6 * * * source /etc/profile.d/rvm.sh && cd /var/www/sleepinnovate.org && rvm 3.0.2 && rails events:followup RAILS_ENV=production
 
 # Export Admin CSV
-15,45 * * * * source /etc/profile.d/rvm.sh && cd /var/www/sleepinnovate.org && rvm 2.6.3 && rails admin:export RAILS_ENV=production
+15,45 * * * * source /etc/profile.d/rvm.sh && cd /var/www/sleepinnovate.org && rvm 3.0.2 && rails admin:export RAILS_ENV=production
 ```
 
 ## Contributing to SleepINNOVATE

@@ -1,13 +1,12 @@
 language: ruby
 rvm:
-- 2.6.3
-- 3.0.0
+- 3.0.2
 - ruby-head
 gemfile: "gems.rb"
 addons:
-  postgresql: "9.6"
+  postgresql: "10"
 before_install:
-  - nvm install 10
+- nvm install 10
 before_script:
 - ruby lib/initial_setup.rb ../.travis_setup
 - cp config/.travis.database.yml config/database.yml

@@ -1,5 +1,15 @@
 ## 19.0.0
 
+### Enhancements
+- **Gem Changes**
+  - Update to ruby 3.0.2
+  - Update to rails 6.1.4.1
+  - Update to bootstrap 4.6.0
+  - Update to carrierwave 2.2.2
+  - Update to devise 4.8.0
+  - Update to font-awesome-sass 5.15.1
+  - Update to haml 5.2.2
+
 ## 18.0.0 (January 16, 2021)
 
 ### Enhancements
