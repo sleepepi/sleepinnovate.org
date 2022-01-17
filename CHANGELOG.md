@@ -1,6 +1,8 @@
 ## 19.0.0
 
 ### Enhancements
+- **Test My Brain Changes**
+  - Added message that Test My Brain is no longer available
 - **Gem Changes**
   - Update to ruby 3.0.2
   - Update to rails 6.1.4.1
