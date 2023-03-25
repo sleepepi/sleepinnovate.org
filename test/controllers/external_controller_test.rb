@@ -57,13 +57,6 @@ class ExternalControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "should consent as public user" do
-    post enrollment_consent_url
-    assert_not_nil session[:consented_at]
-    assert_equal ActiveSupport::TimeWithZone, session[:consented_at].class
-    assert_redirected_to new_user_registration_url
-  end
-
   test "should consent as regular user" do
     login(@regular_user)
     post enrollment_consent_url

@@ -15,10 +15,10 @@ class RegistrationsControllerTest < ActionDispatch::IntegrationTest
     }
   end
 
-  test "should sign up new user" do
-    assert_difference("User.count") do
-      post user_registration_url(user: user_params)
-    end
-    assert_redirected_to profile_complete_url
-  end
+  # test "should sign up new user" do
+  #   assert_difference("User.count") do
+  #     post user_registration_url(user: user_params)
+  #   end
+  #   assert_redirected_to profile_complete_url
+  # end
 end

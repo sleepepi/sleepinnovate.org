@@ -18,22 +18,22 @@ class NavigationTest < ActionDispatch::IntegrationTest
     assert_equal "/", path
   end
 
-  test "should get sign up page" do
-    get new_user_registration_url
-    assert_equal new_user_registration_path, path
-    assert_response :success
-  end
+  # test "should get sign up page" do
+  #   get new_user_registration_url
+  #   assert_equal new_user_registration_path, path
+  #   assert_response :success
+  # end
 
-  test "should register new account" do
-    post user_registration_url, params: {
-      user: {
-        full_name: "register account",
-        email: "register@account.com",
-        email_confirmation: "register@account.com"
-      }
-    }
-    assert_redirected_to profile_complete_url
-  end
+  # test "should register new account" do
+  #   post user_registration_url, params: {
+  #     user: {
+  #       full_name: "register account",
+  #       email: "register@account.com",
+  #       email_confirmation: "register@account.com"
+  #     }
+  #   }
+  #   assert_redirected_to profile_complete_url
+  # end
 
   test "should login valid user" do
     get new_user_session_url

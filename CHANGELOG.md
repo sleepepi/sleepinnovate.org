@@ -1,6 +1,8 @@
 ## 19.0.0
 
 ### Enhancements
+- **General Changes**
+  - Disabled new user registration as the study has been completed
 - **Test My Brain Changes**
   - Added message that Test My Brain is no longer available
 - **Gem Changes**

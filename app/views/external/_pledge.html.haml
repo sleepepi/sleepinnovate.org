@@ -2,49 +2,8 @@
   .pledge
     .pledge-header
       %h1= render "layouts/logo"
-      .lead Help sleep research. Participate in our innovative sleep health research study!
+      .lead Recruitment for the study has closed. Thank you to everyone who participated!
 
-    %p
-      %strong
-        We hope that your participation will help improve our understanding of
-        sleep disorders and lead to improved treatments and diagnoses.
-      Our study,
-      = succeed "," do
-        %strong= render "layouts/logo"
-      is led by Dr. Susan Redline at Partners HealthCare System, and is funded
-      by the National Institutes of Health.
-
-    %p
-      %strong
-        What will happen in this research study?
-
-      We will ask you to complete surveys about yourself and your health,
-      general functioning and sleep habits. In addition, we will ask you to take
-      brain quizzes to help us understand the relationship between sleep and
-      brain functions. We plan to do this by contacting you at least once a year
-      by email.
-
-    %p.mb-0
-      %strong
-        To participate you must:
-
-    %ul
-      %li Be an adult of 18 years of age or older
-      %li Have internet access
-      %li Read English
-
-    %p
-      %strong
-        Can I still get medical care within Partners if I don't take part in
-        this research study, or if I stop taking part?
-      Yes. Your decision won't change the medical care you get within Partners
-      now or in the future. There will be no penalty, and you won't lose any
-      benefits you receive now or have a right to receive.
-
-  .text-center.mb-3
-    = link_to enrollment_start_path, method: :post, class: "btn btn-lg btn-success btn-shadow" do
-      Read consent
-      = icon("fas", "caret-right")
   .text-center
     Already have an account?
     = link_to "Sign in", new_user_session_path

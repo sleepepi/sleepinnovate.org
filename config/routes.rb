@@ -103,10 +103,10 @@ Rails.application.routes.draw do
              controllers: {
                confirmations: "confirmations",
                passwords: "passwords",
-               registrations: "registrations",
                sessions: "sessions",
                unlocks: "unlocks"
              },
-             path_names: { sign_up: "join", sign_in: "login" },
-             path: ""
+             path_names: { sign_in: "login" },
+             path: "",
+             skip: [:registrations]
 end

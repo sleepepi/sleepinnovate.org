@@ -1,9 +1,10 @@
 - if !current_user || (current_user && current_user.unconsented?)
-  = form_with url: enrollment_consent_path, method: :post, local: true, id: "consent-form" do |form|
-    .d-none.d-md-block.text-center
-      = render "consent/i_consent_checkbox", size: "btn-lg"
-    .d-block.d-md-none.text-center
-      = render "consent/i_consent_checkbox", size: ""
+  - if false
+    = form_with url: enrollment_consent_path, method: :post, local: true, id: "consent-form" do |form|
+      .d-none.d-md-block.text-center
+        = render "consent/i_consent_checkbox", size: "btn-lg"
+      .d-block.d-md-none.text-center
+        = render "consent/i_consent_checkbox", size: ""
 - else
   -# This will also show for current users who have revoked consent, but the consent box will be unchecked.
   - consented = current_user.consented?
