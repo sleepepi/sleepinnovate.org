@@ -1,7 +1,6 @@
 language: ruby
 rvm:
-- 3.0.2
-- ruby-head
+- 3.1.2
 gemfile: "gems.rb"
 addons:
   postgresql: "10"
@@ -12,6 +11,3 @@ before_script:
 - cp config/.travis.database.yml config/database.yml
 - psql -c 'create database travis_test;' -U postgres
 - rails db:migrate
-matrix:
-  allow_failures:
-  - rvm: ruby-head

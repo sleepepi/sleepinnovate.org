@@ -4,8 +4,8 @@
 - **Test My Brain Changes**
   - Added message that Test My Brain is no longer available
 - **Gem Changes**
-  - Update to ruby 3.0.2
-  - Update to rails 6.1.4.1
+  - Update to ruby 3.1.2
+  - Update to rails 6.1.6
   - Update to bootstrap 4.6.0
   - Update to carrierwave 2.2.2
   - Update to devise 4.8.0
